@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -540,213 +540,31 @@
 											</li>
 										</ul>
 									</div>
-									<div class="col-xs-12 col-sm-4">
-										<div class="product-display product-description">
-											<figure class="product-image">
-												<img src="assets/images/img-six.jpg" alt="" />
-												<div class="overlay">
-													<div class="product-view-block">
-														<div class="product-view clearfix">
-															<a class="zoom icon_zoom-in_alt single_image" href="assets/images/img-six.jpg"></a>
-															<a class="data-report icon_datareport" href="#"></a>
-															<a class="heart icon_heart_alt" href="#"></a>
+											<div class="col-xs-12 col-sm-4" th:each="art: ${articulos}">
+												<div class="product-display product-description">
+													<figure class="product-image">
+														<img src="assets/images/img-six.jpg" th:src="'assets/images/'+${art.id}+'.jpg'" alt="" />
+														<div class="overlay">
+															<div class="product-view-block">
+																<div class="product-view clearfix">
+																	<a class="zoom icon_zoom-in_alt single_image" href="assets/images/img-six.jpg"></a>
+																	<a class="data-report icon_datareport" href="#"></a>
+																	<a class="heart icon_heart_alt" href="#"></a>
+																</div>
+																<a class="btn add-cart" href="#">ADD TO CART</a>
+															</div>
 														</div>
-														<a class="btn add-cart" href="#">ADD TO CART</a>
+													</figure>
+													<div class="about-product">
+														<h4><a class="item-name" href="#" th:text="${art.descripcion}">Articulo 1</a></h4>
+														<span class="review-icon clearfix"> <i class="icon_star active"></i> <i class="icon_star active"></i> <i class="icon_star active"></i> <i class="icon_star active"></i> <i class="icon_star"></i> </span>
+														<span class="price"> <span th:text="${art.precioBase}">$ 70.00</span> <span class="old-price" th:text="${art.precioBase}">$97.00</span></span>
+		
 													</div>
 												</div>
-											</figure>
-											<div class="about-product">
-												<h4><a class="item-name" href="#">T-Shirt Retro White</a></h4>
-												<span class="review-icon clearfix"> <i class="icon_star active"></i> <i class="icon_star active"></i> <i class="icon_star active"></i> <i class="icon_star active"></i> <i class="icon_star"></i> </span>
-												<span class="price"> <span>$ 70.00</span> <span class="old-price">$97.00</span></span>
+											</div>
 
-											</div>
-										</div>
-									</div>
-									<div class="col-xs-12 col-sm-4">
-										<div class="product-display product-description">
-											<figure class="product-image">
-												<img src="assets/images/img-seven.jpg" alt="" />
-												<div class="overlay">
-													<div class="product-view-block">
-														<div class="product-view clearfix">
-															<a class="zoom icon_zoom-in_alt single_image" href="assets/images/img-seven.jpg"></a>
-															<a class="data-report icon_datareport" href="#"></a>
-															<a class="heart icon_heart_alt" href="#"></a>
-														</div>
-														<a class="btn add-cart" href="#">ADD TO CART</a>
-													</div>
-												</div>
-											</figure>
-											<div class="about-product">
-												<h4><a class="item-name" href="#">T-Shirt Retro White</a></h4>
-												<span class="review-icon clearfix"> <i class="icon_star active"></i> <i class="icon_star active"></i> <i class="icon_star active"></i> <i class="icon_star active"></i> <i class="icon_star"></i> </span>
-												<span class="price"> <span>$ 70.00</span> </span>
-
-											</div>
-										</div>
-									</div>
-									<div class="col-xs-12 col-sm-4">
-										<div class="product-display product-description">
-											<figure class="product-image">
-												<img src="assets/images/img-eight.jpg" alt="" />
-												<div class="overlay">
-													<div class="product-view-block">
-														<div class="product-view clearfix">
-															<a class="zoom icon_zoom-in_alt single_image" href="assets/images/img-eight.jpg"></a>
-															<a class="data-report icon_datareport" href="#"></a>
-															<a class="heart icon_heart_alt" href="#"></a>
-														</div>
-														<a class="btn add-cart" href="#">ADD TO CART</a>
-													</div>
-												</div>
-											</figure>
-											<div class="about-product">
-												<h4><a class="item-name" href="#">T-Shirt Retro White</a></h4>
-												<span class="review-icon clearfix"> <i class="icon_star active"></i> <i class="icon_star active"></i> <i class="icon_star active"></i> <i class="icon_star active"></i> <i class="icon_star"></i> </span>
-												<span class="price"> <span>$ 70.00</span> </span>
-											</div>
-										</div>
-									</div>
-									<div class="col-xs-12 col-sm-4">
-										<div class="product-display product-description">
-											<figure class="product-image">
-												<img src="assets/images/img-ten.jpg" alt="" />
-												<div class="overlay">
-													<div class="product-view-block">
-														<div class="product-view clearfix">
-															<a class="zoom icon_zoom-in_alt single_image" href="assets/images/img-ten.jpg"></a>
-															<a class="data-report icon_datareport" href="#"></a>
-															<a class="heart icon_heart_alt" href="#"></a>
-														</div>
-														<a class="btn add-cart" href="#">ADD TO CART</a>
-													</div>
-												</div>
-											</figure>
-											<div class="about-product">
-												<h4><a class="item-name" href="#">The Wild Ones Raglan</a></h4>
-												<span class="review-icon clearfix"> <i class="icon_star active"></i> <i class="icon_star active"></i> <i class="icon_star active"></i> <i class="icon_star active"></i> <i class="icon_star"></i> </span>
-												<span class="price"> <span>$ 70.00</span> </span>
-
-											</div>
-										</div>
-									</div>
-									<div class="col-xs-12 col-sm-4">
-										<div class="product-display product-description">
-											<figure class="product-image">
-												<img src="assets/images/img-eleven.jpg" alt="" />
-												<div class="overlay">
-													<div class="product-view-block">
-														<div class="product-view clearfix">
-															<a class="zoom icon_zoom-in_alt single_image" href="assets/images/img-eleven.jpg"></a>
-															<a class="data-report icon_datareport" href="#"></a>
-															<a class="heart icon_heart_alt" href="#"></a>
-														</div>
-														<a class="btn add-cart" href="#">ADD TO CART</a>
-													</div>
-												</div>
-											</figure>
-											<div class="about-product">
-												<h4><a class="item-name" href="#">DBD Skull Long Sleeve</a></h4>
-												<span class="review-icon clearfix"> <i class="icon_star active"></i> <i class="icon_star active"></i> <i class="icon_star active"></i> <i class="icon_star active"></i> <i class="icon_star"></i> </span>
-												<span class="price"> <span>$ 70.00</span> </span>
-
-											</div>
-										</div>
-									</div>
-									<div class="col-xs-12 col-sm-4">
-										<div class="product-display product-description">
-											<figure class="product-image">
-												<img src="assets/images/img-twelve.jpg" alt="" />
-												<div class="overlay">
-													<div class="product-view-block">
-														<div class="product-view clearfix">
-															<a class="zoom icon_zoom-in_alt single_image" href="assets/images/img-twelve.jpg"></a>
-															<a class="data-report icon_datareport" href="#"></a>
-															<a class="heart icon_heart_alt" href="#"></a>
-														</div>
-														<a class="btn add-cart" href="#">ADD TO CART</a>
-													</div>
-												</div>
-											</figure>
-											<div class="about-product">
-												<h4><a class="item-name" href="#">DBD Skull Long Sleeve</a></h4>
-												<span class="review-icon clearfix"> <i class="icon_star active"></i> <i class="icon_star active"></i> <i class="icon_star active"></i> <i class="icon_star active"></i> <i class="icon_star"></i> </span>
-												<span class="price"> <span>$ 70.00</span> <span class="old-price">$97.00</span></span>
-
-											</div>
-										</div>
-									</div>
-									<div class="col-xs-12 col-sm-4">
-										<div class="product-display product-description">
-											<figure class="product-image">
-												<img src="assets/images/img-nine.jpg" alt="" />
-												<div class="overlay">
-													<div class="product-view-block">
-														<div class="product-view clearfix">
-															<a class="zoom icon_zoom-in_alt single_image" href="assets/images/img-nine.jpg"></a>
-															<a class="data-report icon_datareport" href="#"></a>
-															<a class="heart icon_heart_alt" href="#"></a>
-														</div>
-														<a class="btn add-cart" href="#">ADD TO CART</a>
-													</div>
-												</div>
-											</figure>
-											<div class="about-product">
-												<h4><a class="item-name" href="#">T-Shirt Retro Mounth</a></h4>
-												<span class="review-icon clearfix"> <i class="icon_star active"></i> <i class="icon_star active"></i> <i class="icon_star active"></i> <i class="icon_star active"></i> <i class="icon_star"></i> </span>
-												<span class="price"> <span>$ 70.00</span> </span>
-
-											</div>
-										</div>
-									</div>
-									<div class="col-xs-12 col-sm-4">
-										<div class="product-display product-description">
-											<figure class="product-image">
-												<img src="assets/images/img-thirteen.jpg" alt="" />
-												<div class="overlay">
-													<div class="product-view-block">
-														<div class="product-view clearfix">
-															<a class="zoom icon_zoom-in_alt single_image" href="assets/images/img-thirteen.jpg"></a>
-															<a class="data-report icon_datareport" href="#"></a>
-															<a class="heart icon_heart_alt" href="#"></a>
-														</div>
-														<a class="btn add-cart" href="#">ADD TO CART</a>
-													</div>
-												</div>
-											</figure>
-											<div class="about-product">
-												<h4><a class="item-name" href="#">Liberty or Death</a></h4>
-												<span class="review-icon clearfix"> <i class="icon_star active"></i> <i class="icon_star active"></i> <i class="icon_star active"></i> <i class="icon_star active"></i> <i class="icon_star"></i> </span>
-												<span class="price"> <span>$ 70.00</span> </span>
-
-											</div>
-										</div>
-									</div>
-									<div class="col-xs-12 col-sm-4">
-										<div class="product-display product-description">
-											<figure class="product-image">
-												<img src="assets/images/img-thirteen.jpg" alt="" />
-												<div class="overlay">
-													<div class="product-view-block">
-														<div class="product-view clearfix">
-															<a class="zoom icon_zoom-in_alt single_image" href="assets/images/img-thirteen.jpg"></a>
-															<a class="data-report icon_datareport" href="#"></a>
-															<a class="heart icon_heart_alt" href="#"></a>
-														</div>
-														<a class="btn add-cart" href="#">ADD TO CART</a>
-													</div>
-												</div>
-											</figure>
-											<div class="about-product">
-												<h4><a class="item-name" href="#">Liberty or Death</a></h4>
-												<span class="review-icon clearfix"> <i class="icon_star active"></i> <i class="icon_star active"></i> <i class="icon_star active"></i> <i class="icon_star active"></i> <i class="icon_star"></i> </span>
-												<span class="price"> <span>$ 70.00</span> </span>
-
-											</div>
-										</div>
-									</div>
-									<div class="col-xs-12">
+																		<div class="col-xs-12">
 										<div class="categories-shop-pagging">
 											<ul>
 												<li class="active">
