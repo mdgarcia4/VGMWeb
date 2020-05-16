@@ -41,7 +41,7 @@ public class Rubro implements Serializable{
 	@JoinColumn(name="id_negocio", referencedColumnName = "id_negocio", insertable = false, updatable = false)
 	private Negocio negocio;
 	
-	@OneToMany(mappedBy = "rubro")
+	@OneToMany(mappedBy = "rubro", fetch = FetchType.EAGER )
 	private Set<Subrubro> subrubros;
 	
 	public PkRubro getId() {

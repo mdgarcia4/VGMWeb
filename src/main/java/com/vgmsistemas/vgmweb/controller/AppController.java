@@ -56,10 +56,10 @@ public class AppController {
 		List<Rubro> rubros;
 		rubros = rubroService.getAll();
 				
-		for (Rubro rubro : rubros) {
+		/*for (Rubro rubro : rubros) {
 			Set<Subrubro> subrubros;
 			subrubros = rubro.getSubrubros();
-		}
+		}*/
 		model.addAttribute("rubros", rubros);
 		model.addAttribute("articulos",articuloService.getAll(pageable));
 		

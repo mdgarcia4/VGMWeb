@@ -20,32 +20,32 @@ public class PkRubro implements Serializable{
 	private static final long serialVersionUID = 6509685569523286853L;
 	 
 	@Column(name = "id_segmento")
-	private long _idRubro;
+	private long idRubro;
 	@Column(name = "id_negocio")
-	private long _idNegocio;
+	private long idNegocio;
 	/**
 	 * @return the idSegmento
 	 */
 	public long getIdRubro() {
-		return this._idRubro;
+		return this.idRubro;
 	}
 	/**
 	 * @param idSegmento the idSegmento to set
 	 */
 	public void setIdRubro(long idSegmento) {
-		this._idRubro = idSegmento;
+		this.idRubro = idSegmento;
 	}
 	/**
 	 * @return the idNegocio
 	 */
 	public long getIdNegocio() {
-		return this._idNegocio;
+		return this.idNegocio;
 	}
 	/**
 	 * @param idNegocio the idNegocio to set
 	 */
 	public void setIdNegocio(long idNegocio) {
-		this._idNegocio = idNegocio;
+		this.idNegocio = idNegocio;
 	}
 	/* (non-Javadoc)
 	 * @see java.lang.Object#hashCode()
@@ -54,8 +54,8 @@ public class PkRubro implements Serializable{
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + (int) (_idNegocio ^ (_idNegocio >>> 32));
-		result = prime * result + (int) (_idRubro ^ (_idRubro >>> 32));
+		result = prime * result + (int) (idNegocio ^ (idNegocio >>> 32));
+		result = prime * result + (int) (idRubro ^ (idRubro >>> 32));
 		return result;
 	}
 	/* (non-Javadoc)
@@ -73,10 +73,10 @@ public class PkRubro implements Serializable{
 			return false;
 		}
 		PkRubro other = (PkRubro) obj;
-		if (_idNegocio != other._idNegocio) {
+		if (idNegocio != other.idNegocio) {
 			return false;
 		}
-		if (_idRubro != other._idRubro) {
+		if (idRubro != other.idRubro) {
 			return false;
 		}
 		return true;

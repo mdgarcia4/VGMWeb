@@ -377,8 +377,8 @@
 										<h3 class="heading">CATEGORIES</h3>
 										<ul class="main-list" id="accordion">
 											<li class="panel-heading" id="headingOne" th:each="rubro: ${rubros}">
-												<a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne" th:text="${rubro.descripcion}" >RUBROS</a>
-												<ul class="sub-list panel-collapse collapse in" id="collapseOne" aria-labelledby="headingOne" >
+												<a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" th:href="'#collapse'+${rubro.id.idRubro}" aria-expanded="true" aria-controls="collapseOne" th:text="${rubro.descripcion}" >RUBROS</a>
+												<ul class="sub-list panel-collapse collapse in" id="collapseOne" th:id="'collapse'+${rubro.id.idRubro}" aria-labelledby="headingOne" >
 													<li th:each="subrubro: ${rubro.subrubros}">
 														<a href="#" th:text="${subrubro.descripcion}" >SUBRUBRO</a>
 													</li>
@@ -500,7 +500,7 @@
 														<div class="overlay">
 															<div class="product-view-block">
 																<div class="product-view clearfix">
-																	<a class="zoom icon_zoom-in_alt single_image" href="assets/images/img-six.jpg"></a>
+																	<a class="zoom icon_zoom-in_alt single_image" href="assets/images/img-six.jpg" th:href="'assets/images/'+${art.id}+'.jpg'"  ></a>
 																	<a class="data-report icon_datareport" href="#"></a>
 																	<a class="heart icon_heart_alt" href="#"></a>
 																</div>
@@ -517,7 +517,7 @@
 												</div>
 											</div>
 
-																		<div class="col-xs-12">
+									<div class="col-xs-12">
 										<div class="categories-shop-pagging">
 											<ul>
 												<li class="active">
