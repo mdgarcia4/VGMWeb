@@ -4,10 +4,10 @@ import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-import com.vgmsistemas.vgmweb.entity.Marca;
+import com.vgmsistemas.vgmweb.entity.Proveedor;
 
 @Repository
-public interface MarcaRepo extends JpaRepository<Marca, Long>  {
-    public List<Marca> findBySnWeb(String snWeb);
+public interface ProveedorRepo extends JpaRepository<Proveedor, Long>  {
+    public List<Proveedor> findBySnWeb(String snWeb);
  
 }

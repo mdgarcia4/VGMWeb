@@ -11,5 +11,5 @@ import com.vgmsistemas.vgmweb.entity.Rubro;
 @Repository
 public interface RubroRepo extends JpaRepository<Rubro, Long>  {
     public List<Rubro> findByNegocio(Negocio negocio);
- 
+    public List<Rubro> findBySnWeb(String snWeb);
 }

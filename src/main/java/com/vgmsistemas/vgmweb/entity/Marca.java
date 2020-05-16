@@ -20,21 +20,20 @@ import javax.persistence.Table;
 @Table( name = "linea" )
 public class Marca implements Serializable{
 
-	/**
-	 * 
-	 */
+	
 	private static final long serialVersionUID = 3593807007462447749L;
-	//@XmlElement(name="idMarca")
+	
 	@Id
 	@GeneratedValue
 	@Column(name = "id_linea")	
 	private long id;
-	//@XmlElement(name="descripcionMarca", required=false)
+	
 	@Column(name = "de_linea")
 	private String descripcion;
-	/**
-	 * @return the id
-	 */
+	
+	@Column(name = "sn_web")
+	private String snWeb;
+	
 	public long getId() {
 		return id;
 	}
@@ -55,6 +54,12 @@ public class Marca implements Serializable{
 	 */
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
+	}
+	public String getSnWeb() {
+		return snWeb;
+	}
+	public void setSnWeb(String snWeb) {
+		this.snWeb = snWeb;
 	}
 		
 }

@@ -374,7 +374,7 @@
 							<div class="col-xs-12 col-sm-3 mobile-view">
 								<div class="categories-filtering">
 									<div class="categories-list">
-										<h3 class="heading">CATEGORIES</h3>
+										<h3 class="heading">CATEGORIAS</h3>
 										<ul class="main-list" id="accordion">
 											<li class="panel-heading" id="headingOne" th:each="rubro: ${rubros}">
 												<a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" th:href="'#collapse'+${rubro.id.idRubro}" aria-expanded="true" aria-controls="collapseOne" th:text="${rubro.descripcion}" >RUBROS</a>
@@ -386,7 +386,7 @@
 											</li>
 										</ul>
 									</div>
-									<div class="filter-list">
+									<!--  <div class="filter-list">
 										<h3 class="heading">filter selection</h3>
 										<div class="select-range">
 											<p>
@@ -436,23 +436,20 @@
 											</li>
 										</ul>
 									</div>
+									-->
 									<div class="manufacturer">
-										<h4>manufacturer</h4>
-										<ul class="main-list">
+										<h4>Marcas</h4>
+										<ul class="main-list" th:each="marca: ${marcas}">
 											<li>
-												<a href="#">Forever 21 <em>(15)</em></a>
+												<a href="#" th:text="${marca.descripcion}">Marca 1 </a>
 											</li>
+										</ul>
+									</div>
+									<div class="manufacturer">
+										<h4>Proveedores</h4>
+										<ul class="main-list" th:each="proveedor: ${proveedores}">
 											<li>
-												<a href="#">Giordano <em>(07)</em></a>
-											</li>
-											<li>
-												<a href="#">Abercrombie <em>(05)</em></a>
-											</li>
-											<li>
-												<a href="#">Ecko United <em>(19)</em></a>
-											</li>
-											<li>
-												<a href="#">Zara <em>(12)</em></a>
+												<a href="#" th:text="${proveedor.deProveedor}">Proveedor 1 </a>
 											</li>
 										</ul>
 									</div>
@@ -656,7 +653,7 @@
 					</div>
 				</div>
 				<div class="secondary-footer">
-					<span class="copy-right">Copyright © 2016 PSD Themes by Themeon. All rights reserved.</span>
+					<span class="copy-right">Copyright © 2020 - VGM Sistemas. Todos los derechos reservados.</span>
 				</div>
 			</footer>
 			<!--Footer Section End-->

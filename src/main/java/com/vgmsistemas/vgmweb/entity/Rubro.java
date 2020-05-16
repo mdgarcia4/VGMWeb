@@ -37,6 +37,9 @@ public class Rubro implements Serializable{
 	@Column(name = "de_segmento")
 	private String descripcion;
 	
+	@Column(name="sn_web")
+	private String snWeb;
+	
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="id_negocio", referencedColumnName = "id_negocio", insertable = false, updatable = false)
 	private Negocio negocio;
