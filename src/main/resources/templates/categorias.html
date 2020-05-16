@@ -376,60 +376,13 @@
 									<div class="categories-list">
 										<h3 class="heading">CATEGORIES</h3>
 										<ul class="main-list" id="accordion">
-											<li class="panel-heading" id="headingOne">
-												<a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">basics</a>
-												<ul class="sub-list panel-collapse collapse in" id="collapseOne" aria-labelledby="headingOne">
-													<li>
-														<a href="#">T-Shirts</a>
-													</li>
-													<li>
-														<a href="#">Jackets</a>
-													</li>
-													<li>
-														<a href="#">Jeans</a>
-													</li>
-													<li>
-														<a href="#">Trousers</a>
-													</li>
-													<li>
-														<a href="#">Kitwears</a>
-													</li>
-													<li>
-														<a href="#">Sweatshirts</a>
+											<li class="panel-heading" id="headingOne" th:each="rubro: ${rubros}">
+												<a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne" th:text="${rubro.descripcion}" >RUBROS</a>
+												<ul class="sub-list panel-collapse collapse in" id="collapseOne" aria-labelledby="headingOne" >
+													<li th:each="subrubro: ${rubro.subrubros}">
+														<a href="#" th:text="${subrubro.descripcion}" >SUBRUBRO</a>
 													</li>
 												</ul>
-											</li>
-											<li class="panel-heading" id="headingTwo">
-												<a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">clothings</a>
-												<ul class="sub-list active panel-collapse collapse" id="collapseTwo" aria-labelledby="headingTwo">
-													<li>
-														<a href="#">T-Shirts</a>
-													</li>
-													<li>
-														<a href="#">Jackets</a>
-													</li>
-													<li>
-														<a href="#">Jeans</a>
-													</li>
-													<li>
-														<a href="#">Trousers</a>
-													</li>
-													<li>
-														<a href="#">Kitwears</a>
-													</li>
-													<li>
-														<a href="#">Sweatshirts</a>
-													</li>
-												</ul>
-											</li>
-											<li>
-												<a href="#">footwear</a>
-											</li>
-											<li>
-												<a href="#">bags and bagpacks</a>
-											</li>
-											<li>
-												<a href="#">accessories</a>
 											</li>
 										</ul>
 									</div>

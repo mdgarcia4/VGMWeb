@@ -2,6 +2,8 @@ package com.vgmsistemas.vgmweb.service;
 
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import com.vgmsistemas.vgmweb.entity.Articulo;
 import com.vgmsistemas.vgmweb.repository.ArticuloRepo;
@@ -17,6 +19,10 @@ public class ArticuloService {
 		List<Articulo> articulos ;
 		articulos = articuloRepo.findAll();
 		return articulos;
+	}
+	
+	public Page<Articulo> getAll(Pageable pageable){
+		return articuloRepo.findAll(pageable);
 	}
 
 	public ArticuloRepo getArticuloRepo() {

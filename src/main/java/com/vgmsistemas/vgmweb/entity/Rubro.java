@@ -3,13 +3,17 @@
  */
 package com.vgmsistemas.vgmweb.entity;
 import java.io.Serializable;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 
@@ -27,20 +31,19 @@ public class Rubro implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = -7046464468790325830L;
-	//@XmlElement(name="idRubro")
 	@EmbeddedId
 	private PkRubro id;
-	//@XmlElement(name="descripcionRubro", required=false)
 	
 	@Column(name = "de_segmento")
 	private String descripcion;
-	//@XmlElement(name="negocio", required=false)
+	
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="id_negocio", referencedColumnName = "id_negocio", insertable = false, updatable = false)
 	private Negocio negocio;
-	/**
-	 * @return the id
-	 */
+	
+	@OneToMany(mappedBy = "rubro")
+	private Set<Subrubro> subrubros;
+	
 	public PkRubro getId() {
 		return id;
 	}
@@ -67,6 +70,14 @@ public class Rubro implements Serializable{
 	 */
 	public Negocio getNegocio() {
 		return negocio;
+	}
+	
+	
+	public Set<Subrubro> getSubrubros() {
+		return subrubros;
+	}
+	public void setSubrubros(Set<Subrubro> subrubros) {
+		this.subrubros = subrubros;
 	}
 	/**
 	 * @param negocio the negocio to set
