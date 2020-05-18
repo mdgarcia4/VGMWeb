@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Look</title>
+		<link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+		<!-- Google Font -->
+		<link href='https://fonts.googleapis.com/css?family=Montserrat:400,700%7CPlayfair+Display:400italic,400,900%7COpen+Sans%7CCrimson+Text:400italic%7CLato:400,700' rel='stylesheet' type='text/css'>
+		<link rel="stylesheet" type="text/css" href="assets/css/jquery.selectbox.css" media="screen">
+		<!-- Linea Icons -->
+		<link rel="stylesheet" type="text/css" href="assets/css/linea.css" media="screen">
+		<!-- Elegant Icons -->
+		<link rel="stylesheet" type="text/css" href="assets/css/eleganticon.css" media="screen">
+		<!-- Font Awesome -->
+		<link rel="stylesheet" type="text/css" href="assets/css/font-awesome.css" media="screen">
+
+		<!-- Bootstrap -->
+		<link rel="stylesheet" type="text/css" href="assets/css/bootstrap.css" media="screen">
+		<link rel="stylesheet" type="text/css" href="assets/css/jquery.fancybox.css" media="screen">
+		<link rel="stylesheet" type="text/css" href="assets/css/jquery-ui.css" media="screen">
+
+		<link rel="stylesheet" type="text/css" href="assets/css/dropdown.css" media="screen">
+		<link rel="stylesheet" type="text/css" href="assets/css/global.css" media="screen">
+		<link rel="stylesheet" type="text/css" href="assets/css/style.css" media="screen">
+		<link rel="stylesheet" type="text/css" href="assets/css/responsive.css" media="screen">
+		<link href="assets/css/skin.less" rel="stylesheet/less">
+		<!--[if lt IE 9]>
+		<script src="assets/js/html5shiv.min.js"></script>
+		<![endif]-->
+	</head>
+	<body>
+		<!-- Loader -->
+		<div id="loading">
+			<div id="loading-center">
+				<div id="loading-center-absolute">
+					<div class="object" id="object_one"></div>
+					<div class="object" id="object_two"></div>
+					<div class="object" id="object_three"></div>
+					<div class="object" id="object_four"></div>
+				</div>
+			</div>
+		</div>
+		<!-- Loader -->
+		<!--Page Wrapper Start-->
+		<div id="wrapper" class="categories">
+			<!--container Start-->
+			<!--Comienzo Sección HEADER-->
+			<iframe src="/header"></iframe>
+			<!--Fin Sección HEADER-->
+			
+			<div class="common-banner forcefullwidth_wrapper_tp_banner">
+				<div class="container">
+					<div class="row">
+						<div class="main-banner-text">
+							<span>shop grid with left sidebar</span>
+							<ul class="banner-nav">
+								<li>
+									<a href="index.html">Home</a>
+								</li>
+								<li>
+									<a href="shopping-cart.html">Shop</a>
+								</li>
+								<li class="active">
+									<a href="#">Shop Grid with Left Sidebar</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!--Content Area Start-->
+			<div class="content">
+				<!-- Categories Shop Starts Here -->
+				<div class="categories-shop">
+					<div class="container">
+						<div class="row">
+							<div class="col-xs-12 hidden-sm">
+								<div class="filter-btn">
+									<a href="#">filter</a>
+								</div>
+							</div>
+							<div class="col-xs-12 col-sm-3 mobile-view">
+								<div class="categories-filtering">
+									<div class="categories-list">
+										<h3 class="heading">CATEGORIAS</h3>
+										<ul class="main-list" id="accordion">
+											<li class="panel-heading" id="headingOne" th:each="rubro: ${rubros}">
+												<a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" th:href="'#collapse'+${rubro.id.idRubro}" aria-expanded="true" aria-controls="collapseOne" th:text="${rubro.descripcion}" >RUBROS</a>
+												<ul class="sub-list panel-collapse collapse in" id="collapseOne" th:id="'collapse'+${rubro.id.idRubro}" aria-labelledby="headingOne" >
+													<li th:each="subrubro: ${rubro.subrubros}">
+														<a href="#" th:href="'/subrubro?rubro='+${subrubro.id.idRubro}+ '&subrubro=' + ${subrubro.id.idSubrubro}" th:text="${subrubro.descripcion}" >SUBRUBRO</a>
+													</li>
+												</ul>
+											</li>
+										</ul>
+									</div>
+									<!--  <div class="filter-list">
+										<h3 class="heading">filter selection</h3>
+										<div class="select-range">
+											<p>
+												<label for="amount">PRICE</label>
+												<input type="text" id="amount" readonly style="border:0; color:#f6931f; font-weight:bold;">
+											</p>
+											<div id="slider-meter" class="slider-meter"></div>
+											<div class="range-price">
+												<span>Range: <span id="amount2" class="first-price">$16.00</span> - <span id="amount1" class="second-price">$200.00</span></span>
+											</div>
+										</div>
+									</div>
+									<div class="color-selection">
+										<h4>color</h4>
+										<ul class="clearfix">
+											<li class="active">
+												<a href="#" class="brown"></a>
+											</li>
+											<li>
+												<a href="#" class="light-green"></a>
+											</li>
+											<li>
+												<a href="#" class="orange"></a>
+											</li>
+											<li>
+												<a href="#" class="yellow"></a>
+											</li>
+										</ul>
+									</div>
+									<div class="size-selection">
+										<h4>size selection</h4>
+										<ul class="clearfix">
+											<li>
+												<a href="#" class="active">s</a>
+											</li>
+											<li>
+												<a href="#">m</a>
+											</li>
+											<li>
+												<a href="#">l</a>
+											</li>
+											<li>
+												<a href="#">xl</a>
+											</li>
+											<li>
+												<a href="#">xxl</a>
+											</li>
+										</ul>
+									</div>
+									-->
+									<div class="manufacturer">
+										<h3 class="heading">Marcas</h3>
+										<ul class="main-list" th:each="marca: ${marcas}">
+											<li>
+												<a href="#" th:href="'/marca?marca='+${marca.id}" th:text="${marca.descripcion}">Marca 1 </a>
+											</li>
+										</ul>
+									</div>
+									<div class="manufacturer">
+										
+										<h3 class="heading">Proveedores</h3>
+										<ul class="main-list" th:each="proveedor: ${proveedores}">
+											<li>
+												<a href="#" th:href="'/proveedor?proveedor='+${proveedor.idProveedor}" th:text="${proveedor.deProveedor}">Proveedor 1 </a>
+											</li>
+										</ul>
+									</div>
+									<!--  <div class="compare-products">
+										<h3 class="heading">compare product</h3>
+										<span>You have no product to compare</span>
+									</div>
+									-->
+								</div>
+							</div>
+							<div class="col-xs-12 col-sm-9">
+								<div class="row">
+									<div class="col-xs-12">
+										<ul class="categories-section">
+											<li>
+												<span>Showing 1 to 16 of 17 <small>total</small></span>
+											</li>
+											<li class="select-name">
+												<span>SORT BY <em>:</em></span>
+												<select class="select">
+													<option value="">Name</option>
+													<option value="1">Size</option>
+													<option value="2">Color</option>
+													<option value="3">Price</option>
+												</select>
+											</li>
+											<li>
+												<span>SHOW <em>:</em></span>
+												<select class="select">
+													<option value="">9</option>
+													<option value="1">10</option>
+													<option value="2">11</option>
+													<option value="3">12</option>
+												</select>
+											</li>
+											<li>
+												<span>VIEW</span>
+												<span class="view-btn"> <a href="#" class="grid-view active"><i class="fa fa-th-large"></i></a> <a href="#" class="list-view"><i class="fa fa-th-list"></i></a> </span>
+											</li>
+										</ul>
+									</div>
+											<div class="col-xs-12 col-sm-4" th:each="art: ${articulos}">
+												<div class="product-display product-description">
+													<figure class="product-image">
+														<img src="assets/images/img-six.jpg" th:src="'assets/images/'+${art.id}+'.jpg'" alt="" />
+														<div class="overlay">
+															<div class="product-view-block">
+																<div class="product-view clearfix">
+																	<a class="zoom icon_zoom-in_alt single_image" href="assets/images/img-six.jpg" th:href="'assets/images/'+${art.id}+'.jpg'"  ></a>
+																	<a class="data-report icon_datareport" href="#"></a>
+																	<a class="heart icon_heart_alt" href="#"></a>
+																</div>
+																<a class="btn add-cart" href="#">ADD TO CART</a>
+															</div>
+														</div>
+													</figure>
+													<div class="about-product">
+														<h4><a class="item-name" href="#" th:text="${art.descripcion}">Articulo 1</a></h4>
+														<span class="review-icon clearfix"> <i class="icon_star active"></i> <i class="icon_star active"></i> <i class="icon_star active"></i> <i class="icon_star active"></i> <i class="icon_star"></i> </span>
+														<span class="price"> <span th:text="${art.precioBase}">$ 70.00</span> <span class="old-price" th:text="${art.precioBase}">$97.00</span></span>
+		
+													</div>
+												</div>
+											</div>
+
+									<div class="col-xs-12">
+										<div class="categories-shop-pagging">
+											<ul>
+												<li class="active">
+													<a href="javascript:void(0)">1</a>
+												</li>
+												<li>
+													<a href="javascript:void(0)">2</a>
+												</li>
+												<li>
+													<a href="javascript:void(0)">3</a>
+												</li>
+												<li>
+													<a href="javascript:void(0)">...</a>
+												</li>
+												<li>
+													<a href="javascript:void(0)">5</a>
+												</li>
+												<li>
+													<a href="javascript:void(0)"><i class="fa fa-angle-right"></i></a>
+												</li>
+											</ul>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- Categories Shop Ends Here -->
+			</div>
+			<!--Content Area End-->
+			<!--Footer Section Start-->
+			<footer class="footer">
+				<iframe src="/footer.html"></iframe>
+			</footer>
+			<!--Footer Section End-->
+			<!--container End-->
+		</div>
+		<!--Page Wrapper End-->
+		<script type="text/javascript" src="assets/js/jquery-1.12.0.min.js"></script>
+		<script src="assets/js/less.js"></script>
+		<script type="text/javascript" src="assets/js/jquery.selectbox-0.2.js"></script>
+		<script type="text/javascript" src="assets/js/jquery.fancybox.js"></script>
+		<script type="text/javascript" src="assets/js/bootstrap.js"></script>
+		<script type="text/javascript" src="assets/js/jquery-ui.js"></script>
+
+		<script type="text/javascript" src="assets/js/site.js"></script>
+		<script type="text/javascript" src="assets/js/touch-enable.js"></script>
+
+	</body>
+</html>

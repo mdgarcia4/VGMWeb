@@ -195,3 +195,23 @@ IF (SELECT COUNT(*) FROM INFORMATION_SCHEMA.COLUMNS AS c1
             ELSE 
                 PRINT 'Tabla:'+@Tabla+', Columna:'+@Columna+' - YA EXISTE LA COLUMNA EN LA TABLA. Tarea:' + @NroTarea;
 
+--------------------
+SET @NroTarea = '#';
+SET @Columna = 'sn_web';/* Nombre de la columna a insertar.*/
+SET @Tipo_Columna = 'varchar(1)Default(''S'')';/* Tipo de la columna a insertar.*/
+SET @Tabla = 'proveedores';/* Nombre de la tabla a modificar.*/    
+
+IF (SELECT COUNT(*) FROM INFORMATION_SCHEMA.COLUMNS AS c1 
+    WHERE c1.table_name = @Tabla) = 0
+        PRINT 'Tabla:'+@Tabla+' - NO EXISTE LA TABLA A LA QUE DESEA INSERTAR LA COLUMNA. Tarea:' + @NroTarea; 
+    ELSE 
+        SET @ConsultaAlter =
+            'ALTER TABLE '+@Tabla+' ADD '+@Columna +' '+ @Tipo_Columna; 
+        IF (SELECT COUNT(*) FROM INFORMATION_SCHEMA.COLUMNS AS c1 
+            WHERE c1.column_name = @Columna and    c1.table_name = @Tabla) = 0 
+                BEGIN
+                    EXEC (@ConsultaAlter);
+                    PRINT 'Tabla:'+@Tabla+', Columna:'+@Columna+' - OK. Tarea:' + @NroTarea;
+                END
+            ELSE 
+                PRINT 'Tabla:'+@Tabla+', Columna:'+@Columna+' - YA EXISTE LA COLUMNA EN LA TABLA. Tarea:' + @NroTarea;

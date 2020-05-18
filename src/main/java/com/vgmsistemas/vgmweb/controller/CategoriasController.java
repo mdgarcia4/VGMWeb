@@ -20,7 +20,7 @@ import com.vgmsistemas.vgmweb.service.RubroService;
 import org.springframework.ui.Model;
 
 @Controller
-public class AppController {
+public class CategoriasController {
 	
 	@Autowired
 	ArticuloService articuloService;
@@ -34,28 +34,21 @@ public class AppController {
 	@Autowired
 	ProveedorService proveedorService;
 	
-	@GetMapping({"/login"})
-	public String login() {
-		return "login";
-	}
-	
-	@GetMapping({"/","/index"})
-	public String index() {
-		return "index";
-	}
-	
 		
-	@GetMapping("/categorias1")
-	public String categorias(Model model, @PageableDefault(page = 0, size = 9) Pageable pageable) {
+	@GetMapping("/categorias")
+	public String categorias(@RequestParam(defaultValue = "0") Integer pagNro,
+            @RequestParam(defaultValue = "12") Integer pagTamanio,
+            @RequestParam(defaultValue = "descripcion") String ordenadoPor,
+            Model model) {
 		model.addAttribute("marcas", marcaService.getBySnWeb("S"));
 		model.addAttribute("rubros", rubroService.getBySnWeb("S"));
 		model.addAttribute("proveedores", proveedorService.getBySnWeb("S"));
-		model.addAttribute("articulos",articuloService.getAll(pageable));
+		model.addAttribute("articulos",articuloService.getAll(pagNro,pagTamanio,ordenadoPor));
 		
 		return "categorias";
 	}
 	
-	@GetMapping("/subrubro")
+	/*@GetMapping("/subrubro")
 	public String categorias(@RequestParam("rubro") Long rubro, @RequestParam("subrubro") Long subrubro  , Model model, @PageableDefault(page = 0, size = 9) Pageable pageable) {
 		model.addAttribute("marcas", marcaService.getBySnWeb("S"));
 		model.addAttribute("rubros", rubroService.getBySnWeb("S"));
@@ -83,25 +76,7 @@ public class AppController {
 		model.addAttribute("articulos",articuloService.getByProveedor(proveedor, pageable));
 		
 		return "categorias";
-	}
-	
-	/*@GetMapping("/categorias1")
-	public String categorias1(Model model, @PageableDefault(page = 0, size = 9) Pageable pageable) {
-		model.addAttribute("marcas", marcaService.getBySnWeb("S"));
-		model.addAttribute("rubros", rubroService.getBySnWeb("S"));
-		model.addAttribute("proveedores", proveedorService.getBySnWeb("S"));
-		model.addAttribute("articulos",articuloService.getAll(pageable));
-		
-		return "categorias1";
-	}
-	
-	@GetMapping("/header")
-	public String header() {
-		return "header";
-	}
-	
-	@GetMapping("/footer")
-	public String footer() {
-		return "footer";
 	}*/
+	
+	
 }

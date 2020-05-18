@@ -1,17 +1,25 @@
 package com.vgmsistemas.vgmweb.repository;
 
 import java.util.List;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import com.vgmsistemas.vgmweb.entity.Articulo;
 
 @Repository
 public interface ArticuloRepo extends JpaRepository<Articulo, Long>  {
-    public List<Articulo> findBySnActivo(String snActivo);
+    public Page<Articulo> findBySnActivo(String snActivo,Pageable pageable);
     
-    //@Query("select a from Articulo a")
-    //Page<Articulo> findByAllPage(Pageable pageable);
-    //public List<Articulo> findBySubrubro(Integer subrubro);
-    //public List<Articulo> findByRubro(Integer rubro);
-    //public List<Articulo> findByMarca(Integer marca);
+    @Query("SELECT a FROM Articulo a WHERE a.subrubro.id.idRubro = ?1 and a.subrubro.id.idSubrubro = ?2")
+    public Page<Articulo> findArticuloByRubroAndSubrubro(Long rubro, Long subrubro, Pageable pageable);
+    
+    @Query("SELECT a FROM Articulo a WHERE a.marca.id = ?1 ")
+    public Page<Articulo> findArticuloByMarca(Long marca, Pageable pageable);
+    
+    @Query("SELECT a FROM Articulo a WHERE a.idProveedor = ?1 ")
+    public Page<Articulo> findArticuloByProveedor(Long proveedor, Pageable pageable);
+    
 }

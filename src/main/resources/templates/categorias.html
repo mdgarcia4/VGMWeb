@@ -380,7 +380,7 @@
 												<a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" th:href="'#collapse'+${rubro.id.idRubro}" aria-expanded="true" aria-controls="collapseOne" th:text="${rubro.descripcion}" >RUBROS</a>
 												<ul class="sub-list panel-collapse collapse in" id="collapseOne" th:id="'collapse'+${rubro.id.idRubro}" aria-labelledby="headingOne" >
 													<li th:each="subrubro: ${rubro.subrubros}">
-														<a href="#" th:text="${subrubro.descripcion}" >SUBRUBRO</a>
+														<a href="#" th:href="'/subrubro?rubro='+${subrubro.id.idRubro}+ '&subrubro=' + ${subrubro.id.idSubrubro}" th:text="${subrubro.descripcion}" >SUBRUBRO</a>
 													</li>
 												</ul>
 											</li>
@@ -438,25 +438,27 @@
 									</div>
 									-->
 									<div class="manufacturer">
-										<h4>Marcas</h4>
+										<h3 class="heading">Marcas</h3>
 										<ul class="main-list" th:each="marca: ${marcas}">
 											<li>
-												<a href="#" th:text="${marca.descripcion}">Marca 1 </a>
+												<a href="#" th:href="'/marca?marca='+${marca.id}" th:text="${marca.descripcion}">Marca 1 </a>
 											</li>
 										</ul>
 									</div>
 									<div class="manufacturer">
-										<h4>Proveedores</h4>
+										
+										<h3 class="heading">Proveedores</h3>
 										<ul class="main-list" th:each="proveedor: ${proveedores}">
 											<li>
-												<a href="#" th:text="${proveedor.deProveedor}">Proveedor 1 </a>
+												<a href="#" th:href="'/proveedor?proveedor='+${proveedor.idProveedor}" th:text="${proveedor.deProveedor}">Proveedor 1 </a>
 											</li>
 										</ul>
 									</div>
-									<div class="compare-products">
+									<!--  <div class="compare-products">
 										<h3 class="heading">compare product</h3>
 										<span>You have no product to compare</span>
 									</div>
+									-->
 								</div>
 							</div>
 							<div class="col-xs-12 col-sm-9">
