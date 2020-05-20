@@ -17,17 +17,19 @@ public class ArticuloService {
 	@Autowired
 	ArticuloRepo articuloRepo;
 
-	public List<Articulo> getAll(Integer pagNro, Integer pagTamanio, String ordenadoPor)  {
+	public Page<Articulo> getAll(Integer pagNro, Integer pagTamanio, String ordenadoPor)  {
 		
 		 Pageable pagina = PageRequest.of(pagNro, pagTamanio, Sort.by(ordenadoPor));
 		 
 	        Page<Articulo> articulos= articuloRepo.findAll(pagina);
 	         
-	        if(articulos.hasContent()) {
+	        /*if(articulos.hasContent()) {
 	            return articulos.getContent();
 	        } else {
 	            return new ArrayList<Articulo>();
-	        }
+	        }*/
+	        
+	        return articulos;
 	}
 	
 	public Page<Articulo> getByRubroAndSubrubro(Long rubro, Long subrubro, Pageable pageable){

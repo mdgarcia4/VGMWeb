@@ -2,8 +2,11 @@ package com.vgmsistemas.vgmweb.controller;
 
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
@@ -12,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.vgmsistemas.vgmweb.entity.Articulo;
 import com.vgmsistemas.vgmweb.service.ArticuloService;
 import com.vgmsistemas.vgmweb.service.MarcaService;
 import com.vgmsistemas.vgmweb.service.ProveedorService;
@@ -36,16 +40,67 @@ public class CategoriasController {
 	
 		
 	@GetMapping("/categorias")
-	public String categorias(@RequestParam(defaultValue = "0") Integer pagNro,
+	public String categorias(@RequestParam(defaultValue = "1") Integer pagNro,
             @RequestParam(defaultValue = "12") Integer pagTamanio,
             @RequestParam(defaultValue = "descripcion") String ordenadoPor,
             Model model) {
+		
+		int paginaRecuperar;
+		int paginasTotal;
+		int paginaSiguiente;
+		int paginaAnterior;
+		
+		
+		
+		
+		paginaRecuperar = pagNro - 1; 
+		
+		Page<Articulo> paginaArticulos = articuloService.getAll(paginaRecuperar,pagTamanio,ordenadoPor);
+		
+		paginasTotal = paginaArticulos.getTotalPages();
+		
+		List<Integer> paginas = getVectorPaginas(pagNro,paginasTotal);
+		
+		if (pagNro <= 1) {
+			paginaAnterior = 1;
+		}
+		else {
+			paginaAnterior = pagNro - 1;
+		}
+		
+		if (pagNro >= paginasTotal) {
+			paginaSiguiente = pagNro ;
+		}
+		else {
+			paginaSiguiente = pagNro + 1;
+		}
+		
+		
+		model.addAttribute("paginas",paginas);
 		model.addAttribute("marcas", marcaService.getBySnWeb("S"));
 		model.addAttribute("rubros", rubroService.getBySnWeb("S"));
 		model.addAttribute("proveedores", proveedorService.getBySnWeb("S"));
-		model.addAttribute("articulos",articuloService.getAll(pagNro,pagTamanio,ordenadoPor));
+		model.addAttribute("articulos",paginaArticulos);
+		model.addAttribute("paginaAnterior", paginaAnterior);
+		model.addAttribute("paginaActual",pagNro);
+		model.addAttribute("paginaSiguiente",paginaSiguiente);
 		
 		return "categorias";
+	}
+	
+	private List<Integer> getVectorPaginas(Integer pagNro, Integer paginasTotal) {
+		int vectorPaginaInial;
+		int vectorPaginaFinal;
+	 	vectorPaginaInial = pagNro / 9;
+		vectorPaginaInial = vectorPaginaInial * 9 + 1;
+		vectorPaginaFinal = vectorPaginaInial + 9;
+		if (vectorPaginaFinal > paginasTotal) {
+			vectorPaginaFinal = paginasTotal;
+		}
+		
+		List<Integer> paginas = IntStream.rangeClosed(vectorPaginaInial, vectorPaginaFinal).boxed().collect(Collectors.toList());
+			
+		return paginas;
 	}
 	
 	/*@GetMapping("/subrubro")
