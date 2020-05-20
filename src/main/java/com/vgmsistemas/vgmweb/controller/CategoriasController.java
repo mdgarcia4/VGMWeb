@@ -49,15 +49,16 @@ public class CategoriasController {
 		int paginasTotal;
 		int paginaSiguiente;
 		int paginaAnterior;
-		
-		
-		
+		int productoDesde;
+		int productoHasta;
+		long productosTotal;
 		
 		paginaRecuperar = pagNro - 1; 
 		
 		Page<Articulo> paginaArticulos = articuloService.getAll(paginaRecuperar,pagTamanio,ordenadoPor);
 		
 		paginasTotal = paginaArticulos.getTotalPages();
+		productosTotal = paginaArticulos.getTotalElements();
 		
 		List<Integer> paginas = getVectorPaginas(pagNro,paginasTotal);
 		
@@ -75,7 +76,9 @@ public class CategoriasController {
 			paginaSiguiente = pagNro + 1;
 		}
 		
-		
+		productoDesde = paginaRecuperar * pagTamanio + 1;
+		productoHasta = paginaRecuperar * pagTamanio + pagTamanio;
+				
 		model.addAttribute("paginas",paginas);
 		model.addAttribute("marcas", marcaService.getBySnWeb("S"));
 		model.addAttribute("rubros", rubroService.getBySnWeb("S"));
@@ -84,6 +87,9 @@ public class CategoriasController {
 		model.addAttribute("paginaAnterior", paginaAnterior);
 		model.addAttribute("paginaActual",pagNro);
 		model.addAttribute("paginaSiguiente",paginaSiguiente);
+		model.addAttribute("productoDesde", productoDesde);
+		model.addAttribute("productoHasta", productoHasta);
+		model.addAttribute("productosTotal", productosTotal);
 		
 		return "categorias";
 	}
