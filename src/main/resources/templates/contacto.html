@@ -1,12 +1,13 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<html lang="en">
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<title>Look</title>
 		<link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
 		<!-- Google Font -->
-		<link href='https://fonts.googleapis.com/css?family=Montserrat:400,700%7CPlayfair+Display:400italic,400,900%7COpen+Sans%7CCrimson+Text:400italic%7CLato:400,700' rel='stylesheet' type='text/css'>
+		<link href='https://fonts.googleapis.com/css?family=Montserrat:400,700%7CPlayfair+Display:400italic,400,900%7COpen+Sans' rel='stylesheet' type='text/css'>
+		<link href='https://fonts.googleapis.com/css?family=Lato:400,700,900' rel='stylesheet' type='text/css'>
 		<link rel="stylesheet" type="text/css" href="assets/css/jquery.selectbox.css" media="screen">
 		<!-- Linea Icons -->
 		<link rel="stylesheet" type="text/css" href="assets/css/linea.css" media="screen">
@@ -17,7 +18,6 @@
 
 		<!-- Bootstrap -->
 		<link rel="stylesheet" type="text/css" href="assets/css/bootstrap.css" media="screen">
-		<link rel="stylesheet" type="text/css" href="assets/css/jquery.fancybox.css" media="screen">
 		<link rel="stylesheet" type="text/css" href="assets/css/jquery-ui.css" media="screen">
 
 		<link rel="stylesheet" type="text/css" href="assets/css/dropdown.css" media="screen">
@@ -29,7 +29,7 @@
 		<script src="assets/js/html5shiv.min.js"></script>
 		<![endif]-->
 	</head>
-	<body>
+	<body ng-app="websiteApp">
 		<!-- Loader -->
 		<div id="loading">
 			<div id="loading-center">
@@ -43,7 +43,7 @@
 		</div>
 		<!-- Loader -->
 		<!--Page Wrapper Start-->
-		<div id="wrapper" class="categories">
+		<div id="wrapper" class="categories contact-page">
 			<!--container Start-->
 			<!--Header Section Start-->
 			<header class="header1" id="header">
@@ -53,13 +53,15 @@
 							<div class="col-xs-12">
 								<ul class="top-header-left clearfix">
 									<li class="register-link clearfix">
-										<i class="lock-icon icon_lock"> </i><a href="login.html" class="login" th:text="#{header.login}" >Log In</a>
-										<span>/</span><a href="#" class="register" th:text="#{header.register}">Register </a>
+										<i class="lock-icon icon_lock"> </i><a href="login.html" class="login">Log In</a>
+										<span>/</span><a href="#" class="register">Register </a>
 									</li>
 									<li class="select-wrapper">
 										<select class="select">
-											<option th:text="#{header.language.english}"> English </option>
-											<option th:text="#{header.language.spanish}"> Spanish </option>
+											<option> English </option>
+											<option> Spanish </option>
+											<option> French </option>
+											<option> German </option>
 										</select><i class="arrow_carrot-down"></i>
 									</li>
 									<li class="select-wrapper">
@@ -70,13 +72,13 @@
 								</ul>
 								<ul class="top-header-right clearfix">
 									<li class="profile">
-										<a href="#" th:text="#{header.myacount}"><i class="icon_profile" ></i>My Account </a>
+										<a href="#"><i class="icon_profile"></i>My Account </a>
 									</li>
-									<!--> <li class="gift">
+									<li class="gift">
 										<a href="#"><i class="icon_gift"></i> My Wishlist</a>
-									</li> -->
+									</li>
 									<li class="checkout">
-										<a href="#" th:text="#{header.checkout}"><i class="icon_check_alt" ></i>Checkout</a>
+										<a href="#"><i class="icon_check_alt"></i>Checkout</a>
 									</li>
 								</ul>
 							</div>
@@ -89,12 +91,12 @@
 							<div class="col-xs-12 middle-header-content">
 								<div class="middle-header-left">
 									<form class="clearfix">
-										<input type="text" name="search" placeholder="Search... " th:placeholder="#{header.search}"/>
+										<input type="text" name="search" placeholder="Search... " />
 										<button type="submit">
 											<i class="icon_search"></i>
 										</button>
 									</form>
-								</div> 
+								</div>
 								<div class="middle-header-right clearfix">
 									<div class="open-cart">
 										<i class="icon_bag_alt"></i>
@@ -108,6 +110,28 @@
 												</figure>
 												<div class="item-description">
 													<h4><a href="#" class="item-name">T-Shirt Retro Black</a></h4>
+													<span class="review-icon clearfix"> <i class="icon_star active"></i> <i class="icon_star active"></i> <i class="icon_star active"></i> <i class="icon_star active"></i> <i class="icon_star"></i> </span>
+													<span class="price">$ 70.00</span>
+												</div>
+												<span class="delete fa fa-trash"> </span>
+											</li>
+											<li>
+												<figure class="item-image">
+													<a href="#"><img src="assets/images/img-two.jpg" alt="t-shirt" /></a>
+												</figure>
+												<div class="item-description">
+													<h4><a href="#" class="item-name">T-Shirt Retro Black</a></h4>
+													<span class="review-icon clearfix"> <i class="icon_star active"></i> <i class="icon_star active"></i> <i class="icon_star active"></i> <i class="icon_star active"></i> <i class="icon_star"></i> </span>
+													<span class="price">$ 70.00</span>
+												</div>
+												<span class="delete fa fa-trash"> </span>
+											</li>
+											<li>
+												<figure class="item-image">
+													<a href="#"><img src="assets/images/img-three.jpg" alt="t-shirt" /></a>
+												</figure>
+												<div class="item-description">
+													<h4><a href="#" class="item-name">T-Shirt Retro White</a></h4>
 													<span class="review-icon clearfix"> <i class="icon_star active"></i> <i class="icon_star active"></i> <i class="icon_star active"></i> <i class="icon_star active"></i> <i class="icon_star"></i> </span>
 													<span class="price">$ 70.00</span>
 												</div>
@@ -141,12 +165,12 @@
 										<li>
 											<a href="index.html">homepage 1</a>
 										</li>
-										<!--  <li>
+										<li>
 											<a href="homepage-two.html">homepage 2</a>
 										</li>
 										<li>
 											<a href="homepage-three.html">homepage 3</a>
-										</li>-->
+										</li>
 									</ul>
 								</li>
 								<li>
@@ -155,7 +179,6 @@
 								<li>
 									<a href="#">ELECTRONICS</a>
 								</li>
-								<!--  
 								<li class="multi-level">
 									<a href="#">MULTI LEVEL</a>
 									<div class="multi-sub-menu clearfix">
@@ -273,7 +296,6 @@
 									</div>
 								</li>
 								<li>
-									
 									<a href="javascript:void(0);">Shop</a>
 									<i class="fs1 mmenu eicon visible-xs" data-icon="3"></i>
 									<ul class="sub-menu">
@@ -308,9 +330,9 @@
 											<a href="blog-detail.html">blog detail</a>
 										</li>
 									</ul>
-								</li>-->
+								</li>
 								<li>
-									<a href="contacto" th:text="#{header.contactus}">Contact us</a>
+									<a href="contact.html">Contact us</a>
 								</li>
 							</ul>
 						</div>
@@ -318,11 +340,11 @@
 				</nav>
 			</header>
 			<!--Header Section End-->
-			<!--  <div class="common-banner forcefullwidth_wrapper_tp_banner">
+			<div class="common-banner blog-detail-banner forcefullwidth_wrapper_tp_banner">
 				<div class="container">
 					<div class="row">
 						<div class="main-banner-text">
-							<span >shop grid with left sidebar</span>
+							<span>contact</span>
 							<ul class="banner-nav">
 								<li>
 									<a href="index.html">Home</a>
@@ -331,211 +353,89 @@
 									<a href="shopping-cart.html">Shop</a>
 								</li>
 								<li class="active">
-									<a href="#">Shop Grid with Left Sidebar</a>
+									<a href="#">Contact</a>
 								</li>
 							</ul>
 						</div>
 					</div>
 				</div>
 			</div>
-			-->
 			<!--Content Area Start-->
 			<div class="content">
-				<!-- Categories Shop Starts Here -->
-				<div class="categories-shop">
+				<div class="contact-content">
 					<div class="container">
 						<div class="row">
-							<div class="col-xs-12 hidden-sm">
-								<div class="filter-btn">
-									<a href="#">filter</a>
+							<div class="col-xs-12">
+								<!--  <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d56762.74902646294!2d-104.99644904239135!3d39.680320063895756!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sin!4v1451546005777" width="1170" height="468" frameborder="0" style="border:0" allowfullscreen></iframe>--> 
+								<div class="map-box " id="map-box"></div>
+							</div>
+							<div class="col-xs-12 col-sm-4">
+								<div class="contact-info contact-number contact-after">
+									<span class="icon_mobile" aria-hidden="true"></span>
+									<h4>phone</h4>
+									<strong class="number">Phone 01: <a href="tel:084963868345">(084) 963 868 345</a></strong>
+									<strong class="number">Phone 01: <a href="tel:084123456789">(084) 123 456 789</a></strong>
 								</div>
 							</div>
-							<div class="col-xs-12 col-sm-3 mobile-view">
-								<div class="categories-filtering">
-									<div class="categories-list">
-										<h3 class="heading">CATEGORIAS</h3>
-										<ul class="main-list" id="accordion">
-											<li class="panel-heading" id="headingOne" th:each="rubro: ${rubros}">
-												<a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" th:href="'#collapse'+${rubro.id.idRubro}" aria-expanded="true" aria-controls="collapseOne" th:text="${rubro.descripcion}" >RUBROS</a>
-												<ul class="sub-list panel-collapse collapse in" id="collapseOne" th:id="'collapse'+${rubro.id.idRubro}" aria-labelledby="headingOne" >
-													<li th:each="subrubro: ${rubro.subrubros}">
-														<a href="#" th:href="'/subrubro?rubro='+${subrubro.id.idRubro}+ '&subrubro=' + ${subrubro.id.idSubrubro}" th:text="${subrubro.descripcion}" >SUBRUBRO</a>
-													</li>
-												</ul>
-											</li>
-										</ul>
-									</div>
-									<!--  <div class="filter-list">
-										<h3 class="heading">filter selection</h3>
-										<div class="select-range">
-											<p>
-												<label for="amount">PRICE</label>
-												<input type="text" id="amount" readonly style="border:0; color:#f6931f; font-weight:bold;">
-											</p>
-											<div id="slider-meter" class="slider-meter"></div>
-											<div class="range-price">
-												<span>Range: <span id="amount2" class="first-price">$16.00</span> - <span id="amount1" class="second-price">$200.00</span></span>
-											</div>
-										</div>
-									</div>
-									<div class="color-selection">
-										<h4>color</h4>
-										<ul class="clearfix">
-											<li class="active">
-												<a href="#" class="brown"></a>
-											</li>
-											<li>
-												<a href="#" class="light-green"></a>
-											</li>
-											<li>
-												<a href="#" class="orange"></a>
-											</li>
-											<li>
-												<a href="#" class="yellow"></a>
-											</li>
-										</ul>
-									</div>
-									<div class="size-selection">
-										<h4>size selection</h4>
-										<ul class="clearfix">
-											<li>
-												<a href="#" class="active">s</a>
-											</li>
-											<li>
-												<a href="#">m</a>
-											</li>
-											<li>
-												<a href="#">l</a>
-											</li>
-											<li>
-												<a href="#">xl</a>
-											</li>
-											<li>
-												<a href="#">xxl</a>
-											</li>
-										</ul>
-									</div>
-									-->
-									<div class="manufacturer">
-										<h3 class="heading">Marcas</h3>
-										<ul class="main-list" th:each="marca: ${marcas}">
-											<li>
-												<a href="#" th:href="'/marca?marca='+${marca.id}" th:text="${marca.descripcion}">Marca 1 </a>
-											</li>
-										</ul>
-									</div>
-									<div class="manufacturer">
-										
-										<h3 class="heading">Proveedores</h3>
-										<ul class="main-list" th:each="proveedor: ${proveedores}">
-											<li>
-												<a href="#" th:href="'/proveedor?proveedor='+${proveedor.idProveedor}" th:text="${proveedor.deProveedor}">Proveedor 1 </a>
-											</li>
-										</ul>
-									</div>
-									<!--  <div class="compare-products">
-										<h3 class="heading">compare product</h3>
-										<span>You have no product to compare</span>
-									</div>
-									-->
+							<div class="col-xs-12 col-sm-4">
+								<div class="contact-info contact-address contact-after">
+									<span class="icon_pin_alt" aria-hidden="true"></span>
+									<h4>address</h4>
+									<address class="address">
+										United Kingdom, London
+										Simple Street 15A
+									</address>
 								</div>
 							</div>
-							<div class="col-xs-12 col-sm-9">
-								<div class="row">
-									<div class="col-xs-12">
-										<ul class="categories-section">
-											<li>
-												<span th:utext="#{categorias.showing}+ ' ' + ${productoDesde} + ' ' + #{categorias.to}+ ' ' + ${productoHasta} + ' '+ #{categorias.of} + ' ' + ${productosTotal}">Showing 1 to 16 of 17 <small>total</small></span>
-												
-											</li>
-											<li class="select-name">
-												<span th:text="#{categorias.sortby}">SORT BY <em>:</em></span>
-												<select class="select" id="">
-													<option value="">Name</option>
-													<option value="1">Size</option>
-													<option value="2">Color</option>
-													<option value="3">Price</option>
-												</select>
-											</li>
-											<li>
-												<span th:text="#{categorias.show}">SHOW <em>:</em></span>
-												<select class="select" id="">
-													<option value=""  >9</option>
-													<option value="1">10</option>
-													<option value="2">11</option>
-													<option value="3">12</option>
-												</select>
-											</li>
-											<li>
-												<span>VIEW</span>
-												<span class="view-btn"> <a href="#" class="grid-view active"><i class="fa fa-th-large"></i></a> <a href="#" class="list-view"><i class="fa fa-th-list"></i></a> </span>
-											</li>
-										</ul>
-									</div>
-											<div class="col-xs-12 col-sm-4" th:each="art: ${articulos}">
-												<div class="product-display product-description">
-													<figure class="product-image">
-														<img src="assets/images/img-six.jpg" th:src="'assets/images/'+${art.id}+'.jpg'" alt="" />
-														<div class="overlay">
-															<div class="product-view-block">
-																<div class="product-view clearfix">
-																	<a class="zoom icon_zoom-in_alt single_image" href="assets/images/img-six.jpg" th:href="'assets/images/'+${art.id}+'.jpg'"  ></a>
-																	<a class="data-report icon_datareport" href="#"></a>
-																	<a class="heart icon_heart_alt" href="#"></a>
-																</div>
-																<a class="btn add-cart" href="#">ADD TO CART</a>
-															</div>
-														</div>
-													</figure>
-													<div class="about-product">
-														<h4><a class="item-name" href="#" th:text="${art.descripcion}">Articulo 1</a></h4>
-														<span class="review-icon clearfix"> <i class="icon_star active"></i> <i class="icon_star active"></i> <i class="icon_star active"></i> <i class="icon_star active"></i> <i class="icon_star"></i> </span>
-														<span class="price"> <span th:text="${art.precioBase}">$ 70.00</span> <span class="old-price" th:text="${art.precioBase}">$97.00</span></span>
-		
-													</div>
-												</div>
-											</div>
+							<div class="col-xs-12 col-sm-4">
+								<div class="contact-info contact-mail">
+									<span class="icon_mail_alt" aria-hidden="true"></span>
+									<h4>email</h4>
+									<strong class="mail"><a href="mailto:support@yourdomain.com">support@yourdomain.com</a></strong>
+									<strong class="mail"><a href="mailto:hello@yourdomain.com">hello@yourdomain.com</a></strong>
+								</div>
+							</div>
+							<div class="query clearfix">
+								<div class="col-xs-12">
+									<h3>If you got any questions
+									<br />
+									please do not hesitate to send us a message.</h3>
+								</div>
+								<div class="col-xs-12 col-sm-8 col-sm-offset-2">
+									<!-- <form ng-submit="submitForm()" name="contactForm" method="post"  novalidate id="contact" class="contact-form">
+									<form class="contact-form">
+									<div ng-class="{'successMessage' : successsubmission}" ng-bind="successsubmissionMessage" id="success"></div>
+									<input id="name" class="contact-name" type="text" placeholder="Name*" ng-model="formData.name" ng-class="{'error' : errorName}"/>
+									<input id="email" class="contact-mail" type="text" placeholder="Email*" ng-model="formData.email" ng-class="{'error' : errorEmail}"/>
+									<input id="sub" class="contact-subject" type="text" placeholder="Subject*" ng-class="{'error' : errorSubject}" ng-model="formData.subject"/>
+									<textarea placeholder="Comment*" id="message" ng-model="formData.message" ng-class="{'error' : errorTextarea}"></textarea>
 
-									<div class="col-xs-12">
-										<div class="categories-shop-pagging">
-											<ul >
-												<li>
-													<a class="page-link" th:href="@{|/categorias?pagNro=${paginaAnterior}|}" ><i class="fa fa-angle-left"></i></a>
-												</li>
-												<li class="active" th:each=" pagina: ${paginas}" th:class="${pagina ==paginaActual ? 'active' :'' }">
-													<a href="javascript:void(0)" th:href="@{|/categorias?pagNro=${pagina}|}" th:text ="${pagina}" >1</a>
-												</li>
-												<li>
-													<a href="javascript:void(0)" th:href="@{|/categorias?pagNro=${paginaSiguiente}|}" ><i class="fa fa-angle-right" ></i></a>
-												</li>
-												<!--  <li class="active">
-													<a href="javascript:void(0)" th:text="${paginasActual}">1</a>
-												</li>
-												<li>
-													<a href="javascript:void(0)" th:text="${paginasActual}">2</a>
-												</li>
-												<li>
-													<a href="javascript:void(0)" th:text="${paginasActual}">3</a>
-												</li>
-												<li>
-													<a href="javascript:void(0)">...</a>
-												</li>
-												<li>
-													<a href="javascript:void(0)" th:text="${paginasTotal}">5</a> 
-												</li>
-												<li>
-													<a href="javascript:void(0)"><i class="fa fa-angle-right"></i></a>
-												</li>
-												-->
-											</ul>
-										</div>
-									</div>
+									<button type="submit" class="comment-submit qoute-sub" ng-disabled="submitButtonDisabled">
+									Submit
+									</button>
+									<input type="submit" class="comment-submit qoute-sub" ng-disabled="submitButtonDisabled">
+									<div ng-class="{'submissionMessage' : submission}" ng-bind="submissionMessage" style="float:right; color: red;"></div>
+									</form> -->
+									<form name="contactForm" method="post"  novalidate id="contact" class="contact-form" data-ng-controller='lookcontactCtrl'>
+										<!-- 	<form class="contact-form"> -->
+										<!-- <div ng-class="{'successMessage' : successsubmission}" ng-bind="successsubmissionMessage" id="success"></div> -->
+										<input id="name" class="contact-name" type="text" name="name" placeholder="Name*" required ng-model="contactformData.name"   ng-class="{'error' : contactForm.name.$error.pattern || submit && contactForm.name.$invalid}"/>
+										<input id="email" class="contact-mail" type="email" name="email" placeholder="Email*" required ng-model="contactformData.email"   ng-class="{'error' : contactForm.email.$error.pattern || submit && contactForm.email.$invalid}"/>
+										<input id="sub" class="contact-subject" type="text" name="subject" placeholder="Subject*" required data-ng-model="contactformData.subject" data-ng-class="{'error' : contactForm.subject.$error.required && contactForm.subject.$blured || submit && contactForm.subject.$invalid}"/>
+										<textarea placeholder="Comment*" id="message" name="message" data-ng-model="contactformData.message" required data-ng-class="{'error' : contactForm.message.$error.required && contactForm.message.$blured || submit && contactForm.message.$invalid}"></textarea>										
+												
+
+										<button type="submit" data-ng-click="submitcontactForm(contactForm.$invalid)" class="comment-submit qoute-sub" data-ng-disabled="submitButtonDisabled">
+											Submit
+										</button>
+										<!-- <input type="submit" class="comment-submit qoute-sub" ng-disabled="submitButtonDisabled"> -->
+										<!-- <div ng-class="{'submissionMessage' : submission}" ng-bind="submissionMessage" style="float:right; color: red;"></div> -->
+									</form>
 								</div>
 							</div>
 						</div>
 					</div>
 				</div>
-				<!-- Categories Shop Ends Here -->
 			</div>
 			<!--Content Area End-->
 			<!--Footer Section Start-->
@@ -645,7 +545,7 @@
 					</div>
 				</div>
 				<div class="secondary-footer">
-					<span class="copy-right">Copyright © 2020 - VGM Sistemas. Todos los derechos reservados.</span>
+					<span class="copy-right">Copyright © 2016 PSD Themes by Themeon. All rights reserved.</span>
 				</div>
 			</footer>
 			<!--Footer Section End-->
@@ -653,14 +553,19 @@
 		</div>
 		<!--Page Wrapper End-->
 		<script type="text/javascript" src="assets/js/jquery-1.12.0.min.js"></script>
+		<script type="text/javascript" src="assets/js/angular.js"></script>
+		
 		<script src="assets/js/less.js"></script>
 		<script type="text/javascript" src="assets/js/jquery.selectbox-0.2.js"></script>
-		<script type="text/javascript" src="assets/js/jquery.fancybox.js"></script>
 		<script type="text/javascript" src="assets/js/bootstrap.js"></script>
 		<script type="text/javascript" src="assets/js/jquery-ui.js"></script>
+		<script src="http://maps.google.com/maps/api/js?sensor=true"></script>
+		<script type="text/javascript" src="assets/js/gmap.js"></script>
+		<script type="text/javascript" src="assets/js/vailidation.js"></script>
+		<!-- RS5.0 Core JS Files -->
 
 		<script type="text/javascript" src="assets/js/site.js"></script>
-		<script type="text/javascript" src="assets/js/touch-enable.js"></script>
+		<script type="text/javascript" src="assets/js/app.js"></script>
 
 	</body>
 </html>

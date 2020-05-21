@@ -52,7 +52,7 @@ public class AppController {
 		model.addAttribute("proveedores", proveedorService.getBySnWeb("S"));
 		model.addAttribute("articulos",articuloService.getAll(pageable));
 		
-		return "categorias";
+		return "categorias1";
 	}
 	
 	@GetMapping("/subrubro")
@@ -85,6 +85,16 @@ public class AppController {
 		return "categorias";
 	}
 	
+	@GetMapping("/contacto" )
+	public String contacto(Model model) {
+		Double latitud=-29.704071;
+		Double longitud=-57.1297873;
+				
+		model.addAttribute("latitud", latitud);
+		model.addAttribute("longitud",longitud);
+		return "contacto";
+	}
+	
 	/*@GetMapping("/categorias1")
 	public String categorias1(Model model, @PageableDefault(page = 0, size = 9) Pageable pageable) {
 		model.addAttribute("marcas", marcaService.getBySnWeb("S"));
@@ -93,7 +103,7 @@ public class AppController {
 		model.addAttribute("articulos",articuloService.getAll(pageable));
 		
 		return "categorias1";
-	}
+	}*/
 	
 	@GetMapping("/header")
 	public String header() {
@@ -103,5 +113,5 @@ public class AppController {
 	@GetMapping("/footer")
 	public String footer() {
 		return "footer";
-	}*/
+	}
 }

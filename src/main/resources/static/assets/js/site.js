@@ -284,8 +284,8 @@
 		if ($('#map-box').length) {
 			var map = new GMaps({
 				div : '#map-box',
-				lat : 39.676521,
-				lng : -104.962289,
+				lat : -29.704071,
+				lng : -57.1297873,
 
 				disableDefaultUI : true,
 				zoom : 11,
