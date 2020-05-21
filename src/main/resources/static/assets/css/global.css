@@ -386,7 +386,7 @@ input:focus, input:active, button:focus, button:active, textarea:focus {
 	position: absolute;
 	top: 102%;
 	right: -1px;
-	width: 369px;
+	width:500px;/*369px;*/
 	display: none;
 	z-index: 999;
 }
