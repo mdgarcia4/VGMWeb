@@ -8,14 +8,18 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.vgmsistemas.vgmweb.entity.Usuario;
 import com.vgmsistemas.vgmweb.service.ArticuloService;
+import com.vgmsistemas.vgmweb.service.BannerService;
 import com.vgmsistemas.vgmweb.service.MarcaService;
 import com.vgmsistemas.vgmweb.service.ProveedorService;
 import com.vgmsistemas.vgmweb.service.RubroService;
+import com.vgmsistemas.vgmweb.service.UserDetailsServiceImpl;
 
 import org.springframework.ui.Model;
 
@@ -34,13 +38,41 @@ public class AppController {
 	@Autowired
 	ProveedorService proveedorService;
 	
-	@GetMapping({"/login"})
-	public String login() {
+	@Autowired
+	UserDetailsServiceImpl userService;
+	
+	@Autowired
+	BannerService bannerService;
+	
+	@GetMapping({"/login","/login.html","/longin.htm"})
+	public String login(Model model) {
+		//model.addAttribute("usr",new Usuario());
 		return "login";
 	}
 	
-	@GetMapping({"/","/index"})
-	public String index() {
+	
+	@GetMapping({"/registrar","/registrar.html","/registrar.htm"})
+	public String getRegistrar(Model model) {
+		
+		return "registrar";
+	}
+	
+	@ModelAttribute(value = "usr")
+	public Usuario newUsuario()
+	{
+	    return new Usuario();
+	}
+	
+	@PostMapping({"/registrar","/registrar.html","/registrar.htm"})
+	public String registrar(@ModelAttribute("usr") Usuario usr) {
+		userService.crearActualizarUsuario(usr);
+		return "login";
+	}
+	
+	
+	@GetMapping({"/","/index","/index.html","/index.htm"})
+	public String index(Model model) {
+		model.addAttribute("banners",bannerService.getByDePaginaAndSnActivo("index", "S"));
 		return "index";
 	}
 	

@@ -13,9 +13,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.vgmsistemas.vgmweb.entity.Articulo;
+import com.vgmsistemas.vgmweb.entity.Usuario;
 import com.vgmsistemas.vgmweb.service.ArticuloService;
 import com.vgmsistemas.vgmweb.service.MarcaService;
 import com.vgmsistemas.vgmweb.service.ProveedorService;
@@ -24,6 +26,7 @@ import com.vgmsistemas.vgmweb.service.RubroService;
 import org.springframework.ui.Model;
 
 @Controller
+@RequestMapping("/categorias")
 public class CategoriasController {
 	
 	@Autowired
@@ -39,7 +42,8 @@ public class CategoriasController {
 	ProveedorService proveedorService;
 	
 		
-	@GetMapping("/categorias")
+	//@GetMapping ("/categorias")
+	@GetMapping
 	public String categorias(@RequestParam(defaultValue = "1") Integer pagNro,
             @RequestParam(defaultValue = "12") Integer pagTamanio,
             @RequestParam(defaultValue = "descripcion") String ordenadoPor,
@@ -91,6 +95,8 @@ public class CategoriasController {
 		model.addAttribute("productoHasta", productoHasta);
 		model.addAttribute("productosTotal", productosTotal);
 		
+		
+		
 		return "categorias";
 	}
 	
@@ -108,8 +114,8 @@ public class CategoriasController {
 			
 		return paginas;
 	}
-	
-	/*@GetMapping("/subrubro")
+	/*
+	@GetMapping("/subrubro")
 	public String categorias(@RequestParam("rubro") Long rubro, @RequestParam("subrubro") Long subrubro  , Model model, @PageableDefault(page = 0, size = 9) Pageable pageable) {
 		model.addAttribute("marcas", marcaService.getBySnWeb("S"));
 		model.addAttribute("rubros", rubroService.getBySnWeb("S"));
@@ -138,6 +144,8 @@ public class CategoriasController {
 		
 		return "categorias";
 	}*/
+	
+	
 	
 	@GetMapping("/home")
 	public String home(@RequestParam(defaultValue = "1") Integer pagNro,
@@ -192,5 +200,17 @@ public class CategoriasController {
 		model.addAttribute("productosTotal", productosTotal);
 		
 		return "home";
+	}
+	
+	//@GetMapping("/categorias/search" , method = RequestMethod.POST)
+	//@PostMapping(value = "/categorias",method = RequestMethod.POST)
+	@PostMapping
+	public String categoriasSearch(String search,  Model model, @PageableDefault(page = 0, size = 9) Pageable pageable) {
+		model.addAttribute("marcas", marcaService.getBySnWeb("S"));
+		model.addAttribute("rubros", rubroService.getBySnWeb("S"));
+		model.addAttribute("proveedores", proveedorService.getBySnWeb("S"));
+		model.addAttribute("articulos",articuloService.searchByDescripcion(search, pageable));
+		
+		return "categorias";
 	}
 }

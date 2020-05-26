@@ -25,6 +25,15 @@ public class Usuario {
 
 	@Column
 	private String clave;
+	
+	@Column
+	private String nombre;
+	
+	@Column
+	private String email;
+	
+	@Column
+	private String telefono;
 
 	@Column
 	private boolean activo;
@@ -71,6 +80,30 @@ public class Usuario {
 
 	public void setRoles(Set<Rol> roles) {
 		this.roles = roles;
+	}
+	
+	public String getNombre() {
+		return nombre;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getTelefono() {
+		return telefono;
+	}
+
+	public void setTelefono(String telefono) {
+		this.telefono = telefono;
 	}
 
 	@Override

@@ -27,7 +27,7 @@ import com.fasterxml.jackson.annotation.JsonView;
 
 @Entity
 @Table( name = "articulos")
-@Where(clause = "(sn_activo='S')")
+@Where(clause = "(sn_activo='S' and sn_web='S')")
 public class Articulo{
 
 	@Id
@@ -122,6 +122,12 @@ public class Articulo{
 	
 	@Column(name="fe_publicacion_web")
 	private Date fePublicacion;
+	
+	@Column(name="id_codigobarras")
+	private String idCodigoBarras;
+	
+	@Column(name="sn_web")
+	private String snWeb;
 
 	//private static final String PESABLE = "S";
 	//private static final String NO_PESABLE = "N";
@@ -490,6 +496,22 @@ public class Articulo{
 
 	public void setIsGenerico(String isGenerico) {
 		this.isGenerico = isGenerico;
+	}
+
+	public String getIdCodigoBarras() {
+		return idCodigoBarras;
+	}
+
+	public void setIdCodigoBarras(String idCodigoBarras) {
+		this.idCodigoBarras = idCodigoBarras;
+	}
+
+	public String getSnWeb() {
+		return snWeb;
+	}
+
+	public void setSnWeb(String snWeb) {
+		this.snWeb = snWeb;
 	}	
 	
 }

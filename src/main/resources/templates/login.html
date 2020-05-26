@@ -367,7 +367,7 @@
 						<div class="row">
 							<div class="col-xs-12 col-sm-4">
 								<div class="account-login">
-									<h3>Ingrese a su cuenta</h3>
+									<h3 >Ingrese a su cuenta</h3>
 									<span class="discover">Ingrese a su cuenta para pode operar</span>
 									<form class="login-account-form" th:action="@{/login}" method="post">
 										<input type="text" class="login-account-form-text" placeholder="Usuario" name="usuario" />
@@ -377,39 +377,43 @@
 											<label for="keep-login"> <span><i class="fa fa-check"></i></span> Mantenme conectado </label>
 											<a href="#">¿Olvidaste tu contraseña ?</a>
 										</div>
-										<div th:if="${param.error}" class="alert alert-danger" role="alert">
-								            Usuario o clave inválida.
-								        </div>
-								        <div th:if="${param.logout}" class="alert alert-success" role="alert">
-								            Usted ha cerrado sesión.
-								        </div>
+										
 										<input type="submit" value="login" />
 									</form>
+									<div th:if="${param.error}" class="alert alert-danger" role="alert">
+							            Usuario o clave inválida.
+							        </div>
+							        <div th:if="${param.logout}" class="alert alert-success" role="alert">
+							            Usted ha cerrado sesión.
+							        </div>
 								</div>
 							</div>
+							<!--  
 							<div class="col-xs-12 col-sm-7 col-sm-offset-1">
 								<div class="register-now">
 									<h3>¿No tienes una cuenta? Regístrate ahora</h3>
 									<span class="benifits">By creating an account with our store, you will be able to move through the checkout process faster, store multiple shipping addresses, view and track your orders in your account and more. </span>
-									<form class="register-now-form">
+									<form class="register-now-form" th:action="@{/registrar}" th:object="${usr}" method="post">
 										<ul class="clearfix">
+											
+											
 											<li>
-												<input type="text" placeholder="Usuario" />
+												<input class="form-control" type="text" placeholder="Correo electrónico" id="email" th:field="*{email}" />
 											</li>
 											<li>
-												<input type="text" placeholder="Correo electrónico" />
+												<input class="form-control" type="text" placeholder="Usuario" id="usuario" th:field="*{usuario}" />
 											</li>
 											<li>
-												<input type="text" placeholder="Nombre" />
+												<input class="form-control" type="text" placeholder="Nombre" id="nombre" th:field="*{nombre}" />
 											</li>
 											<li>
-												<input type="text" placeholder="Teléfono" />
+												<input class="form-control" type="text" placeholder="Teléfono" id="telefono" th:field="*{telefono}" />
 											</li>
 											<li>
-												<input type="password" placeholder="Contraseña" />
+												<input class="form-control" type="password" placeholder="Contraseña" id="clave" th:field="*{clave}" />
 											</li>
 											<li>
-												<input type="password" placeholder="Repetir - Contraseña" />
+												<input class="form-control" type="password" placeholder="Repetir - Contraseña" name="clave-repetir"/>
 											</li>
 											<li>
 												<input type="submit" value="registrar ahora" />
@@ -420,6 +424,7 @@
 
 							</div>
 						</div>
+							-->
 					</div>
 				</div>
 			</div>

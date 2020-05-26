@@ -25,7 +25,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests()
 			.antMatchers(resources).permitAll()
-			.antMatchers("/", "/index","/contacto").permitAll()
+			.antMatchers("/", "/index","/contacto","/registrar").permitAll()
 			.antMatchers("/admin*").access("hasRole('ADMIN')")
 			.antMatchers("/user*").access("hasRole('USER') or hasRole('ADMIN')")
 			.antMatchers("/categorias").access("hasRole('USER') or hasRole('ADMIN')")
@@ -41,7 +41,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 			.usernameParameter("usuario").passwordParameter("clave")
 			.and()
 			.logout().permitAll()
-			.logoutSuccessUrl("/login?logout");
+			.logoutSuccessUrl("/index?logout")
+			;
 	}
 
 	BCryptPasswordEncoder bCryptPasswordEncoder;

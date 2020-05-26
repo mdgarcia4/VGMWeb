@@ -53,6 +53,11 @@ public class ArticuloService {
 	public Page<Articulo> getAll(Pageable pageable){
 		return articuloRepo.findAll(pageable);
 	}
+	
+	public Page<Articulo> searchByDescripcion(String descripcion, Pageable pageable){
+		
+		return articuloRepo.findByDescripcionContainingIgnoreCase(descripcion, pageable);
+	}
 
 	public ArticuloRepo getArticuloRepo() {
 		return articuloRepo;

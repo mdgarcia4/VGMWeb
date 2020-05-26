@@ -53,7 +53,7 @@
 							<div class="col-xs-12">
 								<ul class="top-header-left clearfix">
 									<li class="register-link clearfix">
-										<i class="lock-icon icon_lock"> </i><a href="login.html" class="login" th:text="#{header.login}" >Log In</a>
+										<i class="lock-icon icon_lock"> </i><a href="login" class="login" th:text="#{header.login}" >Log In</a>
 										<span>/</span><a href="#" class="register" th:text="#{header.register}">Register </a>
 									</li>
 									<li class="select-wrapper">
@@ -64,7 +64,7 @@
 									</li>
 									<li class="select-wrapper">
 										<select class="select">
-											<option> USD </option>
+											<option> $ </option>
 										</select><i class="arrow_carrot-down"></i>
 									</li>
 								</ul>
@@ -72,11 +72,12 @@
 									<li class="profile">
 										<a href="#" th:text="#{header.myacount}"><i class="icon_profile" ></i>My Account </a>
 									</li>
-									<!--> <li class="gift">
-										<a href="#"><i class="icon_gift"></i> My Wishlist</a>
-									</li> -->
+									
 									<li class="checkout">
-										<a href="#" th:text="#{header.checkout}"><i class="icon_check_alt" ></i>Checkout</a>
+										<a href="javascript:enviar_formulario_logout()" th:text="#{header.checkout}"><i class="icon_check_alt" ></i>Checkout</a>
+										<form th:action="@{/logout}" method="post" name="formulario_logout">
+					            			<input type="hidden" value="Cerrar Sesion"   />
+					        			</form>
 									</li>
 								</ul>
 							</div>
@@ -88,9 +89,9 @@
 						<div class="row clearfix">
 							<div class="col-xs-12 middle-header-content">
 								<div class="middle-header-left">
-									<form class="clearfix">
+									<form class="clearfix" th:action="@{/categorias}"action="/categorias" method="post">
 										<input type="text" name="search" placeholder="Search... " th:placeholder="#{header.search}"/>
-										<button type="submit">
+										<button type="submit" >
 											<i class="icon_search"></i>
 										</button>
 									</form>
@@ -135,27 +136,28 @@
 							<a href="javascript:void(0);" class="main-menu menu-image"></a>
 							<ul class="menu-links">
 								<li class="active has-sub">
-									<a href="javascript:void(0);">Home</a>
-									<i class="fs1 mmenu eicon visible-xs" data-icon="3"></i>
+									<a href="index" th:text="#{menu.home}">Home</a>
+									<!--  <i class="fs1 mmenu eicon visible-xs" data-icon="3"></i>
 									<ul class="sub-menu">
 										<li>
 											<a href="index.html">homepage 1</a>
 										</li>
-										<!--  <li>
+										  <li>
 											<a href="homepage-two.html">homepage 2</a>
 										</li>
 										<li>
 											<a href="homepage-three.html">homepage 3</a>
-										</li>-->
-									</ul>
+										</li>
+									</ul>-->
 								</li>
+								
 								<li>
-									<a href="#">FASHION</a>
+									<a href="/categorias">Productos</a>
 								</li>
-								<li>
+								<!-- <li>
 									<a href="#">ELECTRONICS</a>
 								</li>
-								<!--  
+								 
 								<li class="multi-level">
 									<a href="#">MULTI LEVEL</a>
 									<div class="multi-sub-menu clearfix">
@@ -310,7 +312,7 @@
 									</ul>
 								</li>-->
 								<li>
-									<a href="contacto" th:text="#{header.contactus}">Contact us</a>
+									<a href="contacto" th:text="#{menu.contactus}">Contact us</a>
 								</li>
 							</ul>
 						</div>
@@ -318,7 +320,7 @@
 				</nav>
 			</header>
 			<!--Header Section End-->
-			<!--  <div class="common-banner forcefullwidth_wrapper_tp_banner">
+			<div class="common-banner forcefullwidth_wrapper_tp_banner">
 				<div class="container">
 					<div class="row">
 						<div class="main-banner-text">
@@ -338,7 +340,7 @@
 					</div>
 				</div>
 			</div>
-			-->
+			
 			<!--Content Area Start-->
 			<div class="content">
 				<!-- Categories Shop Starts Here -->
@@ -353,7 +355,7 @@
 							<div class="col-xs-12 col-sm-3 mobile-view">
 								<div class="categories-filtering">
 									<div class="categories-list">
-										<h3 class="heading">CATEGORIAS</h3>
+										<h3 class="heading" th:text="#{categorias.filter.categories}">CATEGORIAS</h3>
 										<ul class="main-list" id="accordion">
 											<li class="panel-heading" id="headingOne" th:each="rubro: ${rubros}">
 												<a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" th:href="'#collapse'+${rubro.id.idRubro}" aria-expanded="true" aria-controls="collapseOne" th:text="${rubro.descripcion}" >RUBROS</a>
@@ -365,59 +367,22 @@
 											</li>
 										</ul>
 									</div>
-									<!--  <div class="filter-list">
-										<h3 class="heading">filter selection</h3>
+									<div class="filter-list">
+										<h3 class="heading" th:text="#{categorias.filter.selection}">filter selection</h3>
 										<div class="select-range">
 											<p>
-												<label for="amount">PRICE</label>
+												<label for="amount" th:text="#{categorias.filter.precio}">PRICE</label>
 												<input type="text" id="amount" readonly style="border:0; color:#f6931f; font-weight:bold;">
 											</p>
 											<div id="slider-meter" class="slider-meter"></div>
 											<div class="range-price">
-												<span>Range: <span id="amount2" class="first-price">$16.00</span> - <span id="amount1" class="second-price">$200.00</span></span>
+												<span th:text="#{categorias.filter.precio.rango}">Range: <span id="amount2" class="first-price">$16.00</span> - <span id="amount1" class="second-price">$200.00</span></span>
 											</div>
 										</div>
 									</div>
-									<div class="color-selection">
-										<h4>color</h4>
-										<ul class="clearfix">
-											<li class="active">
-												<a href="#" class="brown"></a>
-											</li>
-											<li>
-												<a href="#" class="light-green"></a>
-											</li>
-											<li>
-												<a href="#" class="orange"></a>
-											</li>
-											<li>
-												<a href="#" class="yellow"></a>
-											</li>
-										</ul>
-									</div>
-									<div class="size-selection">
-										<h4>size selection</h4>
-										<ul class="clearfix">
-											<li>
-												<a href="#" class="active">s</a>
-											</li>
-											<li>
-												<a href="#">m</a>
-											</li>
-											<li>
-												<a href="#">l</a>
-											</li>
-											<li>
-												<a href="#">xl</a>
-											</li>
-											<li>
-												<a href="#">xxl</a>
-											</li>
-										</ul>
-									</div>
-									-->
+									
 									<div class="manufacturer">
-										<h3 class="heading">Marcas</h3>
+										<h4 class="heading" th:text="#{categorias.filter.brand}">Marcas</h4>
 										<ul class="main-list" th:each="marca: ${marcas}">
 											<li>
 												<a href="#" th:href="'/marca?marca='+${marca.id}" th:text="${marca.descripcion}">Marca 1 </a>
@@ -426,7 +391,7 @@
 									</div>
 									<div class="manufacturer">
 										
-										<h3 class="heading">Proveedores</h3>
+										<h4 class="heading" th:text="#{categorias.filter.provider}">Proveedores</h4>
 										<ul class="main-list" th:each="proveedor: ${proveedores}">
 											<li>
 												<a href="#" th:href="'/proveedor?proveedor='+${proveedor.idProveedor}" th:text="${proveedor.deProveedor}">Proveedor 1 </a>
@@ -459,15 +424,15 @@
 											</li>
 											<li>
 												<span th:text="#{categorias.show}">SHOW <em>:</em></span>
-												<select class="select" id="">
-													<option value=""  >9</option>
-													<option value="1">10</option>
-													<option value="2">11</option>
-													<option value="3">12</option>
+												<select class="select" id="" >
+													<option value=""  >6</option>
+													<option value="1">9</option>
+													<option value="2">12</option>
+													<option value="3">15</option>
 												</select>
 											</li>
 											<li>
-												<span>VIEW</span>
+												<span th:text="#{categorias.view}" >VIEW</span>
 												<span class="view-btn"> <a href="#" class="grid-view active"><i class="fa fa-th-large"></i></a> <a href="#" class="list-view"><i class="fa fa-th-list"></i></a> </span>
 											</li>
 										</ul>
@@ -475,11 +440,11 @@
 											<div class="col-xs-12 col-sm-4" th:each="art: ${articulos}">
 												<div class="product-display product-description">
 													<figure class="product-image">
-														<img src="assets/images/img-six.jpg" th:src="'assets/images/'+${art.id}+'.jpg'" alt="" />
+														<img src="img/img-six.jpg" th:src="'img/'+${art.idCodigoBarras}+'.jpg'" alt="" />
 														<div class="overlay">
 															<div class="product-view-block">
 																<div class="product-view clearfix">
-																	<a class="zoom icon_zoom-in_alt single_image" href="assets/images/img-six.jpg" th:href="'assets/images/'+${art.id}+'.jpg'"  ></a>
+																	<a class="zoom icon_zoom-in_alt single_image" href="img/img-six.jpg" th:href="'img/'+${art.idCodigoBarras}+'.jpg'"  ></a>
 																	<a class="data-report icon_datareport" href="#"></a>
 																	<a class="heart icon_heart_alt" href="#"></a>
 																</div>
@@ -661,6 +626,6 @@
 
 		<script type="text/javascript" src="assets/js/site.js"></script>
 		<script type="text/javascript" src="assets/js/touch-enable.js"></script>
-
+		<script type="text/javascript" src="js/vgmutil.js"></script>
 	</body>
 </html>

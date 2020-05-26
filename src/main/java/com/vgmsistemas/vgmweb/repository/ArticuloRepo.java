@@ -13,13 +13,19 @@ import com.vgmsistemas.vgmweb.entity.Articulo;
 public interface ArticuloRepo extends JpaRepository<Articulo, Long>  {
     public Page<Articulo> findBySnActivo(String snActivo,Pageable pageable);
     
-    @Query("SELECT a FROM Articulo a WHERE a.subrubro.id.idRubro = ?1 and a.subrubro.id.idSubrubro = ?2")
+    @Query("SELECT a FROM Articulo a "
+    		+ "WHERE a.subrubro.id.idRubro = ?1 "
+    		+ "and a.subrubro.id.idSubrubro = ?2")
     public Page<Articulo> findArticuloByRubroAndSubrubro(Long rubro, Long subrubro, Pageable pageable);
     
-    @Query("SELECT a FROM Articulo a WHERE a.marca.id = ?1 ")
+    @Query("SELECT a FROM Articulo a "
+    		+ "WHERE a.marca.id = ?1 ")
     public Page<Articulo> findArticuloByMarca(Long marca, Pageable pageable);
     
-    @Query("SELECT a FROM Articulo a WHERE a.idProveedor = ?1 ")
+    @Query("SELECT a FROM Articulo a "
+    		+ "WHERE a.idProveedor = ?1 ")
     public Page<Articulo> findArticuloByProveedor(Long proveedor, Pageable pageable);
+    
+    public Page<Articulo> findByDescripcionContainingIgnoreCase(String descripcion, Pageable pageable);
     
 }

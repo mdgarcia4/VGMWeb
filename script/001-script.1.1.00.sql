@@ -215,3 +215,109 @@ IF (SELECT COUNT(*) FROM INFORMATION_SCHEMA.COLUMNS AS c1
                 END
             ELSE 
                 PRINT 'Tabla:'+@Tabla+', Columna:'+@Columna+' - YA EXISTE LA COLUMNA EN LA TABLA. Tarea:' + @NroTarea;
+				
+--------------------
+SET @NroTarea = '#';
+SET @Columna = 'sn_web';/* Nombre de la columna a insertar.*/
+SET @Tipo_Columna = 'varchar(1)Default(''S'')';/* Tipo de la columna a insertar.*/
+SET @Tabla = 'articulos';/* Nombre de la tabla a modificar.*/    
+
+IF (SELECT COUNT(*) FROM INFORMATION_SCHEMA.COLUMNS AS c1 
+    WHERE c1.table_name = @Tabla) = 0
+        PRINT 'Tabla:'+@Tabla+' - NO EXISTE LA TABLA A LA QUE DESEA INSERTAR LA COLUMNA. Tarea:' + @NroTarea; 
+    ELSE 
+        SET @ConsultaAlter =
+            'ALTER TABLE '+@Tabla+' ADD '+@Columna +' '+ @Tipo_Columna; 
+        IF (SELECT COUNT(*) FROM INFORMATION_SCHEMA.COLUMNS AS c1 
+            WHERE c1.column_name = @Columna and    c1.table_name = @Tabla) = 0 
+                BEGIN
+                    EXEC (@ConsultaAlter);
+                    PRINT 'Tabla:'+@Tabla+', Columna:'+@Columna+' - OK. Tarea:' + @NroTarea;
+                END
+            ELSE 
+                PRINT 'Tabla:'+@Tabla+', Columna:'+@Columna+' - YA EXISTE LA COLUMNA EN LA TABLA. Tarea:' + @NroTarea;				
+				
+--------------------
+SET @NroTarea = '#';
+SET @Columna = 'nombre';/* Nombre de la columna a insertar.*/
+SET @Tipo_Columna = 'varchar(50)';/* Tipo de la columna a insertar.*/
+SET @Tabla = 'usuario';/* Nombre de la tabla a modificar.*/    
+
+IF (SELECT COUNT(*) FROM INFORMATION_SCHEMA.COLUMNS AS c1 
+    WHERE c1.table_name = @Tabla) = 0
+        PRINT 'Tabla:'+@Tabla+' - NO EXISTE LA TABLA A LA QUE DESEA INSERTAR LA COLUMNA. Tarea:' + @NroTarea; 
+    ELSE 
+        SET @ConsultaAlter =
+            'ALTER TABLE '+@Tabla+' ADD '+@Columna +' '+ @Tipo_Columna; 
+        IF (SELECT COUNT(*) FROM INFORMATION_SCHEMA.COLUMNS AS c1 
+            WHERE c1.column_name = @Columna and    c1.table_name = @Tabla) = 0 
+                BEGIN
+                    EXEC (@ConsultaAlter);
+                    PRINT 'Tabla:'+@Tabla+', Columna:'+@Columna+' - OK. Tarea:' + @NroTarea;
+                END
+            ELSE 
+                PRINT 'Tabla:'+@Tabla+', Columna:'+@Columna+' - YA EXISTE LA COLUMNA EN LA TABLA. Tarea:' + @NroTarea;					
+				
+				
+--------------------
+SET @NroTarea = '#';
+SET @Columna = 'email';/* Nombre de la columna a insertar.*/
+SET @Tipo_Columna = 'varchar(50)';/* Tipo de la columna a insertar.*/
+SET @Tabla = 'usuario';/* Nombre de la tabla a modificar.*/    
+
+IF (SELECT COUNT(*) FROM INFORMATION_SCHEMA.COLUMNS AS c1 
+    WHERE c1.table_name = @Tabla) = 0
+        PRINT 'Tabla:'+@Tabla+' - NO EXISTE LA TABLA A LA QUE DESEA INSERTAR LA COLUMNA. Tarea:' + @NroTarea; 
+    ELSE 
+        SET @ConsultaAlter =
+            'ALTER TABLE '+@Tabla+' ADD '+@Columna +' '+ @Tipo_Columna; 
+        IF (SELECT COUNT(*) FROM INFORMATION_SCHEMA.COLUMNS AS c1 
+            WHERE c1.column_name = @Columna and    c1.table_name = @Tabla) = 0 
+                BEGIN
+                    EXEC (@ConsultaAlter);
+                    PRINT 'Tabla:'+@Tabla+', Columna:'+@Columna+' - OK. Tarea:' + @NroTarea;
+                END
+            ELSE 
+                PRINT 'Tabla:'+@Tabla+', Columna:'+@Columna+' - YA EXISTE LA COLUMNA EN LA TABLA. Tarea:' + @NroTarea;		
+
+
+
+--------------------
+SET @NroTarea = '#';
+SET @Columna = 'telefono';/* Nombre de la columna a insertar.*/
+SET @Tipo_Columna = 'varchar(50)';/* Tipo de la columna a insertar.*/
+SET @Tabla = 'usuario';/* Nombre de la tabla a modificar.*/    
+
+IF (SELECT COUNT(*) FROM INFORMATION_SCHEMA.COLUMNS AS c1 
+    WHERE c1.table_name = @Tabla) = 0
+        PRINT 'Tabla:'+@Tabla+' - NO EXISTE LA TABLA A LA QUE DESEA INSERTAR LA COLUMNA. Tarea:' + @NroTarea; 
+    ELSE 
+        SET @ConsultaAlter =
+            'ALTER TABLE '+@Tabla+' ADD '+@Columna +' '+ @Tipo_Columna; 
+        IF (SELECT COUNT(*) FROM INFORMATION_SCHEMA.COLUMNS AS c1 
+            WHERE c1.column_name = @Columna and    c1.table_name = @Tabla) = 0 
+                BEGIN
+                    EXEC (@ConsultaAlter);
+                    PRINT 'Tabla:'+@Tabla+', Columna:'+@Columna+' - OK. Tarea:' + @NroTarea;
+                END
+            ELSE 
+                PRINT 'Tabla:'+@Tabla+', Columna:'+@Columna+' - YA EXISTE LA COLUMNA EN LA TABLA. Tarea:' + @NroTarea;				
+
+------------------
+
+CREATE TABLE [dbo].[banner](
+	[id] [int] NOT NULL,
+	[de_pagina] [varchar] (50) NULL,
+	[de_titulo] [varchar](50) NULL,
+	[de_imagen] [varchar](50) NULL,
+	[de_descripcion] [varchar](100) NULL,
+	[de_enlace] [varchar](50) NULL,
+	[de_descripcion_enlace] [varchar](50) NULL,
+	[sn_activo] [varchar] (1) NULL,
+ CONSTRAINT [PK_banner] PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO				
