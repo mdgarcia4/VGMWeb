@@ -6,7 +6,7 @@
 		<title>Look</title>
 		<link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
 		<!-- Google Font -->
-		<link href='https://fonts.googleapis.com/css?family=Montserrat:400,700%7CPlayfair+Display:400italic,400,900%7COpen+Sans%7CCrimson+Text:400italic%7CLato:400,700' rel='stylesheet' type='text/css'>
+		<link href='https://fonts.googleapis.com/css?family=Montserrat:400,700%7CPlayfair+Display:400italic,400,900%7COpen+Sans' rel='stylesheet' type='text/css'>
 		<link rel="stylesheet" type="text/css" href="assets/css/jquery.selectbox.css" media="screen">
 		<!-- Linea Icons -->
 		<link rel="stylesheet" type="text/css" href="assets/css/linea.css" media="screen">
@@ -33,7 +33,7 @@
 				$(image).attr("src","img/imagen_no_disp.jpg");
 	
 			} ;
-		</script>			
+		</script>	
 	</head>
 	<body onLoad="load()">
 		<!-- Loader -->
@@ -49,7 +49,7 @@
 		</div>
 		<!-- Loader -->
 		<!--Page Wrapper Start-->
-		<div id="wrapper" class="categories">
+		<div id="wrapper" class="categories shopping-cart">
 			<!--container Start-->
 			<!--Header Section Start-->
 			<header class="header1" id="header">
@@ -152,178 +152,83 @@
 					</div>
 				</nav>
 			</header>
-			<!--Header Section End-->
-			<div class="common-banner forcefullwidth_wrapper_tp_banner">
-				<div class="container">
-					<div class="row">
-						<div class="main-banner-text">
-							<span >shop grid with left sidebar</span>
-							<ul class="banner-nav">
-								<li>
-									<a href="index.html">Home</a>
-								</li>
-								<li>
-									<a href="shopping-cart.html">Shop</a>
-								</li>
-								<li class="active">
-									<a href="#">Shop Grid with Left Sidebar</a>
-								</li>
-							</ul>
-						</div>
-					</div>
-				</div>
-			</div>
 			
 			<!--Content Area Start-->
-			<div class="content">
-				<!-- Categories Shop Starts Here -->
-				<div class="categories-shop">
+			<div id="shopping-cart-content" class="content">
+				<!-- Cart Section Starts Here -->
+				<div class="cart-section">
 					<div class="container">
 						<div class="row">
-							<div class="col-xs-12 hidden-sm">
-								<div class="filter-btn">
-									<a href="#">filter</a>
+							<div class="col-xs-12">
+								<!-- Cart Items Starts Here -->
+								<div class="cart-item">
+									<h3>your cart items</h3>
+									<table class="table custom-table">
+										<thead>
+											<tr>
+												<th colspan="1">product name</th>
+												<th>price</th>
+												<th>quantity</th>
+												<th colspan="2">total</th>
+											</tr>
+										</thead>
+										<tbody id="itemShoppingCart">
+											
+										</tbody>
+									</table>
+								</div>
+								<!-- Cart Items Starts Here -->
+							</div>
+							<div class="col-xs-12 col-sm-4 col-md-3">
+								<span class="shopping-btn"><a onClick="vaciarCarrito()" href="#">clear shopping cart</a></span>
+							</div>
+							<div class="col-xs-12 col-sm-4 col-md-3">
+								<span class="shopping-btn"><a href="#">update shopping cart</a></span>
+							</div>
+							<div class="col-xs-12 col-sm-4 col-md-3 col-md-offset-3">
+								<span class="shopping-btn continue"><a href="#">continue shopping</a></span>
+							</div>
+							<div class="col-xs-12 col-sm-4">
+								<div class="cart-form">
+									<h3>calculate shipping <span class="after-icon"><span class="icon_minus-06" aria-hidden="true"></span></span></h3>
+									<form>
+										<select class="select">
+											<option value="">united kingdom (UK)</option>
+											<option value="1">germany</option>
+											<option value="2">france</option>
+											<option value="3">italy</option>
+										</select>
+										<input type="text" placeholder="State / Country" />
+										<input type="text" placeholder="Postcode / Zip" />
+										<input type="submit" value="GET A QUOTE" />
+									</form>
 								</div>
 							</div>
-							<div class="col-xs-12 col-sm-3 mobile-view">
-								<div class="categories-filtering">
-									<div class="categories-list">
-										<h3 class="heading" th:text="#{categorias.filter.categories}">CATEGORIAS</h3>
-										<ul class="main-list" id="accordion">
-											<li class="panel-heading" id="headingOne" th:each="rubro: ${rubros}">
-												<a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" th:href="'#collapse'+${rubro.id.idRubro}" aria-expanded="true" aria-controls="collapseOne" th:text="${rubro.descripcion}" >RUBROS</a>
-												<ul class="sub-list panel-collapse collapse in" id="collapseOne" th:id="'collapse'+${rubro.id.idRubro}" aria-labelledby="headingOne" >
-													<li th:each="subrubro: ${rubro.subrubros}">
-														<a href="#" th:href="'/subrubro?rubro='+${subrubro.id.idRubro}+ '&subrubro=' + ${subrubro.id.idSubrubro}" th:text="${subrubro.descripcion}" >SUBRUBRO</a>
-													</li>
-												</ul>
-											</li>
-										</ul>
-									</div>
-									<div class="filter-list">
-										<h3 class="heading" th:text="#{categorias.filter.selection}">filter selection</h3>
-										<div class="select-range">
-											<p>
-												<label for="amount" th:text="#{categorias.filter.precio}">PRICE</label>
-												<input type="text" id="amount" readonly style="border:0; color:#f6931f; font-weight:bold;">
-											</p>
-											<div id="slider-meter" class="slider-meter"></div>
-											<div class="range-price">
-												<span th:text="#{categorias.filter.precio.rango}">Range: <span id="amount2" class="first-price">$16.00</span> - <span id="amount1" class="second-price">$200.00</span></span>
-											</div>
-										</div>
-									</div>
-									
-									<div class="manufacturer">
-										<h4 class="heading" th:text="#{categorias.filter.brand}">Marcas</h4>
-										<ul class="main-list" th:each="marca: ${marcas}">
-											<li>
-												<a href="#" th:href="'/marca?marca='+${marca.id}" th:text="${marca.descripcion}">Marca 1 </a>
-											</li>
-										</ul>
-									</div>
-									<div class="manufacturer">
-										
-										<h4 class="heading" th:text="#{categorias.filter.provider}">Proveedores</h4>
-										<ul class="main-list" th:each="proveedor: ${proveedores}">
-											<li>
-												<a href="#" th:href="'/proveedor?proveedor='+${proveedor.idProveedor}" th:text="${proveedor.deProveedor}">Proveedor 1 </a>
-											</li>
-										</ul>
-									</div>
-									<!--  <div class="compare-products">
-										<h3 class="heading">compare product</h3>
-										<span>You have no product to compare</span>
-									</div>
-									-->
+							<div class="col-xs-12 col-sm-4">
+								<div class="cart-form">
+									<h3>coupon discount <span class="after-icon"><span class="icon_minus-06" aria-hidden="true"></span></span></h3>
+									<span class="enter-coupon">Enter your coupon code if you have one.</span>
+									<form>
+										<input type="text" placeholder="Enter your code here !" />
+										<input type="submit" value="APPLY Coupon" />
+									</form>
 								</div>
 							</div>
-							<div class="col-xs-12 col-sm-9">
-								<div class="row">
-									<div class="col-xs-12">
-										<ul class="categories-section">
-											<li>
-												<span th:utext="#{categorias.showing}+ ' ' + ${productoDesde} + ' ' + #{categorias.to}+ ' ' + ${productoHasta} + ' '+ #{categorias.of} + ' ' + ${productosTotal}">Showing 1 to 16 of 17 <small>total</small></span>
-												
-											</li>
-											<li class="select-name">
-												<span th:text="#{categorias.sortby}">SORT BY <em>:</em></span>
-												<select class="select" id="">
-													<option value="">Name</option>
-													<option value="1">Size</option>
-													<option value="2">Color</option>
-													<option value="3">Price</option>
-												</select>
-											</li>
-											<li>
-												<span th:text="#{categorias.show}">SHOW <em>:</em></span>
-												<select class="select" id="" >
-													<option value=""  >6</option>
-													<option value="1">9</option>
-													<option value="2">12</option>
-													<option value="3">15</option>
-												</select>
-											</li>
-											<li>
-												<span th:text="#{categorias.view}" >VIEW</span>
-												<span class="view-btn"> <a href="#" class="grid-view active"><i class="fa fa-th-large"></i></a> <a href="#" class="list-view"><i class="fa fa-th-list"></i></a> </span>
-											</li>
-										</ul>
+							<div class="col-xs-12 col-sm-4">
+								<div class="cart-checkout">
+									<div id="cart-totales" class="total">
+										<span class="sub-total">sub total</span>
+										<span id="cart-pr-subtotal" class="sub-total"><strong>$126.00</strong></span>
+										<span id="cart-pr-total-gral" class="grand-total">grand total <strong>$126.00</strong></span>
 									</div>
-									<!-- articulos de carrito -->
-									<div class="col-xs-12 col-sm-4" th:each="art: ${articulos}">
-										<div class="product-display product-description">
-											<figure class="product-image">
-												<img th:id="'item-fig-'+${art.id}" src="img/img-six.jpg" onerror="imgErrorLoad(this);" th:src="'img/'+${art.idCodigoBarras}+'.jpg'" alt="" />
-												<div class="overlay">
-													<div class="product-view-block">
-														<div class="product-view clearfix">
-															<a class="zoom icon_zoom-in_alt single_image" href="img/img-six.jpg" th:href="'img/'+${art.idCodigoBarras}+'.jpg'"  ></a>
-															<a class="data-report icon_datareport" href="#"></a>
-															<a class="heart icon_heart_alt" href="#"></a>
-														</div>
-														<button th:id="'btn-add-'+${art.id}" th:onClick="|agregarDwnCarritoVgm(${art.id},'N','#{categorias.error}')|" class="btn add-cart btn-block" >AGREGAR
-														AL CARRITO</button>
-													</div>
-												</div>
-											</figure>
-											<div class="about-product">
-												<h4>
-													<a th:id="'item-descr-'+${art.id}" class="item-name"
-														href="#" th:text="${art.descripcion}">Articulo 1</a>
-												</h4>
-												<span class="review-icon clearfix"> <i
-													class="icon_star active"></i> <i class="icon_star active"></i>
-													<i class="icon_star active"></i> <i class="icon_star active"></i>
-													<i class="icon_star"></i>
-												</span> <span class="price"> <span
-													th:id="'item-precio-'+${art.id}" th:text="${art.precioBase}">$
-														70.00</span> <span class="old-price" th:text="${art.precioBase}">$97.00</span></span>
-											</div>
-										</div>
-									</div>
-									<!-- pagina de carrito -->
-									<div class="col-xs-12">
-										<div class="categories-shop-pagging">
-											<ul >
-												<li>
-													<a class="page-link" th:href="@{|/categorias?pagNro=${paginaAnterior}|}" ><i class="fa fa-angle-left"></i></a>
-												</li>
-												<li class="active" th:each=" pagina: ${paginas}" th:class="${pagina ==paginaActual ? 'active' :'' }">
-													<a href="javascript:void(0)" th:href="@{|/categorias?pagNro=${pagina}|}" th:text ="${pagina}" >1</a>
-												</li>
-												<li>
-													<a href="javascript:void(0)" th:href="@{|/categorias?pagNro=${paginaSiguiente}|}" ><i class="fa fa-angle-right" ></i></a>
-												</li>
-											</ul>
-										</div>
-									</div>
+									<a href="#" class="cart-proceed">proceed to checkout</a>
+									<a href="#" class="checkout-with">Checkout with Mutilple Adresses</a>
 								</div>
 							</div>
 						</div>
 					</div>
 				</div>
-				<!-- Categories Shop Ends Here -->
+				<!-- Cart Section Ends Here -->
 			</div>
 			<!--Content Area End-->
 			<!--Footer Section Start-->
@@ -433,7 +338,7 @@
 					</div>
 				</div>
 				<div class="secondary-footer">
-					<span class="copy-right">Copyright © 2020 - VGM Sistemas. Todos los derechos reservados.</span>
+					<span class="copy-right">Copyright © 2016 PSD Themes by Themeon. All rights reserved.</span>
 				</div>
 			</footer>
 			<!--Footer Section End-->
@@ -446,12 +351,14 @@
 		<script type="text/javascript" src="assets/js/jquery.fancybox.js"></script>
 		<script type="text/javascript" src="assets/js/bootstrap.js"></script>
 		<script type="text/javascript" src="assets/js/jquery-ui.js"></script>
-		
-		<script type="text/javascript" src="js/vgmjs.js"></script>
+		<!-- RS5.0 Core JS Files -->
 		<script type="text/javascript" src="js/sweetalert2.all.js"></script>
-		
-		<script type="text/javascript" src="assets/js/site.js"></script>
-		<script type="text/javascript" src="assets/js/touch-enable.js"></script>
+		<script type="text/javascript" src="js/vgmjs.js"></script>
 		<script type="text/javascript" src="js/vgmutil.js"></script>
+
+		<script type="text/javascript" src="assets/js/site.js"></script>
+		
+		
+
 	</body>
 </html>
