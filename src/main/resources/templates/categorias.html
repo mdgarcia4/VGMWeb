@@ -54,12 +54,12 @@
 								<ul class="top-header-left clearfix">
 									<li class="register-link clearfix">
 										<i class="lock-icon icon_lock"> </i><a href="login" class="login" th:text="#{header.login}" >Log In</a>
-										<span>/</span><a href="#" class="register" th:text="#{header.register}">Register </a>
+										<span>/</span><a href="registrar" class="register" th:text="#{header.register}">Register </a>
 									</li>
 									<li class="select-wrapper">
 										<select class="select">
-											<option th:text="#{header.language.english}"> English </option>
 											<option th:text="#{header.language.spanish}"> Spanish </option>
+											<option th:text="#{header.language.english}"> English </option>
 										</select><i class="arrow_carrot-down"></i>
 									</li>
 									<li class="select-wrapper">
@@ -152,7 +152,7 @@
 								</li>
 								
 								<li>
-									<a href="/categorias">Productos</a>
+									<a href="/categorias" th:text="#{menu.products}">Productos</a>
 								</li>
 								<!-- <li>
 									<a href="#">ELECTRONICS</a>
@@ -610,7 +610,7 @@
 					</div>
 				</div>
 				<div class="secondary-footer">
-					<span class="copy-right">Copyright © 2020 - VGM Sistemas. Todos los derechos reservados.</span>
+					<span class="copy-right" th:utext="#{footer.copyright}">Copyright © 2020 - VGM Sistemas. Todos los derechos reservados.</span>
 				</div>
 			</footer>
 			<!--Footer Section End-->

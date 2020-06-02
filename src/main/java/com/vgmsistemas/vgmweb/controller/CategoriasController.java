@@ -147,60 +147,7 @@ public class CategoriasController {
 	
 	
 	
-	@GetMapping("/home")
-	public String home(@RequestParam(defaultValue = "1") Integer pagNro,
-            @RequestParam(defaultValue = "12") Integer pagTamanio,
-            @RequestParam(defaultValue = "descripcion") String ordenadoPor,
-            Model model) {
-		
-		int paginaRecuperar;
-		int paginasTotal;
-		int paginaSiguiente;
-		int paginaAnterior;
-		int productoDesde;
-		int productoHasta;
-		long productosTotal;
-		
-		paginaRecuperar = pagNro - 1; 
-		
-		Page<Articulo> paginaArticulos = articuloService.getAll(paginaRecuperar,pagTamanio,ordenadoPor);
-		
-		paginasTotal = paginaArticulos.getTotalPages();
-		productosTotal = paginaArticulos.getTotalElements();
-		
-		List<Integer> paginas = getVectorPaginas(pagNro,paginasTotal);
-		
-		if (pagNro <= 1) {
-			paginaAnterior = 1;
-		}
-		else {
-			paginaAnterior = pagNro - 1;
-		}
-		
-		if (pagNro >= paginasTotal) {
-			paginaSiguiente = pagNro ;
-		}
-		else {
-			paginaSiguiente = pagNro + 1;
-		}
-		
-		productoDesde = paginaRecuperar * pagTamanio + 1;
-		productoHasta = paginaRecuperar * pagTamanio + pagTamanio;
-				
-		model.addAttribute("paginas",paginas);
-		model.addAttribute("marcas", marcaService.getBySnWeb("S"));
-		model.addAttribute("rubros", rubroService.getBySnWeb("S"));
-		model.addAttribute("proveedores", proveedorService.getBySnWeb("S"));
-		model.addAttribute("articulos",paginaArticulos);
-		model.addAttribute("paginaAnterior", paginaAnterior);
-		model.addAttribute("paginaActual",pagNro);
-		model.addAttribute("paginaSiguiente",paginaSiguiente);
-		model.addAttribute("productoDesde", productoDesde);
-		model.addAttribute("productoHasta", productoHasta);
-		model.addAttribute("productosTotal", productosTotal);
-		
-		return "home";
-	}
+	
 	
 	//@GetMapping("/categorias/search" , method = RequestMethod.POST)
 	//@PostMapping(value = "/categorias",method = RequestMethod.POST)
