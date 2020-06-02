@@ -1,7 +1,6 @@
 package com.vgmsistemas.vgmweb.controller;
 
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -13,16 +12,17 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.vgmsistemas.vgmweb.entity.Articulo;
+import com.vgmsistemas.vgmweb.entity.Sucursal;
 import com.vgmsistemas.vgmweb.entity.Usuario;
 import com.vgmsistemas.vgmweb.service.ArticuloService;
 import com.vgmsistemas.vgmweb.service.BannerService;
 import com.vgmsistemas.vgmweb.service.MarcaService;
 import com.vgmsistemas.vgmweb.service.ProveedorService;
 import com.vgmsistemas.vgmweb.service.RubroService;
+import com.vgmsistemas.vgmweb.service.SucursalService;
 import com.vgmsistemas.vgmweb.service.UserDetailsServiceImpl;
 
 import org.springframework.ui.Model;
@@ -48,6 +48,9 @@ public class AppController {
 	@Autowired
 	BannerService bannerService;
 	
+	@Autowired
+	SucursalService sucursalService;
+		
 	@GetMapping({"/login","/login.html","/longin.htm"})
 	public String login(Model model) {
 		//model.addAttribute("usr",new Usuario());
@@ -76,7 +79,12 @@ public class AppController {
 	
 	@GetMapping({"/","/index","/index.html","/index.htm"})
 	public String index(Model model) {
+		
+		List<Articulo> paginaArticulos = articuloService.getByTiWebDestacados();
+		
 		model.addAttribute("banners",bannerService.getByDePaginaAndSnActivo("index", "S"));
+		model.addAttribute("articulos", paginaArticulos);
+		
 		return "index";
 	}
 	
@@ -125,9 +133,11 @@ public class AppController {
 	public String contacto(Model model) {
 		Double latitud=-29.704071;
 		Double longitud=-57.1297873;
-				
+		List<Sucursal> sucursales;	
+		sucursales = sucursalService.getAll();
 		model.addAttribute("latitud", latitud);
 		model.addAttribute("longitud",longitud);
+		model.addAttribute("sucursales",sucursales );
 		return "contacto";
 	}
 	
@@ -156,6 +166,7 @@ public class AppController {
 	public String footer() {
 		return "footer";
 	}
+	
 	@GetMapping("/home")
 	public String home(@RequestParam(defaultValue = "1") Integer pagNro,
             @RequestParam(defaultValue = "12") Integer pagTamanio,

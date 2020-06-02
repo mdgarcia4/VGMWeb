@@ -58,6 +58,16 @@ public class ArticuloService {
 		
 		return articuloRepo.findByDescripcionContainingIgnoreCase(descripcion, pageable);
 	}
+	
+	public List<Articulo> getByTiWebDestacados(){
+		ArrayList<String> tiWebDestacados = new ArrayList<>();
+		
+		tiWebDestacados.add("cat1");
+		tiWebDestacados.add("cat2");
+		tiWebDestacados.add("cat3");
+		
+		return articuloRepo.findByTiWebDestacadosIn(tiWebDestacados);
+	}
 
 	public ArticuloRepo getArticuloRepo() {
 		return articuloRepo;

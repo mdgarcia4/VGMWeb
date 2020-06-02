@@ -128,6 +128,9 @@ public class Articulo{
 	
 	@Column(name="sn_web")
 	private String snWeb;
+	
+	@Column(name="ti_web_destacados")
+	private String tiWebDestacados;
 
 	//private static final String PESABLE = "S";
 	//private static final String NO_PESABLE = "N";
@@ -512,6 +515,15 @@ public class Articulo{
 
 	public void setSnWeb(String snWeb) {
 		this.snWeb = snWeb;
+	}
+
+	public String getTiWebDestacados() {
+		return tiWebDestacados;
+	}
+
+	public void setTiWebDestacados(String tiWebDestacados) {
+		this.tiWebDestacados = tiWebDestacados;
 	}	
+	
 	
 }

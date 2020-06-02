@@ -28,4 +28,6 @@ public interface ArticuloRepo extends JpaRepository<Articulo, Long>  {
     
     public Page<Articulo> findByDescripcionContainingIgnoreCase(String descripcion, Pageable pageable);
     
+    public List<Articulo> findByTiWebDestacadosIn(List<String> tiWebDestacados);
+    
 }
