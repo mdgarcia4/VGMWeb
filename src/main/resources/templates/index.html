@@ -85,12 +85,12 @@
 								</ul>
 								<ul class="top-header-right clearfix">
 									<li class="profile">
-										<a href="#" ><i class="icon_profile"></i></a>
-										<a href="#" th:text="#{header.myacount}">My Account </a>
+										
+										<a href="#" th:utext="#{header.myacount}"><i class="icon_profile"></i>My Account </a>
 									</li>
 									<li class="checkout">
-										<a href="javascript:enviar_formulario_logout()" ><i class="icon_check_alt" ></i></a>
-										<a href="javascript:enviar_formulario_logout()" th:text="#{header.checkout}">Checkout </a>
+										
+										<a href="javascript:enviar_formulario_logout()" th:utext="#{header.checkout}"><i class="icon_check_alt" ></i> Checkout </a>
 										<form th:action="@{/logout}" method="post" name="formulario_logout">
 					            			<input type="hidden" value="Cerrar Sesion"   />
 					        			</form>

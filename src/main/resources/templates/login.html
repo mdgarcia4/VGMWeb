@@ -71,13 +71,12 @@
 								</ul>
 								<ul class="top-header-right clearfix">
 									<li class="profile">
-										<a href="#" ><i class="icon_profile"></i></a>
-										<a href="#" th:text="#{header.myacount}">My Account </a>
+										
+										<a href="#" th:utext="#{header.myacount}"><i class="icon_profile"></i>My Account </a>
 									</li>
 									
 									<li class="checkout">
-										<a href="javascript:enviar_formulario_logout()" ><i class="icon_check_alt" ></i></a>
-										<a href="javascript:enviar_formulario_logout()" th:text="#{header.checkout}">Checkout </a>
+										<a href="javascript:enviar_formulario_logout()" th:utext="#{header.checkout}"> <i class="icon_check_alt" ></i> Checkout </a>
 										<form th:action="@{/logout}" method="post" name="formulario_logout">
 					            			<input type="hidden" value="Cerrar Sesion"   />
 					        			</form>
@@ -206,17 +205,17 @@
 									<h3 >Ingrese a su cuenta</h3>
 									<span class="discover">Ingrese a su cuenta para pode operar</span>
 									<form class="login-account-form" th:action="@{/login}" method="post">
-										<input type="text" class="login-account-form-text" placeholder="Usuario" name="usuario" />
-										<input type="password" placeholder="Contraseña" name="clave"/>
+										<input type="text" class="login-account-form-text" placeholder="Usuario" th:placeholder="#{login.user}" name="usuario" />
+										<input type="password" placeholder="Contraseña" th:placeholder="#{login.password}" name="clave"/>
 										<input type="checkbox" id="keep-login" />
 										<div class="forgot-pswrd">
-											<label for="keep-login"> <span><i class="fa fa-check"></i></span> Mantenme conectado </label>
-											<a href="#">¿Olvidaste tu contraseña ?</a>
+											<label for="keep-login" th:utext="#{login.keep}">  <span ><i class="fa fa-check"></i></span> Mantenme conectado </label>
+											<a href="#" th:utext="#{login.forgot}">¿Olvidaste tu contraseña ?</a>
 										</div>
 										
-										<input type="submit" value="login" />
+										<input type="submit" value="login" th:value="#{login.submit}" />
 									</form>
-									<div th:if="${param.error}" class="alert alert-danger" role="alert">
+									<div th:if="${param.error}" class="alert alert-danger" role="alert" th:text="#{login.userInvalid}">
 							            Usuario o clave inválida.
 							        </div>
 							        <div th:if="${param.logout}" class="alert alert-success" role="alert">
