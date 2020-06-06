@@ -5,13 +5,10 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.Formula;
-
-import com.fasterxml.jackson.annotation.JsonView;
 
 @Entity
 @Table( name = "sucursales" )
@@ -48,10 +45,18 @@ public class Sucursal implements Serializable{
 	private Float tasaIvaInscripto;
 	@Formula("(SELECT empresas.ta_ivanoinscripto"
 			+ " FROM empresas)")
-	private Float tasaIvaNoInscripto;	
-	
+	private Float tasaIvaNoInscripto;		
 	 
-	    
+	@Column(name = "nu_latitud")
+	private Float latitud;
+	
+	@Column(name = "nu_longitud")
+	private Float longitud;
+	
+	@Formula("(SELECT empresas.id_sucactiva"
+			+ " FROM empresas)")
+	private Float sucActivaEmpresa;
+	
 	/**
 	 * @return the id
 	 */
@@ -184,4 +189,28 @@ public class Sucursal implements Serializable{
 		this.deDomicilio = deDomicilio;
 	}
 	
+	
+	public Float getLatitud() {
+		return latitud;
+	}
+	
+	public void setLatitud(Float nu_latitud) {
+		this.latitud = nu_latitud;
+	}
+	
+	public Float getLongitud() {
+		return longitud;
+	}
+	
+	public void setLongitud(Float nu_longitud) {
+		this.longitud = nu_longitud;
+	}
+	
+	public Float getSucActivaEmpresa() {
+		return sucActivaEmpresa;
+	}
+	
+	public void setSucActivaEmpresa(Float sucActivaEmpresa) {
+		this.sucActivaEmpresa = sucActivaEmpresa;
+	}
 }

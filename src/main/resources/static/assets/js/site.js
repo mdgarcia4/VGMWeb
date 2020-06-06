@@ -188,7 +188,9 @@
 		});
 		$('.mmenu').on('click', function() {
 			$(this).next().slideToggle();
-		});		$('body').on('click', function() {
+		});
+
+		$('body').on('click', function() {
 			
 			$('.item-block').slideUp();
 		});
@@ -247,7 +249,9 @@
 			var cat = $(this).attr('ID');
 			$(this).addClass('active');
 			showProjectsbyCat(cat);
-		});		if ($('#slider-meter').length) {
+		});
+
+		if ($('#slider-meter').length) {
 			$("#slider-meter").slider({
 				range : true,
 				min : 16,
@@ -282,13 +286,21 @@
 			$('.mobile-view').slideToggle();
 		});
 		if ($('#map-box').length) {
+			var latCentro = $("#latCenter").text();
+			var longCentro = $("#longCenter").text();
+			if (latCentro === null){
+				latCentro = -29.704071;
+			};
+			if (longCentro === null){
+				longCentro = -57.1297873;
+			};
 			var map = new GMaps({
 				div : '#map-box',
-				lat : -29.704071,
-				lng : -57.1297873,
+				lat : latCentro,/*-29.704071,*/
+				lng : longCentro,/*-57.1297873,*/
 
 				disableDefaultUI : true,
-				zoom : 11,
+				zoom : 15,/*11*/
 				scrollwheel : false,
 				styles : [{
 					"featureType" : "all",
@@ -312,24 +324,29 @@
 			if ($(window).width() >= 1200) {
 				map.setOptions({
 
-					center : new google.maps.LatLng(39.676521, -104.962289),
+					center : new google.maps.LatLng(latCentro,longCentro),/*39.676521, -104.962289),*/
 				});
 			} else if ($(window).width() >= 992) {
 				map.setOptions({
 
-					center : new google.maps.LatLng(39.676521, -104.962289),
+					center : new google.maps.LatLng(latCentro,longCentro),/*39.676521, -104.962289),*/
 				});
 			} else if ($(window).width() >= 768) {
 				map.setOptions({
 
-					center : new google.maps.LatLng(39.676521, -104.962289),
+					center : new google.maps.LatLng(latCentro,longCentro),/*39.676521, -104.962289),*/
 				});
 			} else {
 				map.setOptions({
 
-					center : new google.maps.LatLng(39.676521, -104.962289),
+					center : new google.maps.LatLng(latCentro,longCentro),/*39.676521, -104.962289),*/
 				});
 			}
+			/*var marker = new google.maps.Marker({
+				position: new google.maps.LatLng(latCentro,longCentro),
+				map: map,
+				title: 'Hello Gustavo!'
+			  });*/
 		}
 
 		$('.blog-pagination').find("li").on('click', function() {

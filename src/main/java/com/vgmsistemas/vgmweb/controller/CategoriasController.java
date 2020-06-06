@@ -1,7 +1,6 @@
 package com.vgmsistemas.vgmweb.controller;
 
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -13,11 +12,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.vgmsistemas.vgmweb.entity.Articulo;
-import com.vgmsistemas.vgmweb.entity.Usuario;
 import com.vgmsistemas.vgmweb.service.ArticuloService;
 import com.vgmsistemas.vgmweb.service.MarcaService;
 import com.vgmsistemas.vgmweb.service.ProveedorService;
@@ -150,14 +147,14 @@ public class CategoriasController {
 	
 	
 	//@GetMapping("/categorias/search" , method = RequestMethod.POST)
-	//@PostMapping(value = "/categorias",method = RequestMethod.POST)
-	@PostMapping
-	public String categoriasSearch(String search,  Model model, @PageableDefault(page = 0, size = 9) Pageable pageable) {
-		model.addAttribute("marcas", marcaService.getBySnWeb("S"));
-		model.addAttribute("rubros", rubroService.getBySnWeb("S"));
-		model.addAttribute("proveedores", proveedorService.getBySnWeb("S"));
-		model.addAttribute("articulos",articuloService.searchByDescripcion(search, pageable));
-		
-		return "categorias";
-	}
+		//@PostMapping(value = "/categorias",method = RequestMethod.POST)
+		@PostMapping
+		public String categoriasSearch(String search,  Model model, @PageableDefault(page = 0, size = 9) Pageable pageable) {
+			model.addAttribute("marcas", marcaService.getBySnWeb("S"));
+			model.addAttribute("rubros", rubroService.getBySnWeb("S"));
+			model.addAttribute("proveedores", proveedorService.getBySnWeb("S"));
+			model.addAttribute("articulos",articuloService.searchByDescripcion(search, pageable));
+			
+			return "categorias";
+		}
 }

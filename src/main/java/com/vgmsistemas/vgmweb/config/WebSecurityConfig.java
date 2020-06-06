@@ -25,11 +25,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests()
 			.antMatchers(resources).permitAll()
-			.antMatchers("/", "/index","/contacto","/registrar").permitAll()
+			.antMatchers("/", "/index","/contacto","/registrar","/home").permitAll()
 			.antMatchers("/admin*").access("hasRole('ADMIN')")
 			.antMatchers("/user*").access("hasRole('USER') or hasRole('ADMIN')")
 			.antMatchers("/categorias").access("hasRole('USER') or hasRole('ADMIN')")
 			.antMatchers("/categorias1").access("hasRole('USER') or hasRole('ADMIN')")
+			.antMatchers("/shopping-cart").access("hasRole('USER') or hasRole('ADMIN')")
 			.antMatchers("/header").access("hasRole('USER') or hasRole('ADMIN')")
 			.antMatchers("/footer").access("hasRole('USER') or hasRole('ADMIN')")
 			.anyRequest().authenticated()
