@@ -2,12 +2,17 @@
 /*cuando se cargar home*/
 function load() {
 	/*cargo items del carrito*/
-	loadItemDwnCarrito();
+	loadItemDwnCarrito();	
 	/* si estoy en la pag de shopping cargo los items */
 	if ($("#shopping-cart-content").length > 0) {
 		loadItemsShoppingCart();
 	};
-
+	resguardarUrlLocal();
+	let optionValue = localStorage.getItem("optionValue");
+	if (optionValue === null) {
+		optionValue = "es";
+	};
+	$("#idiomas option[value='"+ optionValue +"']").attr("selected",true);
 };
 
 function loadItemDwnCarrito(){
@@ -325,3 +330,103 @@ function imgError(image){
 	$(image).attr("src","img/imagen_no_disp.jpg");
 
 } ;
+
+function UrlActual(urlcompleta, urlpathname, urlabsuluta, urldominio, urlhash, urlquery) {
+	this.urlcompleta = urlcompleta;
+	this.urlpathname = urlpathname;
+	this.urlabsuluta = urlabsuluta;
+	this.urldominio = urldominio;
+	this.urlhash = urlhash;
+	this.urlquery = urlquery;
+};
+
+function getAbsolutePath() {
+    var loc = window.location;
+    var pathName = loc.pathname.substring(0, loc.pathname.lastIndexOf('/') + 1);
+    return loc.href.substring(0, loc.href.length - ((loc.pathname + loc.search + loc.hash).length - pathName.length));
+};
+
+function resguardarUrlLocal() {
+	var lsUrlcompleta = window.location.href;
+	var lsUrlpathname = window.location.pathname;
+	var lsUrlabsuluta = getAbsolutePath();
+	var lsUrldominio = window.location.host;
+	var lsUrlhash = window.location.hash;
+	var lsUrlquery = window.location.search;
+	var localUrl = JSON.parse(localStorage.getItem("localUrl"));	
+	if (localUrl !== null){
+		localStorage.removeItem("localUrl");
+	};
+	localUrl = [];
+	var urlocal = new UrlActual(lsUrlcompleta, lsUrlpathname, lsUrlabsuluta, lsUrldominio, lsUrlhash, lsUrlquery)
+	localUrl.push(urlocal);	
+	localStorage.setItem("localUrl", JSON.stringify(localUrl));
+};
+
+$('select#idiomas').change(function(){
+	var lsValorSelect = $(this).val();
+	var localUrl = JSON.parse(localStorage.getItem("localUrl"));
+	if (lsValorSelect === "#") { lsValorSelect = "es";} /*Idioma por default*/
+	localStorage.removeItem("optionValue");
+	localStorage.setItem('optionValue', lsValorSelect);
+	if (localUrl !== null){
+		var lsurlhash = localUrl[0].urlhash;		
+		var lsurlquery= localUrl[0].urlquery;
+		var lsurlpaht = localUrl[0].urlpathname;
+		if ( lsurlhash !== null || lsurlquery !== null ){
+			if ( lsurlhash !== "" || lsurlquery !== "") {
+				if ( lsurlhash !== "" && lsurlquery === ""){
+					lsurlhash = delParamIdioma(lsurlhash);
+					if (lsurlhash === "") {
+						window.location  = lsurlpaht + lsurlhash + "?idioma=" + lsValorSelect;
+					}else{
+						window.location  = lsurlpaht + lsurlhash + "&idioma=" + lsValorSelect;
+					};
+						
+				}else if ( lsurlhash === "" && lsurlquery !== ""){
+					lsurlquery = delParamIdioma(lsurlquery);
+					if (lsurlquery === "") {
+						window.location  = lsurlpaht + lsurlquery + "?idioma=" + lsValorSelect;
+					}else{
+						window.location  = lsurlpaht + lsurlquery + "&idioma=" + lsValorSelect;
+					};					
+				};
+			}else{
+				window.location = lsurlpaht + "?idioma=" + lsValorSelect;
+			};			
+		}else{
+			window.location = lsurlpaht + "?idioma=" + lsValorSelect;
+		};
+	};
+});
+
+function delParamIdioma(strCadena) {
+	let posInicial = strCadena.indexOf("?idioma=");
+	let intentos = 0;
+	let respuesta = strCadena;
+	if (posInicial === -1){
+		intentos += 1;
+		posInicial = indexOf("idioma=");
+		if (posInicial === -1){
+			return respuesta;
+		};
+	};
+	if (intentos === 0){
+		let cadenaVieja = respuesta.substring(posInicial,10);
+		respuesta = reemplazarCadena(cadenaVieja, "", respuesta)
+	}else{
+		let cadenaVieja = respuesta.substring(posInicial,9);
+		respuesta = reemplazarCadena(cadenaVieja, "", respuesta)
+	};
+	return respuesta;
+};
+
+function reemplazarCadena(cadenaVieja, cadenaNueva, cadenaCompleta) {
+// Reemplaza cadenaVieja por cadenaNueva en cadenaCompleta
+   for (var i = 0; i < cadenaCompleta.length; i++) {
+      if (cadenaCompleta.substring(i, i + cadenaVieja.length) == cadenaVieja) {
+         cadenaCompleta= cadenaCompleta.substring(0, i) + cadenaNueva + cadenaCompleta.substring(i + cadenaVieja.length, cadenaCompleta.length);
+      }
+   }
+   return cadenaCompleta;
+}

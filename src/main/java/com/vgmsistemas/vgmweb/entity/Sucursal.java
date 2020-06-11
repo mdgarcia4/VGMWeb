@@ -55,7 +55,7 @@ public class Sucursal implements Serializable{
 	
 	@Formula("(SELECT empresas.id_sucactiva"
 			+ " FROM empresas)")
-	private Float sucActivaEmpresa;
+	private int sucActivaEmpresa;
 	
 	/**
 	 * @return the id
@@ -206,11 +206,11 @@ public class Sucursal implements Serializable{
 		this.longitud = nu_longitud;
 	}
 	
-	public Float getSucActivaEmpresa() {
+	public int getSucActivaEmpresa() {
 		return sucActivaEmpresa;
 	}
 	
-	public void setSucActivaEmpresa(Float sucActivaEmpresa) {
+	public void setSucActivaEmpresa(int sucActivaEmpresa) {
 		this.sucActivaEmpresa = sucActivaEmpresa;
 	}
 }
