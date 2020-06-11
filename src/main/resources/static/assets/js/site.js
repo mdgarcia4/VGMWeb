@@ -1,3 +1,16 @@
+function OptionMap(lat, lng, infoWindow) {
+	this.lat = lat;
+	this.lng = lng;
+	this.infoWindow = infoWindow;
+  };
+function OptionsInfoWindow(content, disableAutoPan, maxWidth, pixelOffset, position, zIndex) {
+	this.content = content;/*Type:  string|Node optional*/
+	this.disableAutoPan = disableAutoPan;/*Type:  boolean optional*/
+	this.maxWidth = maxWidth;/*Type:  number optional*/
+	this.pixelOffset = pixelOffset;/*Type:  Size optional*/
+	this.position = position;/*Type:  LatLng|LatLngLiteral optional*/
+	this.zIndex = zIndex;/*Type:  number optional*/
+}
 (function($) {"use strict";
 	var isMobile;
 	$(document).ready(function() {
@@ -288,6 +301,7 @@
 		if ($('#map-box').length) {
 			var latCentro = $("#latCenter").text();
 			var longCentro = $("#longCenter").text();
+			var desInfoWindows = $("#descInfoWindows").text();
 			if (latCentro === null){
 				latCentro = -29.704071;
 			};
@@ -312,6 +326,10 @@
 					}]
 				}]
 			});
+			var infoWindowConten = "<p><a>" + desInfoWindows + "</a></p>";
+			var infow = new OptionsInfoWindow(infoWindowConten,true,null, null, null,null)
+			var options = new OptionMap(latCentro,longCentro,infow);
+			map.addMarker(options);
 			map.drawOverlay({
 				lat : map.getCenter().lat(),
 				lng : map.getCenter().lng(),
@@ -342,11 +360,6 @@
 					center : new google.maps.LatLng(latCentro,longCentro),/*39.676521, -104.962289),*/
 				});
 			}
-			/*var marker = new google.maps.Marker({
-				position: new google.maps.LatLng(latCentro,longCentro),
-				map: map,
-				title: 'Hello Gustavo!'
-			  });*/
 		}
 
 		$('.blog-pagination').find("li").on('click', function() {
