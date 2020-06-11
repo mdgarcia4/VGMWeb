@@ -63,10 +63,10 @@
 										<span>/</span><a href="registrar" class="register" th:text="#{header.register}">Register </a>
 									</li>
 									<li class="select-wrapper">
-										<select class="select">
-											<option th:utext="#{header.language.spanish}"> Spanish </option>
-											<option th:utext="#{header.language.english}"> English </option>
-											
+										<select name="idiomas" id="idiomas" class="select">
+											<option value="#" th:utext="#{header.language.select}" disabled selected>  Languaje  </option>
+											<option value="es" th:utext="#{header.language.spanish}"> Spanish </option>
+											<option value="en" th:utext="#{header.language.english}"> English </option>											
 										</select><i class="arrow_carrot-down"></i>
 									</li>
 									<li class="select-wrapper">
@@ -118,8 +118,8 @@
 											<span class="total">Total</span> <span id="totDwnCarritoVgmItem" class="amount">$ 0.00</span>
 										</div>
 										<div class="butn-group clearfix">
-											<a href="/shopping-cart" class="cart">VIEW CART</a> <a href="#"
-												class="checkout">CHECKOUT</a>
+											<a href="/shopping-cart" class="cart" th:text="#{itemcart.viewcart}">VIEW CART</a> 
+											<a href="#" class="checkout" th:text="#{itemcart.checkout}">CHECKOUT</a>
 										</div>
 									</div>
 								</div>
@@ -213,7 +213,7 @@
 							<div class="query clearfix">
 								<div class="col-xs-12">
 									<h3 th:utext="#{contacto.question}">If you got any questions
-									<br />
+									<br/>
 									please do not hesitate to send us a message.</h3>
 								</div>
 								<div class="col-xs-12 col-sm-8 col-sm-offset-2">
@@ -266,8 +266,9 @@
 					<span class="copy-right" th:utext="#{footer.copyright}">Copyright © 2016 PSD Themes by Themeon. All rights reserved.</span>
 					
 					<div id="contacto-coordenadas" style="display: none">
-					 	<a id="latCenter" th:text="${sucursales[0].latitud}" ></a>
-					 	<a id="longCenter" th:text="${sucursales[0].longitud}" ></a>
+					 	<a id="latCenter" th:text="${latitud}" ></a>
+					 	<a id="longCenter" th:text="${longitud}" ></a>					 	
+					 	<a id="descInfoWindows" th:text="${infoWindowDescripcion}" ></a>
 					</div>
 				</div>
 			</footer>
@@ -294,6 +295,5 @@
 
 		<script type="text/javascript" src="assets/js/site.js"></script>
 		<script type="text/javascript" src="assets/js/app.js"></script>
-
 	</body>
 </html>
