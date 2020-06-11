@@ -11,6 +11,10 @@ import javax.persistence.Embeddable;
 public class PkRolesUsuarios implements Serializable{
 
 		 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	@Column(name = "id_usuario")
 	private long idUsuario;
 	@Column(name = "id_rol")

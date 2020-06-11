@@ -7,9 +7,6 @@ import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 
-import com.fasterxml.jackson.annotation.JsonView;
-
-
 @Embeddable
 public class PkCliente implements Serializable{
 

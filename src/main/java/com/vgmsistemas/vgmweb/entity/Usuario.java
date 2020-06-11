@@ -11,8 +11,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 
-import com.vgmsistemas.vgmweb.entity.Rol;
-
 @Entity
 public class Usuario {
 
@@ -25,6 +23,15 @@ public class Usuario {
 
 	@Column
 	private String clave;
+	
+	@Column(name="id_sucursal")
+	private Integer idSucursal;
+	
+	@Column(name="id_cliente")
+	private Integer idCliente;
+	
+	@Column(name="id_comercio")
+	private Integer idComercio;
 	
 	@Column
 	private String nombre;
@@ -104,6 +111,30 @@ public class Usuario {
 
 	public void setTelefono(String telefono) {
 		this.telefono = telefono;
+	}
+	
+	public Integer getIdSucursal() {
+		return idSucursal;
+	}
+
+	public void setIdSucursal(Integer idSucursal) {
+		this.idSucursal = idSucursal;
+	}
+
+	public Integer getIdCliente() {
+		return idCliente;
+	}
+
+	public void setIdCliente(Integer idCliente) {
+		this.idCliente = idCliente;
+	}
+
+	public Integer getIdComercio() {
+		return idComercio;
+	}
+
+	public void setIdComercio(Integer idComercio) {
+		this.idComercio = idComercio;
 	}
 
 	@Override

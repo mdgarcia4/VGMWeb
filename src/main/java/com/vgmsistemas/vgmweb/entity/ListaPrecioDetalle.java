@@ -6,24 +6,15 @@ package com.vgmsistemas.vgmweb.entity;
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
-
 import org.hibernate.annotations.Where;
 
-import com.fasterxml.jackson.annotation.JsonView;
-
-/**
- * @author pablo
- * 
- */
-
-//@XmlRootElement(name = "ListaPrecioDetalle")
-//@XmlAccessorType(XmlAccessType.FIELD)
 @Entity
 @Table( name = "v_listas_precio_articulos" )
 @Where(clause = "pr_siva IS NOT NULL AND pr_final IS NOT NULL")
@@ -77,9 +68,9 @@ public class ListaPrecioDetalle implements Serializable {
 	@Column (name = "ca_articulo_hasta")
 	private Integer caArticuloHasta;*/
 	
-	/*@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne()
 	@JoinColumn(name = "id_articulos", referencedColumnName= "id_articulos", insertable = false, updatable = false)
-	private Articulo articulo;*/
+	private Articulo articulo;
 	
 	public ListaPrecioDetalle(){
 		
@@ -287,12 +278,12 @@ public class ListaPrecioDetalle implements Serializable {
 	}*/
 
 	
-	/*public Articulo getArticulo() {
+	public Articulo getArticulo() {
 		return articulo;
 	}
 
 	public void setArticulo(Articulo articulo) {
 		this.articulo = articulo;
-	}*/
+	}
 
 }

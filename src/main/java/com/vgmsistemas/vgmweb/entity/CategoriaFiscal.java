@@ -32,8 +32,8 @@ public class CategoriaFiscal implements Serializable{
 	private String id;
 	@Column(name = "de_contribuyente")
 	private String descripcion;
-	@Column(name = "sn_bn")
-	private String snBn;
+	//@Column(name = "sn_bn")
+	//private String snBn;
 	
 	/**
 	 * @return the id
@@ -61,12 +61,12 @@ public class CategoriaFiscal implements Serializable{
 	}
 	
 	
-	public String getSnBn() {
+	/*public String getSnBn() {
 		return snBn;
 	}
 	public void setSnBn(String snBn) {
 		this.snBn = snBn;
-	}
+	}*/
 	/* (non-Javadoc)
 	 * @see java.lang.Object#hashCode()
 	 */

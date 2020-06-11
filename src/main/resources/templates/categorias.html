@@ -271,34 +271,34 @@
 										</ul>
 									</div>
 									<!-- articulos de carrito -->
-									<div class="col-xs-12 col-sm-4" th:each="art: ${articulos}">
+									<div class="col-xs-12 col-sm-4" th:each="precio: ${preciosArticulos}">
 										<div class="product-display product-description">
 											<figure class="product-image">
-												<img th:id="'item-fig-'+${art.id}" src="img/img-six.jpg" onerror="imgErrorLoad(this);" th:src="'img/'+${art.idCodigoBarras}+'.jpg'" alt="" />
+												<img th:id="'item-fig-'+${precio.articulo.id}" src="img/img-six.jpg" onerror="imgErrorLoad(this);" th:src="'img/'+${precio.articulo.idCodigoBarras}+'.jpg'" alt="" />
 												<div class="overlay">
 													<div class="product-view-block">
 														<div class="product-view clearfix">
-															<a class="zoom icon_zoom-in_alt single_image" href="img/img-six.jpg" th:href="'img/'+${art.idCodigoBarras}+'.jpg'"  ></a>
+															<a class="zoom icon_zoom-in_alt single_image" href="img/img-six.jpg" th:href="'img/'+${precio.articulo.idCodigoBarras}+'.jpg'"  ></a>
 															<a class="data-report icon_datareport" href="#"></a>
 															<a class="heart icon_heart_alt" href="#"></a>
 														</div>
-														<button th:id="'btn-add-'+${art.id}" th:onClick="|agregarDwnCarritoVgm(${art.id},'N','#{categorias.error}')|" class="btn add-cart btn-block" >AGREGAR
+														<button th:id="'btn-add-'+${precio.articulo.id}" th:onClick="|agregarDwnCarritoVgm(${precio.articulo.id},'N','#{categorias.error}')|" class="btn add-cart btn-block" >AGREGAR
 														AL CARRITO</button>
 													</div>
 												</div>
 											</figure>
 											<div class="about-product">
 												<h4>
-													<a th:id="'item-descr-'+${art.id}" class="item-name"
-														href="#" th:text="${art.descripcion}">Articulo 1</a>
+													<a th:id="'item-descr-'+${precio.articulo.id}" class="item-name"
+														href="#" th:text="${precio.articulo.descripcion}">Articulo 1</a>
 												</h4>
 												<span class="review-icon clearfix"> <i
 													class="icon_star active"></i> <i class="icon_star active"></i>
 													<i class="icon_star active"></i> <i class="icon_star active"></i>
 													<i class="icon_star"></i>
 												</span> <span class="price"> <span
-													th:id="'item-precio-'+${art.id}" th:text="${art.precioBase}">$
-														70.00</span> <span class="old-price" th:text="${art.precioBase}">$97.00</span></span>
+													th:id="'item-precio-'+${precio.articulo.id}" th:text="${precio.precioConIva}">$
+														70.00</span> <span class="old-price" th:text="${precio.articulo.precioBase}">$97.00</span></span>
 											</div>
 										</div>
 									</div>

@@ -1,7 +1,6 @@
 package com.vgmsistemas.vgmweb.entity;
 
 import javax.persistence.Column;
-import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
@@ -9,9 +8,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
-
-import com.fasterxml.jackson.annotation.JsonView;
-
 
 @Entity
 @Table( name = "v_clientes_comercios" )
@@ -32,11 +28,11 @@ public class Cliente{
 	@Column(name = "nu_telefono")
 	private String telefono;
 	
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne()
 	@JoinColumn(name="ti_contribuyente", insertable = false, updatable = false)
 	private CategoriaFiscal categoriaFiscal;
 	
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne()
 	@JoinColumn(name="ti_tadgr", insertable = false, updatable = false)
 	private CondicionRenta condicionRenta;
 	
@@ -44,7 +40,7 @@ public class Cliente{
 	@JoinColumn(name="id_condvta", insertable = false, updatable = false)
 	private CondicionVenta condicionVenta;
 	
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne()
 	@JoinColumn(name="id_lista", insertable = false, updatable = false)
 	private ListaPrecio listaPrecio;
 	

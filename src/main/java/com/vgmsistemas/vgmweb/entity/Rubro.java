@@ -4,25 +4,16 @@
 package com.vgmsistemas.vgmweb.entity;
 import java.io.Serializable;
 import java.util.Set;
-
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 
-/**
- * @author pablo
- *
- */
-/*@XmlRootElement(name="Rubro")
-@XmlAccessorType(XmlAccessType.FIELD)*/
 @Entity
 @Table( name = "segmento" )
 public class Rubro implements Serializable{

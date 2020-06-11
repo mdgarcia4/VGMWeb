@@ -40,8 +40,8 @@ public class CondicionRenta implements Serializable{
 	private Long tipoCalculo;
 	@Column(name = "pr_min_imp_dgr")
 	private Float montoMinimoImpuestoDgr;
-	@Column(name = "sn_aplica_a_nc")
-	private String snAplicaANc;
+	/*@Column(name = "sn_aplica_a_nc")
+	private String snAplicaANc;*/
 
 	public static final long TIPO_CALCULO_CORRIENTES 		= 1;
 	public static final long TIPO_CALCULO_CHACO 			= 2;
@@ -163,12 +163,12 @@ public class CondicionRenta implements Serializable{
 	}
 	
 	
-	public String getSnAplicaANc() {
+	/*public String getSnAplicaANc() {
 		return snAplicaANc;
 	}
 	public void setSnAplicaANc(String snAplicaANc) {
 		this.snAplicaANc = snAplicaANc;
-	}
+	}*/
 	
 		
 }

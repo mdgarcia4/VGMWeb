@@ -6,28 +6,25 @@ package com.vgmsistemas.vgmweb.entity;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinColumns;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
-
 import org.hibernate.annotations.Formula;
 import org.hibernate.annotations.Where;
 
-import com.fasterxml.jackson.annotation.JsonView;
 
 @Entity
 @Table( name = "articulos")
-@Where(clause = "(sn_activo='S' and sn_web='S')")
 public class Articulo{
 
 	@Id
@@ -86,9 +83,9 @@ public class Articulo{
 	@JoinColumn(name = "id_linea")
 	private Marca marca;
 	
-	@OneToMany(/*mappedBy = "articulo",*/ fetch=FetchType.LAZY)
+	@OneToMany()
 	@JoinColumn(name = "id_articulos", referencedColumnName= "id_articulos", insertable = false, updatable = false)
-	private List<ListaPrecioDetalle> listaPrecios;
+	private Set<ListaPrecioDetalle> listaPrecios;
 	@Column(name = "pr_arcor_a")
 	private Float precioBase;
 	
@@ -302,21 +299,13 @@ public class Articulo{
 		this.marca = marca;
 	}
 
-	/**
-	 * @return the listaPrecios
-	 */
-	public List<ListaPrecioDetalle> getListaPrecios() {
-		if(listaPrecios == null){
-			listaPrecios  = new ArrayList<ListaPrecioDetalle>();
-		}
-		return this.listaPrecios;
+	
+
+	public Set<ListaPrecioDetalle> getListaPrecios() {
+		return listaPrecios;
 	}
 
-	/**
-	 * @param listaPrecios
-	 *            the listaPrecios to set
-	 */
-	public void setListaPrecios(List<ListaPrecioDetalle> listaPrecios) {
+	public void setListaPrecios(Set<ListaPrecioDetalle> listaPrecios) {
 		this.listaPrecios = listaPrecios;
 	}
 

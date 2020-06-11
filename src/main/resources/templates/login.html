@@ -215,8 +215,8 @@
 										
 										<input type="submit" value="login" th:value="#{login.submit}" />
 									</form>
-									<div th:if="${param.error}" class="alert alert-danger" role="alert" th:text="#{login.userInvalid}">
-							            Usuario o clave inválida.
+									<div th:if="${param.error}" class="alert alert-danger" role="alert" th:utext="#{login.userInvalid}">
+										Usuario o clave inválida.
 							        </div>
 							        <div th:if="${param.logout}" class="alert alert-success" role="alert">
 							            Usted ha cerrado sesión.

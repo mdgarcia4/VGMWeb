@@ -32,6 +32,21 @@ public class ArticuloService {
 	        return articulos;
 	}
 	
+	public Page<Articulo> getArticuloBySucursalAndLista(Long sucursal, Long lista, Integer pagNro, Integer pagTamanio, String ordenadoPor)  {
+		
+		 Pageable pagina = PageRequest.of(pagNro, pagTamanio, Sort.by(ordenadoPor));
+		 
+	        Page<Articulo> articulos= articuloRepo.findArticuloBySucursalAndLista(sucursal, lista, pagina);
+	         
+	        /*if(articulos.hasContent()) {
+	            return articulos.getContent();
+	        } else {
+	            return new ArrayList<Articulo>();
+	        }*/
+	        
+	        return articulos;
+	}
+	
 	public Page<Articulo> getByRubroAndSubrubro(Long rubro, Long subrubro, Pageable pageable){
 		Page<Articulo> articulos ;
 		articulos = articuloRepo.findArticuloByRubroAndSubrubro(rubro, subrubro, pageable);

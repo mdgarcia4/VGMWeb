@@ -3,7 +3,6 @@ package com.vgmsistemas.vgmweb.controller;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -13,9 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
 import com.vgmsistemas.vgmweb.entity.Articulo;
-import com.vgmsistemas.vgmweb.entity.Sucursal;
 import com.vgmsistemas.vgmweb.entity.Usuario;
 import com.vgmsistemas.vgmweb.service.ArticuloService;
 import com.vgmsistemas.vgmweb.service.BannerService;

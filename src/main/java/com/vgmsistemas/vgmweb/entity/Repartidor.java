@@ -8,15 +8,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
-/**
- * @author pablo
- *
- */
-/*@XmlRootElement(name="Repartidor")
-@XmlAccessorType(XmlAccessType.NONE)*/
 @Entity
 @Table( name = "repartidor" )
 //@PrimaryKeyJoinColumn(name="id_repartidor",referencedColumnName="id_legajo")

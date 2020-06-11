@@ -11,7 +11,16 @@ import com.vgmsistemas.vgmweb.entity.Articulo;
 
 @Repository
 public interface ArticuloRepo extends JpaRepository<Articulo, Long>  {
+	
     public Page<Articulo> findBySnActivo(String snActivo,Pageable pageable);
+    
+    @Query("SELECT a FROM Articulo a, ListaPrecioDetalle l "
+    		+ " WHERE a.id = l.id.idArticulo "
+    		+ "  AND a.snActivo ='S'"
+    		+ "  and a.snWeb='S'"
+    		+ "  AND l.id.idSucursal = ?1"
+    		+ "  AND l.id.idLista = ?2")
+    public Page<Articulo> findArticuloBySucursalAndLista(Long sucursal, Long lista, Pageable pageable);
     
     @Query("SELECT a FROM Articulo a "
     		+ "WHERE a.subrubro.id.idRubro = ?1 "

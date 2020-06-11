@@ -15,7 +15,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.vgmsistemas.vgmweb.entity.Articulo;
+import com.vgmsistemas.vgmweb.entity.Cliente;
+import com.vgmsistemas.vgmweb.entity.ListaPrecioDetalle;
 import com.vgmsistemas.vgmweb.service.ArticuloService;
+import com.vgmsistemas.vgmweb.service.ClienteService;
+import com.vgmsistemas.vgmweb.service.ListaPrecioDetalleService;
 import com.vgmsistemas.vgmweb.service.MarcaService;
 import com.vgmsistemas.vgmweb.service.ProveedorService;
 import com.vgmsistemas.vgmweb.service.RubroService;
@@ -38,12 +42,18 @@ public class CategoriasController {
 	@Autowired
 	ProveedorService proveedorService;
 	
+	@Autowired
+	ClienteService clienteService;
+	
+	@Autowired
+	ListaPrecioDetalleService listaPrecioDetalleService;
+	
 		
 	//@GetMapping ("/categorias")
 	@GetMapping
 	public String categorias(@RequestParam(defaultValue = "1") Integer pagNro,
             @RequestParam(defaultValue = "12") Integer pagTamanio,
-            @RequestParam(defaultValue = "descripcion") String ordenadoPor,
+            @RequestParam(defaultValue = "articulo.descripcion") String ordenadoPor,
             Model model) {
 		
 		int paginaRecuperar;
@@ -54,9 +64,20 @@ public class CategoriasController {
 		int productoHasta;
 		long productosTotal;
 		
+		
+		// Obtengo el usuario para poder obtener el cliente relacionado con su lista de precio
+		/*Authentication auth = SecurityContextHolder
+				.getContext()
+				.getAuthentication();
+		UserDetails userDetail = (UserDetails) auth.getPrincipal();
+		String usuario = userDetail.getUsername();*/
+		
+		Cliente cliente = clienteService.getClienteByUsuario("admin");
+		
 		paginaRecuperar = pagNro - 1; 
 		
-		Page<Articulo> paginaArticulos = articuloService.getAll(paginaRecuperar,pagTamanio,ordenadoPor);
+		Page<ListaPrecioDetalle> paginaArticulos = listaPrecioDetalleService.getListaBySucursalAndLista(cliente.getId().getIdSucursal(),cliente.getListaPrecio().getId(),paginaRecuperar,pagTamanio,ordenadoPor);
+		
 		
 		paginasTotal = paginaArticulos.getTotalPages();
 		productosTotal = paginaArticulos.getTotalElements();
@@ -84,13 +105,14 @@ public class CategoriasController {
 		model.addAttribute("marcas", marcaService.getBySnWeb("S"));
 		model.addAttribute("rubros", rubroService.getBySnWeb("S"));
 		model.addAttribute("proveedores", proveedorService.getBySnWeb("S"));
-		model.addAttribute("articulos",paginaArticulos);
+		model.addAttribute("preciosArticulos",paginaArticulos);
 		model.addAttribute("paginaAnterior", paginaAnterior);
 		model.addAttribute("paginaActual",pagNro);
 		model.addAttribute("paginaSiguiente",paginaSiguiente);
 		model.addAttribute("productoDesde", productoDesde);
 		model.addAttribute("productoHasta", productoHasta);
 		model.addAttribute("productosTotal", productosTotal);
+		
 		
 		
 		
