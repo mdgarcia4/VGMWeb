@@ -21,12 +21,23 @@ public class ContactoController {
 	
 	@GetMapping("/contacto" )
 	public String contacto(Model model) {
-		Double latitud=-29.704071;
-		Double longitud=-57.1297873;
+		Float latitud = -29.704071F;
+		Float longitud = -57.1297873F;
+		String infoWindowDesc = "Casa Central";
 		List<Sucursal> sucursales;	
 		sucursales = sucursalService.getAll();
+		for(Sucursal suc:sucursales)
+		{
+			if(suc.getId() == suc.getSucActivaEmpresa())
+			{
+				latitud = suc.getLatitud();
+				longitud = suc.getLongitud();
+				infoWindowDesc = suc.getDescripcion();
+			}
+		}
 		model.addAttribute("latitud", latitud);
 		model.addAttribute("longitud",longitud);
+		model.addAttribute("infoWindowDescripcion",infoWindowDesc);
 		model.addAttribute("sucursales",sucursales );
 		model.addAttribute("apiKey",prepertyService.getApiKeyGoogle());
 		return "contacto";
