@@ -57,10 +57,10 @@
 										<span>/</span><a href="registrar" class="register" th:text="#{header.register}">Register </a>
 									</li>
 									<li class="select-wrapper">
-										<select class="select">
-											<option th:utext="#{header.language.spanish}"> Spanish </option>
-											<option th:utext="#{header.language.english}"> English </option>
-											
+										<select name="idiomas" id="idiomas" class="select">
+											<option value="#" th:utext="#{header.language.select}" disabled selected>  Languaje  </option>
+											<option value="es" th:utext="#{header.language.spanish}"> Spanish </option>
+											<option value="en" th:utext="#{header.language.english}"> English </option>											
 										</select><i class="arrow_carrot-down"></i>
 									</li>
 									<li class="select-wrapper">
@@ -98,6 +98,7 @@
 										</button>
 									</form>
 								</div>
+								<!--  
 								<div class="middle-header-right clearfix">
 									<div class="open-cart">
 										<i class="icon_bag_alt"></i>
@@ -116,28 +117,6 @@
 												</div>
 												<span class="delete fa fa-trash"> </span>
 											</li>
-											<li>
-												<figure class="item-image">
-													<a href="#"><img src="assets/images/img-two.jpg" alt="t-shirt" /></a>
-												</figure>
-												<div class="item-description">
-													<h4><a href="#" class="item-name">T-Shirt Retro Black</a></h4>
-													<span class="review-icon clearfix"> <i class="icon_star active"></i> <i class="icon_star active"></i> <i class="icon_star active"></i> <i class="icon_star active"></i> <i class="icon_star"></i> </span>
-													<span class="price">$ 70.00</span>
-												</div>
-												<span class="delete fa fa-trash"> </span>
-											</li>
-											<li>
-												<figure class="item-image">
-													<a href="#"><img src="assets/images/img-three.jpg" alt="t-shirt" /></a>
-												</figure>
-												<div class="item-description">
-													<h4><a href="#" class="item-name">T-Shirt Retro White</a></h4>
-													<span class="review-icon clearfix"> <i class="icon_star active"></i> <i class="icon_star active"></i> <i class="icon_star active"></i> <i class="icon_star active"></i> <i class="icon_star"></i> </span>
-													<span class="price">$ 70.00</span>
-												</div>
-												<span class="delete fa fa-trash"> </span>
-											</li>
 										</ul>
 										<div class="total-amount clearfix">
 											<span class="total">Total</span>
@@ -149,6 +128,7 @@
 										</div>
 									</div>
 								</div>
+								-->
 								<a href="index.html" class="logo"><img src="assets/images/logo.png" alt="LOOK" /></a>
 							</div>
 						</div>
@@ -202,8 +182,8 @@
 						<div class="row">
 							<div class="col-xs-12 col-sm-4">
 								<div class="account-login">
-									<h3 >Ingrese a su cuenta</h3>
-									<span class="discover">Ingrese a su cuenta para pode operar</span>
+									<h3 th:text="#{login.title}">Ingrese a su cuenta</h3>
+									<span class="discover" th:text="#{login.title.description}">Ingrese a su cuenta para pode operar</span>
 									<form class="login-account-form" th:action="@{/login}" method="post">
 										<input type="text" class="login-account-form-text" placeholder="Usuario" th:placeholder="#{login.user}" name="usuario" />
 										<input type="password" placeholder="Contraseña" th:placeholder="#{login.password}" name="clave"/>

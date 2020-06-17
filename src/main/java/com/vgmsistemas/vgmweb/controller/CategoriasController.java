@@ -8,6 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -54,6 +57,10 @@ public class CategoriasController {
 	public String categorias(@RequestParam(defaultValue = "1") Integer pagNro,
             @RequestParam(defaultValue = "12") Integer pagTamanio,
             @RequestParam(defaultValue = "articulo.descripcion") String ordenadoPor,
+            @RequestParam(defaultValue = "0") Long rubro,
+            @RequestParam(defaultValue = "0") Long subrubro,
+            @RequestParam(defaultValue = "0") Long proveedor,
+            @RequestParam(defaultValue = "0") Long marca,
             Model model) {
 		
 		int paginaRecuperar;
@@ -66,17 +73,17 @@ public class CategoriasController {
 		
 		
 		// Obtengo el usuario para poder obtener el cliente relacionado con su lista de precio
-		/*Authentication auth = SecurityContextHolder
+		Authentication auth = SecurityContextHolder
 				.getContext()
 				.getAuthentication();
 		UserDetails userDetail = (UserDetails) auth.getPrincipal();
-		String usuario = userDetail.getUsername();*/
+		String usuario = userDetail.getUsername();
 		
-		Cliente cliente = clienteService.getClienteByUsuario("admin");
+		Cliente cliente = clienteService.getClienteByUsuario(usuario);
 		
 		paginaRecuperar = pagNro - 1; 
 		
-		Page<ListaPrecioDetalle> paginaArticulos = listaPrecioDetalleService.getListaBySucursalAndLista(cliente.getId().getIdSucursal(),cliente.getListaPrecio().getId(),paginaRecuperar,pagTamanio,ordenadoPor);
+		Page<ListaPrecioDetalle> paginaArticulos = listaPrecioDetalleService.getListaPrecio(cliente.getId().getIdSucursal(),cliente.getListaPrecio().getId(),paginaRecuperar,pagTamanio,ordenadoPor,rubro,subrubro,proveedor,marca);
 		
 		
 		paginasTotal = paginaArticulos.getTotalPages();
@@ -133,39 +140,6 @@ public class CategoriasController {
 			
 		return paginas;
 	}
-	/*
-	@GetMapping("/subrubro")
-	public String categorias(@RequestParam("rubro") Long rubro, @RequestParam("subrubro") Long subrubro  , Model model, @PageableDefault(page = 0, size = 9) Pageable pageable) {
-		model.addAttribute("marcas", marcaService.getBySnWeb("S"));
-		model.addAttribute("rubros", rubroService.getBySnWeb("S"));
-		model.addAttribute("proveedores", proveedorService.getBySnWeb("S"));
-		model.addAttribute("articulos",articuloService.getByRubroAndSubrubro(rubro, subrubro,pageable));
-		
-		return "categorias";
-	}
-	
-	@GetMapping("/marca")
-	public String categorias(@RequestParam("marca") Long marca,  Model model, @PageableDefault(page = 0, size = 9) Pageable pageable) {
-		model.addAttribute("marcas", marcaService.getBySnWeb("S"));
-		model.addAttribute("rubros", rubroService.getBySnWeb("S"));
-		model.addAttribute("proveedores", proveedorService.getBySnWeb("S"));
-		model.addAttribute("articulos",articuloService.getByMarca(marca, pageable));
-		
-		return "categorias";
-	}
-	
-	@GetMapping("/proveedor")
-	public String categoriasProv(@RequestParam("proveedor") Long proveedor,  Model model, @PageableDefault(page = 0, size = 9) Pageable pageable) {
-		model.addAttribute("marcas", marcaService.getBySnWeb("S"));
-		model.addAttribute("rubros", rubroService.getBySnWeb("S"));
-		model.addAttribute("proveedores", proveedorService.getBySnWeb("S"));
-		model.addAttribute("articulos",articuloService.getByProveedor(proveedor, pageable));
-		
-		return "categorias";
-	}*/
-	
-	
-	
 	
 	
 	//@GetMapping("/categorias/search" , method = RequestMethod.POST)

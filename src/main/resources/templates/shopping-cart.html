@@ -78,11 +78,11 @@
 								</ul>
 								<ul class="top-header-right clearfix">
 									<li class="profile">
-										<a href="#" th:text="#{header.myacount}"><i class="icon_profile" ></i>My Account </a>
+										<a href="#" th:utext="#{header.myacount}"><i class="icon_profile" ></i>My Account </a>
 									</li>
 									
 									<li class="checkout">
-										<a href="javascript:enviar_formulario_logout()" th:text="#{header.checkout}"><i class="icon_check_alt" ></i>Checkout</a>
+										<a href="javascript:enviar_formulario_logout()" th:utext="#{header.checkout}"><i class="icon_check_alt" ></i>Checkout</a>
 										<form th:action="@{/logout}" method="post" name="formulario_logout">
 					            			<input type="hidden" value="Cerrar Sesion"   />
 					        			</form>
