@@ -1,6 +1,9 @@
 package com.vgmsistemas.vgmweb.service;
 
+import java.io.File;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.system.ApplicationHome;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -29,8 +32,22 @@ public class ListaPrecioDetalleService {
 	            return new ArrayList<Articulo>();
 	        }*/
 	        
-	        return listaPrecios;
+	        return controlImgArticulos(listaPrecios);
 	}
 	
-	
+	private Page<ListaPrecioDetalle> controlImgArticulos(Page<ListaPrecioDetalle> listado){
+		String codBarraControl;
+		ApplicationHome home = new ApplicationHome(this.getClass());
+		File dirApp = home.getDir();
+		String path = dirApp.toString() + "\\src\\main\\resources\\static\\img\\";
+		for(ListaPrecioDetalle list : listado){
+			codBarraControl = list.getArticulo().getIdCodigoBarras();
+			File myFile = new File(path+codBarraControl+".jpg");
+			//si no existe pongo imagen no disponible.
+			if (!myFile.exists()) {
+				list.getArticulo().setIdCodigoBarras("imagen_no_disp");
+			}
+		}
+		return listado;
+	}	
 }
