@@ -20,7 +20,7 @@ public class ListaPrecioDetalleService {
 
 	
 	
-	public Page<ListaPrecioDetalle> getListaBySucursalAndLista(Long sucursal, Long lista, Integer pagNro, Integer pagTamanio, String ordenadoPor)  {
+	public Page<ListaPrecioDetalle> getListaBySucursalAndLista(Long sucursal, Long lista, Integer pagNro, Integer pagTamanio, String ordenadoPor, Long rubro, Long subrubro, Long proveedor, Long marca)  {
 		
 		 Pageable pagina = PageRequest.of(pagNro, pagTamanio, Sort.by(ordenadoPor));
 		 
@@ -35,6 +35,7 @@ public class ListaPrecioDetalleService {
 	        return controlImgArticulos(listaPrecios);
 	}
 	
+
 	private Page<ListaPrecioDetalle> controlImgArticulos(Page<ListaPrecioDetalle> listado){
 		String codBarraControl;
 		ApplicationHome home = new ApplicationHome(this.getClass());
@@ -50,4 +51,26 @@ public class ListaPrecioDetalleService {
 		}
 		return listado;
 	}	
+
+	public Page<ListaPrecioDetalle> getListaPrecio(Long sucursal, Long lista, Integer pagNro, Integer pagTamanio, String ordenadoPor, Long rubro, Long subrubro, Long proveedor, Long marca)  {
+		
+		 Pageable pagina = PageRequest.of(pagNro, pagTamanio, Sort.by(ordenadoPor));
+		 Page<ListaPrecioDetalle> listaPrecios;
+		 
+		 if (rubro != 0 && subrubro != 0) {
+			 listaPrecios = listaPrecioDetalleRepo.findListaBySucursalAndListaAndSubrubro(sucursal, lista, rubro, subrubro, pagina);
+		 }
+		 else if(proveedor != 0) {
+			 listaPrecios = listaPrecioDetalleRepo.findListaBySucursalAndListaAndProveedor(sucursal, lista, proveedor, pagina);
+		 }
+		 else if(marca!=0) {
+			 listaPrecios = listaPrecioDetalleRepo.findListaBySucursalAndListaAndMarca(sucursal, lista, marca, pagina);
+		 }
+		 else {
+			 listaPrecios= listaPrecioDetalleRepo.findListaBySucursalAndLista(sucursal, lista, pagina);
+	     }
+	     	        
+	    return listaPrecios;
+	}
+
 }

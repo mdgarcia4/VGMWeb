@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<html xmlns:th="http://www.thymeleaf.org" lang="en" >
 	<head>
 		<meta http-equiv="Content-Type" content="text/html" charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -44,7 +43,7 @@
 		<script src="assets/js/html5shiv.min.js"></script>
 		<![endif]-->
 	</head>
-	<body>
+	<body onLoad="load()">
 		<!-- Loader -->
 		<div id="loading">
 			<div id="loading-center">
@@ -72,9 +71,10 @@
 										<span>/</span><a href="registrar" class="register" th:text="#{header.register}">Register </a>
 									</li>
 									<li class="select-wrapper">
-										<select class="select">
-											<option th:utext="#{header.language.spanish}"> Spanish </option>
-											<option th:text="#{header.language.english}"> English </option>
+										<select name="idiomas" id="idiomas" class="select">
+											<option value="#" th:utext="#{header.language.select}" disabled selected>  Languaje  </option>
+											<option value="es" th:utext="#{header.language.spanish}"> Spanish </option>
+											<option value="en" th:utext="#{header.language.english}"> English </option>											
 										</select><i class="arrow_carrot-down"></i>
 									</li>
 									<li class="select-wrapper">
@@ -104,14 +104,15 @@
 					<div class="container">
 						<div class="row clearfix">
 							<div class="col-xs-12 middle-header-content">
+								<!-- Busqueda -->
 								<div class="middle-header-left">
 									<form class="clearfix" th:action="@{/categorias}"action="/categorias" method="post">
 										<input type="text" name="search" placeholder="Search... " th:placeholder="#{header.search}"/>
-										<button type="submit">
+										<button type="submit" >
 											<i class="icon_search"></i>
 										</button>
 									</form>
-								</div>
+								</div> 
 								<div class="middle-header-right clearfix">
 									<div id="cantPrCarritoVgm" class="open-cart">
 										<i id="icono1CantPrCarritoVgm" class="icon_bag_alt"></i> 
@@ -120,17 +121,17 @@
 										</span>
 									</div>
 									<div class="item-block">
-									<ul  id="dwnCarritoVgm"  class="item-list">
-										<!-- se agregan los elementos en tiempo ejecucion -->
-									</ul>
-									<div id="totDwnCarritoVgm" class="total-amount clearfix">
-										<span class="total">Total</span> <span id="totDwnCarritoVgmItem" class="amount">€1145.00</span>
+										<ul  id="dwnCarritoVgm"  class="item-list">
+											<!-- se agregan los elementos en tiempo ejecucion -->
+										</ul>
+										<div id="totDwnCarritoVgm" class="total-amount clearfix">
+											<span class="total">Total</span> <span id="totDwnCarritoVgmItem" class="amount">$ 0.00</span>
+										</div>
+										<div class="butn-group clearfix">
+											<a href="/shopping-cart" class="cart" th:text="#{itemcart.viewcart}">VIEW CART</a> 
+											<a href="#"	class="checkout" th:text="#{itemcart.checkout}" >CHECKOUT</a>
+										</div>
 									</div>
-									<div class="butn-group clearfix">
-										<a href="#" class="cart">VIEW CART</a> <a href="#"
-											class="checkout">CHECKOUT</a>
-									</div>
-								</div>
 								</div>
 								<a href="index.html" class="logo"><img src="assets/images/logo.png" alt="LOOK" /></a>
 							</div>
@@ -1028,10 +1029,11 @@
 		<script type="text/javascript" src="assets/js/jquery.themepunch.tools.min.js"></script>
 		<script type="text/javascript" src="assets/js/jquery.themepunch.revolution.min.js"></script>
 		<script type="text/javascript" src="assets/js/jquery.revolution.js"></script>
-		<script type="text/javascript" src="assets/js/site.js"></script>
-
-		<script type="text/javascript" src="js/sweetalert2.all.js"></script>
+		
 		<script type="text/javascript" src="js/vgmjs.js"></script>
+		<script type="text/javascript" src="js/sweetalert2.all.js"></script>
+				
+		<script type="text/javascript" src="assets/js/site.js"></script>
 		<script type="text/javascript" src="js/vgmutil.js"></script>
 	</body>
 </html>

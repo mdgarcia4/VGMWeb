@@ -122,8 +122,8 @@
 											<span class="total">Total</span> <span id="totDwnCarritoVgmItem" class="amount">$ 0.00</span>
 										</div>
 										<div class="butn-group clearfix">
-											<a href="/shopping-cart" class="cart">VIEW CART</a> <a href="#"
-												class="checkout">CHECKOUT</a>
+											<a href="/shopping-cart" class="cart" th:text="#{itemcart.viewcart}">VIEW CART</a> 
+											<a href="#"	class="checkout" th:text="#{itemcart.checkout}" >CHECKOUT</a>
 										</div>
 									</div>
 								</div>
@@ -195,7 +195,7 @@
 												<a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" th:href="'#collapse'+${rubro.id.idRubro}" aria-expanded="true" aria-controls="collapseOne" th:text="${rubro.descripcion}" >RUBROS</a>
 												<ul class="sub-list panel-collapse collapse in" id="collapseOne" th:id="'collapse'+${rubro.id.idRubro}" aria-labelledby="headingOne" >
 													<li th:each="subrubro: ${rubro.subrubros}">
-														<a href="#" th:href="'/subrubro?rubro='+${subrubro.id.idRubro}+ '&subrubro=' + ${subrubro.id.idSubrubro}" th:text="${subrubro.descripcion}" >SUBRUBRO</a>
+														<a href="#" th:href="'/categorias?rubro='+${subrubro.id.idRubro}+ '&subrubro=' + ${subrubro.id.idSubrubro}" th:text="${subrubro.descripcion}" >SUBRUBRO</a>
 													</li>
 												</ul>
 											</li>
@@ -219,7 +219,7 @@
 										<h4 class="heading" th:text="#{categorias.filter.brand}">Marcas</h4>
 										<ul class="main-list" th:each="marca: ${marcas}">
 											<li>
-												<a href="#" th:href="'/marca?marca='+${marca.id}" th:text="${marca.descripcion}">Marca 1 </a>
+												<a href="#" th:href="'/categorias?marca='+${marca.id}" th:text="${marca.descripcion}">Marca 1 </a>
 											</li>
 										</ul>
 									</div>
@@ -228,7 +228,7 @@
 										<h4 class="heading" th:text="#{categorias.filter.provider}">Proveedores</h4>
 										<ul class="main-list" th:each="proveedor: ${proveedores}">
 											<li>
-												<a href="#" th:href="'/proveedor?proveedor='+${proveedor.idProveedor}" th:text="${proveedor.deProveedor}">Proveedor 1 </a>
+												<a href="#" th:href="'/categorias?proveedor='+${proveedor.idProveedor}" th:text="${proveedor.deProveedor}">Proveedor 1 </a>
 											</li>
 										</ul>
 									</div>
@@ -348,7 +348,7 @@
 				<div class="primary-footer">
 					<div class="container">
 						<div class="row">
-							<div class="footer-content col-md-3 col-sm-3 col-xs-12">
+							<!-- <div class="footer-content col-md-3 col-sm-3 col-xs-12">
 								<div class="footer-border">
 									<h4> STORE </h4>
 									<ul class="footer-nav">
@@ -445,7 +445,7 @@
 										<span class="mail-info"> <a href="mailto:megashop@info.com">megashop@info.com</a> <a href="mailto:megashop@holding.com">megashop@holding.com</a> </span>
 									</div>
 								</div>
-							</div>
+							</div>-->
 						</div>
 					</div>
 				</div>

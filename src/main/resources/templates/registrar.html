@@ -57,9 +57,10 @@
 										<span>/</span><a href="registrar" class="register" th:text="#{header.register}">Register </a>
 									</li>
 									<li class="select-wrapper">
-										<select class="select">
-											<option th:utext="#{header.language.spanish}"> Spanish </option>
-											<option th:utext="#{header.language.english}"> English </option>
+										<select name="idiomas" id="idiomas" class="select">
+											<option value="#" th:utext="#{header.language.select}" disabled selected>  Languaje  </option>
+											<option value="es" th:utext="#{header.language.spanish}"> Spanish </option>
+											<option value="en" th:utext="#{header.language.english}"> English </option>
 											
 										</select><i class="arrow_carrot-down"></i>
 									</li>
@@ -71,13 +72,11 @@
 								</ul>
 								<ul class="top-header-right clearfix">
 									<li class="profile">
-										<a href="#" ><i class="icon_profile"></i></a>
-										<a href="#" th:text="#{header.myacount}">My Account </a>
+										<a href="#" th:utext="#{header.myacount}">My Account </a>
 									</li>
 									
 									<li class="checkout">
-										<a href="javascript:enviar_formulario_logout()" ><i class="icon_check_alt" ></i></a>
-										<a href="javascript:enviar_formulario_logout()" th:text="#{header.checkout}">Checkout </a>
+										<a href="javascript:enviar_formulario_logout()" th:utext="#{header.checkout}">Checkout </a>
 										<form th:action="@{/logout}" method="post" name="formulario_logout">
 					            			<input type="hidden" value="Cerrar Sesion"   />
 					        			</form>
@@ -99,6 +98,7 @@
 										</button>
 									</form>
 								</div>
+								<!--  
 								<div class="middle-header-right clearfix">
 									<div class="open-cart">
 										<i class="icon_bag_alt"></i>
@@ -117,28 +117,7 @@
 												</div>
 												<span class="delete fa fa-trash"> </span>
 											</li>
-											<li>
-												<figure class="item-image">
-													<a href="#"><img src="assets/images/img-two.jpg" alt="t-shirt" /></a>
-												</figure>
-												<div class="item-description">
-													<h4><a href="#" class="item-name">T-Shirt Retro Black</a></h4>
-													<span class="review-icon clearfix"> <i class="icon_star active"></i> <i class="icon_star active"></i> <i class="icon_star active"></i> <i class="icon_star active"></i> <i class="icon_star"></i> </span>
-													<span class="price">$ 70.00</span>
-												</div>
-												<span class="delete fa fa-trash"> </span>
-											</li>
-											<li>
-												<figure class="item-image">
-													<a href="#"><img src="assets/images/img-three.jpg" alt="t-shirt" /></a>
-												</figure>
-												<div class="item-description">
-													<h4><a href="#" class="item-name">T-Shirt Retro White</a></h4>
-													<span class="review-icon clearfix"> <i class="icon_star active"></i> <i class="icon_star active"></i> <i class="icon_star active"></i> <i class="icon_star active"></i> <i class="icon_star"></i> </span>
-													<span class="price">$ 70.00</span>
-												</div>
-												<span class="delete fa fa-trash"> </span>
-											</li>
+											
 										</ul>
 										<div class="total-amount clearfix">
 											<span class="total">Total</span>
@@ -150,6 +129,7 @@
 										</div>
 									</div>
 								</div>
+								-->
 								<a href="index.html" class="logo"><img src="assets/images/logo.png" alt="LOOK" /></a>
 							</div>
 						</div>
@@ -225,32 +205,32 @@
 							</div>-->
 							<div class="col-xs-12 col-sm-7 col-sm-offset-1">
 								<div class="register-now">
-									<h3>¿No tienes una cuenta? Regístrate ahora</h3>
-									<span class="benifits">By creating an account with our store, you will be able to move through the checkout process faster, store multiple shipping addresses, view and track your orders in your account and more. </span>
+									<h3 th:text="#{registrar.title}">¿No tienes una cuenta? Regístrate ahora</h3>
+									<span class="benifits" th:text="#{registrar.title.description}">By creating an account with our store, you will be able to move through the checkout process faster, store multiple shipping addresses, view and track your orders in your account and more. </span>
 									<form class="register-now-form" th:action="@{/registrar}" th:object="${usr}" method="post">
 										<ul class="clearfix">
 											
 											
 											<li>
-												<input class="form-control" type="text" placeholder="Correo electrónico" id="email" th:field="*{email}" />
+												<input class="form-control" type="text" placeholder="Correo electrónico" th:placeholder="#{registrar.form.email}" id="email" th:field="*{email}" />
 											</li>
 											<li>
-												<input class="form-control" type="text" placeholder="Usuario" id="usuario" th:field="*{usuario}" />
+												<input class="form-control" type="text" placeholder="Usuario" th:placeholder="#{registrar.form.user}" id="usuario" th:field="*{usuario}" />
 											</li>
 											<li>
-												<input class="form-control" type="text" placeholder="Nombre" id="nombre" th:field="*{nombre}" />
+												<input class="form-control" type="text" placeholder="Nombre" th:placeholder="#{registrar.form.name}" id="nombre" th:field="*{nombre}" />
 											</li>
 											<li>
-												<input class="form-control" type="text" placeholder="Teléfono" id="telefono" th:field="*{telefono}" />
+												<input class="form-control" type="text" placeholder="Teléfono" th:placeholder="#{registrar.form.phone}" id="telefono" th:field="*{telefono}" />
 											</li>
 											<li>
-												<input class="form-control" type="password" placeholder="Contraseña" id="clave" th:field="*{clave}" />
+												<input class="form-control" type="password" placeholder="Contraseña" th:placeholder="#{registrar.form.password}" id="clave" th:field="*{clave}" />
 											</li>
 											<li>
-												<input class="form-control" type="password" placeholder="Repetir - Contraseña" name="clave-repetir"/>
+												<input class="form-control" type="password" placeholder="Repetir - Contraseña" th:placeholder="#{registrar.form.repassword}" name="clave-repetir"/>
 											</li>
 											<li>
-												<input type="submit" value="registrar ahora" />
+												<input type="submit" value="registrar ahora" th:value="#{registrar.form.submit}" />
 											</li>
 										</ul>
 									</form>
