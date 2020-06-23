@@ -19,24 +19,13 @@ import org.hibernate.annotations.Where;
 @Table( name = "v_listas_precio_articulos" )
 @Where(clause = "pr_siva IS NOT NULL AND pr_final IS NOT NULL")
 public class ListaPrecioDetalle implements Serializable {
-	/*@Id
-	private Long idLista;
-	@Id
-	private Long idArticulo;
-	@Id
-	private Long idSucursal;*/
-
-	/**
-	 * 
-	 */
-	//private static final SimpleDateFormat formatDateSqlite = new SimpleDateFormat("yyyy-MM-dd");
+	
 	private static final SimpleDateFormat formatTimestampSqlite = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
 
 	private static final long serialVersionUID = -3096719252632833846L;
 	
 	@EmbeddedId
 	private PkListaPrecioDetalle id;
-	//@XmlElement(name = "precio")
 	
 	@Column(name = "pr_siva")
 	private Float precioSinIva;
@@ -49,6 +38,7 @@ public class ListaPrecioDetalle implements Serializable {
 
 	@Column(name = "ca_vendido")
 	private Float cantidadVendida;
+	
 	@Column(name = "sn_palm")
 	private String snMovil;
 
@@ -57,20 +47,24 @@ public class ListaPrecioDetalle implements Serializable {
 
 	@Column(name = "fe_vigencia_hasta")
 	private Date fechaVigenciaHasta;
+	
 	@Transient
 	private String fechaVigenciaDesdeSqlite;
+	
 	@Transient
 	private String fechaVigenciaHastaSqlite;
+	
 	@Column(name = "sn_pedido_web")
 	private String snPedidoWeb;
+
+	@ManyToOne()
+	@JoinColumn(name = "id_articulos", referencedColumnName= "id_articulos", insertable = false, updatable = false)
+	private Articulo articulo;
 	/*@Column (name = "ca_articulo_desde")
 	private Integer caArticuloDesde;
 	@Column (name = "ca_articulo_hasta")
 	private Integer caArticuloHasta;*/
 	
-	@ManyToOne()
-	@JoinColumn(name = "id_articulos", referencedColumnName= "id_articulos", insertable = false, updatable = false)
-	private Articulo articulo;
 	
 	public ListaPrecioDetalle(){
 		
@@ -121,49 +115,6 @@ public class ListaPrecioDetalle implements Serializable {
 	public void setId(PkListaPrecioDetalle id) {
 		this.id = id;
 	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#hashCode()
-	 */
-	/*@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		return result;
-	}*/
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#equals(java.lang.Object)
-	 */
-	/*@Override
-	public boolean equals(Object obj) {
-		if (this == obj) {
-			return true;
-		}
-		if (obj == null) {
-			return false;
-		}
-		if (!(obj instanceof ListaPrecioDetalle)) {
-			return false;
-		}
-		ListaPrecioDetalle other = (ListaPrecioDetalle) obj;
-		if (id == null) {
-			if (other.id != null) {
-				return false;
-			}
-		} else if (!id.equals(other.id)) {
-			return false;
-		}
-		if (Float.floatToIntBits(precioSinIva) != Float.floatToIntBits(other.precioSinIva)) {
-			return false;
-		}
-		return true;
-	}*/
 
 	/**
 	 * @return the precioConIva
@@ -285,5 +236,5 @@ public class ListaPrecioDetalle implements Serializable {
 	public void setArticulo(Articulo articulo) {
 		this.articulo = articulo;
 	}
-
+	
 }
