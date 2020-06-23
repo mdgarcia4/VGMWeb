@@ -126,12 +126,7 @@ public class AppController {
 		return "categorias";
 	}
 		
-	@GetMapping({"/shopping-cart","/shopping-cart.html","/shopping-cart.htm"})
-	public String getShoppingCar(Model model) {
 		
-		return "shopping-cart";
-	}
-	
 	@GetMapping("/header")
 	public String header() {
 		return "header";
