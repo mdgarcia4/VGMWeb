@@ -64,9 +64,10 @@
 										<span>/</span><a href="registrar" class="register" th:text="#{header.register}">Register </a>
 									</li>
 									<li class="select-wrapper">
-										<select class="select">
-											<option th:text="#{header.language.spanish}"> Spanish </option>
-											<option th:text="#{header.language.english}"> English </option>
+										<select name="idiomas" id="idiomas" class="select">
+											<option value="#" th:utext="#{header.language.select}" disabled selected>  Languaje  </option>
+											<option value="es" th:utext="#{header.language.spanish}"> Spanish </option>
+											<option value="en" th:utext="#{header.language.english}"> English </option>											
 										</select><i class="arrow_carrot-down"></i>
 									</li>
 									<li class="select-wrapper">
@@ -303,6 +304,22 @@
 										</div>
 									</div>
 									<!-- pagina de carrito -->
+									<div class="col-xs-12">
+										<div class="categories-shop-pagging">
+											<ul >
+												<li>
+													<a class="page-link" th:href="@{|/categorias?pagNro=${paginaAnterior}|}" ><i class="fa fa-angle-left"></i></a>
+												</li>
+												<li class="active" th:each=" pagina: ${paginas}" th:class="${pagina ==paginaActual ? 'active' :'' }">
+													<a href="javascript:void(0)" th:href="@{|/categorias?pagNro=${pagina}|}" th:text ="${pagina}" >1</a>
+												</li>
+												<li>
+													<a href="javascript:void(0)" th:href="@{|/categorias?pagNro=${paginaSiguiente}|}" ><i class="fa fa-angle-right" ></i></a>
+												</li>
+											</ul>
+										</div>
+									</div>
+									<!-- pagina de carrito 2-->
 									<div class="col-xs-12">
 										<div class="categories-shop-pagging">
 											<ul >
