@@ -406,16 +406,20 @@ function delParamIdioma(strCadena) {
 	let respuesta = strCadena;
 	if (posInicial === -1){
 		intentos += 1;
-		posInicial = indexOf("idioma=");
+		posInicial = strCadena.indexOf("&idioma=");
 		if (posInicial === -1){
-			return respuesta;
+			intentos += 1;
+			posInicial = strCadena.indexOf("idioma=");
+			if (posInicial === -1){
+				return respuesta;
+			};
 		};
 	};
-	if (intentos === 0){
-		let cadenaVieja = respuesta.substring(posInicial,10);
+	if (intentos <= 1){
+		let cadenaVieja = respuesta.substring(posInicial,posInicial + 10);
 		respuesta = reemplazarCadena(cadenaVieja, "", respuesta)
 	}else{
-		let cadenaVieja = respuesta.substring(posInicial,9);
+		let cadenaVieja = respuesta.substring(posInicial,posInicial + 9);
 		respuesta = reemplazarCadena(cadenaVieja, "", respuesta)
 	};
 	return respuesta;
@@ -429,4 +433,88 @@ function reemplazarCadena(cadenaVieja, cadenaNueva, cadenaCompleta) {
       }
    }
    return cadenaCompleta;
+}
+
+function enviarPedido() {
+	var cbShopCart = JSON.parse(localStorage.getItem("cbShopCart"));
+	if ((cbShopCart === null || !Array.isArray(cbShopCart) || cbShopCart.length === 0)){
+		swal({
+			type: 'error',
+			title: 'Error',
+			text: 'No es posible envíar el pedido ya que su carrito esta vacío',
+		});
+		return
+	};
+	
+	if (cbShopCart !== null){
+		var url_enviar = "http://" + window.location.host
+		/*DIA Y HORA*/
+		var today = new Date();
+		var dd = today.getDate();
+		var mm = today.getMonth()+1; //January is 0!
+		var yyyy = today.getFullYear();
+		if(dd<10) {
+			dd = '0'+dd;
+		}; 
+		if(mm<10) {
+			mm = '0'+mm;
+		};
+		var time = today.getHours()+""+today.getMinutes()+""+today.getSeconds();
+		today = yyyy+mm+dd;
+		/************ "web-"+"PD-"+"-"+cliente.idSucursal+"-"+cliente.idCliente+"-"+comercioID+   */
+		var idMovil = today+"-"+time;
+		var listaArticulos = '"ventaDetalle":[';			
+		cbShopCart.forEach(function(art){
+			if (listaArticulos !=='"ventaDetalle":['){
+				listaArticulos += ',';
+			}
+			listaArticulos += '{"articulo":{"id":'+art.id+'},"idMovil":"'+idMovil+'","cantidad":'+art.cantidad
+							+',"unidades":'+art.cantidad+',"bultos":0}';
+		});
+		listaArticulos += ']';	
+		var oparam = '{'+ listaArticulos+ '}';
+		$.ajax({ 			
+			method: "POST", 
+			contentType: "application/json; charset=utf-8", 
+			dataType: "json",  
+			url: url_enviar + "/shopping-cart",
+			data: oparam,
+			timeout: 30000,	
+			statusCode: {
+				404: function(response){
+					console.log(response);
+					window.location.href = "404.html";				
+				}/*,
+				503: function(response){
+					console.log(response);
+					window.location.href = "503.html"
+				}*/
+			},
+			/*beforeSend: function (xhr) {
+				xhr.setRequestHeader("Accept", "application/json"); 
+				xhr.setRequestHeader("Authorization", "Basic dmdtcHJldmVudGE6cHJldmVudGEq");
+				xhr.setRequestHeader("Content-Type", "application/json"); 
+			}, */
+			success: function (data) {
+				localStorage.removeItem("cbShopCart");
+				swal({
+				  type: 'success',
+				  title: 'Envío',
+				  text: 'El pedido ha sido enviado correctamente',
+				}).then(function(){
+					location.reload(); 
+				});
+			},
+			error: function (jqXHR, textStatus, errorThrown) {
+				swal({
+				  type: 'error',
+				  title: 'Error',
+				  text: 'Parte del pedido no ha sido enviado correctamente',
+				}).then(function(){
+					location.reload(); 
+				});
+			}, 
+		});
+
+	};
 }
