@@ -265,11 +265,15 @@ function OptionsInfoWindow(content, disableAutoPan, maxWidth, pixelOffset, posit
 		});
 
 		if ($('#slider-meter').length) {
+			let prminimo = 0
+			if ($("#preciominimo").length > 0) {prminimo = parseInt($("#preciominimo").text())}
+			let prmaximo = 10000
+			if ($("#preciomaximo").length > 0) {prmaximo = parseInt($("#preciomaximo").text())}
 			$("#slider-meter").slider({
 				range : true,
-				min : 16,
-				max : 200,
-				values : [16, 200],
+				min : prminimo,
+				max : prmaximo,
+				values : [prminimo, prmaximo],
 				slide : function(event, ui) {
 					$("#amount2").text("$" + ui.values[0] );
 					$("#amount1").text("$" + ui.values[1]);
