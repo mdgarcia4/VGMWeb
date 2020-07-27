@@ -16,7 +16,18 @@ public class PropertiesService {
 	
 	@Value("${shopping-cart.expires_in}")
 	private int expiresIn;
-
+	
+	@Value("${webservicesrest.timeOutAlto}")
+	private int timeOutAlto;
+	
+	@Value("${webservicesrest.timeOutMedio}")
+	private int timeOutMedio;
+	
+	@Value("${webservicesrest.timeOutBajo}")
+	private int timeOutBajo;
+	
+	@Value("${pagina.nameapp}")
+	private String nameApp;
 
 	public String getApiKeyGoogle() {
 		if(apiKeyGoogle == null) {
@@ -60,5 +71,37 @@ public class PropertiesService {
 
 	public void setExpiresIn(int expiresIn) {
 		this.expiresIn = expiresIn;
+	}
+	
+	public int getTimeOutAlto() {
+		return timeOutAlto;
+	}
+
+	public void setTimeOutAlto(int timeOutAlto) {
+		this.timeOutAlto = timeOutAlto;
+	}
+
+	public int getTimeOutMedio() {
+		return timeOutMedio;
+	}
+
+	public void setTimeOutMedio(int timeOutMedio) {
+		this.timeOutMedio = timeOutMedio;
+	}
+
+	public int getTimeOutBajo() {
+		return timeOutBajo;
+	}
+
+	public void setTimeOutBajo(int timeOutBajo) {
+		this.timeOutBajo = timeOutBajo;
+	}
+	
+	public String getNameApp() {
+		return nameApp;
+	}
+
+	public void setNameApp(String nameApp) {
+		this.nameApp = nameApp;
 	}
 }
