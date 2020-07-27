@@ -70,7 +70,7 @@ public class ListaPrecioDetalleService {
 			 listaPrecios= listaPrecioDetalleRepo.findListaBySucursalAndLista(sucursal, lista, pagina);
 	     }
 	     	        
-	    return listaPrecios;
+	    return controlImgArticulos(listaPrecios);
 	}
 
 }
