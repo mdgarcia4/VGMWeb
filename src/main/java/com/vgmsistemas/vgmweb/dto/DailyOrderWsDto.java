@@ -1,13 +1,13 @@
 package com.vgmsistemas.vgmweb.dto;
 
-import java.io.Serializable;
+//import java.io.Serializable;
 //import java.util.ArrayList;
 import java.util.List;
 
-public class DailyOrderWsDto implements Serializable{
-	private static final long serialVersionUID = 1074853576498884937L;
+public class DailyOrderWsDto /*implements Serializable*/{
+	//private static final long serialVersionUID = 1074853576498884937L;
 	private CustomerWsDto cliente;
-	private List<DailyOrderDetailWsDto> ventaDetalle;// = new ArrayList<DailyOrderDetailWsDto>();
+	private List<DailyOrderDetailWsDto> VentaDetalle;// = new ArrayList<DailyOrderDetailWsDto>();
 	private String idMovil;
 	private String pie;
 	
@@ -18,10 +18,10 @@ public class DailyOrderWsDto implements Serializable{
 		this.cliente = cliente;
 	}
 	public List<DailyOrderDetailWsDto> getVentaDetalle() {
-		return ventaDetalle;
+		return VentaDetalle;
 	}
 	public void setVentaDetalle(List<DailyOrderDetailWsDto> ventaDetalle) {
-		this.ventaDetalle = ventaDetalle;
+		this.VentaDetalle = ventaDetalle;
 	}
 	public String getIdMovil() {
 		return idMovil;
