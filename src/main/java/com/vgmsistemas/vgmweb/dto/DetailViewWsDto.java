@@ -5,16 +5,15 @@ import java.util.List;
 
 public class DetailViewWsDto {
 
-	//private static final long serialVersionUID = 2191503143427478983L;
-	private List<DailyOrderDetailWsDto> ventaDetalle;
+	private List<DailyOrderDetailWsDto> VentaDetalle;
 	
 	public List<DailyOrderDetailWsDto> getVentaDetalle() {
-		if(ventaDetalle==null){
-			ventaDetalle = new ArrayList<DailyOrderDetailWsDto>();
+		if(VentaDetalle == null){
+			VentaDetalle = new ArrayList<DailyOrderDetailWsDto>();
 		}
-		return ventaDetalle;
+		return VentaDetalle;
 	}
 	public void setVentaDetalle(List<DailyOrderDetailWsDto> ventaDetalle) {
-		this.ventaDetalle = ventaDetalle;
+		this.VentaDetalle = ventaDetalle;
 	}
 }
