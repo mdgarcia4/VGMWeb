@@ -17,13 +17,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.vgmsistemas.vgmweb.entity.Articulo;
 import com.vgmsistemas.vgmweb.entity.Cliente;
 import com.vgmsistemas.vgmweb.entity.ListaPrecioDetalle;
 import com.vgmsistemas.vgmweb.service.ArticuloService;
 import com.vgmsistemas.vgmweb.service.ClienteService;
 import com.vgmsistemas.vgmweb.service.ListaPrecioDetalleService;
 import com.vgmsistemas.vgmweb.service.MarcaService;
+import com.vgmsistemas.vgmweb.service.PropertiesService;
 import com.vgmsistemas.vgmweb.service.ProveedorService;
 import com.vgmsistemas.vgmweb.service.RubroService;
 
@@ -51,12 +51,15 @@ public class CategoriasController {
 	@Autowired
 	ListaPrecioDetalleService listaPrecioDetalleService;
 	
+	@Autowired
+	PropertiesService propertyService;
+	
 		
 	//@GetMapping ("/categorias")
 	@GetMapping
-	public String categorias(@RequestParam(defaultValue = "1") Integer pagNro,
-            @RequestParam(defaultValue = "12") Integer pagTamanio,
-            @RequestParam(defaultValue = "articulo.descripcion") String ordenadoPor,
+	public String categorias(@RequestParam(defaultValue = "1") Integer page,
+            @RequestParam(defaultValue = "12") Integer size,
+            @RequestParam(defaultValue = "articulo.descripcion") String order,
             @RequestParam(defaultValue = "0") Long rubro,
             @RequestParam(defaultValue = "0") Long subrubro,
             @RequestParam(defaultValue = "0") Long proveedor,
@@ -81,32 +84,32 @@ public class CategoriasController {
 		
 		Cliente cliente = clienteService.getClienteByUsuario(usuario);
 		
-		paginaRecuperar = pagNro - 1; 
+		paginaRecuperar = page - 1; 
 		
-		Page<ListaPrecioDetalle> paginaArticulos = listaPrecioDetalleService.getListaPrecio(cliente.getId().getIdSucursal(),cliente.getListaPrecio().getId(),paginaRecuperar,pagTamanio,ordenadoPor,rubro,subrubro,proveedor,marca);
+		Page<ListaPrecioDetalle> paginaArticulos = listaPrecioDetalleService.getListaPrecio(cliente.getId().getIdSucursal(),cliente.getListaPrecio().getId(),paginaRecuperar,size,order,rubro,subrubro,proveedor,marca);
 		
 		
 		paginasTotal = paginaArticulos.getTotalPages();
 		productosTotal = paginaArticulos.getTotalElements();
 		
-		List<Integer> paginas = getVectorPaginas(pagNro,paginasTotal);
+		List<Integer> paginas = getVectorPaginas(page,paginasTotal);
 		
-		if (pagNro <= 1) {
+		if (page <= 1) {
 			paginaAnterior = 1;
 		}
 		else {
-			paginaAnterior = pagNro - 1;
+			paginaAnterior = page - 1;
 		}
 		
-		if (pagNro >= paginasTotal) {
-			paginaSiguiente = pagNro ;
+		if (page >= paginasTotal) {
+			paginaSiguiente = page ;
 		}
 		else {
-			paginaSiguiente = pagNro + 1;
+			paginaSiguiente = page + 1;
 		}
 		
-		productoDesde = paginaRecuperar * pagTamanio + 1;
-		productoHasta = paginaRecuperar * pagTamanio + pagTamanio;
+		productoDesde = paginaRecuperar * size + 1;
+		productoHasta = paginaRecuperar * size + size;
 				
 		model.addAttribute("paginas",paginas);
 		model.addAttribute("marcas", marcaService.getBySnWeb("S"));
@@ -114,12 +117,14 @@ public class CategoriasController {
 		model.addAttribute("proveedores", proveedorService.getBySnWeb("S"));
 		model.addAttribute("preciosArticulos",paginaArticulos);
 		model.addAttribute("paginaAnterior", paginaAnterior);
-		model.addAttribute("paginaActual",pagNro);
+		model.addAttribute("paginaActual",page);
 		model.addAttribute("paginaSiguiente",paginaSiguiente);
 		model.addAttribute("productoDesde", productoDesde);
 		model.addAttribute("productoHasta", productoHasta);
 		model.addAttribute("productosTotal", productosTotal);
-		
+		model.addAttribute("preciominimo", 10);
+		model.addAttribute("preciomaximo", 50000);
+		model.addAttribute("nameapp",propertyService.getNameApp());
 		
 		
 		
@@ -129,9 +134,9 @@ public class CategoriasController {
 	private List<Integer> getVectorPaginas(Integer pagNro, Integer paginasTotal) {
 		int vectorPaginaInial;
 		int vectorPaginaFinal;
-	 	vectorPaginaInial = pagNro / 9;
-		vectorPaginaInial = vectorPaginaInial * 9 + 1;
-		vectorPaginaFinal = vectorPaginaInial + 9;
+	 	vectorPaginaInial = pagNro / 6;
+		vectorPaginaInial = vectorPaginaInial * 6 + 1;
+		vectorPaginaFinal = vectorPaginaInial + 6;
 		if (vectorPaginaFinal > paginasTotal) {
 			vectorPaginaFinal = paginasTotal;
 		}
