@@ -203,7 +203,7 @@ input:focus, input:active, button:focus, button:active, textarea:focus {
 }
 .middle-header-right {
 	float: right;
-	width: 17.5%;
+	width: 23%;/*17.5%;*/
 	border: 1px solid rgba(255,255,255,0.3);
 	margin-top: 15px;
 	position: relative;
