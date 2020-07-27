@@ -17,6 +17,7 @@ import com.vgmsistemas.vgmweb.entity.Usuario;
 import com.vgmsistemas.vgmweb.service.ArticuloService;
 import com.vgmsistemas.vgmweb.service.BannerService;
 import com.vgmsistemas.vgmweb.service.MarcaService;
+import com.vgmsistemas.vgmweb.service.PropertiesService;
 import com.vgmsistemas.vgmweb.service.ProveedorService;
 import com.vgmsistemas.vgmweb.service.RubroService;
 import com.vgmsistemas.vgmweb.service.SucursalService;
@@ -47,6 +48,9 @@ public class AppController {
 	
 	@Autowired
 	SucursalService sucursalService;
+
+	@Autowired
+	PropertiesService propertyService;
 		
 	@GetMapping({"/login","/login.html","/longin.htm"})
 	public String login(Model model) {
@@ -81,6 +85,7 @@ public class AppController {
 		
 		model.addAttribute("banners",bannerService.getByDePaginaAndSnActivo("index", "S"));
 		model.addAttribute("articulos", paginaArticulos);
+		model.addAttribute("nameapp",propertyService.getNameApp());
 		
 		return "index";
 	}
