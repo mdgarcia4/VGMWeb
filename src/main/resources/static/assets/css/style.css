@@ -402,7 +402,7 @@
 	letter-spacing: 0.6px;
 }
 .common-banner {
-	background: url(../images/categories-banner.jpg) no-repeat center top;
+	background: url(../../img/gral/categories-banner.jpg) no-repeat center top;
 	min-height: 420px;
 	margin-bottom: 60px;
 	background-size: cover;
@@ -1943,7 +1943,7 @@
 
 /*..blog-grid-sidebar..*/
 .common-banner.blog-sidebar-banner {
-	background: url(../images/blog-banner.jpg) no-repeat center top;
+	background: url(../../img/gral/blog-banner.jpg) no-repeat center top;
 	margin-bottom: 108px;
 }
 .common-heading.heading {
@@ -2387,12 +2387,12 @@
 	margin-right: 27px;
 }
 .common-banner.login-banner {
-	background: url(../images/login-banner.jpg) no-repeat center top;
+	background: url(../../img/gral/login-banner.jpg) no-repeat center top;
 	margin-bottom: 106px;
 }
 /*..blog-detail..*/
 .common-banner.blog-detail-banner {
-	background: url(../images/blog-detail-banner.jpg) no-repeat center top;
+	background: url(../../img/gral/blog-detail-banner.jpg) no-repeat center top;
 	margin-bottom: 108px;
 }
 .blog-news {
@@ -2645,7 +2645,7 @@
 }
 /*..blog-list-sidebar..*/
 .common-banner.blog-list-sidebar {
-	background: url(../images/blog-list-sidebar.jpg) no-repeat center bottom;
+	background: url(../../img/gral/blog-list-sidebar.jpg) no-repeat center bottom;
 	margin-bottom: 79px;
 }
 .full-width-block .post-details-section {
@@ -2697,7 +2697,7 @@
 
 /*7.) Contact Page*/
 .contact-page .common-banner.blog-detail-banner {
-	background: url("../images/product-banner.jpg") no-repeat scroll center top;
+	background: url("../../img/gral/product-banner.jpg") no-repeat scroll center top;
 }
 .map-box {
 	height: 468px;
@@ -2822,7 +2822,7 @@
 	width: 43.1%;
 	left: 0;
 	right: 0;
-	background: url("../images/pop-up.jpg") no-repeat;
+	background: url("../../img/gral/pop-up.jpg") no-repeat;
 	top: 50%;
 	transform: translateY(-50%);
 	-webkit-transform: translateY(-50%);
