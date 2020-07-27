@@ -1,13 +1,17 @@
 package com.vgmsistemas.vgmweb.service.rest;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import java.util.Map;
 
+import org.json.JSONObject;
+
+import com.mashape.unirest.http.HttpResponse;
+import com.mashape.unirest.http.JsonNode;
+import com.mashape.unirest.http.Unirest;
 import com.vgmsistemas.vgmweb.service.PropertiesService;
+import com.vgmsistemas.vgmweb.util.CodeResult;
+//import com.vgmsistemas.vgmweb.util.CodeResult;
 import com.vgmsistemas.vgmweb.util.RutasServicios;
 
-import kong.unirest.HttpResponse;
-import kong.unirest.JsonNode;
-import kong.unirest.Unirest;
 
 public abstract class GenericWs {
     protected String url;
@@ -26,16 +30,12 @@ public abstract class GenericWs {
     protected final String tagToken = "token";
     public static final String KEY_TOKEN = "token";
     protected static final String TOKEN_INVALIDO = "401";
-    public static final String PREFERENCIA = "preferencia_token";
-
+    public static final String PREFERENCIA = "preferencia_token";    
     
     
-    @Autowired
-	PropertiesService propertyService;
+    PropertiesService propertyService;
     
-    public GenericWs(){
-    	url = propertyService.getUrlServicio();
-    }
+    public GenericWs(){  }
     
     public synchronized void refreshToken()throws Exception {
         
@@ -47,15 +47,65 @@ public abstract class GenericWs {
     	            .field("username", "vgm")
     	            .field("password", "abc123")
     	            .asJson();
-    		token = response.getBody().getObject().getString("access_token").toString(); 
-    		expiraEn = Integer.parseInt(response.getBody().getObject().getString("expires_in").toString());  
-    		
-    		/*Asigno los resultados*/
-    		propertyService.setKeyToken(token);
-    		propertyService.setExpiresIn(expiraEn);
+    		if (response.getStatus() == 200 )
+    		{
+	    		token = response.getBody().getObject().getString("access_token").toString(); 
+	    		expiraEn = response.getBody().getObject().getInt("expires_in");  
+	    		
+	    		/*Asigno los resultados*/
+	    		//propertyService.setKeyToken(token);
+	    		propertyService.setExpiresIn(expiraEn);
+    		}else
+    		{
+    			//TODO escribir en el log luego retornar valor para ser tratado
+    			//String sError = CodeResult.getHttpError(response.getStatus());
+    			token = "";
+    		}
     		
 		}catch(Exception ex) {
+			//TODO escribir en el log
 			ex.getStackTrace();
 		}
     }
+    
+    protected synchronized int callWebService
+	    (String url, String webService, final Map<String,String> parametros, String volumnenDeDatos)
+	    throws Exception {
+    	return callWebService(url, webService, parametros, volumnenDeDatos, null);
+	}
+    
+    protected synchronized int callWebService
+	(String url, String webService, final Map<String,String> parametros, String volumnenDeDatos, final JSONObject body)
+			throws Exception {
+
+	    if (volumnenDeDatos.equals(VOLUMEN_DE_DATOS_ALTO)) {
+	        timeOut = propertyService.getTimeOutAlto();
+	    } else if (volumnenDeDatos.equals(VOLUMEN_DE_DATOS_MEDIO)) {
+	        timeOut = propertyService.getTimeOutMedio();
+	    } else if (volumnenDeDatos.equals(VOLUMEN_DE_DATOS_BAJO)) {
+	        timeOut = propertyService.getTimeOutBajo();
+	    }
+
+	    //refreshToken();
+	    token = propertyService.getKeyToken();
+	    if (token.equals("")){ refreshToken();}
+	    
+	    /*asigno los valores*/
+	    HttpResponse<String> response = Unirest.post(url + webService)
+	    		.header("Accept", "application/json")
+	  		    .header("Content-Type", "application/x-www-form-urlencoded")
+	    		.field("access_token",token.toString())
+	    	    .field("ventaString", parametros.get("pedido"))
+	    	    .asString();
+	    if (response.getStatus() == 200 )
+		{
+	    	return CodeResult.RESULT_OK;
+		}else
+		{
+			//TODO escribir en el log luego retornar valor para ser tratado
+			//String sError = "StatusCode:" + String.valueOf(response.getStatus())+"-"+ CodeResult.getHttpError(response.getStatus());
+			return response.getStatus();
+		}
+    }
+
 }
