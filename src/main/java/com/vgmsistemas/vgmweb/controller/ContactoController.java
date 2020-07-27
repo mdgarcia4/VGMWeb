@@ -40,6 +40,7 @@ public class ContactoController {
 		model.addAttribute("infoWindowDescripcion",infoWindowDesc);
 		model.addAttribute("sucursales",sucursales );
 		model.addAttribute("apiKey",prepertyService.getApiKeyGoogle());
+		model.addAttribute("nameapp",prepertyService.getNameApp());
 		return "contacto";
 	}
 }
