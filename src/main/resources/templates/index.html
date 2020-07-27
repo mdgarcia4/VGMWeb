@@ -3,8 +3,8 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html" charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<title>Look</title>
-		<link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+		<title th:text="${nameapp}+'-'+#{index.nombre}">Look</title>
+		<link rel="shortcut icon" type="image/x-icon" href="img/gral/favicon.ico">
 
 		<!-- Google Font -->
 		<link href='https://fonts.googleapis.com/css?family=Montserrat:400,700%7CPlayfair+Display:400italic,400,900%7COpen+Sans' rel='stylesheet' type='text/css'>
@@ -133,7 +133,7 @@
 										</div>
 									</div>
 								</div>
-								<a href="index.html" class="logo"><img src="assets/images/logo.png" alt="LOOK" /></a>
+								<a href="index.html" class="logo"><img src="img/gral/logo.png" alt="LOOK" /></a>
 							</div>
 						</div>
 					</div>
@@ -154,7 +154,7 @@
 									</ul>-->
 								</li>
 								<li>
-									<a href="/categorias" th:text="#{menu.products}">Productos </a>
+									<a href="/categorias" th:text="#{menu.products}">Productos</a>
 								</li>
 								<!--<li>
 									<a href="javascript:void(0);">Shop</a>
@@ -181,7 +181,7 @@
 						<ul >
 							<li data-transition="cube" th:each="banner: ${banners}">
 								<!-- MAIN IMAGE -->
-								<img src="img/banner01.jpg" th:src="'img/'+${banner.deImagen}" alt=""  width="1920" height="1280">
+								<img src="img/banner01.jpg" th:src="'img/'+${banner.deImagen}"  alt=""  width="1920" height="1280">
 								<div class="banner-content">
 									<!-- LAYER NR. 1 -->
 									<div class="tp-caption NotGeneric-Title   tp-resizeme title"  data-x="left" data-hoffset="-100px" data-y="center" data-voffset="-50" data-width="['auto','auto','auto','auto']"

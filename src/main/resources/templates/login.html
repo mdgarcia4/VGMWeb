@@ -1,372 +1,2081 @@
 <!DOCTYPE html>
+<html  xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
 
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<title>Look</title>
-		<link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
-		<!-- Google Font -->
-		<link href='https://fonts.googleapis.com/css?family=Montserrat:400,700%7CPlayfair+Display:400italic,400,900%7COpen+Sans' rel='stylesheet' type='text/css'>
-		<link rel="stylesheet" type="text/css" href="assets/css/jquery.selectbox.css" media="screen">
-		<!-- Linea Icons -->
-		<link rel="stylesheet" type="text/css" href="assets/css/linea.css" media="screen">
-		<!-- Elegant Icons -->
-		<link rel="stylesheet" type="text/css" href="assets/css/eleganticon.css" media="screen">
-		<!-- Font Awesome -->
-		<link rel="stylesheet" type="text/css" href="assets/css/font-awesome.css" media="screen">
+    <style>
+        body {
+            margin-top: 0;
+            margin-right: 0;
+            margin-bottom: 0;
+            margin-left: 0;
+            background-color: #f5f5f5;
+        }
+        .wrapper-sup-container-container {
+            text-align: center;
+            height: 100% !important;
+            width: 100% !important;
+            background-color: #f5f5f5;
+        }
 
-		<!-- Bootstrap -->
-		<link rel="stylesheet" type="text/css" href="assets/css/bootstrap.css" media="screen">
-		<link rel="stylesheet" type="text/css" href="assets/css/jquery-ui.css" media="screen">
+        .wrapper-sup-container-ie {
+            width: 919px;
+            height: 495px;
+            border-radius: 10px;
+            box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.1);
+            -pie-background: linear-gradient(0, #ffffff);
+            behavior: url(/pie/PIE.htc);
+            margin-top: 100px;
+            background-color: #ffffff;
+            text-align: center;
+            display: inline-block;
+        }
+        .wrapper-int-img-logo {
+            text-align: left;
+            padding: 25px 0 0 50px;
+        }
 
-		<link rel="stylesheet" type="text/css" href="assets/css/dropdown.css" media="screen">
-		<link rel="stylesheet" type="text/css" href="assets/css/global.css" media="screen">
-		<link rel="stylesheet" type="text/css" href="assets/css/style.css" media="screen">
-		<link rel="stylesheet" type="text/css" href="assets/css/responsive.css" media="screen">
-		<link href="assets/css/skin.less" rel="stylesheet/less">
-		<!--[if lt IE 9]>
-		<script src="assets/js/html5shiv.min.js"></script>
-		<![endif]-->
-	</head>
-	<body>
-		<!-- Loader -->
-		<div id="loading">
-			<div id="loading-center">
-				<div id="loading-center-absolute">
-					<div class="object" id="object_one"></div>
-					<div class="object" id="object_two"></div>
-					<div class="object" id="object_three"></div>
-					<div class="object" id="object_four"></div>
+        .Ups-Navegador-no-so {
+            width: auto !important;
+            margin: 20px 0;
+            height: 38px;
+            font-family: Roboto;
+            font-size: 32px;
+            font-weight: normal;
+            font-style: normal;
+            font-stretch: normal;
+            line-height: 1.25;
+            letter-spacing: normal;
+            text-align: center;
+            color: #4a4a4a;
+            display: block;
+            padding: 32px 0px 0px 42px;
+        }
+
+        .Intent-ingresando-c {
+            width: auto !important;
+            height: 71px;
+            font-family: Roboto;
+            font-size: 22px;
+            font-weight: normal;
+            font-style: normal;
+            font-stretch: normal;
+            line-height: 1.36;
+            letter-spacing: normal;
+            text-align: center;
+            color: #4a4a4a;
+            display: block;
+            padding: 2px 192px 9px 159px;
+        }
+
+        .Disculp-las-molesti {
+            width: 324px;
+            height: 24px;
+            font-family: Roboto;
+            font-size: 20px;
+            font-weight: normal;
+            font-style: normal;
+            font-stretch: normal;
+            line-height: 1.2;
+            letter-spacing: normal;
+            text-align: center;
+            color: #9b9b9b;
+            padding-top: 2px;
+        }
+    </style>
+    
+	<meta charset="UTF-8">
+	<title>Login</title>
+	<link rel="shortcut icon" href="img/gral/favicon.ico" type="image/x-icon">
+	<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" media="screen">
+	<link rel="stylesheet" type="text/css" href="css/vgm.css">
+	
+	<script type="text/javascript"></script>
+	
+	
+    <style>
+        .sideDiv[_ngcontent-c0] {
+            margin: 0;
+            padding: 0;
+            width: 15%;
+            height: 100%;
+            margin-bottom: -15000px !important;
+            padding-bottom: 15000px !important;
+            display: inline-block;
+            background-color: #fff;
+        }
+        @media only screen and (min-width: 768px) and (max-width: 1064px) {
+            .sideDiv[_ngcontent-c0] {
+                min-width: 20%;
+            }
+        }
+        #divredondo[_ngcontent-c0] {
+            position: absolute;
+            height: 12px;
+            width: 12px;
+            border-radius: 50px;
+            color: #f37320;
+            background-color: #f37320;
+            top: 45%;
+            left: 70%;
+            -webkit-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+        }
+        .asesor[_ngcontent-c0] {
+            padding: 3px 3px 0 !important;
+            margin: 0 !important;
+            overflow: none;
+            box-shadow: none !important;
+            border-radius: 0;
+        }
+        .asesor[_ngcontent-c0] mat-card-content[_ngcontent-c0] {
+            text-align: left;
+        }
+        @media only screen and (max-width: 768px) {
+            .sideDiv[_ngcontent-c0] {
+                display: table-row;
+                box-shadow: none !important;
+                min-width: 0;
+                height: 0;
+            }
+            .asesor[_ngcontent-c0] {
+                display: none;
+            }
+        }
+        .HBicon[_ngcontent-c0] {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            box-shadow: none !important;
+            border-radius: 0;
+            float: left;
+        }
+        #divLogo[_ngcontent-c0] {
+            width: 85%;
+            margin: 0 auto;
+            text-align: left;
+            height: 42px;
+        }
+        .imgLogo[_ngcontent-c0] {
+            width: 140px;
+            height: 35px;
+        }
+        .userData[_ngcontent-c0] {
+            margin: 0;
+            padding: 0;
+            height: auto !important;
+            overflow: hidden;
+            box-shadow: none !important;
+            border-radius: 0;
+        }
+        .nav1[_ngcontent-c0] {
+            margin: 0;
+            padding: 0;
+            box-shadow: none !important;
+            border-radius: 0;
+        }
+        .nav1[_ngcontent-c0] .barra[_ngcontent-c0] {
+            margin: 0;
+            padding: 0;
+            height: auto !important;
+            box-shadow: none !important;
+            border-radius: 0;
+        }
+        @media only screen and (max-width: 768px) {
+            .userData[_ngcontent-c0] {
+                float: right;
+                position: absolute;
+                right: 10px;
+                top: 10px;
+                height: 8vh !important;
+            }
+            .nav1[_ngcontent-c0] {
+                margin: 0 0 20px;
+                padding: 0;
+                display: inline-block;
+                z-index: 9999;
+            }
+            .nav1[_ngcontent-c0] .barra[_ngcontent-c0] {
+                height: auto !important;
+                display: none;
+            }
+        }
+        .nav2[_ngcontent-c0] {
+            display: none;
+        }
+        .nav2[_ngcontent-c0] .barra2[_ngcontent-c0] {
+            z-index: 9999;
+            margin: 0;
+            padding: 0;
+            height: auto !important;
+            border-radius: 0;
+            display: none;
+            width: auto !important;
+        }
+        .nav2[_ngcontent-c0]:hover .barra2[_ngcontent-c0] {
+            position: absolute;
+            left: -10px;
+            display: block;
+            box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12) !important;
+            margin: 17px;
+        }
+        .nav2[_ngcontent-c0]:hover .barra2[_ngcontent-c0] mat-card-content[_ngcontent-c0] {
+            height: auto;
+            max-height: calc(100vh - 57px);
+            overflow-y: scroll;
+        }
+        #menu-icon[_ngcontent-c0],
+        .nav2[_ngcontent-c0]:hover .barra2.non-active[_ngcontent-c0] {
+            display: none;
+        }
+        .btnGoToPreviousHB[_ngcontent-c0] {
+            border-radius: 24px !important;
+            font-family: Roboto, "Helvetica Neue", sans-serif;
+            font-weight: 400;
+            background-color: #fff;
+            color: #000;
+            height: 35px;
+            box-shadow: none !important;
+            font-size: 8pt;
+            border: 1px solid #d3d3d3;
+        }
+        .contenedor-header[_ngcontent-c0] {
+            width: 100%;
+        }
+        .img-menu-lateral[_ngcontent-c0] {
+            margin: 0 0 10px;
+        }
+        .img-menu-lateral[_ngcontent-c0] mat-card[_ngcontent-c0] {
+            box-shadow: none !important;
+            padding: 0;
+        }
+        .img-menu-lateral[_ngcontent-c0] mat-card[_ngcontent-c0] .mat-card-image[_ngcontent-c0]:first-child {
+            margin-top: 0;
+        }
+        .img-menu-lateral[_ngcontent-c0] mat-card[_ngcontent-c0] img[_ngcontent-c0] {
+            width: 80%;
+            height: 100%;
+        }
+        .img-menu-lateral[_ngcontent-c0] mat-card[_ngcontent-c0] img[_ngcontent-c0] .normativa[_ngcontent-c0] {
+            width: 200px;
+            height: 50px;
+            -o-object-fit: contain;
+            object-fit: contain;
+        }
+        .img-menu-lateral[_ngcontent-c0] mat-card[_ngcontent-c0] img[_ngcontent-c0] .uso-financiero[_ngcontent-c0] {
+            width: 200px;
+            height: 110px;
+            -o-object-fit: contain;
+            object-fit: contain;
+        }
+        @media only screen and (max-width: 768px) {
+            .nav2[_ngcontent-c0] {
+                display: inline-block;
+            }
+            #menu-icon[_ngcontent-c0] {
+                display: flex;
+            }
+            header[_ngcontent-c0] {
+                position: absolute;
+            }
+            .img-menu-lateral[_ngcontent-c0] {
+                display: none;
+            }
+        }
+        .top-header[_ngcontent-c0] {
+            background-color: #fff;
+            box-shadow: 0 3px 1px -2px transparent, 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12) !important;
+            height: 56px;
+            min-height: 56px;
+        }
+        .top-header[_ngcontent-c0] mat-toolbar-row[_ngcontent-c0] {
+            height: 56px;
+            padding: 0;
+        }
+        .top-header[_ngcontent-c0] mat-toolbar-row[_ngcontent-c0] div[_ngcontent-c0] {
+            height: 100%;
+            display: flex;
+            align-items: center;
+        }
+        .top-header[_ngcontent-c0] mat-toolbar-row[_ngcontent-c0] .col-header-logo[_ngcontent-c0] {
+            padding-left: 9px;
+            margin-right: auto;
+        }
+        @media screen and (max-width: 768px) {
+            #divLogo[_ngcontent-c0] {
+                width: 85%;
+                height: 62px;
+                padding-top: 10px;
+            }
+            .top-header[_ngcontent-c0] mat-toolbar-row[_ngcontent-c0] .col-header-logo[_ngcontent-c0] {
+                width: 70%;
+                padding-left: calc(35% - 9.76px);
+                margin-left: 15%;
+            }
+            .top-header[_ngcontent-c0] mat-toolbar-row[_ngcontent-c0] .col-header-logo[_ngcontent-c0] .logo-no-responsivo[_ngcontent-c0] {
+                display: none;
+            }
+        }
+        @media screen and (min-width: 769px) and (max-width: 1025px) {
+            .top-header[_ngcontent-c0] mat-toolbar-row[_ngcontent-c0] .col-header-logo[_ngcontent-c0] {
+                width: 35%;
+                padding-left: 0;
+            }
+        }
+        @media screen and (min-width: 1025px) and (max-width: 1250px) {
+            .top-header[_ngcontent-c0] mat-toolbar-row[_ngcontent-c0] .col-header-logo[_ngcontent-c0] {
+                width: 78%;
+            }
+        }
+        .top-header[_ngcontent-c0] mat-toolbar-row[_ngcontent-c0] .col-header-logo[_ngcontent-c0] .logo-responsivo[_ngcontent-c0] {
+            display: left !important;
+        }
+        @media screen and (min-width: 769px) {
+            .top-header[_ngcontent-c0] mat-toolbar-row[_ngcontent-c0] .col-header-logo[_ngcontent-c0] .logo-responsivo[_ngcontent-c0] {
+                display: none;
+            }
+        }
+        .top-header[_ngcontent-c0] mat-toolbar-row[_ngcontent-c0] .col-header-logo[_ngcontent-c0] .logo-responsivo[_ngcontent-c0] .imgLogo[_ngcontent-c0] {
+            height: 39px;
+            width: 20px;
+        }
+        .top-header[_ngcontent-c0] mat-toolbar-row[_ngcontent-c0] .col-header-combo[_ngcontent-c0] {
+            width: 9%;
+        }
+        .top-header[_ngcontent-c0] mat-toolbar-row[_ngcontent-c0] .col-header-combo[_ngcontent-c0] span[_ngcontent-c0] {
+            font-family: Roboto, "Helvetica Neue", sans-serif;
+            font-size: 21px;
+            display: flex;
+            align-items: center;
+            color: #666;
+            font-weight: 300;
+        }
+        .top-header[_ngcontent-c0] mat-toolbar-row[_ngcontent-c0] .col-header-combo[_ngcontent-c0] span[_ngcontent-c0] .name-perfil[_ngcontent-c0] {
+            margin: 0;
+        }
+        .top-header[_ngcontent-c0] mat-toolbar-row[_ngcontent-c0] .col-header-combo[_ngcontent-c0] span[_ngcontent-c0] .name-perfil[_ngcontent-c0]:hover {
+            text-decoration: underline;
+        }
+        .top-header[_ngcontent-c0] mat-toolbar-row[_ngcontent-c0] .col-header-combo[_ngcontent-c0] span[_ngcontent-c0] .name-perfil[_ngcontent-c0] a[_ngcontent-c0] {
+            padding: 0 0 0 4px;
+            color: #666;
+        }
+        @media screen and (min-width: 768px) and (max-width: 1025px) {
+            .top-header[_ngcontent-c0] mat-toolbar-row[_ngcontent-c0] .col-header-combo[_ngcontent-c0] {
+                width: 16%;
+            }
+        }
+        @media screen and (min-width: 1025px) and (max-width: 1250px) {
+            .top-header[_ngcontent-c0] mat-toolbar-row[_ngcontent-c0] .col-header-combo[_ngcontent-c0] {
+                width: 12%;
+            }
+        }
+        @media screen and (max-width: 768px) {
+            .top-header[_ngcontent-c0] mat-toolbar-row[_ngcontent-c0] .col-header-combo[_ngcontent-c0] {
+                display: none;
+            }
+            .top-header[_ngcontent-c0] mat-toolbar-row[_ngcontent-c0] .col-header-notificaciones[_ngcontent-c0] {
+                margin-right: 10px;
+            }
+            .top-header[_ngcontent-c0] mat-toolbar-row[_ngcontent-c0] .col-header-logout[_ngcontent-c0] {
+                position: absolute;
+                float: left;
+                width: 15%;
+                left: 10px;
+            }
+        }
+        .top-header[_ngcontent-c0] mat-toolbar-row[_ngcontent-c0] .col-header-notificaciones[_ngcontent-c0] mat-icon[_ngcontent-c0] {
+            color: #666;
+        }
+        .top-header[_ngcontent-c0] mat-toolbar-row[_ngcontent-c0] .col-header-logout[_ngcontent-c0] {
+            margin-right: 20px;
+        }
+        @media screen and (max-width: 320px) {
+            .top-header[_ngcontent-c0] mat-toolbar-row[_ngcontent-c0] .col-header-logout[_ngcontent-c0] {
+                width: 15%;
+            }
+        }
+        @media screen and (max-width: 768px) {
+            .top-header[_ngcontent-c0] mat-toolbar-row[_ngcontent-c0] .col-header-logout[_ngcontent-c0] .logout[_ngcontent-c0] {
+                display: none;
+            }
+        }
+        .top-header[_ngcontent-c0] mat-toolbar-row[_ngcontent-c0] .col-header-logout[_ngcontent-c0] .logout[_ngcontent-c0] mat-icon[_ngcontent-c0] {
+            color: #4a4a4a;
+        }
+        .top-header[_ngcontent-c0] mat-toolbar-row[_ngcontent-c0] .col-header-logout[_ngcontent-c0] .menu[_ngcontent-c0] {
+            position: absolute;
+        }
+        @media screen and (min-width: 768px) {
+            .top-header[_ngcontent-c0] mat-toolbar-row[_ngcontent-c0] .col-header-logout[_ngcontent-c0] .menu[_ngcontent-c0] {
+                display: none;
+            }
+        }
+        .contenedorRoot[_ngcontent-c0] {
+            width: 100%;
+            height: 100%;
+            padding-left: auto;
+            padding-right: auto;
+        }
+    </style>
+    <style>
+        .visible[_ngcontent-c1] {
+            display: block;
+        }
+        .non-visible[_ngcontent-c1] {
+            display: none;
+        }
+        #overlay[_ngcontent-c1] {
+            width: 100%;
+            height: 100%;
+            background-color: transparent;
+            position: fixed;
+            left: 0;
+            top: 0;
+            z-index: 900;
+        }
+        #overlay[_ngcontent-c1] #loader[_ngcontent-c1] {
+            position: fixed;
+            z-index: 900;
+            height: 150px;
+            top: 50%;
+            left: 50%;
+            -webkit-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+            background-color: #fff;
+            background-position: center center;
+            background-repeat: no-repeat;
+            border: 1px solid #c5c5c5;
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.25);
+            border-radius: 4px;
+            -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
+            filter: alpha(opacity=50);
+            -moz-opacity: 0.8;
+            -khtml-opacity: 0.8;
+            opacity: 1;
+        }
+        #overlay[_ngcontent-c1] #loader[_ngcontent-c1] #circleG[_ngcontent-c1] {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            top: 30%;
+            margin: -6px auto 0;
+            text-align: center;
+        }
+        @media screen and (max-width: 992px) {
+            #overlay[_ngcontent-c1] #loader[_ngcontent-c1] #circleG[_ngcontent-c1] {
+                width: 90%;
+                top: 20%;
+            }
+        }
+        @media screen and (max-width: 768px) {
+            #overlay[_ngcontent-c1] #loader[_ngcontent-c1] {
+                width: 90%;
+            }
+        }
+    </style>
+    <style>
+        .content-float.red[_ngcontent-c2] {
+            background-color: #d0021b;
+        }
+        .content-float.light_green[_ngcontent-c2] {
+            background-color: #6daf25;
+        }
+    </style>
+    <style>
+        .mat-progress-spinner {
+            display: block;
+            position: relative;
+        }
+        .mat-progress-spinner svg {
+            position: absolute;
+            transform: rotate(-90deg);
+            top: 0;
+            left: 0;
+            transform-origin: center;
+            overflow: visible;
+        }
+        .mat-progress-spinner circle {
+            fill: transparent;
+            transform-origin: center;
+            transition: stroke-dashoffset 225ms linear;
+        }
+        ._mat-animation-noopable.mat-progress-spinner circle {
+            transition: none;
+            animation: none;
+        }
+        .mat-progress-spinner.mat-progress-spinner-indeterminate-animation[mode="indeterminate"] {
+            animation: mat-progress-spinner-linear-rotate 2s linear infinite;
+        }
+        ._mat-animation-noopable.mat-progress-spinner.mat-progress-spinner-indeterminate-animation[mode="indeterminate"] {
+            transition: none;
+            animation: none;
+        }
+        .mat-progress-spinner.mat-progress-spinner-indeterminate-animation[mode="indeterminate"] circle {
+            transition-property: stroke;
+            animation-duration: 4s;
+            animation-timing-function: cubic-bezier(0.35, 0, 0.25, 1);
+            animation-iteration-count: infinite;
+        }
+        ._mat-animation-noopable.mat-progress-spinner.mat-progress-spinner-indeterminate-animation[mode="indeterminate"] circle {
+            transition: none;
+            animation: none;
+        }
+        .mat-progress-spinner.mat-progress-spinner-indeterminate-fallback-animation[mode="indeterminate"] {
+            animation: mat-progress-spinner-stroke-rotate-fallback 10s cubic-bezier(0.87, 0.03, 0.33, 1) infinite;
+        }
+        ._mat-animation-noopable.mat-progress-spinner.mat-progress-spinner-indeterminate-fallback-animation[mode="indeterminate"] {
+            transition: none;
+            animation: none;
+        }
+        .mat-progress-spinner.mat-progress-spinner-indeterminate-fallback-animation[mode="indeterminate"] circle {
+            transition-property: stroke;
+        }
+        ._mat-animation-noopable.mat-progress-spinner.mat-progress-spinner-indeterminate-fallback-animation[mode="indeterminate"] circle {
+            transition: none;
+            animation: none;
+        }
+        @keyframes mat-progress-spinner-linear-rotate {
+            0% {
+                transform: rotate(0);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+        @keyframes mat-progress-spinner-stroke-rotate-100 {
+            0% {
+                stroke-dashoffset: 268.60617px;
+                transform: rotate(0);
+            }
+            12.5% {
+                stroke-dashoffset: 56.54867px;
+                transform: rotate(0);
+            }
+            12.5001% {
+                stroke-dashoffset: 56.54867px;
+                transform: rotateX(180deg) rotate(72.5deg);
+            }
+            25% {
+                stroke-dashoffset: 268.60617px;
+                transform: rotateX(180deg) rotate(72.5deg);
+            }
+            25.0001% {
+                stroke-dashoffset: 268.60617px;
+                transform: rotate(270deg);
+            }
+            37.5% {
+                stroke-dashoffset: 56.54867px;
+                transform: rotate(270deg);
+            }
+            37.5001% {
+                stroke-dashoffset: 56.54867px;
+                transform: rotateX(180deg) rotate(161.5deg);
+            }
+            50% {
+                stroke-dashoffset: 268.60617px;
+                transform: rotateX(180deg) rotate(161.5deg);
+            }
+            50.0001% {
+                stroke-dashoffset: 268.60617px;
+                transform: rotate(180deg);
+            }
+            62.5% {
+                stroke-dashoffset: 56.54867px;
+                transform: rotate(180deg);
+            }
+            62.5001% {
+                stroke-dashoffset: 56.54867px;
+                transform: rotateX(180deg) rotate(251.5deg);
+            }
+            75% {
+                stroke-dashoffset: 268.60617px;
+                transform: rotateX(180deg) rotate(251.5deg);
+            }
+            75.0001% {
+                stroke-dashoffset: 268.60617px;
+                transform: rotate(90deg);
+            }
+            87.5% {
+                stroke-dashoffset: 56.54867px;
+                transform: rotate(90deg);
+            }
+            87.5001% {
+                stroke-dashoffset: 56.54867px;
+                transform: rotateX(180deg) rotate(341.5deg);
+            }
+            100% {
+                stroke-dashoffset: 268.60617px;
+                transform: rotateX(180deg) rotate(341.5deg);
+            }
+        }
+        @keyframes mat-progress-spinner-stroke-rotate-fallback {
+            0% {
+                transform: rotate(0);
+            }
+            25% {
+                transform: rotate(1170deg);
+            }
+            50% {
+                transform: rotate(2340deg);
+            }
+            75% {
+                transform: rotate(3510deg);
+            }
+            100% {
+                transform: rotate(4680deg);
+            }
+        }
+    </style>
+    <style>
+        .mat-icon {
+            background-repeat: no-repeat;
+            display: inline-block;
+            fill: currentColor;
+            height: 24px;
+            width: 24px;
+        }
+        .mat-icon.mat-icon-inline {
+            font-size: inherit;
+            height: inherit;
+            line-height: inherit;
+            width: inherit;
+        }
+        [dir="rtl"] .mat-icon-rtl-mirror {
+            transform: scale(-1, 1);
+        }
+        .mat-form-field:not(.mat-form-field-appearance-legacy) .mat-form-field-prefix .mat-icon,
+        .mat-form-field:not(.mat-form-field-appearance-legacy) .mat-form-field-suffix .mat-icon {
+            display: block;
+        }
+        .mat-form-field:not(.mat-form-field-appearance-legacy) .mat-form-field-prefix .mat-icon-button .mat-icon,
+        .mat-form-field:not(.mat-form-field-appearance-legacy) .mat-form-field-suffix .mat-icon-button .mat-icon {
+            margin: auto;
+        }
+    </style>
+    <style></style>
+    <style>
+        #divLogo[_ngcontent-c9] {
+            width: 85%;
+            margin: 0 auto;
+            text-align: left;
+        }
+        @media screen and (max-width: 768px) {
+            #divLogo[_ngcontent-c9] {
+                width: 85%;
+            }
+        }
+        .imgLogo[_ngcontent-c9] {
+            width: 139px;
+            height: 50px;
+            margin-bottom: 20px;
+        }
+        body[_nghost-c9] {
+            background-image: none;
+        }
+        mat-select[_ngcontent-c9] {
+            font-size: 20px !important;
+        }
+        .row[_ngcontent-c9] .text4[_ngcontent-c9] {
+            color: #818181;
+        }
+        .row[_ngcontent-c9] .text4[_ngcontent-c9] a[_ngcontent-c9] {
+            text-decoration: underline;
+            cursor: pointer;
+            color: #818181;
+        }
+        .row[_ngcontent-c9] .m_t_8[_ngcontent-c9] {
+            margin-top: 8px;
+        }
+    </style>
+    <style>
+        .mat-card {
+            transition: box-shadow 280ms cubic-bezier(0.4, 0, 0.2, 1);
+            display: block;
+            position: relative;
+            padding: 24px;
+            border-radius: 2px;
+        }
+        .mat-card:not([class*="mat-elevation-z"]) {
+            box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+        }
+        .mat-card .mat-divider-horizontal {
+            position: absolute;
+            left: 0;
+            width: 100%;
+        }
+        [dir="rtl"] .mat-card .mat-divider-horizontal {
+            left: auto;
+            right: 0;
+        }
+        .mat-card .mat-divider-horizontal.mat-divider-inset {
+            position: static;
+            margin: 0;
+        }
+        [dir="rtl"] .mat-card .mat-divider-horizontal.mat-divider-inset {
+            margin-right: 0;
+        }
+        .mat-card.mat-card-flat {
+            box-shadow: none;
+        }
+        @media screen and (-ms-high-contrast: active) {
+            .mat-card {
+                outline: solid 1px;
+            }
+        }
+        .mat-card-actions,
+        .mat-card-content,
+        .mat-card-subtitle,
+        .mat-card-title {
+            display: block;
+            margin-bottom: 16px;
+        }
+        .mat-card-actions {
+            margin-left: -16px;
+            margin-right: -16px;
+            padding: 8px 0;
+        }
+        .mat-card-actions-align-end {
+            display: flex;
+            justify-content: flex-end;
+        }
+        .mat-card-image {
+            width: calc(100% + 48px);
+            margin: 0 -24px 16px -24px;
+        }
+        .mat-card-footer {
+            display: block;
+            margin: 0 -24px -24px -24px;
+        }
+        .mat-card-actions .mat-button,
+        .mat-card-actions .mat-raised-button {
+            margin: 0 4px;
+        }
+        .mat-card-header {
+            display: flex;
+            flex-direction: row;
+        }
+        .mat-card-header-text {
+            margin: 0 8px;
+        }
+        .mat-card-avatar {
+            height: 40px;
+            width: 40px;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+        .mat-card-lg-image,
+        .mat-card-md-image,
+        .mat-card-sm-image,
+        .mat-card-title-group > .mat-card-xl-image {
+            margin: -8px 0 8px 0;
+        }
+        .mat-card-title-group {
+            display: flex;
+            justify-content: space-between;
+            margin: 0 -8px;
+        }
+        .mat-card-sm-image {
+            width: 80px;
+            height: 80px;
+        }
+        .mat-card-md-image {
+            width: 112px;
+            height: 112px;
+        }
+        .mat-card-lg-image {
+            width: 152px;
+            height: 152px;
+        }
+        .mat-card-xl-image {
+            width: 240px;
+            height: 240px;
+            margin: -8px;
+        }
+        @media (max-width: 599px) {
+            .mat-card {
+                padding: 24px 16px;
+            }
+            .mat-card-actions {
+                margin-left: -8px;
+                margin-right: -8px;
+            }
+            .mat-card-image {
+                width: calc(100% + 32px);
+                margin: 16px -16px;
+            }
+            .mat-card-title-group {
+                margin: 0;
+            }
+            .mat-card-xl-image {
+                margin-left: 0;
+                margin-right: 0;
+            }
+            .mat-card-header {
+                margin: -8px 0 0 0;
+            }
+            .mat-card-footer {
+                margin-left: -16px;
+                margin-right: -16px;
+            }
+        }
+        .mat-card-content > :first-child,
+        .mat-card > :first-child {
+            margin-top: 0;
+        }
+        .mat-card-content > :last-child:not(.mat-card-footer),
+        .mat-card > :last-child:not(.mat-card-footer) {
+            margin-bottom: 0;
+        }
+        .mat-card-image:first-child {
+            margin-top: -24px;
+        }
+        .mat-card > .mat-card-actions:last-child {
+            margin-bottom: -16px;
+            padding-bottom: 0;
+        }
+        .mat-card-actions .mat-button:first-child,
+        .mat-card-actions .mat-raised-button:first-child {
+            margin-left: 0;
+            margin-right: 0;
+        }
+        .mat-card-subtitle:not(:first-child),
+        .mat-card-title:not(:first-child) {
+            margin-top: -4px;
+        }
+        .mat-card-header .mat-card-subtitle:not(:first-child) {
+            margin-top: -8px;
+        }
+        .mat-card > .mat-card-xl-image:first-child {
+            margin-top: -8px;
+        }
+        .mat-card > .mat-card-xl-image:last-child {
+            margin-bottom: -8px;
+        }
+    </style>
+    <style>
+        .mat-form-field {
+            display: inline-block;
+            position: relative;
+            text-align: left;
+        }
+        [dir="rtl"] .mat-form-field {
+            text-align: right;
+        }
+        .mat-form-field-wrapper {
+            position: relative;
+        }
+        .mat-form-field-flex {
+            display: inline-flex;
+            align-items: baseline;
+            box-sizing: border-box;
+            width: 100%;
+        }
+        .mat-form-field-prefix,
+        .mat-form-field-suffix {
+            white-space: nowrap;
+            flex: none;
+            position: relative;
+        }
+        .mat-form-field-infix {
+            display: block;
+            position: relative;
+            flex: auto;
+            min-width: 0;
+            width: 180px;
+        }
+        @media screen and (-ms-high-contrast: active) {
+            .mat-form-field-infix {
+                border-image: linear-gradient(transparent, transparent);
+            }
+        }
+        .mat-form-field-label-wrapper {
+            position: absolute;
+            left: 0;
+            box-sizing: content-box;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            pointer-events: none;
+        }
+        .mat-form-field-label {
+            position: absolute;
+            left: 0;
+            font: inherit;
+            pointer-events: none;
+            width: 100%;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            transform-origin: 0 0;
+            transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), color 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), width 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+            display: none;
+        }
+        [dir="rtl"] .mat-form-field-label {
+            transform-origin: 100% 0;
+            left: auto;
+            right: 0;
+        }
+        .mat-form-field-can-float.mat-form-field-should-float .mat-form-field-label,
+        .mat-form-field-empty.mat-form-field-label {
+            display: block;
+        }
+        .mat-form-field-autofill-control:-webkit-autofill + .mat-form-field-label-wrapper .mat-form-field-label {
+            display: none;
+        }
+        .mat-form-field-can-float .mat-form-field-autofill-control:-webkit-autofill + .mat-form-field-label-wrapper .mat-form-field-label {
+            display: block;
+            transition: none;
+        }
+        .mat-input-server:focus + .mat-form-field-label-wrapper .mat-form-field-label,
+        .mat-input-server[placeholder]:not(:placeholder-shown) + .mat-form-field-label-wrapper .mat-form-field-label {
+            display: none;
+        }
+        .mat-form-field-can-float .mat-input-server:focus + .mat-form-field-label-wrapper .mat-form-field-label,
+        .mat-form-field-can-float .mat-input-server[placeholder]:not(:placeholder-shown) + .mat-form-field-label-wrapper .mat-form-field-label {
+            display: block;
+        }
+        .mat-form-field-label:not(.mat-form-field-empty) {
+            transition: none;
+        }
+        .mat-form-field-underline {
+            position: absolute;
+            width: 100%;
+            pointer-events: none;
+            transform: scaleY(1.0001);
+        }
+        .mat-form-field-ripple {
+            position: absolute;
+            left: 0;
+            width: 100%;
+            transform-origin: 50%;
+            transform: scaleX(0.5);
+            opacity: 0;
+            transition: background-color 0.3s cubic-bezier(0.55, 0, 0.55, 0.2);
+        }
+        .mat-form-field.mat-focused .mat-form-field-ripple,
+        .mat-form-field.mat-form-field-invalid .mat-form-field-ripple {
+            opacity: 1;
+            transform: scaleX(1);
+            transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1), opacity 0.1s cubic-bezier(0.25, 0.8, 0.25, 1), background-color 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+        .mat-form-field-subscript-wrapper {
+            position: absolute;
+            box-sizing: border-box;
+            width: 100%;
+            overflow: hidden;
+        }
+        .mat-form-field-label-wrapper .mat-icon,
+        .mat-form-field-subscript-wrapper .mat-icon {
+            width: 1em;
+            height: 1em;
+            font-size: inherit;
+            vertical-align: baseline;
+        }
+        .mat-form-field-hint-wrapper {
+            display: flex;
+        }
+        .mat-form-field-hint-spacer {
+            flex: 1 0 1em;
+        }
+        .mat-error {
+            display: block;
+        }
+        .mat-form-field._mat-animation-noopable .mat-form-field-label,
+        .mat-form-field._mat-animation-noopable .mat-form-field-ripple {
+            transition: none;
+        }
+    </style>
+    <style>
+        .mat-form-field-appearance-fill .mat-form-field-flex {
+            border-radius: 4px 4px 0 0;
+            padding: 0.75em 0.75em 0 0.75em;
+        }
+        @media screen and (-ms-high-contrast: active) {
+            .mat-form-field-appearance-fill .mat-form-field-flex {
+                outline: solid 1px;
+            }
+        }
+        .mat-form-field-appearance-fill .mat-form-field-underline::before {
+            content: "";
+            display: block;
+            position: absolute;
+            bottom: 0;
+            height: 1px;
+            width: 100%;
+        }
+        .mat-form-field-appearance-fill .mat-form-field-ripple {
+            bottom: 0;
+            height: 2px;
+        }
+        @media screen and (-ms-high-contrast: active) {
+            .mat-form-field-appearance-fill .mat-form-field-ripple {
+                height: 0;
+                border-top: solid 2px;
+            }
+        }
+        .mat-form-field-appearance-fill:not(.mat-form-field-disabled) .mat-form-field-flex:hover ~ .mat-form-field-underline .mat-form-field-ripple {
+            opacity: 1;
+            transform: none;
+            transition: opacity 0.6s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+        .mat-form-field-appearance-fill._mat-animation-noopable:not(.mat-form-field-disabled) .mat-form-field-flex:hover ~ .mat-form-field-underline .mat-form-field-ripple {
+            transition: none;
+        }
+        .mat-form-field-appearance-fill .mat-form-field-subscript-wrapper {
+            padding: 0 1em;
+        }
+    </style>
+    <style>
+        .mat-form-field-appearance-legacy .mat-form-field-label {
+            transform: perspective(100px);
+            -ms-transform: none;
+        }
+        .mat-form-field-appearance-legacy .mat-form-field-prefix .mat-icon,
+        .mat-form-field-appearance-legacy .mat-form-field-suffix .mat-icon {
+            width: 1em;
+        }
+        .mat-form-field-appearance-legacy .mat-form-field-prefix .mat-icon-button,
+        .mat-form-field-appearance-legacy .mat-form-field-suffix .mat-icon-button {
+            font: inherit;
+            vertical-align: baseline;
+        }
+        .mat-form-field-appearance-legacy .mat-form-field-prefix .mat-icon-button .mat-icon,
+        .mat-form-field-appearance-legacy .mat-form-field-suffix .mat-icon-button .mat-icon {
+            font-size: inherit;
+        }
+        .mat-form-field-appearance-legacy .mat-form-field-underline {
+            height: 1px;
+        }
+        @media screen and (-ms-high-contrast: active) {
+            .mat-form-field-appearance-legacy .mat-form-field-underline {
+                height: 0;
+                border-top: solid 1px;
+            }
+        }
+        .mat-form-field-appearance-legacy .mat-form-field-ripple {
+            top: 0;
+            height: 2px;
+            overflow: hidden;
+        }
+        @media screen and (-ms-high-contrast: active) {
+            .mat-form-field-appearance-legacy .mat-form-field-ripple {
+                height: 0;
+                border-top: solid 2px;
+            }
+        }
+        .mat-form-field-appearance-legacy.mat-form-field-disabled .mat-form-field-underline {
+            background-position: 0;
+            background-color: transparent;
+        }
+        @media screen and (-ms-high-contrast: active) {
+            .mat-form-field-appearance-legacy.mat-form-field-disabled .mat-form-field-underline {
+                border-top-style: dotted;
+                border-top-width: 2px;
+            }
+        }
+        .mat-form-field-appearance-legacy.mat-form-field-invalid:not(.mat-focused) .mat-form-field-ripple {
+            height: 1px;
+        }
+    </style>
+    <style>
+        .mat-form-field-appearance-outline .mat-form-field-wrapper {
+            margin: 0.25em 0;
+        }
+        .mat-form-field-appearance-outline .mat-form-field-flex {
+            padding: 0 0.75em 0 0.75em;
+            margin-top: -0.25em;
+            position: relative;
+        }
+        .mat-form-field-appearance-outline .mat-form-field-prefix,
+        .mat-form-field-appearance-outline .mat-form-field-suffix {
+            top: 0.25em;
+        }
+        .mat-form-field-appearance-outline .mat-form-field-outline {
+            display: flex;
+            position: absolute;
+            top: 0.25em;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            pointer-events: none;
+        }
+        .mat-form-field-appearance-outline .mat-form-field-outline-end,
+        .mat-form-field-appearance-outline .mat-form-field-outline-start {
+            border: 1px solid currentColor;
+            min-width: 5px;
+        }
+        .mat-form-field-appearance-outline .mat-form-field-outline-start {
+            border-radius: 5px 0 0 5px;
+            border-right-style: none;
+        }
+        [dir="rtl"] .mat-form-field-appearance-outline .mat-form-field-outline-start {
+            border-right-style: solid;
+            border-left-style: none;
+            border-radius: 0 5px 5px 0;
+        }
+        .mat-form-field-appearance-outline .mat-form-field-outline-end {
+            border-radius: 0 5px 5px 0;
+            border-left-style: none;
+            flex-grow: 1;
+        }
+        [dir="rtl"] .mat-form-field-appearance-outline .mat-form-field-outline-end {
+            border-left-style: solid;
+            border-right-style: none;
+            border-radius: 5px 0 0 5px;
+        }
+        .mat-form-field-appearance-outline .mat-form-field-outline-gap {
+            border-radius: 0.000001px;
+            border: 1px solid currentColor;
+            border-left-style: none;
+            border-right-style: none;
+        }
+        .mat-form-field-appearance-outline.mat-form-field-can-float.mat-form-field-should-float .mat-form-field-outline-gap {
+            border-top-color: transparent;
+        }
+        .mat-form-field-appearance-outline .mat-form-field-outline-thick {
+            opacity: 0;
+        }
+        .mat-form-field-appearance-outline .mat-form-field-outline-thick .mat-form-field-outline-end,
+        .mat-form-field-appearance-outline .mat-form-field-outline-thick .mat-form-field-outline-gap,
+        .mat-form-field-appearance-outline .mat-form-field-outline-thick .mat-form-field-outline-start {
+            border-width: 2px;
+            transition: border-color 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+        .mat-form-field-appearance-outline.mat-focused .mat-form-field-outline,
+        .mat-form-field-appearance-outline.mat-form-field-invalid .mat-form-field-outline {
+            opacity: 0;
+            transition: opacity 0.1s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+        .mat-form-field-appearance-outline.mat-focused .mat-form-field-outline-thick,
+        .mat-form-field-appearance-outline.mat-form-field-invalid .mat-form-field-outline-thick {
+            opacity: 1;
+        }
+        .mat-form-field-appearance-outline:not(.mat-form-field-disabled) .mat-form-field-flex:hover .mat-form-field-outline {
+            opacity: 0;
+            transition: opacity 0.6s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+        .mat-form-field-appearance-outline:not(.mat-form-field-disabled) .mat-form-field-flex:hover .mat-form-field-outline-thick {
+            opacity: 1;
+        }
+        .mat-form-field-appearance-outline .mat-form-field-subscript-wrapper {
+            padding: 0 1em;
+        }
+        .mat-form-field-appearance-outline._mat-animation-noopable .mat-form-field-outline,
+        .mat-form-field-appearance-outline._mat-animation-noopable .mat-form-field-outline-end,
+        .mat-form-field-appearance-outline._mat-animation-noopable .mat-form-field-outline-gap,
+        .mat-form-field-appearance-outline._mat-animation-noopable .mat-form-field-outline-start,
+        .mat-form-field-appearance-outline._mat-animation-noopable:not(.mat-form-field-disabled) .mat-form-field-flex:hover ~ .mat-form-field-outline {
+            transition: none;
+        }
+    </style>
+    <style>
+        .mat-form-field-appearance-standard .mat-form-field-flex {
+            padding-top: 0.75em;
+        }
+        .mat-form-field-appearance-standard .mat-form-field-underline {
+            height: 1px;
+        }
+        @media screen and (-ms-high-contrast: active) {
+            .mat-form-field-appearance-standard .mat-form-field-underline {
+                height: 0;
+                border-top: solid 1px;
+            }
+        }
+        .mat-form-field-appearance-standard .mat-form-field-ripple {
+            bottom: 0;
+            height: 2px;
+        }
+        @media screen and (-ms-high-contrast: active) {
+            .mat-form-field-appearance-standard .mat-form-field-ripple {
+                height: 0;
+                border-top: 2px;
+            }
+        }
+        .mat-form-field-appearance-standard.mat-form-field-disabled .mat-form-field-underline {
+            background-position: 0;
+            background-color: transparent;
+        }
+        @media screen and (-ms-high-contrast: active) {
+            .mat-form-field-appearance-standard.mat-form-field-disabled .mat-form-field-underline {
+                border-top-style: dotted;
+                border-top-width: 2px;
+            }
+        }
+        .mat-form-field-appearance-standard:not(.mat-form-field-disabled) .mat-form-field-flex:hover ~ .mat-form-field-underline .mat-form-field-ripple {
+            opacity: 1;
+            transform: none;
+            transition: opacity 0.6s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+        .mat-form-field-appearance-standard._mat-animation-noopable:not(.mat-form-field-disabled) .mat-form-field-flex:hover ~ .mat-form-field-underline .mat-form-field-ripple {
+            transition: none;
+        }
+    </style>
+    <style>
+        .mat-input-element {
+            font: inherit;
+            background: 0 0;
+            color: currentColor;
+            border: none;
+            outline: 0;
+            padding: 0;
+            margin: 0;
+            width: 100%;
+            max-width: 100%;
+            vertical-align: bottom;
+            text-align: inherit;
+        }
+        .mat-input-element:-moz-ui-invalid {
+            box-shadow: none;
+        }
+        .mat-input-element::-ms-clear,
+        .mat-input-element::-ms-reveal {
+            display: none;
+        }
+        .mat-input-element,
+        .mat-input-element::-webkit-search-cancel-button,
+        .mat-input-element::-webkit-search-decoration,
+        .mat-input-element::-webkit-search-results-button,
+        .mat-input-element::-webkit-search-results-decoration {
+            -webkit-appearance: none;
+        }
+        .mat-input-element::-webkit-caps-lock-indicator,
+        .mat-input-element::-webkit-contacts-auto-fill-button,
+        .mat-input-element::-webkit-credentials-auto-fill-button {
+            visibility: hidden;
+        }
+        .mat-input-element[type="date"]::after,
+        .mat-input-element[type="datetime-local"]::after,
+        .mat-input-element[type="datetime"]::after,
+        .mat-input-element[type="month"]::after,
+        .mat-input-element[type="time"]::after,
+        .mat-input-element[type="week"]::after {
+            content: " ";
+            white-space: pre;
+            width: 1px;
+        }
+        .mat-input-element::placeholder {
+            transition: color 0.4s 0.133s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+        .mat-input-element::-moz-placeholder {
+            transition: color 0.4s 0.133s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+        .mat-input-element::-webkit-input-placeholder {
+            transition: color 0.4s 0.133s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+        .mat-input-element:-ms-input-placeholder {
+            transition: color 0.4s 0.133s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+        .mat-form-field-hide-placeholder .mat-input-element::placeholder {
+            color: transparent !important;
+            -webkit-text-fill-color: transparent;
+            transition: none;
+        }
+        .mat-form-field-hide-placeholder .mat-input-element::-moz-placeholder {
+            color: transparent !important;
+            -webkit-text-fill-color: transparent;
+            transition: none;
+        }
+        .mat-form-field-hide-placeholder .mat-input-element::-webkit-input-placeholder {
+            color: transparent !important;
+            -webkit-text-fill-color: transparent;
+            transition: none;
+        }
+        .mat-form-field-hide-placeholder .mat-input-element:-ms-input-placeholder {
+            color: transparent !important;
+            -webkit-text-fill-color: transparent;
+            transition: none;
+        }
+        textarea.mat-input-element {
+            resize: vertical;
+            overflow: auto;
+        }
+        textarea.mat-input-element.cdk-textarea-autosize {
+            resize: none;
+        }
+        textarea.mat-input-element {
+            padding: 2px 0;
+            margin: -2px 0;
+        }
+    </style>
+    <style>
+        @keyframes mat-checkbox-fade-in-background {
+            0% {
+                opacity: 0;
+            }
+            50% {
+                opacity: 1;
+            }
+        }
+        @keyframes mat-checkbox-fade-out-background {
+            0%,
+            50% {
+                opacity: 1;
+            }
+            100% {
+                opacity: 0;
+            }
+        }
+        @keyframes mat-checkbox-unchecked-checked-checkmark-path {
+            0%,
+            50% {
+                stroke-dashoffset: 22.91026;
+            }
+            50% {
+                animation-timing-function: cubic-bezier(0, 0, 0.2, 0.1);
+            }
+            100% {
+                stroke-dashoffset: 0;
+            }
+        }
+        @keyframes mat-checkbox-unchecked-indeterminate-mixedmark {
+            0%,
+            68.2% {
+                transform: scaleX(0);
+            }
+            68.2% {
+                animation-timing-function: cubic-bezier(0, 0, 0, 1);
+            }
+            100% {
+                transform: scaleX(1);
+            }
+        }
+        @keyframes mat-checkbox-checked-unchecked-checkmark-path {
+            from {
+                animation-timing-function: cubic-bezier(0.4, 0, 1, 1);
+                stroke-dashoffset: 0;
+            }
+            to {
+                stroke-dashoffset: -22.91026;
+            }
+        }
+        @keyframes mat-checkbox-checked-indeterminate-checkmark {
+            from {
+                animation-timing-function: cubic-bezier(0, 0, 0.2, 0.1);
+                opacity: 1;
+                transform: rotate(0);
+            }
+            to {
+                opacity: 0;
+                transform: rotate(45deg);
+            }
+        }
+        @keyframes mat-checkbox-indeterminate-checked-checkmark {
+            from {
+                animation-timing-function: cubic-bezier(0.14, 0, 0, 1);
+                opacity: 0;
+                transform: rotate(45deg);
+            }
+            to {
+                opacity: 1;
+                transform: rotate(360deg);
+            }
+        }
+        @keyframes mat-checkbox-checked-indeterminate-mixedmark {
+            from {
+                animation-timing-function: cubic-bezier(0, 0, 0.2, 0.1);
+                opacity: 0;
+                transform: rotate(-45deg);
+            }
+            to {
+                opacity: 1;
+                transform: rotate(0);
+            }
+        }
+        @keyframes mat-checkbox-indeterminate-checked-mixedmark {
+            from {
+                animation-timing-function: cubic-bezier(0.14, 0, 0, 1);
+                opacity: 1;
+                transform: rotate(0);
+            }
+            to {
+                opacity: 0;
+                transform: rotate(315deg);
+            }
+        }
+        @keyframes mat-checkbox-indeterminate-unchecked-mixedmark {
+            0% {
+                animation-timing-function: linear;
+                opacity: 1;
+                transform: scaleX(1);
+            }
+            100%,
+            32.8% {
+                opacity: 0;
+                transform: scaleX(0);
+            }
+        }
+        .mat-checkbox-checkmark,
+        .mat-checkbox-mixedmark {
+            width: calc(100% - 4px);
+        }
+        .mat-checkbox-background,
+        .mat-checkbox-frame {
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            position: absolute;
+            border-radius: 2px;
+            box-sizing: border-box;
+            pointer-events: none;
+        }
+        .mat-checkbox {
+            transition: background 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 280ms cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+            -webkit-tap-highlight-color: transparent;
+        }
+        ._mat-animation-noopable.mat-checkbox {
+            transition: none;
+            animation: none;
+        }
+        .mat-checkbox-layout {
+            cursor: inherit;
+            align-items: baseline;
+            vertical-align: middle;
+            display: inline-flex;
+            white-space: nowrap;
+        }
+        .mat-checkbox-inner-container {
+            display: inline-block;
+            height: 20px;
+            line-height: 0;
+            margin: auto;
+            margin-right: 8px;
+            order: 0;
+            position: relative;
+            vertical-align: middle;
+            white-space: nowrap;
+            width: 20px;
+            flex-shrink: 0;
+        }
+        [dir="rtl"] .mat-checkbox-inner-container {
+            margin-left: 8px;
+            margin-right: auto;
+        }
+        .mat-checkbox-inner-container-no-side-margin {
+            margin-left: 0;
+            margin-right: 0;
+        }
+        .mat-checkbox-frame {
+            background-color: transparent;
+            transition: border-color 90ms cubic-bezier(0, 0, 0.2, 0.1);
+            border-width: 2px;
+            border-style: solid;
+        }
+        ._mat-animation-noopable .mat-checkbox-frame {
+            transition: none;
+        }
+        .mat-checkbox-background {
+            align-items: center;
+            display: inline-flex;
+            justify-content: center;
+            transition: background-color 90ms cubic-bezier(0, 0, 0.2, 0.1), opacity 90ms cubic-bezier(0, 0, 0.2, 0.1);
+        }
+        ._mat-animation-noopable .mat-checkbox-background {
+            transition: none;
+        }
+        .mat-checkbox-checkmark {
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            position: absolute;
+            width: 100%;
+        }
+        .mat-checkbox-checkmark-path {
+            stroke-dashoffset: 22.91026;
+            stroke-dasharray: 22.91026;
+            stroke-width: 2.66667px;
+        }
+        .mat-checkbox-mixedmark {
+            height: 2px;
+            opacity: 0;
+            transform: scaleX(0) rotate(0);
+        }
+        @media screen and (-ms-high-contrast: active) {
+            .mat-checkbox-mixedmark {
+                height: 0;
+                border-top: solid 2px;
+                margin-top: 2px;
+            }
+        }
+        .mat-checkbox-label-before .mat-checkbox-inner-container {
+            order: 1;
+            margin-left: 8px;
+            margin-right: auto;
+        }
+        [dir="rtl"] .mat-checkbox-label-before .mat-checkbox-inner-container {
+            margin-left: auto;
+            margin-right: 8px;
+        }
+        .mat-checkbox-checked .mat-checkbox-checkmark {
+            opacity: 1;
+        }
+        .mat-checkbox-checked .mat-checkbox-checkmark-path {
+            stroke-dashoffset: 0;
+        }
+        .mat-checkbox-checked .mat-checkbox-mixedmark {
+            transform: scaleX(1) rotate(-45deg);
+        }
+        .mat-checkbox-indeterminate .mat-checkbox-checkmark {
+            opacity: 0;
+            transform: rotate(45deg);
+        }
+        .mat-checkbox-indeterminate .mat-checkbox-checkmark-path {
+            stroke-dashoffset: 0;
+        }
+        .mat-checkbox-indeterminate .mat-checkbox-mixedmark {
+            opacity: 1;
+            transform: scaleX(1) rotate(0);
+        }
+        .mat-checkbox-unchecked .mat-checkbox-background {
+            background-color: transparent;
+        }
+        .mat-checkbox-disabled {
+            cursor: default;
+        }
+        .mat-checkbox-anim-unchecked-checked .mat-checkbox-background {
+            animation: 180ms linear 0s mat-checkbox-fade-in-background;
+        }
+        .mat-checkbox-anim-unchecked-checked .mat-checkbox-checkmark-path {
+            animation: 180ms linear 0s mat-checkbox-unchecked-checked-checkmark-path;
+        }
+        .mat-checkbox-anim-unchecked-indeterminate .mat-checkbox-background {
+            animation: 180ms linear 0s mat-checkbox-fade-in-background;
+        }
+        .mat-checkbox-anim-unchecked-indeterminate .mat-checkbox-mixedmark {
+            animation: 90ms linear 0s mat-checkbox-unchecked-indeterminate-mixedmark;
+        }
+        .mat-checkbox-anim-checked-unchecked .mat-checkbox-background {
+            animation: 180ms linear 0s mat-checkbox-fade-out-background;
+        }
+        .mat-checkbox-anim-checked-unchecked .mat-checkbox-checkmark-path {
+            animation: 90ms linear 0s mat-checkbox-checked-unchecked-checkmark-path;
+        }
+        .mat-checkbox-anim-checked-indeterminate .mat-checkbox-checkmark {
+            animation: 90ms linear 0s mat-checkbox-checked-indeterminate-checkmark;
+        }
+        .mat-checkbox-anim-checked-indeterminate .mat-checkbox-mixedmark {
+            animation: 90ms linear 0s mat-checkbox-checked-indeterminate-mixedmark;
+        }
+        .mat-checkbox-anim-indeterminate-checked .mat-checkbox-checkmark {
+            animation: 0.5s linear 0s mat-checkbox-indeterminate-checked-checkmark;
+        }
+        .mat-checkbox-anim-indeterminate-checked .mat-checkbox-mixedmark {
+            animation: 0.5s linear 0s mat-checkbox-indeterminate-checked-mixedmark;
+        }
+        .mat-checkbox-anim-indeterminate-unchecked .mat-checkbox-background {
+            animation: 180ms linear 0s mat-checkbox-fade-out-background;
+        }
+        .mat-checkbox-anim-indeterminate-unchecked .mat-checkbox-mixedmark {
+            animation: 0.3s linear 0s mat-checkbox-indeterminate-unchecked-mixedmark;
+        }
+        .mat-checkbox-input {
+            bottom: 0;
+            left: 50%;
+        }
+        .mat-checkbox-ripple {
+            position: absolute;
+            left: calc(50% - 25px);
+            top: calc(50% - 25px);
+            height: 50px;
+            width: 50px;
+            z-index: 1;
+            pointer-events: none;
+        }
+    </style>
+    <style>
+        .mat-button,
+        .mat-flat-button,
+        .mat-icon-button,
+        .mat-stroked-button {
+            box-sizing: border-box;
+            position: relative;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            cursor: pointer;
+            outline: 0;
+            border: none;
+            -webkit-tap-highlight-color: transparent;
+            display: inline-block;
+            white-space: nowrap;
+            text-decoration: none;
+            vertical-align: baseline;
+            text-align: center;
+            margin: 0;
+            min-width: 88px;
+            line-height: 36px;
+            padding: 0 16px;
+            border-radius: 2px;
+            overflow: visible;
+        }
+        .mat-button::-moz-focus-inner,
+        .mat-flat-button::-moz-focus-inner,
+        .mat-icon-button::-moz-focus-inner,
+        .mat-stroked-button::-moz-focus-inner {
+            border: 0;
+        }
+        .mat-button[disabled],
+        .mat-flat-button[disabled],
+        .mat-icon-button[disabled],
+        .mat-stroked-button[disabled] {
+            cursor: default;
+        }
+        .mat-button.cdk-keyboard-focused .mat-button-focus-overlay,
+        .mat-button.cdk-program-focused .mat-button-focus-overlay,
+        .mat-flat-button.cdk-keyboard-focused .mat-button-focus-overlay,
+        .mat-flat-button.cdk-program-focused .mat-button-focus-overlay,
+        .mat-icon-button.cdk-keyboard-focused .mat-button-focus-overlay,
+        .mat-icon-button.cdk-program-focused .mat-button-focus-overlay,
+        .mat-stroked-button.cdk-keyboard-focused .mat-button-focus-overlay,
+        .mat-stroked-button.cdk-program-focused .mat-button-focus-overlay {
+            opacity: 1;
+        }
+        .mat-button::-moz-focus-inner,
+        .mat-flat-button::-moz-focus-inner,
+        .mat-icon-button::-moz-focus-inner,
+        .mat-stroked-button::-moz-focus-inner {
+            border: 0;
+        }
+        .mat-button .mat-button-focus-overlay,
+        .mat-icon-button .mat-button-focus-overlay {
+            opacity: 0;
+        }
+        .mat-button:hover .mat-button-focus-overlay,
+        .mat-stroked-button:hover .mat-button-focus-overlay {
+            opacity: 1;
+        }
+        @media (hover: none) {
+            .mat-button:hover .mat-button-focus-overlay,
+            .mat-stroked-button:hover .mat-button-focus-overlay {
+                opacity: 0;
+            }
+        }
+        .mat-raised-button {
+            box-sizing: border-box;
+            position: relative;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            cursor: pointer;
+            outline: 0;
+            border: none;
+            -webkit-tap-highlight-color: transparent;
+            display: inline-block;
+            white-space: nowrap;
+            text-decoration: none;
+            vertical-align: baseline;
+            text-align: center;
+            margin: 0;
+            min-width: 88px;
+            line-height: 36px;
+            padding: 0 16px;
+            border-radius: 2px;
+            overflow: visible;
+            transform: translate3d(0, 0, 0);
+            transition: background 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 280ms cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .mat-raised-button::-moz-focus-inner {
+            border: 0;
+        }
+        .mat-raised-button[disabled] {
+            cursor: default;
+        }
+        .mat-raised-button.cdk-keyboard-focused .mat-button-focus-overlay,
+        .mat-raised-button.cdk-program-focused .mat-button-focus-overlay {
+            opacity: 1;
+        }
+        .mat-raised-button::-moz-focus-inner {
+            border: 0;
+        }
+        .mat-raised-button:not([class*="mat-elevation-z"]) {
+            box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+        }
+        ._mat-animation-noopable.mat-raised-button {
+            transition: none;
+            animation: none;
+        }
+        .mat-raised-button:not([disabled]):active:not([class*="mat-elevation-z"]) {
+            box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2), 0 8px 10px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12);
+        }
+        .mat-raised-button[disabled] {
+            box-shadow: none;
+        }
+        .mat-stroked-button {
+            border: 1px solid currentColor;
+            padding: 0 15px;
+            line-height: 34px;
+        }
+        .mat-stroked-button:not([class*="mat-elevation-z"]) {
+            box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.2), 0 0 0 0 rgba(0, 0, 0, 0.14), 0 0 0 0 rgba(0, 0, 0, 0.12);
+        }
+        .mat-flat-button:not([class*="mat-elevation-z"]) {
+            box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.2), 0 0 0 0 rgba(0, 0, 0, 0.14), 0 0 0 0 rgba(0, 0, 0, 0.12);
+        }
+        .mat-fab {
+            box-sizing: border-box;
+            position: relative;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            cursor: pointer;
+            outline: 0;
+            border: none;
+            -webkit-tap-highlight-color: transparent;
+            display: inline-block;
+            white-space: nowrap;
+            text-decoration: none;
+            vertical-align: baseline;
+            text-align: center;
+            margin: 0;
+            min-width: 88px;
+            line-height: 36px;
+            padding: 0 16px;
+            border-radius: 2px;
+            overflow: visible;
+            transform: translate3d(0, 0, 0);
+            transition: background 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 280ms cubic-bezier(0.4, 0, 0.2, 1);
+            min-width: 0;
+            border-radius: 50%;
+            width: 56px;
+            height: 56px;
+            padding: 0;
+            flex-shrink: 0;
+        }
+        .mat-fab::-moz-focus-inner {
+            border: 0;
+        }
+        .mat-fab[disabled] {
+            cursor: default;
+        }
+        .mat-fab.cdk-keyboard-focused .mat-button-focus-overlay,
+        .mat-fab.cdk-program-focused .mat-button-focus-overlay {
+            opacity: 1;
+        }
+        .mat-fab::-moz-focus-inner {
+            border: 0;
+        }
+        .mat-fab:not([class*="mat-elevation-z"]) {
+            box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+        }
+        ._mat-animation-noopable.mat-fab {
+            transition: none;
+            animation: none;
+        }
+        .mat-fab:not([disabled]):active:not([class*="mat-elevation-z"]) {
+            box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2), 0 8px 10px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12);
+        }
+        .mat-fab[disabled] {
+            box-shadow: none;
+        }
+        .mat-fab:not([class*="mat-elevation-z"]) {
+            box-shadow: 0 3px 5px -1px rgba(0, 0, 0, 0.2), 0 6px 10px 0 rgba(0, 0, 0, 0.14), 0 1px 18px 0 rgba(0, 0, 0, 0.12);
+        }
+        .mat-fab:not([disabled]):active:not([class*="mat-elevation-z"]) {
+            box-shadow: 0 7px 8px -4px rgba(0, 0, 0, 0.2), 0 12px 17px 2px rgba(0, 0, 0, 0.14), 0 5px 22px 4px rgba(0, 0, 0, 0.12);
+        }
+        .mat-fab .mat-button-wrapper {
+            padding: 16px 0;
+            display: inline-block;
+            line-height: 24px;
+        }
+        .mat-mini-fab {
+            box-sizing: border-box;
+            position: relative;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            cursor: pointer;
+            outline: 0;
+            border: none;
+            -webkit-tap-highlight-color: transparent;
+            display: inline-block;
+            white-space: nowrap;
+            text-decoration: none;
+            vertical-align: baseline;
+            text-align: center;
+            margin: 0;
+            min-width: 88px;
+            line-height: 36px;
+            padding: 0 16px;
+            border-radius: 2px;
+            overflow: visible;
+            transform: translate3d(0, 0, 0);
+            transition: background 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 280ms cubic-bezier(0.4, 0, 0.2, 1);
+            min-width: 0;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            padding: 0;
+            flex-shrink: 0;
+        }
+        .mat-mini-fab::-moz-focus-inner {
+            border: 0;
+        }
+        .mat-mini-fab[disabled] {
+            cursor: default;
+        }
+        .mat-mini-fab.cdk-keyboard-focused .mat-button-focus-overlay,
+        .mat-mini-fab.cdk-program-focused .mat-button-focus-overlay {
+            opacity: 1;
+        }
+        .mat-mini-fab::-moz-focus-inner {
+            border: 0;
+        }
+        .mat-mini-fab:not([class*="mat-elevation-z"]) {
+            box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+        }
+        ._mat-animation-noopable.mat-mini-fab {
+            transition: none;
+            animation: none;
+        }
+        .mat-mini-fab:not([disabled]):active:not([class*="mat-elevation-z"]) {
+            box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2), 0 8px 10px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12);
+        }
+        .mat-mini-fab[disabled] {
+            box-shadow: none;
+        }
+        .mat-mini-fab:not([class*="mat-elevation-z"]) {
+            box-shadow: 0 3px 5px -1px rgba(0, 0, 0, 0.2), 0 6px 10px 0 rgba(0, 0, 0, 0.14), 0 1px 18px 0 rgba(0, 0, 0, 0.12);
+        }
+        .mat-mini-fab:not([disabled]):active:not([class*="mat-elevation-z"]) {
+            box-shadow: 0 7px 8px -4px rgba(0, 0, 0, 0.2), 0 12px 17px 2px rgba(0, 0, 0, 0.14), 0 5px 22px 4px rgba(0, 0, 0, 0.12);
+        }
+        .mat-mini-fab .mat-button-wrapper {
+            padding: 8px 0;
+            display: inline-block;
+            line-height: 24px;
+        }
+        .mat-icon-button {
+            padding: 0;
+            min-width: 0;
+            width: 40px;
+            height: 40px;
+            flex-shrink: 0;
+            line-height: 40px;
+            border-radius: 50%;
+        }
+        .mat-icon-button .mat-icon,
+        .mat-icon-button i {
+            line-height: 24px;
+        }
+        .mat-button-focus-overlay,
+        .mat-button-ripple {
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            position: absolute;
+            pointer-events: none;
+            border-radius: inherit;
+        }
+        .mat-button-focus-overlay {
+            background-color: rgba(0, 0, 0, 0.12);
+            border-radius: inherit;
+            opacity: 0;
+            transition: opacity 0.2s cubic-bezier(0.35, 0, 0.25, 1), background-color 0.2s cubic-bezier(0.35, 0, 0.25, 1);
+        }
+        ._mat-animation-noopable .mat-button-focus-overlay {
+            transition: none;
+        }
+        @media screen and (-ms-high-contrast: active) {
+            .mat-button-focus-overlay {
+                background-color: rgba(255, 255, 255, 0.5);
+            }
+        }
+        .mat-button-ripple-round {
+            border-radius: 50%;
+            z-index: 1;
+        }
+        .mat-button .mat-button-wrapper > *,
+        .mat-fab .mat-button-wrapper > *,
+        .mat-flat-button .mat-button-wrapper > *,
+        .mat-icon-button .mat-button-wrapper > *,
+        .mat-mini-fab .mat-button-wrapper > *,
+        .mat-raised-button .mat-button-wrapper > *,
+        .mat-stroked-button .mat-button-wrapper > * {
+            vertical-align: middle;
+        }
+        .mat-form-field:not(.mat-form-field-appearance-legacy) .mat-form-field-prefix .mat-icon-button,
+        .mat-form-field:not(.mat-form-field-appearance-legacy) .mat-form-field-suffix .mat-icon-button {
+            display: block;
+            font-size: inherit;
+            width: 2.5em;
+            height: 2.5em;
+        }
+        @media screen and (-ms-high-contrast: active) {
+            .mat-button,
+            .mat-fab,
+            .mat-flat-button,
+            .mat-icon-button,
+            .mat-mini-fab,
+            .mat-raised-button {
+                outline: solid 1px;
+            }
+        }
+    </style>
+
+</head>
+<body>
+	<div class="loginCardContainer">
+		<form th:action="@{/login}" method="post">
+			<div class="cardlogin mat-card">
+				<div class="mat-card-header">
+					<div class="mat-card-header-text"></div>				
 				</div>
-			</div>
-		</div>
-		<!-- Loader -->
-		<!--Page Wrapper Start-->
-		<div id="wrapper" class="categories login-page">
-			<!--container Start-->
-			<!--Header Section Start-->
-			<header class="header1" id="header">
-				<div class="top-header hidden-xs">
-					<div class="container">
-						<div class="row clearfix">
-							<div class="col-xs-12">
-								<ul class="top-header-left clearfix">
-									<li class="register-link clearfix">
-										<i class="lock-icon icon_lock"> </i><a href="login" class="login" th:text="#{header.login}">Log In</a>
-										<span>/</span><a href="registrar" class="register" th:text="#{header.register}">Register </a>
-									</li>
-									<li class="select-wrapper">
-										<select name="idiomas" id="idiomas" class="select">
-											<option value="#" th:utext="#{header.language.select}" disabled selected>  Languaje  </option>
-											<option value="es" th:utext="#{header.language.spanish}"> Spanish </option>
-											<option value="en" th:utext="#{header.language.english}"> English </option>											
-										</select><i class="arrow_carrot-down"></i>
-									</li>
-									<li class="select-wrapper">
-										<select class="select">
-											<option> $ </option>
-										</select><i class="arrow_carrot-down"></i>
-									</li>
-								</ul>
-								<ul class="top-header-right clearfix">
-									<li class="profile">
+				<div class="mat-card-content">
+					<div  id="divLogo">
+					    <div class="imgLogo div" role="img" aria-hidden="true">
+					        <img src="../img/gral/logologin.jpg" style="width:100%; height:100%">
+
+					    </div>
+					</div>
+					<div class="divField">
+						<div class="mat-form-field mat-primary">
+							<div class="mat-form-field-wrapper">
+								<div class="mat-form-field-flex">
+									<div class="mat-form-field-prefix">
+										<div class="div-span">
+											<i class="fa fa-user"></i>
+										</div>
+									</div>
+									<div class="mat-form-field-infix">
+										<input
+										    autocomplete="off"
+										    class="mat-input-element mat-form-field-autofill-control cdk-text-field-autofill-monitored"
+										    maxlength="20"
+										    name="usuario"
+										    placeholder="Usuario"
+										    th:placeholder="#{login.user}"
+										    id="user-0"
+										    aria-invalid="false"
+										    aria-required="false"
+										/>
+										<span class="mat-form-field-label-wrapper">
+										    <!---->
+										    <label class="mat-form-field-label ng-star-inserted" id="mat-form-field-label-3" for="mat-input-1" aria-owns="mat-input-1"><!----><!---->Usuario<!----><!----></label>
+										</span>							
+									</div>
+								</div>
+								<div class="mat-form-field-underline ng-star-inserted">
+									<span class="mat-form-field-ripple">
 										
-										<a href="#" th:utext="#{header.myacount}"><i class="icon_profile"></i>My Account </a>
-									</li>
-									
-									<li class="checkout">
-										<a href="javascript:enviar_formulario_logout()" th:utext="#{header.checkout}"> <i class="icon_check_alt" ></i> Checkout </a>
-										<form th:action="@{/logout}" method="post" name="formulario_logout">
-					            			<input type="hidden" value="Cerrar Sesion"   />
-					        			</form>
-									</li>
-								</ul>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="middle-header">
-					<div class="container">
-						<div class="row clearfix">
-							<div class="col-xs-12 middle-header-content">
-								<div class="middle-header-left">
-									<form class="clearfix">
-										<input type="text" name="search" placeholder="Search... " />
-										<button type="submit">
-											<i class="icon_search"></i>
-										</button>
-									</form>
+									</span>
 								</div>
-								<!--  
-								<div class="middle-header-right clearfix">
-									<div class="open-cart">
-										<i class="icon_bag_alt"></i>
-										<span class="item-count"> 0 Item(s) - <strong>$0.00</strong> <i class="arrow_carrot-down"></i></span>
-									</div>
-									<div class="item-block">
-										<ul class="item-list">
-											<li>
-												<figure class="item-image">
-													<a href="#"><img src="assets/images/img-one.jpg" alt="t-shirt" /></a>
-												</figure>
-												<div class="item-description">
-													<h4><a href="#" class="item-name">T-Shirt Retro Black</a></h4>
-													<span class="review-icon clearfix"> <i class="icon_star active"></i> <i class="icon_star active"></i> <i class="icon_star active"></i> <i class="icon_star active"></i> <i class="icon_star"></i> </span>
-													<span class="price">$ 70.00</span>
-												</div>
-												<span class="delete fa fa-trash"> </span>
-											</li>
-										</ul>
-										<div class="total-amount clearfix">
-											<span class="total">Total</span>
-											<span class="amount">€1145.00</span>
-										</div>
-										<div class="butn-group clearfix">
-											<a href="#" class="cart">VIEW CART</a>
-											<a href="#" class="checkout">CHECKOUT</a>
+								<div class="mat-form-field-subscript-wrapper">
+								    <!----><!---->
+								    <div class="mat-form-field-hint-wrapper ng-tns-c10-1 ng-trigger ng-trigger-transitionMessages ng-star-inserted" style="opacity: 1; transform: translateY(0%);">
+								        <!---->
+								        <div class="mat-form-field-hint-spacer"></div>
+								    </div>
+								</div>
+							</div>
+						</div>						
+						
+					</div>
+					<div class="divField">
+						<div class="mat-form-field mat-primary">
+							<div class="mat-form-field-wrapper">
+								<div class="mat-form-field-flex">
+									<div class="mat-form-field-prefix">
+										<div class="div-span">
+											<i class="fa fa-lock"></i>
 										</div>
 									</div>
-								</div>
-								-->
-								<a href="index.html" class="logo"><img src="assets/images/logo.png" alt="LOOK" /></a>
-							</div>
-						</div>
-					</div>
-				</div>
-				<nav class="navigation">
-					<div class="container">
-						<div id="cssmenu">
-							<a href="javascript:void(0);" class="main-menu menu-image"></a>
-							<ul class="menu-links">
-								<li class="active has-sub">
-									<a href="index" th:text="#{menu.home}">Home</a>
-								</li>
-								<li>
-									<a href="/categorias" th:text="#{menu.products}">Productos</a>
-								</li>
-								
-								<li>
-									<a href="contacto" th:text="#{menu.contactus}">Contact us</a>
-								</li>
-							</ul>
-						</div>
-					</div>
-				</nav>
-			</header>
-			<!--Header Section End-->
-			<div class="common-banner login-banner forcefullwidth_wrapper_tp_banner">
-				<div class="container">
-					<div class="row">
-						<div class="main-banner-text">
-							<span>LOGIN</span>
-							<ul class="banner-nav">
-								<li>
-									<a href="index.html">Home</a>
-								</li>
-								<li>
-									<a href="shopping-cart.html">Shop</a>
-								</li>
-								<li class="active">
-									<a href="#">Login</a>
-								</li>
-							</ul>
-						</div>
-					</div>
-				</div>
-			</div>
-			<!--Content Area Start-->
-			<div class="content">
-				<div class="login-content">
-					<div class="container">
-						<div class="row">
-							<div class="col-xs-12 col-sm-4">
-								<div class="account-login">
-									<h3 th:text="#{login.title}">Ingrese a su cuenta</h3>
-									<span class="discover" th:text="#{login.title.description}">Ingrese a su cuenta para pode operar</span>
-									<form class="login-account-form" th:action="@{/login}" method="post">
-										<input type="text" class="login-account-form-text" placeholder="Usuario" th:placeholder="#{login.user}" name="usuario" />
-										<input type="password" placeholder="Contraseña" th:placeholder="#{login.password}" name="clave"/>
-										<input type="checkbox" id="keep-login" />
-										<div class="forgot-pswrd">
-											<label for="keep-login" th:utext="#{login.keep}">  <span ><i class="fa fa-check"></i></span> Mantenme conectado </label>
-											<a href="#" th:utext="#{login.forgot}">¿Olvidaste tu contraseña ?</a>
-										</div>
-										
-										<input type="submit" value="login" th:value="#{login.submit}" />
-									</form>
-									<div th:if="${param.error}" class="alert alert-danger" role="alert" th:utext="#{login.userInvalid}">
-										Usuario o clave inválida.
-							        </div>
-							        <div th:if="${param.logout}" class="alert alert-success" role="alert">
-							            Usted ha cerrado sesión.
-							        </div>
-								</div>
-							</div>
-							<!--  
-							<div class="col-xs-12 col-sm-7 col-sm-offset-1">
-								<div class="register-now">
-									<h3>¿No tienes una cuenta? Regístrate ahora</h3>
-									<span class="benifits">By creating an account with our store, you will be able to move through the checkout process faster, store multiple shipping addresses, view and track your orders in your account and more. </span>
-									<form class="register-now-form" th:action="@{/registrar}" th:object="${usr}" method="post">
-										<ul class="clearfix">
-											
-											
-											<li>
-												<input class="form-control" type="text" placeholder="Correo electrónico" id="email" th:field="*{email}" />
-											</li>
-											<li>
-												<input class="form-control" type="text" placeholder="Usuario" id="usuario" th:field="*{usuario}" />
-											</li>
-											<li>
-												<input class="form-control" type="text" placeholder="Nombre" id="nombre" th:field="*{nombre}" />
-											</li>
-											<li>
-												<input class="form-control" type="text" placeholder="Teléfono" id="telefono" th:field="*{telefono}" />
-											</li>
-											<li>
-												<input class="form-control" type="password" placeholder="Contraseña" id="clave" th:field="*{clave}" />
-											</li>
-											<li>
-												<input class="form-control" type="password" placeholder="Repetir - Contraseña" name="clave-repetir"/>
-											</li>
-											<li>
-												<input type="submit" value="registrar ahora" />
-											</li>
-										</ul>
-									</form>
-								</div>
-
-							</div>
-						</div>
-							-->
-					</div>
-				</div>
-			</div>
-			<!--Content Area End-->
-			<!--Footer Section Start-->
-			<footer class="footer">
-				<!--  <div class="primary-footer">
-					<div class="container">
-						<div class="row">
-							<div class="footer-content col-md-3 col-sm-3 col-xs-12">
-								<div class="footer-border">
-									<h4> STORE </h4>
-									<ul class="footer-nav">
-										<li>
-											<a href="#">New York</a>
-										</li>
-										<li>
-											<a href="#">Paris</a>
-										</li>
-										<li>
-											<a href="#">London</a>
-										</li>
-										<li>
-											<a href="#">Madrid</a>
-										</li>
-										<li>
-											<a href="#">Tokio</a>
-										</li>
-										<li>
-											<a href="#">Milan</a>
-										</li>
-										<li>
-											<a href="#">Hong Kong</a>
-										</li>
-									</ul>
-								</div>
-							</div>
-							<div class="footer-content col-md-3 col-sm-3 col-xs-12">
-								<div class="footer-border">
-									<h4> OUR OFFER </h4>
-									<ul class="footer-nav">
-										<li>
-											<a href="#">New products</a>
-										</li>
-										<li>
-											<a href="#">Top sellers</a>
-										</li>
-										<li>
-											<a href="#">Specials</a>
-										</li>
-										<li>
-											<a href="#">Manufacturers</a>
-										</li>
-										<li>
-											<a href="#">Suppliers</a>
-										</li>
-										<li>
-											<a href="#">Specials</a>
-										</li>
-										<li>
-											<a href="#">Customer Service</a>
-										</li>
-									</ul>
-								</div>
-							</div>
-							<div class="footer-content col-md-3 col-sm-3 col-xs-12">
-								<div class="footer-border">
-									<h4> OUR SERVICES </h4>
-									<ul class="footer-nav">
-										<li>
-											<a href="#">Order tracking</a>
-										</li>
-										<li>
-											<a href="#">Privacy Policy</a>
-										</li>
-										<li>
-											<a href="#">Gift Cards</a>
-										</li>
-										<li>
-											<a href="#">Shipping Information</a>
-										</li>
-										<li>
-											<a href="#">Returns &amp; refunds</a>
-										</li>
-										<li>
-											<a href="#">Personalised Cards</a>
-										</li>
-										<li>
-											<a href="#">Delivery information</a>
-										</li>
-									</ul>
-								</div>
-							</div>
-							<div class="footer-content col-md-3 col-sm-3 col-xs-12">
-								<div class="footer-border">
-									<h4> OUR CONTACT </h4>
-									<div class="info-block">
-										<address class="address-info">
-											United Kingdom, London
-											<br />
-											Simple Street 15A
-										</address>
-										<span class="call-info"> <a href="callto:1231234567890">(123) 123.456.7890 </a> <a href="callto:1231234567890">(123) 123.456.7890</a> </span>
-										<span class="mail-info"> <a href="mailto:megashop@info.com">megashop@info.com</a> <a href="mailto:megashop@holding.com">megashop@holding.com</a> </span>
+									<div class="mat-form-field-infix">
+										<input
+										    autocomplete="off"
+										    class="mat-input-element mat-form-field-autofill-control cdk-text-field-autofill-monitored"
+										    maxlength="20"
+										    name="clave"
+										    placeholder="Contraseña"
+										    th:placeholder="#{login.password}"
+										    id="pass-0"
+										    aria-invalid="false"
+										    aria-required="false"
+										    type="password"   
+										/>
+										<span class="mat-form-field-label-wrapper">
+										    <!---->
+										    <label class="mat-form-field-label ng-star-inserted" id="mat-form-field-label-3" for="mat-input-1" aria-owns="mat-input-1"><!----><!---->Contraseña<!----><!----></label>
+										</span>							
 									</div>
+										<div class="mat-form-field-suffix ng-tns-c10-1 ng-star-inserted" onclick="viewPass()"><!---->
+											<span  class="ng-star-inserted"><i id="faico-0" class="fa fa-eye-slash"></i></span></div>
+										</div>
+									<div class="mat-form-field-underline ng-star-inserted">
+										<span class="mat-form-field-ripple">											
+										</span>
+									</div>
+								<div class="mat-form-field-subscript-wrapper">
+								    <!----><!---->
+								    <div class="mat-form-field-hint-wrapper ng-tns-c10-1 ng-trigger ng-trigger-transitionMessages ng-star-inserted" style="opacity: 1; transform: translateY(0%);">
+								        <!---->
+								        <div class="mat-form-field-hint-spacer"></div>
+								    </div>
 								</div>
 							</div>
-						</div>
-					</div>
-				</div>-->
-				<div class="secondary-footer">
-					<span class="copy-right" th:utext="#{footer.copyright}">Copyright © 2014 - 2015 PSD Themes by Lotustheme. All rights reserved.</span>
+						</div>						
+						
+					</div>					
+					<div  class="divField" style="font-size: small; margin-top: 10px;">
+					    <div  style="width: 30px; display: inline-block;">
+					        <div  class="smallcheck mat-checkbox mat-accent" style="margin-left: 8px;" id="mat-checkbox-1">
+					            <label class="custom-radio-checkbox mat-checkbox-layout">
+								    <!-- Input oculto -->
+								    <input class="custom-radio-checkbox__input" type="checkbox" name="genero" value="hombre">
+								    <!-- Imagen en sustitucion -->
+								    <span class="custom-radio-checkbox__show custom-radio-checkbox__show--checkbox"></span>
+								    <!-- Texto -->
+								    <span class="custom-radio-checkbox__text" th:utext="#{login.keep}" >								    	
+								    </span>								    
+								</label>
+					        </div>
+					    </div>
+					</div>			
 				</div>
-			</footer>
-			<!--Footer Section End-->
-			<!--container End-->
-		</div>
-		<!--Page Wrapper End-->
-		<script type="text/javascript" src="assets/js/jquery-1.12.0.min.js"></script>
-		<script src="assets/js/less.js"></script>
-		<script type="text/javascript" src="assets/js/jquery.selectbox-0.2.js"></script>
-		<script type="text/javascript" src="assets/js/bootstrap.js"></script>
-		<script type="text/javascript" src="assets/js/jquery-ui.js"></script>
-		<!-- RS5.0 Core JS Files -->
-
-		<script type="text/javascript" src="assets/js/site.js"></script>
-		<script type="text/javascript" src="js/vgmjs.js"></script>
-		<script type="text/javascript" src="js/vgmutil.js"></script>
-	</body>
+				<div class="mat-card-actions">
+				    <div class="row align-items-center justify-content-center">
+				    	<div class="col-12 col-sm-auto">
+				            <button class="btn-gen-default mat-raised-button" type="submit" >
+				                <span class="mat-button-wrapper" th:value="#{login.submit}">LOGIN</span>
+				                <div class="mat-button-ripple mat-ripple"></div>
+				                <div class="mat-button-focus-overlay"></div>
+				            </button>
+				        </div>
+				    </div>
+				</div>
+				<div style="text-align: center; margin-top:20px;">
+					<a href="#" class="enlace" th:utext="#{login.forgot}">¿Olvidaste tu contraseña ?</a>							
+					<div>
+						<div  style="text-align: center;">
+							<a th:if="${param.error}"  role="alert" th:utext="#{login.userInvalid}" class="enlace">Usuario o clave inválida.</a>
+							<span  style="margin-left: 15px; margin-right: 15px; color:#b0b8bf;">|</span>
+							<a th:if="${param.logout}" role="alert" class="enlace">Usted ha cerrado sesión.</a>
+						</div>
+			        </div>
+			    </div>				
+			</div>			
+		</form>		
+	</div>
+	<script type="text/javascript">
+		function viewPass(){ 			
+			if ( document.getElementById("faico-0").className.match(/(?:^|\s)fa-eye-slash(?!\S)/) )
+			{
+				document.getElementById("faico-0").className = "fa fa-eye";
+				document.getElementById("pass-0").type = "text";
+			}else
+			{
+				document.getElementById("faico-0").className = "fa fa-eye-slash";
+				document.getElementById("pass-0").type = "password";
+			}
+			document.getElementById("pass-0").focus();
+		} ;
+	</script>					
+</body>
 </html>

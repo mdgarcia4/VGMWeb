@@ -3,8 +3,8 @@
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<title>Look</title>
-		<link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+		<title th:text="${nameapp}+'-'+#{categorias.nombre}">Look1</title>
+		<link rel="shortcut icon" href="img/gral/favicon.ico" type="image/x-icon">
 		<!-- Google Font -->
 		<link href='https://fonts.googleapis.com/css?family=Montserrat:400,700%7CPlayfair+Display:400italic,400,900%7COpen+Sans%7CCrimson+Text:400italic%7CLato:400,700' rel='stylesheet' type='text/css'>
 		<link rel="stylesheet" type="text/css" href="assets/css/jquery.selectbox.css" media="screen">
@@ -158,8 +158,8 @@
 				<div class="container">
 					<div class="row">
 						<div class="main-banner-text">
-							<span >shop grid with left sidebar</span>
-							<ul class="banner-nav">
+							<span style="display: none">shop grid with left sidebar</span>
+							<ul class="banner-nav" style="display: none">
 								<li>
 									<a href="index.html">Home</a>
 								</li>
@@ -194,8 +194,8 @@
 											<li class="panel-heading" id="headingOne" th:each="rubro: ${rubros}">
 												<a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" th:href="'#collapse'+${rubro.id.idRubro}" aria-expanded="true" aria-controls="collapseOne" th:text="${rubro.descripcion}" >RUBROS</a>
 												<ul class="sub-list panel-collapse collapse in" id="collapseOne" th:id="'collapse'+${rubro.id.idRubro}" aria-labelledby="headingOne" >
-													<li th:each="subrubro: ${rubro.subrubros}">
-														<a href="#" th:href="'/categorias?rubro='+${subrubro.id.idRubro}+ '&subrubro=' + ${subrubro.id.idSubrubro}" th:text="${subrubro.descripcion}" >SUBRUBRO</a>
+													<li th:each="subrubro: ${rubro.subrubros}">														
+														<a th:href="'javascript:getsubrubro('+${subrubro.id.idRubro}+ ','+ ${subrubro.id.idSubrubro}+')'" th:text="${subrubro.descripcion}" >SUBRUBRO</a>
 													</li>
 												</ul>
 											</li>
@@ -210,16 +210,20 @@
 											</p>
 											<div id="slider-meter" class="slider-meter"></div>
 											<div class="range-price">
-												<span th:text="#{categorias.filter.precio.rango}">Range: <span id="amount2" class="first-price">$16.00</span> - <span id="amount1" class="second-price">$200.00</span></span>
+												<span th:text="#{categorias.filter.precio.rango}"></span>
+												<span><span id="amount2" class="first-price">$16.00</span> - <span id="amount1" class="second-price">$200.00</span></span>
 											</div>
 										</div>
+										<div id="rango-precio-local" style="display: none">
+											<a id="preciominimo" th:text="${preciominimo}" ></a>
+											<a id="preciomaximo" th:text="${preciomaximo}" ></a>
+									   </div>
 									</div>
-									
 									<div class="manufacturer">
 										<h4 class="heading" th:text="#{categorias.filter.brand}">Marcas</h4>
 										<ul class="main-list" th:each="marca: ${marcas}">
 											<li>
-												<a href="#" th:href="'/categorias?marca='+${marca.id}" th:text="${marca.descripcion}">Marca 1 </a>
+												<a th:href="'javascript:getmarca('+ ${marca.id} +')'" th:text="${marca.descripcion}">Marca 1 </a>
 											</li>
 										</ul>
 									</div>
@@ -227,8 +231,8 @@
 										
 										<h4 class="heading" th:text="#{categorias.filter.provider}">Proveedores</h4>
 										<ul class="main-list" th:each="proveedor: ${proveedores}">
-											<li>
-												<a href="#" th:href="'/categorias?proveedor='+${proveedor.idProveedor}" th:text="${proveedor.deProveedor}">Proveedor 1 </a>
+											<li>												
+												<a th:href="'javascript:getproveedor('+ ${proveedor.idProveedor} +')'" th:text="${proveedor.deProveedor}">Proveedor 1 </a>
 											</li>
 										</ul>
 									</div>
@@ -249,26 +253,26 @@
 											</li>
 											<li class="select-name">
 												<span th:text="#{categorias.sortby}">SORT BY <em>:</em></span>
-												<select class="select" id="">
-													<option value="">Name</option>
-													<option value="1">Size</option>
-													<option value="2">Color</option>
-													<option value="3">Price</option>
+												<select name="ordenamiento" id="ordenamiento" class="select"  >
+													<option value="#"disabled selected></option>
+													<option value="articulo.descripcion" th:utext="#{categorias.order.nombre}">Name</option>
+													<option value="3" th:utext="#{categorias.order.precio}">Price</option>
 												</select>
 											</li>
 											<li>
 												<span th:text="#{categorias.show}">SHOW <em>:</em></span>
-												<select class="select" id="" >
-													<option value=""  >6</option>
-													<option value="1">9</option>
-													<option value="2">12</option>
-													<option value="3">15</option>
+												<select class="select" id="tamanio" name="tamanio">
+													<option value="#"disabled selected></option>
+													<option value="6">6</option>
+													<option value="9">9</option>
+													<option value="12">12</option>
+													<option value="15">15</option>
 												</select>
 											</li>
-											<li>
+											<!-- <li>
 												<span th:text="#{categorias.view}" >VIEW</span>
 												<span class="view-btn"> <a href="#" class="grid-view active"><i class="fa fa-th-large"></i></a> <a href="#" class="list-view"><i class="fa fa-th-list"></i></a> </span>
-											</li>
+											</li> -->
 										</ul>
 									</div>
 									<!-- articulos de carrito -->
@@ -279,8 +283,8 @@
 												<div class="overlay">
 													<div class="product-view-block">
 														<div class="product-view clearfix">
-															<a class="zoom icon_zoom-in_alt single_image" href="img/img-six.jpg" th:href="'img/'+${precio.articulo.idCodigoBarras}+'.jpg'"  ></a>
 															<a class="data-report icon_datareport" href="#"></a>
+															<a class="zoom icon_zoom-in_alt single_image" th:href="'img/'+${precio.articulo.idCodigoBarras}+'.jpg'"  ></a>
 															<a class="heart icon_heart_alt" href="#"></a>
 														</div>
 														<button th:id="'btn-add-'+${precio.articulo.id}" th:onClick="|agregarDwnCarritoVgm(${precio.articulo.id},'N','#{categorias.error}')|" class="btn add-cart btn-block" >AGREGAR
@@ -303,34 +307,18 @@
 											</div>
 										</div>
 									</div>
-									<!-- pagina de carrito -->
-									<div class="col-xs-12">
+									<!-- paginado de carrito-->
+									<div  class="col-xs-12" >
 										<div class="categories-shop-pagging">
 											<ul >
 												<li>
-													<a class="page-link" th:href="@{|/categorias?pagNro=${paginaAnterior}|}" ><i class="fa fa-angle-left"></i></a>
+													<a th:href="@{|/categorias?pagNro=${paginaAnterior}|}" ><i class="fa fa-angle-left"></i></a>
 												</li>
-												<li class="active" th:each=" pagina: ${paginas}" th:class="${pagina ==paginaActual ? 'active' :'' }">
-													<a href="javascript:void(0)" th:href="@{|/categorias?pagNro=${pagina}|}" th:text ="${pagina}" >1</a>
-												</li>
-												<li>
-													<a href="javascript:void(0)" th:href="@{|/categorias?pagNro=${paginaSiguiente}|}" ><i class="fa fa-angle-right" ></i></a>
-												</li>
-											</ul>
-										</div>
-									</div>
-									<!-- pagina de carrito 2-->
-									<div class="col-xs-12">
-										<div class="categories-shop-pagging">
-											<ul >
-												<li>
-													<a class="page-link" th:href="@{|/categorias?pagNro=${paginaAnterior}|}" ><i class="fa fa-angle-left"></i></a>
-												</li>
-												<li class="active" th:each=" pagina: ${paginas}" th:class="${pagina ==paginaActual ? 'active' :'' }">
-													<a href="javascript:void(0)" th:href="@{|/categorias?pagNro=${pagina}|}" th:text ="${pagina}" >1</a>
+												<li th:each=" pagina: ${paginas}" th:class="${pagina ==paginaActual ? 'active' :'' }">
+													<a th:href="'javascript:getpage('+ ${pagina} +')'" th:text ="${pagina}" >1</a>
 												</li>
 												<li>
-													<a href="javascript:void(0)" th:href="@{|/categorias?pagNro=${paginaSiguiente}|}" ><i class="fa fa-angle-right" ></i></a>
+													<a th:href="@{|/categorias?pagNro=${paginaSiguiente}|}" ><i class="fa fa-angle-right" ></i></a>
 												</li>
 											</ul>
 										</div>
@@ -348,104 +336,6 @@
 				<div class="primary-footer">
 					<div class="container">
 						<div class="row">
-							<!-- <div class="footer-content col-md-3 col-sm-3 col-xs-12">
-								<div class="footer-border">
-									<h4> STORE </h4>
-									<ul class="footer-nav">
-										<li>
-											<a href="#">New York</a>
-										</li>
-										<li>
-											<a href="#">Paris</a>
-										</li>
-										<li>
-											<a href="#">London</a>
-										</li>
-										<li>
-											<a href="#">Madrid</a>
-										</li>
-										<li>
-											<a href="#">Tokio</a>
-										</li>
-										<li>
-											<a href="#">Milan</a>
-										</li>
-										<li>
-											<a href="#">Hong Kong</a>
-										</li>
-									</ul>
-								</div>
-							</div>
-							<div class="footer-content col-md-3 col-sm-3 col-xs-12">
-								<div class="footer-border">
-									<h4> OUR OFFER </h4>
-									<ul class="footer-nav">
-										<li>
-											<a href="#">New products</a>
-										</li>
-										<li>
-											<a href="#">Top sellers</a>
-										</li>
-										<li>
-											<a href="#">Specials</a>
-										</li>
-										<li>
-											<a href="#">Manufacturers</a>
-										</li>
-										<li>
-											<a href="#">Suppliers</a>
-										</li>
-										<li>
-											<a href="#">Specials</a>
-										</li>
-										<li>
-											<a href="#">Customer Service</a>
-										</li>
-									</ul>
-								</div>
-							</div>
-							<div class="footer-content col-md-3 col-sm-3 col-xs-12">
-								<div class="footer-border">
-									<h4> OUR SERVICES </h4>
-									<ul class="footer-nav">
-										<li>
-											<a href="#">Order tracking</a>
-										</li>
-										<li>
-											<a href="#">Privacy Policy</a>
-										</li>
-										<li>
-											<a href="#">Gift Cards</a>
-										</li>
-										<li>
-											<a href="#">Shipping Information</a>
-										</li>
-										<li>
-											<a href="#">Returns &amp; refunds</a>
-										</li>
-										<li>
-											<a href="#">Personalised Cards</a>
-										</li>
-										<li>
-											<a href="#">Delivery information</a>
-										</li>
-									</ul>
-								</div>
-							</div>
-							<div class="footer-content col-md-3 col-sm-3 col-xs-12">
-								<div class="footer-border">
-									<h4> OUR CONTACT </h4>
-									<div class="info-block">
-										<address class="address-info">
-											United Kingdom, London
-											<br />
-											Simple Street 15A
-										</address>
-										<span class="call-info"> <a href="callto:1231234567890">(123) 123.456.7890 </a> <a href="callto:1231234567890">(123) 123.456.7890</a> </span>
-										<span class="mail-info"> <a href="mailto:megashop@info.com">megashop@info.com</a> <a href="mailto:megashop@holding.com">megashop@holding.com</a> </span>
-									</div>
-								</div>
-							</div>-->
 						</div>
 					</div>
 				</div>

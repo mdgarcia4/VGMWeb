@@ -3,8 +3,8 @@
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<title>Look</title>
-		<link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+		<title th:text="${nameapp}+'-'+#{shopping.cart.nombre}">Look</title>
+		<link rel="shortcut icon" href="img/gral/favicon.ico" type="image/x-icon">
 		<!-- Google Font -->
 		<link href='https://fonts.googleapis.com/css?family=Montserrat:400,700%7CPlayfair+Display:400italic,400,900%7COpen+Sans' rel='stylesheet' type='text/css'>
 		<link rel="stylesheet" type="text/css" href="assets/css/jquery.selectbox.css" media="screen">
@@ -30,7 +30,7 @@
 		<![endif]-->
 		<script type="text/javascript">
 			function imgErrorLoad(image){ 
-				$(image).attr("src","img/imagen_no_disp.jpg");
+				$(image).attr("src","img/gral/imagen_no_disp.jpg");
 	
 			} ;
 		</script>	
@@ -127,7 +127,7 @@
 										</div>
 									</div>
 								</div>
-								<a href="index.html" class="logo"><img src="assets/images/logo.png" alt="LOOK" /></a>
+								<a href="index.html" class="logo"><img src="img/gral/logo.png" alt="LOOK" /></a>
 							</div>
 						</div>
 					</div>
@@ -163,7 +163,7 @@
 							<div class="col-xs-12">
 								<!-- Cart Items Starts Here -->
 								<div class="cart-item">
-									<h3 th:utext="#{shopping.cart.description}">your cart items</h3>
+									<h3 th:utext="#{shopping.cart.description}" >your cart items</h3>
 									<table class="table custom-table">
 										<thead>
 											<tr>
@@ -192,11 +192,11 @@
 							</div>
 							<div class="col-xs-12 col-sm-4 col-md-3 col-md-offset-3">
 								<span class="shopping-btn continue">
-									<a href="/categorias" th:text="#{shopping.cart.table.footer.continue}">continue shopping</a>
+									<a href="javascript:goToCatalog()" th:text="#{shopping.cart.table.footer.continue}">continue shopping</a>
 								</span>
 							</div>
 							<div class="col-xs-12 col-sm-4">
-								<div class="cart-form">
+								<div class="cart-form" style="display: none">
 									<h3 th:text="#{shopping.cart.costoenvio.description}">calculate shipping 
 											<span class="after-icon">
 												<span class="icon_minus-06" aria-hidden="true"></span>
@@ -215,17 +215,17 @@
 									</form>
 								</div>
 							</div>
-							<div class="col-xs-12 col-sm-4">
+							<div class="col-xs-12 col-sm-4" >
 								<div class="cart-form">
-									<h3 th:text="#{shopping.cart.cupon.description}">coupon discount 
+									<h3 th:text="#{shopping.cart.cupon.description}" style="display: none">coupon discount 
 										<span class="after-icon">
 											<span class="icon_minus-06" aria-hidden="true"></span>
 										</span>
 									</h3>
-									<span th:text="#{shopping.cart.cupon.header}" class="enter-coupon">Enter your coupon code if you have one.</span>
+									<span th:text="#{shopping.cart.cupon.header}" class="enter-coupon" style="display: none">Enter your coupon code if you have one.</span>
 									<form>
-										<input type="text" th:placeholder="#{shopping.cart.cupon.code}" />
-										<input type="submit" th:value="#{shopping.cart.cupon.btndescription}" />
+										<input type="text" th:placeholder="#{shopping.cart.cupon.code}" style="display: none"/>
+										<input type="submit" th:value="#{shopping.cart.cupon.btndescription}" style="display: none"/>
 									</form>
 								</div>
 							</div>
@@ -237,7 +237,7 @@
 										<span id="cart-pr-total-gral" class="grand-total">total <strong>$0.00</strong></span>
 									</div>
 									<a href="#" onclick="enviarPedido()" class="cart-proceed" th:text="#{shopping.cart.precios.btncheckout}">proceed to checkout</a>
-									<a href="#" class="checkout-with" th:text="#{shopping.cart.precios.description}">Checkout with Mutilple Adresses</a>
+									<a href="#" class="checkout-with" th:text="#{shopping.cart.precios.description}"style="display: none">Checkout with Mutilple Adresses</a>
 								</div>
 							</div>
 						</div>
@@ -251,104 +251,6 @@
 				<div class="primary-footer">
 					<div class="container">
 						<div class="row">
-							<div class="footer-content col-md-3 col-sm-3 col-xs-12">
-								<div class="footer-border">
-									<h4> STORE </h4>
-									<ul class="footer-nav">
-										<li>
-											<a href="#">New York</a>
-										</li>
-										<li>
-											<a href="#">Paris</a>
-										</li>
-										<li>
-											<a href="#">London</a>
-										</li>
-										<li>
-											<a href="#">Madrid</a>
-										</li>
-										<li>
-											<a href="#">Tokio</a>
-										</li>
-										<li>
-											<a href="#">Milan</a>
-										</li>
-										<li>
-											<a href="#">Hong Kong</a>
-										</li>
-									</ul>
-								</div>
-							</div>
-							<div class="footer-content col-md-3 col-sm-3 col-xs-12">
-								<div class="footer-border">
-									<h4> OUR OFFER </h4>
-									<ul class="footer-nav">
-										<li>
-											<a th:text="${token}" href="#">New products</a>
-										</li>
-										<li>
-											<a href="#">Top sellers</a>
-										</li>
-										<li>
-											<a href="#">Specials</a>
-										</li>
-										<li>
-											<a href="#">Manufacturers</a>
-										</li>
-										<li>
-											<a href="#">Suppliers</a>
-										</li>
-										<li>
-											<a href="#">Specials</a>
-										</li>
-										<li>
-											<a href="#">Customer Service</a>
-										</li>
-									</ul>
-								</div>
-							</div>
-							<div class="footer-content col-md-3 col-sm-3 col-xs-12">
-								<div class="footer-border">
-									<h4> OUR SERVICES </h4>
-									<ul class="footer-nav">
-										<li>
-											<a href="#">Order tracking</a>
-										</li>
-										<li>
-											<a href="#">Privacy Policy</a>
-										</li>
-										<li>
-											<a href="#">Gift Cards</a>
-										</li>
-										<li>
-											<a href="#">Shipping Information</a>
-										</li>
-										<li>
-											<a href="#">Returns &amp; refunds</a>
-										</li>
-										<li>
-											<a href="#">Personalised Cards</a>
-										</li>
-										<li>
-											<a href="#">Delivery information</a>
-										</li>
-									</ul>
-								</div>
-							</div>
-							<div class="footer-content col-md-3 col-sm-3 col-xs-12">
-								<div class="footer-border">
-									<h4> OUR CONTACT </h4>
-									<div class="info-block">
-										<address class="address-info">
-											United Kingdom, London
-											<br />
-											Simple Street 15A
-										</address>
-										<span class="call-info"> <a href="callto:1231234567890">(123) 123.456.7890 </a> <a href="callto:1231234567890">(123) 123.456.7890</a> </span>
-										<span class="mail-info"> <a href="mailto:megashop@info.com">megashop@info.com</a> <a href="mailto:megashop@holding.com">megashop@holding.com</a> </span>
-									</div>
-								</div>
-							</div>
 						</div>
 					</div>
 				</div>

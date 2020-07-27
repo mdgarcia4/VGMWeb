@@ -3,8 +3,8 @@
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<title>Look</title>
-		<link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+		<title th:text="${nameapp}+'-'+#{contacto.nombre}">Look</title>
+		<link rel="shortcut icon" href="img/gral/favicon.ico" type="image/x-icon">
 		<!-- Google Font -->
 		<link href='https://fonts.googleapis.com/css?family=Montserrat:400,700%7CPlayfair+Display:400italic,400,900%7COpen+Sans' rel='stylesheet' type='text/css'>
 		<link href='https://fonts.googleapis.com/css?family=Lato:400,700,900' rel='stylesheet' type='text/css'>
@@ -123,7 +123,7 @@
 										</div>
 									</div>
 								</div>
-								<a href="index.html" class="logo"><img src="assets/images/logo.png" alt="LOOK" /></a>
+								<a href="index.html" class="logo"><img src="img/gral/logo.png" alt="LOOK" /></a>
 							</div>
 						</div>
 					</div>
@@ -153,15 +153,15 @@
 				<div class="container">
 					<div class="row">
 						<div class="main-banner-text">
-							<span>contact</span>
-							<ul class="banner-nav">
-								<li>
+							<span style="display: none">contact</span>
+							 <ul class="banner-nav" style="display: none">
+								<listyle="display: none">
 									<a href="index.html">Home</a>
 								</li>
-								<li>
+								<listyle="display: none">
 									<a href="shopping-cart.html">Shop</a>
-								</li>
-								<li class="active">
+								</listyle="display: none">
+								<li class="active" style="display: none">
 									<a href="#">Contact</a>
 								</li>
 							</ul>
