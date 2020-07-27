@@ -8,25 +8,26 @@ import org.springframework.stereotype.Service;
 
 import com.vgmsistemas.vgmweb.dto.CustomerWsDto;
 import com.vgmsistemas.vgmweb.dto.PkCustomerWsDto;
-import com.vgmsistemas.vgmweb.dto.DailyOrderDetailWsDto;
 import com.vgmsistemas.vgmweb.dto.DailyOrderWsDto;
 import com.vgmsistemas.vgmweb.dto.DetailViewWsDto;
 
-import com.vgmsistemas.vgmweb.dto.ItemWsDto;
 import com.vgmsistemas.vgmweb.entity.Cliente;
 import com.vgmsistemas.vgmweb.service.rest.VentaWs;
+import com.vgmsistemas.vgmweb.util.CodeResult;
 
 @Service
 public class VentaService {
 	
 	@Autowired
-	ClienteService clienteService;	
+	VentaWs ventaWs;
+	@Autowired
+	ClienteService clienteService;
 	PkCustomerWsDto pkCustomer;	
 	CustomerWsDto customer; 	
 	DailyOrderWsDto dailyOrder;
-	VentaWs ventaWs;
 	
-	public int generarVenta(DetailViewWsDto detallePedido) {
+	
+	public String generarVenta(DetailViewWsDto detallePedido) {
 		try {
 			/**** Armo la venta ****/
 			// Obtengo el usuario para poder obtener el cliente 
@@ -53,13 +54,19 @@ public class VentaService {
 			dailyOrder.setVentaDetalle(detallePedido.getVentaDetalle()); 
 			
 			/*** Mando el pedido ***/
-			ventaWs = new VentaWs();
 			int respuesta = ventaWs.send(dailyOrder);
+			if(respuesta == 0) 
+			{
+				return String.valueOf(CodeResult.RESULT_OK);
+			}
+			else //por errores se ingresa aquí
+			{
+				return "StatusCode:" + String.valueOf(respuesta)+"-"+ CodeResult.getHttpError(respuesta);/*"0";*/
+			}
 			
-			return respuesta;
 		} catch (Exception e) {
 			// TODO: handle exception
-			return -1;
+			return  "StatusCode:500-Error Interno del Servidor";
 		}
 		
 	}
