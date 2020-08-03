@@ -13,6 +13,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+
 import org.hibernate.annotations.Where;
 
 @Entity
@@ -21,39 +22,33 @@ import org.hibernate.annotations.Where;
 public class ListaPrecioDetalle implements Serializable {
 	
 	private static final SimpleDateFormat formatTimestampSqlite = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+	
+	public static final String BUSQUEDA_POR_ID = "ID";
+	public static final String BUSQUEDA_POR_CODBARRA = "CB";
+	public static final String BUSQUEDA_POR_IDEMPRESA = "IE";
 
 	private static final long serialVersionUID = -3096719252632833846L;
 	
 	@EmbeddedId
-	private PkListaPrecioDetalle id;
-	
+	private PkListaPrecioDetalle id;	
 	@Column(name = "pr_siva")
-	private Float precioSinIva;
-	
+	private Double precioSinIva;	
 	@Column(name = "pr_final")
-	private Float precioConIva;
-
+	private Double precioConIva;
 	@Column(name = "ca_lista")
 	private Float cantidadPorLista;
-
 	@Column(name = "ca_vendido")
-	private Float cantidadVendida;
-	
+	private Float cantidadVendida;	
 	@Column(name = "sn_palm")
 	private String snMovil;
-
 	@Column(name = "fe_vigencia_desde")
 	private Date fechaVigenciaDesde;
-
 	@Column(name = "fe_vigencia_hasta")
-	private Date fechaVigenciaHasta;
-	
+	private Date fechaVigenciaHasta;	
 	@Transient
-	private String fechaVigenciaDesdeSqlite;
-	
+	private String fechaVigenciaDesdeSqlite;	
 	@Transient
-	private String fechaVigenciaHastaSqlite;
-	
+	private String fechaVigenciaHastaSqlite;	
 	@Column(name = "sn_pedido_web")
 	private String snPedidoWeb;
 
@@ -65,12 +60,23 @@ public class ListaPrecioDetalle implements Serializable {
 	@Column (name = "ca_articulo_hasta")
 	private Integer caArticuloHasta;*/
 	
+	@Transient
+	private Float taDtoProveedor;	
+	@Transient
+	private Float taDtoCliente;	
+	@Transient
+	private Float taDto;
+	@Transient
+	private Double precioConIvaYDtos;
+	@Transient
+	private String srcImagen;
 	
+
 	public ListaPrecioDetalle(){
 		
 	}
 
-	public ListaPrecioDetalle(PkListaPrecioDetalle id, Float precioSinIva, Float precioConIva, Float cantidadPorLista,
+	public ListaPrecioDetalle(PkListaPrecioDetalle id, Double precioSinIva, Double precioConIva, Float cantidadPorLista,
 			Float cantidadVendida, String snMovil, Date fechaVigenciaDesde, Date fechaVigenciaHasta,
 			String fechaVigenciaDesdeSqlite, String fechaVigenciaHastaSqlite, String snPedidoWeb) {
 		super();
@@ -90,14 +96,14 @@ public class ListaPrecioDetalle implements Serializable {
 	/**
 	 * @param precioSinIva the precio to set
 	 */
-	public void setPrecioSinIva(Float precioSinIva) {
+	public void setPrecioSinIva(Double precioSinIva) {
 		this.precioSinIva = precioSinIva;
 	}
 	
 	/**
 	 * @return the precioSinIva
 	 */
-	public Float getPrecioSinIva() {
+	public Double getPrecioSinIva() {
 		return this.precioSinIva;
 	}
 
@@ -119,14 +125,14 @@ public class ListaPrecioDetalle implements Serializable {
 	/**
 	 * @return the precioConIva
 	 */
-	public Float getPrecioConIva() {
+	public Double getPrecioConIva() {
 		return precioConIva;
 	}
 
 	/**
 	 * @param precioConIva the precioConIva to set
 	 */
-	public void setPrecioConIva(Float precioConIva) {
+	public void setPrecioConIva(Double precioConIva) {
 		this.precioConIva = precioConIva;
 	}
 
@@ -237,4 +243,44 @@ public class ListaPrecioDetalle implements Serializable {
 		this.articulo = articulo;
 	}
 	
+	public Float getTaDtoProveedor() {
+		return taDtoProveedor;
+	}
+
+	public void setTaDtoProveedor(Float taDtoProveedor) {
+		this.taDtoProveedor = taDtoProveedor;
+	}
+
+	public Float getTaDtoCliente() {
+		return taDtoCliente;
+	}
+
+	public void setTaDtoCliente(Float taDtoCliente) {
+		this.taDtoCliente = taDtoCliente;
+	}
+
+	public Float getTaDto() {
+		return taDto;
+	}
+
+	public void setTaDto(Float taDto) {
+		this.taDto = taDto;
+	}
+
+	public Double getPrecioConIvaYDtos() {
+		return precioConIvaYDtos;
+	}
+
+	public void setPrecioConIvaYDtos(Double precioConIvaYDtos) {
+		this.precioConIvaYDtos = precioConIvaYDtos;
+	}
+	
+	public String getSrcImagen() {
+		return srcImagen;
+	}
+
+	public void setSrcImagen(String srcImagen) {
+		this.srcImagen = srcImagen;
+	}
+
 }
