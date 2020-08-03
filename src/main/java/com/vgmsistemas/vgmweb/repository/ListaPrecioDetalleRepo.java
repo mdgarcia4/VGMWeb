@@ -46,5 +46,18 @@ public interface ListaPrecioDetalleRepo extends JpaRepository<ListaPrecioDetalle
     		+ "  AND l.id.idLista = ?2"
     		+ "  AND a.marca.id = ?3")
     public Page<ListaPrecioDetalle> findListaBySucursalAndListaAndMarca(Long sucursal, Long lista, Long marca, Pageable pageable);
-       
+    
+	@Query("SELECT l FROM ListaPrecioDetalle l,Articulo a "
+    		+ " WHERE a.id = l.id.idArticulo "
+    		+ "  AND a.snActivo ='S'"
+    		+ "  and a.snWeb='S'"
+    		+ "  AND l.id.idSucursal = ?1"
+    		+ "  AND l.id.idLista = ?2"
+    		+ "  AND (a.subrubro.id.idRubro = ?3 OR 0 = ?3 )"
+    		+ "  AND (a.subrubro.id.idSubrubro = ?4 OR 0 = ?4 )"
+    		+ "  AND (a.marca.id = ?5 OR 0 = ?5 )"
+    		+ "  AND (a.idProveedor = ?6 OR 0 = ?6 )")
+    public Page<ListaPrecioDetalle> findListaBySucListaRubroSubrubroMarcaProvedor(Long sucursal, Long lista, 
+    			Long rubro, Long subrubro ,Long marca, Long proveedor, Pageable pageable);
+    
 }
