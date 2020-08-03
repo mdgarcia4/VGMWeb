@@ -57,6 +57,14 @@ public class Sucursal implements Serializable{
 			+ " FROM empresas)")
 	private int sucActivaEmpresa;
 	
+	@Column(name = "ti_ctrl_accom")
+	private String tiCtrlAccom;
+	
+	public static String TI_CONTROL_CON_AUTORIZACION = "CA";
+    public static String TI_CONTROL_NO_RETIENE = "NR";
+    public static String TI_CONTROL_SACA_DESCUENTO = "SD";    
+	
+	
 	/**
 	 * @return the id
 	 */
@@ -212,5 +220,13 @@ public class Sucursal implements Serializable{
 	
 	public void setSucActivaEmpresa(int sucActivaEmpresa) {
 		this.sucActivaEmpresa = sucActivaEmpresa;
+	}
+	
+	public String getTiCtrlAccom() {
+		return tiCtrlAccom;
+	}
+	
+	public void setTiCtrlAccom(String tiCtrlAccom) {
+		this.tiCtrlAccom = tiCtrlAccom;
 	}
 }
