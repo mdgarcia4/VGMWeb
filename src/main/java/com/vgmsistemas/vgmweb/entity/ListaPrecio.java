@@ -1,7 +1,5 @@
-/**
- * 
- */
 package com.vgmsistemas.vgmweb.entity;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -16,13 +14,13 @@ import javax.persistence.Transient;
 @Entity
 @Table( name = "listas" )
 public class ListaPrecio implements Serializable{
-	public static final int TIPO_LISTA_LIBRE = 5;
-	public final static int TIPO_LISTA_COMBOS_ESPECIALES = 8;
-	public final static int TIPO_LISTA_COMBOS_COMUNES = 3;
 	public final static int TIPO_LISTA_BASE = 1;
-	/**
-	 * 
-	 */
+	public final static int TIPO_LISTA_COMBOS_COMUNES = 3;
+	public static final int TIPO_LISTA_LIBRE = 5;
+	public static final int TIPO_LISTA_BASE_X_ART_LIBRE = 7;
+	public final static int TIPO_LISTA_COMBOS_ESPECIALES = 8;
+	public static final int TIPO_LISTA_BASE_X_CANTIDAD = 9;
+	
 	private static final long serialVersionUID = -2608483363578337292L;
 	
 	@Id
@@ -59,13 +57,6 @@ public class ListaPrecio implements Serializable{
 	
 	@Column(name = "fh_vencimiento")
 	private Calendar fhVencimiento;
-
-	public static final int LISTA_BASE = 1;
-	public static final int LISTA_PROMOCION = 3;
-	public static final int LISTA_LIBRE = 5;
-	public static final int LISTA_BASE_X_ART_LIBRE = 7;
-	public static final int LISTA_PROMOCION_ESPECIAL = 8;
-	public static final int LISTA_BASE_X_CANTIDAD = 9;
 	
 	/**
 	 * @return the id
