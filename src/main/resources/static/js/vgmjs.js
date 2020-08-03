@@ -54,6 +54,7 @@ function cargaritemdwnhtml(id, asimagensrc, asdescripcion, asprecio, ascantidad,
 		}
 	} 
 	ascantidad = parseInt(ascantidad);
+	let vaciar = 0;
 	var htmlDinamico = '<li id="li-dwn-' + id + '">';	
 		htmlDinamico += '<figure class="item-image">';
 		htmlDinamico += '<a href="#"><img src="' + asimagensrc + '" alt="t-shirt" onerror="imgErrorLoad(this);" /></a>';
@@ -63,7 +64,7 @@ function cargaritemdwnhtml(id, asimagensrc, asdescripcion, asprecio, ascantidad,
 		htmlDinamico += '<span ><strong>' + ascantidad + '</strong> item(s) - <strong>$ ' + asprecio + '</strong></span>';
     	htmlDinamico += '<span class="price"> $ ' + aspreciototal + '</span>';
     	htmlDinamico += '</div>';
-		htmlDinamico += '<span id="li-dwn-' + id + '" class="delete fa fa-trash" onClick="borrarItemDwnCarritoVgm(' + id + ')"> </span>';
+		htmlDinamico += '<span id="li-dwn-' + id + '" class="delete fa fa-trash" onClick="borrarItemDwnCarritoVgm(' + id + ','+ vaciar +')"> </span>';
 		htmlDinamico += '</li>';
 		$("#dwnCarritoVgm").append(htmlDinamico);
 		refreshCantPrDwnCarritoVgm();
@@ -100,7 +101,7 @@ function loadItemsShoppingCart() {
 		var lsPrecio = precioString(item.precio);
 		var lsPrecioxCant = precioString(item.precio * item.cantidad);
 		var lsimagensrc = item.srcimagen;
-		
+		let vaciar = 0;
 		var htmlDinamico = '<tr id="tr-item-' + id + '">';
 		htmlDinamico += '<td data-product="product name" class="cart-fig">';
 		htmlDinamico += '<figure>';
@@ -116,7 +117,7 @@ function loadItemsShoppingCart() {
 		htmlDinamico += '<td data-total="total" class="cart-total"><span id="item-prtotal-' + item.id + '" class="cart-price">$' + lsPrecioxCant + '</span></td>';
 		htmlDinamico += '<td class="cart-btn">';
 		/*htmlDinamico += '<a href="#" class="trash"><i class="fa fa-trash"></i></a>';*/
-		htmlDinamico += '<a id="li-dwn-' + id + '" onClick="borrarItemDwnCarritoVgm(' + id + ')" class="trash"><i class="fa fa-trash"></i></a>';
+		htmlDinamico += '<a id="li-dwn-' + id + '" onClick="borrarItemDwnCarritoVgm(' + id + ','+ vaciar +')" class="trash"><i class="fa fa-trash"></i></a>';
 		/*htmlDinamico += '<a href="#" class="pencil"><span class="icon_pencil" aria-hidden="true"></span></a></td>';*/
 		htmlDinamico += '</tr>';
 		$("#itemShoppingCart").append(htmlDinamico);
@@ -351,7 +352,7 @@ function vaciarCarrito(){
 		type: 'warning',
 		showCancelButton: true,
 		confirmButtonColor: '#333333',/*#3085d6*/
-		cancelButtonColor: '#d33',
+		/*cancelButtonColor: '#d33',*/
         confirmButtonText: "Sí, limpiar",
         cancelButtonText: "Cancelar"
 	  }).then(resultado => {
@@ -359,7 +360,7 @@ function vaciarCarrito(){
             // Hicieron click en "Sí"
             var cbShopCart = JSON.parse(localStorage.getItem("cbShopCart"));
 			cbShopCart.forEach(function(item){
-				borrarItemDwnCarritoVgm(item.id);
+				borrarItemDwnCarritoVgm(item.id,1);/*1: no generna msj*/
 			});
 			localStorage.removeItem("cbShopCart");
 			load();
@@ -370,32 +371,43 @@ function vaciarCarrito(){
     });	
 };
 /*Borra un elemento de dropdown del carrito*/
-function borrarItemDwnCarritoVgm(id) {
+function borrarItemDwnCarritoVgm(id,vaciar) {
 	let idborrar = id
-	swal({
-		title: '¿Desea eliminar este Item?',
-		text: "No podrás revertir esta acción",
-		type: 'warning',
-		showCancelButton: true,
-		confirmButtonColor: '#333333',/*#3085d6*/
-		cancelButtonColor: '#d33',
-        confirmButtonText: "Sí, eliminar",
-        cancelButtonText: "Cancelar"
-	  }).then(resultado => {
-        if (resultado.value) {
-            // Hicieron click en "Sí"
-        	$("#li-dwn-"+idborrar).remove();
-        	/* si estoy en la pag de shopping cargo los items */
-        	if ($("#shopping-cart-content").length > 0) {
-        		$("#tr-item-"+idborrar).remove();
-        	};
-        	deleteStorage(idborrar);
-        	refreshCantPrDwnCarritoVgm();
-        } else {
-            // Dijeron que no
-            return;
-        }
-    });		
+	if(vaciar === 0){
+		swal({
+			title: '¿Desea eliminar este Item?',
+			text: "No podrás revertir esta acción",
+			type: 'warning',
+			showCancelButton: true,
+			confirmButtonColor: '#333333',/*#3085d6*/
+			/*cancelButtonColor: '#d33',*/
+	        confirmButtonText: "Sí, eliminar",
+	        cancelButtonText: "Cancelar"
+		  }).then(resultado => {
+	        if (resultado.value) {
+	            // Hicieron click en "Sí"
+	        	$("#li-dwn-"+idborrar).remove();
+	        	/* si estoy en la pag de shopping cargo los items */
+	        	if ($("#shopping-cart-content").length > 0) {
+	        		$("#tr-item-"+idborrar).remove();
+	        	};
+	        	deleteStorage(idborrar);
+	        	refreshCantPrDwnCarritoVgm();
+	        } else {
+	            // Dijeron que no
+	            return;
+	        }
+		  });
+	}else{
+		// Hicieron click en "Sí"
+    	$("#li-dwn-"+idborrar).remove();
+    	/* si estoy en la pag de shopping cargo los items*/ 
+    	if ($("#shopping-cart-content").length > 0) {
+    		$("#tr-item-"+idborrar).remove();
+    	};
+    	deleteStorage(idborrar);
+    	refreshCantPrDwnCarritoVgm();
+	}
 };
 
 /*quitar de storage por id*/
