@@ -122,8 +122,8 @@
 											<span class="total">Total</span> <span id="totDwnCarritoVgmItem" class="amount">$ 0.00</span>
 										</div>
 										<div class="butn-group clearfix">
+											<a href="#"	class="checkout" th:text="#{itemcart.checkout}" style="display: none">CHECKOUT</a>
 											<a href="/shopping-cart" class="cart" th:text="#{itemcart.viewcart}">VIEW CART</a> 
-											<a href="#"	class="checkout" th:text="#{itemcart.checkout}" >CHECKOUT</a>
 										</div>
 									</div>
 								</div>
@@ -256,7 +256,7 @@
 												<select name="ordenamiento" id="ordenamiento" class="select"  >
 													<option value="#"disabled selected></option>
 													<option value="articulo.descripcion" th:utext="#{categorias.order.nombre}">Name</option>
-													<option value="3" th:utext="#{categorias.order.precio}">Price</option>
+													<option value="precioConIva" th:utext="#{categorias.order.precio}">Price</option>
 												</select>
 											</li>
 											<li>
@@ -279,7 +279,7 @@
 									<div class="col-xs-12 col-sm-4" th:each="precio: ${preciosArticulos}">
 										<div class="product-display product-description">
 											<figure class="product-image">
-												<img th:id="'item-fig-'+${precio.articulo.id}" src="img/img-six.jpg" onerror="imgErrorLoad(this);" th:src="'img/'+${precio.articulo.idCodigoBarras}+'.jpg'" alt="" />
+												<img th:id="'item-fig-'+${precio.articulo.id}" onerror="imgErrorLoad(this);" th:src="'img/'+${precio.srcImagen}+'.jpg'" alt="" />
 												<div class="overlay">
 													<div class="product-view-block">
 														<div class="product-view clearfix">
@@ -297,13 +297,18 @@
 													<a th:id="'item-descr-'+${precio.articulo.id}" class="item-name"
 														href="#" th:text="${precio.articulo.descripcion}">Articulo 1</a>
 												</h4>
-												<span class="review-icon clearfix"> <i
-													class="icon_star active"></i> <i class="icon_star active"></i>
+												<span > 
+													<!-- <i class="icon_star active"></i> <i class="icon_star active"></i>
 													<i class="icon_star active"></i> <i class="icon_star active"></i>
-													<i class="icon_star"></i>
-												</span> <span class="price"> <span
-													th:id="'item-precio-'+${precio.articulo.id}" th:text="${precio.precioConIva}">$
-														70.00</span> <span class="old-price" th:text="${precio.articulo.precioBase}">$97.00</span></span>
+													<i class="icon_star"></i> -->
+													<span th:id="'item-idempresa-'+${precio.articulo.id}" class="item-name"
+														th:text="'COD:[' + ${precio.articulo.codigoEmpresa} + ']'">Codigo</span>													
+												</span> 
+												<span class="price">
+													<span >$ </span> 													
+													<span th:id="'item-precio-'+${precio.articulo.id}" th:text="${precio.precioConIvaYDtos}">$ 70.00</span> 
+													<span th:if="${precio.precioConIvaYDtos != precio.precioConIva}" class="old-price" th:text="'$ ' + ${precio.precioConIva}">$97.00</span>
+												</span>
 											</div>
 										</div>
 									</div>
@@ -312,13 +317,15 @@
 										<div class="categories-shop-pagging">
 											<ul >
 												<li>
-													<a th:href="@{|/categorias?pagNro=${paginaAnterior}|}" ><i class="fa fa-angle-left"></i></a>
+													<!-- <a th:href="@{|/categorias?pagNro=${paginaAnterior}|}" ><i class="fa fa-angle-left"></i></a> -->
+													<a th:href="'javascript:getpage('+ ${paginaAnterior} +')'" ><i class="fa fa-angle-left"></i></a>
 												</li>
 												<li th:each=" pagina: ${paginas}" th:class="${pagina ==paginaActual ? 'active' :'' }">
 													<a th:href="'javascript:getpage('+ ${pagina} +')'" th:text ="${pagina}" >1</a>
 												</li>
 												<li>
-													<a th:href="@{|/categorias?pagNro=${paginaSiguiente}|}" ><i class="fa fa-angle-right" ></i></a>
+													<!-- <a th:href="@{|/categorias?pagNro=${paginaSiguiente}|}" ><i class="fa fa-angle-right" ></i></a> -->
+													<a th:href="'javascript:getpage('+ ${paginaSiguiente} +')'" ><i class="fa fa-angle-right" ></i></a>
 												</li>
 											</ul>
 										</div>
