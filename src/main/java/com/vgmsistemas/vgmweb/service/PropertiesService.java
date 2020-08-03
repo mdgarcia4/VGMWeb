@@ -29,6 +29,9 @@ public class PropertiesService {
 	@Value("${pagina.nameapp}")
 	private String nameApp;
 
+	@Value("${pagina.path.imagenes}")
+	private String pathSrcImagen;
+		
 	public String getApiKeyGoogle() {
 		if(apiKeyGoogle == null) {
 			return "";
@@ -103,5 +106,12 @@ public class PropertiesService {
 
 	public void setNameApp(String nameApp) {
 		this.nameApp = nameApp;
+	}
+	public String getPathSrcImagen() {
+		return pathSrcImagen;
+	}
+
+	public void setPathSrcImagen(String pathSrcImagen) {
+		this.pathSrcImagen = pathSrcImagen;
 	}
 }
