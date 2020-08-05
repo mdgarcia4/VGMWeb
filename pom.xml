@@ -6,7 +6,7 @@
 
 	<groupId>com.vgmsistemas</groupId>
 	<artifactId>VGMWeb</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1.0.1-VGMWeb</version>
 	<packaging>jar</packaging>
 
 	<name>VGMWeb</name>
@@ -55,12 +55,6 @@
 			<version>7.4.1.jre8</version>
 		</dependency>
 		<!-- <dependency>
-		    <groupId>com.konghq</groupId>
-		    <artifactId>unirest-java</artifactId>
-		    <version>3.7.02</version>
-		    
-		    
-		            
         <dependency>
                 <groupId> com.fasterxml.jackson.datatype </groupId>
                 <artifactId> jackson-datatype-jsr310 </artifactId>
@@ -70,14 +64,14 @@
                 <artifactId> jackson-dataformat-xml </artifactId>
          </dependency>
 		</dependency> -->
+		
+		<!-- Conector a Servicio Rest -->
 		<dependency>
            <groupId>com.mashape.unirest</groupId>
            <artifactId>unirest-java</artifactId>
            <version>1.4.9</version>
         </dependency>		
-        <!-- Usos en Json
-        
-         -->
+        <!-- Usos en Json -->
          <dependency>
             <groupId>com.google.code.gson</groupId>
             <artifactId>gson</artifactId>
