@@ -13,7 +13,6 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.vgmsistemas.vgmweb.entity.Cliente;
 import com.vgmsistemas.vgmweb.entity.PkCliente;
 import com.vgmsistemas.vgmweb.entity.PkRolesUsuarios;
 import com.vgmsistemas.vgmweb.entity.Rol;
@@ -57,7 +56,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 				.orElseThrow(() -> new UsernameNotFoundException("El cliente no existe o esta deshabilitado")) ;
 
 		// Mapear nuestra lista de Authority con la de spring security
-		List grantList = getRoles(appUser);
+		List<GrantedAuthority> grantList = getRoles(appUser);
 
 		// Crear El objeto UserDetails que va a ir en sesion y retornarlo.
 		UserDetails user = (UserDetails) new User(appUser.getUsuario(), appUser.getClave(), grantList);
@@ -80,7 +79,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
  
             newUsuario = usuarioRepo.save(newUsuario) ;
             
-            List grantList = getRoles(entidad);
+            List<GrantedAuthority> grantList = getRoles(entidad);
             
             userDet = (UserDetails) new User(entidad.getUsuario(), entidad.getClave(), grantList);
             return userDet;
@@ -102,7 +101,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         	
         	rolusuarioDefault = rolesUsuariosRepo.save(rolusuarioDefault);
         	
-        	List grantList = new ArrayList();
+        	List<GrantedAuthority> grantList = new ArrayList<GrantedAuthority>();
         	GrantedAuthority grantedAuthority = new SimpleGrantedAuthority("ROLE_USER");
 			grantList.add(grantedAuthority);
         	
@@ -111,9 +110,9 @@ public class UserDetailsServiceImpl implements UserDetailsService {
             return userDet;
         }
 	}
-	private List getRoles(Usuario appUser) {
+	private List<GrantedAuthority> getRoles(Usuario appUser) {
 		// Mapear nuestra lista de Authority con la de spring security
-		List grantList = new ArrayList();
+		List<GrantedAuthority> grantList = new ArrayList<GrantedAuthority>();
 		for (Rol rol : appUser.getRoles()) {
 			// ROLE_USER, ROLE_ADMIN,..
 			GrantedAuthority grantedAuthority = new SimpleGrantedAuthority(rol.getRol());

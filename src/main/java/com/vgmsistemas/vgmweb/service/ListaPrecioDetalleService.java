@@ -88,7 +88,7 @@ public class ListaPrecioDetalleService {
 
 	private Page<ListaPrecioDetalle> controlCalculosPorArticulos(Page<ListaPrecioDetalle> listado) {
 		// para controlar la existencia de imagen
-		String srcImagenControl, pathSourceImage, path, pathHtml;
+		String srcImagenControl, pathSourceImage, path;
 		ApplicationHome home = new ApplicationHome(this.getClass());
 		File dirApp = home.getDir();// obtengo la dir donde esta el proyecto
 		pathSourceImage = propertyService.getPathSrcImagen();

@@ -1,7 +1,6 @@
 package com.vgmsistemas.vgmweb.service;
 
 
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Iterator;
@@ -64,9 +63,6 @@ public class AccionesComDetalleService {
 		Long idSucursal = cliente.getId().getIdSucursal();
 		Long idCliente = cliente.getId().getIdCliente();
 		Long idComercio = cliente.getId().getIdComercio();
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
-		String fechaActual = sdf.format(Calendar.getInstance().getTime());
-
 		Date fechaActuald = Calendar.getInstance().getTime();
 		String tiOrigen = origen;
 		Long idProveedor = (origen.equals(AccionesCom.TI_ORIGEN_PROVEEDOR))
