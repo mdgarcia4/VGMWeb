@@ -8,6 +8,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 
 import com.vgmsistemas.vgmweb.service.UserDetailsServiceImpl;
 
@@ -24,27 +25,31 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests()
-			.antMatchers(resources).permitAll()
-			.antMatchers("/", "/index","/contacto","/registrar","/home").permitAll()
-			.antMatchers("/admin*").access("hasRole('ADMIN')")
-			.antMatchers("/user*").access("hasRole('USER') or hasRole('ADMIN')")
-			.antMatchers("/categorias").access("hasRole('USER') or hasRole('ADMIN')")
-			.antMatchers("/categorias1").access("hasRole('USER') or hasRole('ADMIN')")
-			.antMatchers("/shopping-cart").access("hasRole('USER') or hasRole('ADMIN')")
-			.antMatchers("/checkin").access("hasRole('USER') or hasRole('ADMIN')")
-			.antMatchers("/header").access("hasRole('USER') or hasRole('ADMIN')")
-			.antMatchers("/footer").access("hasRole('USER') or hasRole('ADMIN')")
-			.anyRequest().authenticated()
-			.and()
+				.antMatchers(resources).permitAll()
+				.antMatchers("/", "/index","/contacto","/registrar","/myaccount","/recover-password").permitAll()
+				.antMatchers("/admin*").access("hasRole('ADMIN')")
+				.antMatchers("/user*").access("hasRole('USER') or hasRole('ADMIN')")
+				.antMatchers("/categorias").access("hasRole('USER') or hasRole('ADMIN')")
+				.antMatchers("/shopping-cart").access("hasRole('USER') or hasRole('ADMIN')")
+				.antMatchers("/change-password").access("hasRole('USER') or hasRole('ADMIN')")
+				.antMatchers("/checkin").access("hasRole('USER') or hasRole('ADMIN')")
+				.antMatchers("/change-password").access("hasRole('USER') or hasRole('ADMIN')")
+				.anyRequest().authenticated()
+				.and()
 			.csrf().disable()
 			.formLogin()
-			.loginPage("/login").permitAll()
-			.defaultSuccessUrl("/index")
-			.failureUrl("/login?error=true" )
-			.usernameParameter("usuario").passwordParameter("clave")
+				.loginPage("/login").permitAll()
+				.defaultSuccessUrl("/index")
+				.failureUrl("/login?error=true" )
+                //.failureHandler(authenticationFailureHandler())
+				.usernameParameter("usuario").passwordParameter("clave")
 			.and()
 			.logout().permitAll()
-			.logoutSuccessUrl("/index?logout")
+				.logoutSuccessUrl("/index?logout")
+				.clearAuthentication(true)
+				.invalidateHttpSession(true)
+			.and()
+	            .rememberMe().key("uniqueAndSecret")
 			;
 	}
 
@@ -73,4 +78,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		// And Setting PassswordEncoder
 		auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
 	}
+	
+	@Bean
+    public AuthenticationFailureHandler authenticationFailureHandler() {
+        return new CustomAuthenticationFailureHandler();
+    }
 }
