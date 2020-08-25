@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -47,6 +49,7 @@ public class CategoriasController {
 	ListaPrecioDetalleService listaPrecioDetalleService;
 	@Autowired
 	PropertiesService propertyService;
+	static Logger logger = LoggerFactory.getLogger(CategoriasController.class);
 
 	@GetMapping
 	public String categorias(@RequestParam(defaultValue = "1") Integer page,
@@ -63,58 +66,64 @@ public class CategoriasController {
 		int productoDesde;
 		int productoHasta;
 		long productosTotal;
+		try {
+			// Obtengo el usuario para poder obtener el cliente relacionado con su lista de
+			// precio
+			Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+			UserDetails userDetail = (UserDetails) auth.getPrincipal();
+			String usuario = userDetail.getUsername();
 
-		// Obtengo el usuario para poder obtener el cliente relacionado con su lista de
-		// precio
-		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		UserDetails userDetail = (UserDetails) auth.getPrincipal();
-		String usuario = userDetail.getUsername();
+			Cliente cliente = clienteService.getClienteByUsuario(usuario);
 
-		Cliente cliente = clienteService.getClienteByUsuario(usuario);
+			paginaRecuperar = page - 1;
 
-		paginaRecuperar = page - 1;
+			Page<ListaPrecioDetalle> paginaArticulos = listaPrecioDetalleService.getListaPrecioPorCliente(cliente,
+					paginaRecuperar, size, order, rubro, subrubro, proveedor, marca);
 
-		Page<ListaPrecioDetalle> paginaArticulos = listaPrecioDetalleService.getListaPrecioPorCliente(cliente,
-				paginaRecuperar, size, order, rubro, subrubro, proveedor, marca);
+			paginasTotal = paginaArticulos.getTotalPages();
+			productosTotal = paginaArticulos.getTotalElements();
 
-		paginasTotal = paginaArticulos.getTotalPages();
-		productosTotal = paginaArticulos.getTotalElements();
+			List<Integer> paginas = getVectorPaginasLista(page, paginasTotal);
 
-		List<Integer> paginas = getVectorPaginasLista(page, paginasTotal);
+			if (page <= 1) {
+				paginaAnterior = 1;
+			} else {
+				paginaAnterior = page - 1;
+			}
 
-		if (page <= 1) {
-			paginaAnterior = 1;
-		} else {
-			paginaAnterior = page - 1;
+			if (page >= paginasTotal) {
+				paginaSiguiente = page;
+			} else {
+				paginaSiguiente = page + 1;
+			}
+
+			productoDesde = paginaRecuperar * size + 1;
+			productoHasta = paginaRecuperar * size + size;
+
+			model.addAttribute("paginas", paginas);
+			model.addAttribute("marcas", marcaService.getBySnWeb("S"));
+			model.addAttribute("rubros", rubroService.getBySnWeb("S"));
+			model.addAttribute("proveedores", proveedorService.getBySnWeb("S"));
+			model.addAttribute("preciosArticulos", paginaArticulos);
+			model.addAttribute("paginaAnterior", paginaAnterior);
+			model.addAttribute("paginaActual", page);
+			model.addAttribute("paginaSiguiente", paginaSiguiente);
+			model.addAttribute("productoDesde", productoDesde);
+			model.addAttribute("productoHasta", productoHasta);
+			model.addAttribute("productosTotal", productosTotal);
+			model.addAttribute("preciominimo", 10);
+			model.addAttribute("preciomaximo", 50000);
+			model.addAttribute("nameapp", propertyService.getNameApp());
+			model.addAttribute("userlogincontroller",usuario);
+
+			return "categorias";
+		} catch (Exception e) {
+			logger.error("Error inesperado en clase CategoriasController-Página: categorias. " + e.getStackTrace());
+			return "error";
 		}
 
-		if (page >= paginasTotal) {
-			paginaSiguiente = page;
-		} else {
-			paginaSiguiente = page + 1;
-		}
-
-		productoDesde = paginaRecuperar * size + 1;
-		productoHasta = paginaRecuperar * size + size;
-
-		model.addAttribute("paginas", paginas);
-		model.addAttribute("marcas", marcaService.getBySnWeb("S"));
-		model.addAttribute("rubros", rubroService.getBySnWeb("S"));
-		model.addAttribute("proveedores", proveedorService.getBySnWeb("S"));
-		model.addAttribute("preciosArticulos", paginaArticulos);
-		model.addAttribute("paginaAnterior", paginaAnterior);
-		model.addAttribute("paginaActual", page);
-		model.addAttribute("paginaSiguiente", paginaSiguiente);
-		model.addAttribute("productoDesde", productoDesde);
-		model.addAttribute("productoHasta", productoHasta);
-		model.addAttribute("productosTotal", productosTotal);
-		model.addAttribute("preciominimo", 10);
-		model.addAttribute("preciomaximo", 50000);
-		model.addAttribute("nameapp", propertyService.getNameApp());
-
-		return "categorias";
 	}
-	
+
 	private List<Integer> getVectorPaginasLista(Integer pagVisual, Integer totalPaginas) {
 		int tamaniopagina, pagInicial, pagFinal, cociente, residuo;
 		tamaniopagina = 7;
@@ -133,11 +142,18 @@ public class CategoriasController {
 
 	@PostMapping
 	public String categoriasSearch(String search, Model model, @PageableDefault(page = 0, size = 9) Pageable pageable) {
-		model.addAttribute("marcas", marcaService.getBySnWeb("S"));
-		model.addAttribute("rubros", rubroService.getBySnWeb("S"));
-		model.addAttribute("proveedores", proveedorService.getBySnWeb("S"));
-		model.addAttribute("articulos", articuloService.searchByDescripcion(search, pageable));
+		try {
+			model.addAttribute("marcas", marcaService.getBySnWeb("S"));
+			model.addAttribute("rubros", rubroService.getBySnWeb("S"));
+			model.addAttribute("proveedores", proveedorService.getBySnWeb("S"));
+			model.addAttribute("articulos", articuloService.searchByDescripcion(search, pageable));
 
-		return "categorias";
+			return "categorias";
+
+		} catch (Exception e) {
+			logger.error(
+					"Error inesperado en clase CategoriasController-Página: categoriasSearch. " + e.getStackTrace());
+			return "error";
+		}
 	}
 }
