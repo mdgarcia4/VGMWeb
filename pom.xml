@@ -54,6 +54,11 @@
 			<artifactId>mssql-jdbc</artifactId>
 			<version>7.4.1.jre8</version>
 		</dependency>
+		<!-- ***Envio Mail*** -->
+		<dependency>
+		   <groupId>org.springframework.boot</groupId>
+		   <artifactId>spring-boot-starter-mail</artifactId>
+		</dependency>
 		<!-- <dependency>
         <dependency>
                 <groupId> com.fasterxml.jackson.datatype </groupId>
