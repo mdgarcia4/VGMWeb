@@ -11,7 +11,7 @@ public class EmpresaService {
 	@Autowired
 	EmpresaRepo empresaRepo;
 
-	public Empresa getById(Long id) {
+	public Empresa getById(Long id) throws Exception{
 		return empresaRepo.findById(id).get();
 	}
 }

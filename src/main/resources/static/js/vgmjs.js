@@ -14,6 +14,21 @@ function load() {
 	$("#idiomas option[value='"+ optionValue +"']").attr("selected",true);
 	
 	loadMemoryBackUp();
+	/*cargo datos del comercio selecionado*/
+	let comercioSelect = localStorage.getItem("comercioSeleccionado");
+	if (comercioSelect === null){
+		comercioSelectt = 0;
+		localStorage.setItem('comercioSeleccionado', comercioSelect);
+	};
+	/*cargo el usuario logueado si estoy en categ*/
+	if ($("#usuariologin").length > 0) {
+		let userlogin = localStorage.getItem("userlogin");
+		if (userlogin === null){
+			userlogin = $("#usuariologueado").text();;
+			localStorage.setItem('userlogin', userlogin);
+		};
+	};
+	
 };
 
 function loadItemDwnCarrito(){
@@ -223,6 +238,10 @@ function getproveedor(id) {
 	goToCatalog();
 };
 
+function goToAccount() {
+	window.location="/myaccount"
+}
+
 /*agrego items al ddn-carrito*/
 function agregarDwnCarritoVgm(id, isCombo,msj){
 	var cantidad = 1;
@@ -289,7 +308,7 @@ function addItem(id, isCombo,msj){
 	};*/
 
 	let cantidad = parseInt(localStorage.getItem("cantidadPedida"));
-	localStorage.setItem("cantidadPedida", 0);
+	localStorage.setItem("cantidadPedida", 0);//limpio la variable
 	let descripcion = $("#item-descr-"+id).text();
 	let precio = parseFloat(parseFloat($("#item-precio-"+id).text()).toFixed(2));
 	let ele_imagen = document.getElementById("item-fig-"+id);
@@ -643,6 +662,131 @@ function reemplazarCadena(cadenaVieja, cadenaNueva, cadenaCompleta) {
       }
    }
    return cadenaCompleta;
+};
+
+if(document.getElementById("form-register")){
+	$.validator.addMethod("campoemail", function(value, element) {
+		return this.optional(element) || /^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/.test(value);
+		}, "Debe ser de una direcci\u00f3n email valida");
+
+	$.validator.addMethod("campotelefono", function(value, element) {
+		return this.optional(element) || /^[0-9]{1,50}$/.test(value);
+		}, "S\u00f3lo se adminten n\u00fameros");
+
+	$.validator.addMethod("sin-caracter-especial", function(value, element) {
+		return this.optional(element) || /^[A-Za-z\d=#$%@_ -]+$/.test(value);
+		}, "No se adminten caracteres especiales");
+
+	jQuery(function() {
+		jQuery( "#form-register" ).validate({
+			rules :{
+				email : {
+					required : true, //para validar campo vacio
+					campoemail    : ""  //para validar formato email
+					/*email	 : true*/
+				},
+				nombre : {
+					required : true,
+					minlength : 6, //para validar campo con minimo 6 caracteres
+					maxlength : 50  //para validar campo con maximo 50 caracteres
+				},
+				usuario : {
+					required : true,
+					minlength : 6, //para validar campo con minimo 6 caracteres
+					maxlength : 30  //para validar campo con maximo 30 caracteres
+				},
+				telefono : {
+					required : true,
+					minlength : 8, //para validar campo con minimo 8 caracteres
+					maxlength : 20,  //para validar campo con maximo 20 caracteres
+					number : true   //para validar campo solo numeros
+				},
+				clave : {
+					required :true,
+				},
+				claverepetir: {
+					required :true,
+					equalTo: "#clave"
+				}
+			},
+			messages : {
+				email : {
+					required : "Debe ingresar un email.",
+					/*email    : "Debe ingresar un email valido"*/
+				},
+				nombre : {
+					required : "Debe ingresar un nombre.",
+					minlength : "EL nombre debe tener un m\u00ednimo de 6 caracteres.",
+					maxlength : "EL nombre debe tener un m\u00e1ximo de 50 caracteres."
+				},
+				usuario : {
+					required : "Debe ingresar un usuario",
+					minlength : "EL usuario debe tener un m\u00ednimo de 6 caracteres.",
+					maxlength : "EL usuario debe tener un m\u00e1ximo de 30 caracteres."
+				},
+				telefono : {
+					required : "Debe ingresar un tel\u00e9fono",
+					minlength : "EL tel\u00e9fono debe tener un m\u00ednimo de 6 caracteres.",
+					maxlength : "EL tel\u00e9fono debe tener un m\u00e1ximo de 50 caracteres.",
+					number : "Solo se adminten n\u00fameros en en el tel\u00e9fono."
+				},
+				clave : {
+					required : "Debe ingresar una clave."
+				} ,
+				claverepetir : {
+					required : "Debe repetir la clave ingresada."
+				}
+			}
+		});
+	});
+};
+
+if(document.getElementById("form-change-pass")){
+	jQuery(function() {
+		jQuery( "#form-change-pass" ).validate({
+			rules :{
+				user : {
+					required : true,
+					minlength : 6, //para validar campo con minimo 6 caracteres
+					maxlength : 30  //para validar campo con maximo 30 caracteres
+				},
+				oldpassword : {
+					required :true,
+				},
+				newPassword : {
+					required :true,
+				},
+				repeatPassword: {
+					required :true,
+					equalTo: "#newPassword"
+				}
+			},
+			messages : {
+				user : {
+					required : "Debe ingresar un usuario",
+					minlength : "EL usuario debe tener un m\u00ednimo de 6 caracteres.",
+					maxlength : "EL usuario debe tener un m\u00e1ximo de 30 caracteres."
+				},
+				oldpassword : {
+					required : "Debe ingresar la clave actual."
+				} ,
+				newPassword : {
+					required : "Debe ingresar la nueva clave."
+				} ,
+				repeatPassword : {
+					required : "Debe repetir la nueva clave ingresada."
+				}
+			}
+		});
+	});
+};
+
+function getComercioSelected() {
+	let lsValorSelect = document.getElementById("dropDnwComercios").value;
+	if (lsValorSelect === "#") { lsValorSelect = "0";} /*No hay comercio selecionado*/
+	let intValorSelect = parseInt(lsValorSelect);
+	localStorage.removeItem("comercioSeleccionado");
+	localStorage.setItem('comercioSeleccionado', intValorSelect);
 }
 
 function enviarPedido() {
@@ -656,6 +800,16 @@ function enviarPedido() {
 		return
 	};
 	
+	let comercioSelect = localStorage.getItem("comercioSeleccionado");
+	if ((comercioSelect === null || comercioSelect === 0)){
+		swal({
+			type: 'error',
+			title: 'Error',
+			text: 'Debe eligir un comercio',
+		});
+		return
+	};
+
 	if (cbShopCart !== null){
 		var url_enviar = "http://" + window.location.host
 		/*DIA Y HORA*/
@@ -682,7 +836,7 @@ function enviarPedido() {
 							+',"unidades":'+art.cantidad+',"bultos":0}';
 		});
 		listaArticulos += ']';	
-		var oparam = '{'+ listaArticulos+ '}';
+		var oparam = '{'+ listaArticulos+ ', "comercioSeleccionado":'+comercioSelect+'}';
 		$.ajax({ 			
 			method: "POST", 
 			contentType: "application/json; charset=utf-8", 
@@ -700,9 +854,15 @@ function enviarPedido() {
 					window.location.href = "503.html"
 				}*/
 			},
+			beforeSend: function () {
+				$('#loading').fadeIn();
+			  },
+			complete: function () {
+				$('#loading').fadeOut(500);
+			  },
 			success: function (data) {
 				if(data === 0){
-					localStorage.removeItem("cbShopCart");
+					limpiarLocalStorage();
 					swal({
 					  type: 'success',
 					  title: 'Envío',
@@ -733,4 +893,10 @@ function enviarPedido() {
 		});
 
 	};
-}
+};
+
+function limpiarLocalStorage() {
+	localStorage.removeItem("cbShopCart");
+	localStorage.removeItem("comercioSeleccionado");
+	localStorage.removeItem("optionValue");
+};

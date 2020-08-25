@@ -14,28 +14,25 @@ public class SucursalService {
 	@Autowired
 	SucursalRepo sucursalRepo;
 
-	public List<Sucursal> getAll(){
+	public List<Sucursal> getAll() throws Exception {
 		List<Sucursal> sucursales;
 		sucursales = sucursalRepo.findAll();
-		for(Sucursal suc: sucursales) 
-		{
-			if(suc.getLatitud()== null) 
-			{
+		for (Sucursal suc : sucursales) {
+			if (suc.getLatitud() == null) {
 				suc.setLatitud(0F);
 			}
-			if(suc.getLongitud()== null) 
-			{
+			if (suc.getLongitud() == null) {
 				suc.setLongitud(0F);
 			}
 		}
 		return sucursales;
 	}
-	
-	public Sucursal getById(Long id) {
+
+	public Sucursal getById(Long id) throws Exception {
 		Optional<Sucursal> optSucursal = sucursalRepo.findById(id);
-		if( optSucursal.isPresent()) {
+		if (optSucursal.isPresent()) {
 			return optSucursal.get();
-		}else {
+		} else {
 			return null;
 		}
 	}

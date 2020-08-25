@@ -1991,7 +1991,7 @@
 										<input
 										    autocomplete="off"
 										    class="mat-input-element mat-form-field-autofill-control cdk-text-field-autofill-monitored"
-										    maxlength="20"
+										    maxlength="30"
 										    name="clave"
 										    placeholder="Contraseña"
 										    th:placeholder="#{login.password}"
@@ -2028,7 +2028,7 @@
 					        <div  class="smallcheck mat-checkbox mat-accent" style="margin-left: 8px;" id="mat-checkbox-1">
 					            <label class="custom-radio-checkbox mat-checkbox-layout">
 								    <!-- Input oculto -->
-								    <input class="custom-radio-checkbox__input" type="checkbox" name="genero" value="hombre">
+								    <input class="custom-radio-checkbox__input" type="checkbox" name="remember-me" value="hombre">
 								    <!-- Imagen en sustitucion -->
 								    <span class="custom-radio-checkbox__show custom-radio-checkbox__show--checkbox"></span>
 								    <!-- Texto -->
@@ -2051,7 +2051,7 @@
 				    </div>
 				</div>
 				<div style="text-align: center; margin-top:20px;">
-					<a href="#" class="enlace" th:utext="#{login.forgot}">¿Olvidaste tu contraseña ?</a>							
+					<a href="recover-password" class="enlace" th:utext="#{login.forgot}">¿Olvidaste tu contraseña ?</a>							
 					<div>
 						<div  style="text-align: center;">
 							<a th:if="${param.error}"  role="alert" th:utext="#{login.userInvalid}" class="enlace">Usuario o clave inválida.</a>

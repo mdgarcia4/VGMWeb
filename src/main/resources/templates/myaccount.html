@@ -3,10 +3,11 @@
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<title th:text="${nameapp}+'-'+#{shopping.cart.nombre}">Look</title>
+		<title th:text="${nameapp}+'-'+#{myaccount.nombre}">Look</title>
 		<link rel="shortcut icon" href="img/gral/favicon.ico" type="image/x-icon">
 		<!-- Google Font -->
 		<link href='https://fonts.googleapis.com/css?family=Montserrat:400,700%7CPlayfair+Display:400italic,400,900%7COpen+Sans' rel='stylesheet' type='text/css'>
+		<link href='https://fonts.googleapis.com/css?family=Lato:400,700,900' rel='stylesheet' type='text/css'>
 		<link rel="stylesheet" type="text/css" href="assets/css/jquery.selectbox.css" media="screen">
 		<!-- Linea Icons -->
 		<link rel="stylesheet" type="text/css" href="assets/css/linea.css" media="screen">
@@ -17,7 +18,6 @@
 
 		<!-- Bootstrap -->
 		<link rel="stylesheet" type="text/css" href="assets/css/bootstrap.css" media="screen">
-		<link rel="stylesheet" type="text/css" href="assets/css/jquery.fancybox.css" media="screen">
 		<link rel="stylesheet" type="text/css" href="assets/css/jquery-ui.css" media="screen">
 
 		<link rel="stylesheet" type="text/css" href="assets/css/dropdown.css" media="screen">
@@ -28,14 +28,8 @@
 		<!--[if lt IE 9]>
 		<script src="assets/js/html5shiv.min.js"></script>
 		<![endif]-->
-		<script type="text/javascript">
-			function imgErrorLoad(image){ 
-				$(image).attr("src","img/gral/imagen_no_disp.jpg");
-	
-			} ;
-		</script>	
 	</head>
-	<body onLoad="load()">
+	<body  onLoad="load()">
 		<!-- Loader -->
 		<div id="loading">
 			<div id="loading-center">
@@ -49,18 +43,17 @@
 		</div>
 		<!-- Loader -->
 		<!--Page Wrapper Start-->
-		<div id="wrapper" class="categories shopping-cart">
+		<div id="wrapper" class="categories contact-page">
 			<!--container Start-->
 			<!--Header Section Start-->
 			<header class="header1" id="header">
-				<!--1Fila-->
 				<div class="top-header hidden-xs">
 					<div class="container">
 						<div class="row clearfix">
 							<div class="col-xs-12">
 								<ul class="top-header-left clearfix">
 									<li class="register-link clearfix">
-										<i class="lock-icon icon_lock"> </i><a href="login" class="login" th:text="#{header.login}" >Log In</a>
+										<i class="lock-icon icon_lock"> </i><a href="login" class="login" th:text="#{header.login}">Log In</a>
 										<span>/</span><a href="registrar" class="register" th:text="#{header.register}">Register </a>
 									</li>
 									<li class="select-wrapper">
@@ -78,9 +71,8 @@
 								</ul>
 								<ul class="top-header-right clearfix">
 									<li class="profile">
-										<a href="myaccount" th:utext="#{header.myacount}"><i class="icon_profile" ></i>My Account </a>
-									</li>
-									
+										<a href="myaccount" th:utext="#{header.myacount}"><i class="icon_profile"></i>My Account </a>
+									</li>									
 									<li class="checkout">
 										<a href="javascript:enviar_formulario_logout()" th:utext="#{header.checkout}"><i class="icon_check_alt" ></i>Checkout</a>
 										<form th:action="@{/logout}" method="post" name="formulario_logout">
@@ -92,22 +84,19 @@
 						</div>
 					</div>
 				</div>
-				<!--2Fila-->
-				<!-- seccion del carrito -->
 				<div class="middle-header">
 					<div class="container">
 						<div class="row clearfix">
 							<div class="col-xs-12 middle-header-content">
-								<!-- Busqueda -->
-								<div class="middle-header-left" style="display: none">
+								<div class="middle-header-left">
 									<form class="clearfix" th:action="@{/categorias}"action="/categorias" method="post">
 										<input type="text" name="search" placeholder="Search... " th:placeholder="#{header.search}"/>
-										<button type="submit" >
+										<button type="submit">
 											<i class="icon_search"></i>
 										</button>
 									</form>
-								</div> 
-								<div class="middle-header-right clearfix" style="display: none">
+								</div>
+								<div class="middle-header-right clearfix">
 									<div id="cantPrCarritoVgm" class="open-cart">
 										<i id="icono1CantPrCarritoVgm" class="icon_bag_alt"></i> 
 										<span id="cantPrCarritoVgmItem" class="item-count"> 0
@@ -122,8 +111,8 @@
 											<span class="total">Total</span> <span id="totDwnCarritoVgmItem" class="amount">$ 0.00</span>
 										</div>
 										<div class="butn-group clearfix">
-											<a href="/shopping-cart" class="cart" th:text="#{itemcart.viewcart}">VIEW CART</a> <a href="#"
-												class="checkout" th:text="#{itemcart.checkout}">CHECKOUT</a>
+											<a href="/shopping-cart" class="cart" th:text="#{itemcart.viewcart}">VIEW CART</a> 
+											<a href="#" class="checkout" th:text="#{itemcart.checkout}">CHECKOUT</a>
 										</div>
 									</div>
 								</div>
@@ -132,7 +121,6 @@
 						</div>
 					</div>
 				</div>
-				<!--3Fila-->
 				<nav class="navigation">
 					<div class="container">
 						<div id="cssmenu">
@@ -141,10 +129,10 @@
 								<li class="active has-sub">
 									<a href="index" th:text="#{menu.home}">Home</a>
 								</li>
-								
 								<li>
-									<a href="/categorias">Productos</a>
+									<a href="/categorias" th:text="#{menu.products}">Productos</a>
 								</li>
+								
 								<li>
 									<a href="contacto" th:text="#{menu.contactus}">Contact us</a>
 								</li>
@@ -153,113 +141,141 @@
 					</div>
 				</nav>
 			</header>
-			<div class="header1"><p></p></div>
+			<!--Header Section End-->
+			<div class="common-banner blog-detail-banner forcefullwidth_wrapper_tp_banner">
+				<div class="container">
+					<div class="row">
+						<div class="main-banner-text">
+							<span style="display: none">contact</span>
+							 <ul class="banner-nav" style="display: none">
+								<li style="display: none">
+									<a href="index.html">Home</a>
+								</li>
+								<li style="display: none">
+									<a href="shopping-cart.html">Shop</a>
+								</li>
+								<li class="active" style="display: none">
+									<a href="#">Contact</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
 			<!--Content Area Start-->
-			<div id="shopping-cart-content" class="content">
-				<!-- Cart Section Starts Here -->
-				<div class="cart-section">
+			<div class="content">
+				<div class="contact-content">
 					<div class="container">
-						<div class="row">
-							<div class="col-xs-12">
-								<!-- Cart Items Starts Here -->
-								<div class="cart-item">
-									<h3 th:utext="#{shopping.cart.description}" >your cart items</h3>
-									<table class="table custom-table">
-										<thead>
-											<tr>
-												<th colspan="1" th:utext="#{shopping.cart.table.header.name}">product name</th>
-												<th th:text="#{shopping.cart.table.header.price}">price</th>
-												<th th:text="#{shopping.cart.table.header.quantity}">quantity</th>
-												<th colspan="2" th:text="#{shopping.cart.table.header.total}">total</th>
-											</tr>
-										</thead>
-										<tbody id="itemShoppingCart">
-											
-										</tbody>
-									</table>
-								</div>
-								<!-- Cart Items Starts Here -->
-							</div>
-							<div class="col-xs-12 col-sm-4 col-md-3">
-								<span class="shopping-btn">
-									<a onClick="vaciarCarrito()" href="#" th:text="#{shopping.cart.table.footer.clear}">clear shopping cart</a>
-								</span>
-							</div>
-							<div class="col-xs-12 col-sm-4 col-md-3">
-								<!--<span class="shopping-btn" style="display: none">
-									<a href="#" th:text="#{shopping.cart.table.footer.update}">update shopping cart</a>
-								</span>-->
-								<div style="padding-top: 8px;	padding-bottom: 5px;"th:object="${comercio}">
-									<select class="form-control" name="dropDnwComercios" id="dropDnwComercios"  onchange="getComercioSelected();">
-										<option value="#" th:text="#{shopping.cart.comercios.opciones}">Select Test Order</option>
-										<option th:each="comercio : ${comercios}"
-												th:value="${comercio.id.idComercio}"
-												th:text="${comercio.razonSocial}+' : '+${comercio.domicilio}">
-										</option>
-									</select>
-								</div>
-							</div>
-							<div class="col-xs-12 col-sm-4 col-md-3 col-md-offset-3">
-								<span class="shopping-btn continue">
-									<a href="javascript:goToCatalog()" th:text="#{shopping.cart.table.footer.continue}">continue shopping</a>
-								</span>
-							</div>
-							<div class="col-xs-12 col-sm-4">
-								<div class="cart-form" style="display: none">
-									<h3 th:text="#{shopping.cart.costoenvio.description}">calculate shipping 
-											<span class="after-icon">
-												<span class="icon_minus-06" aria-hidden="true"></span>
+						<div class="row">							
+							<div class="query clearfix">
+								<div class="col-xs-12">
+									<h3 th:if="${cliente == null}" th:utext="#{myaccount.notlogin}">Not logged in yet.</h3>
+									<div class="col-xs-12 col-sm-8 col-sm-offset-2" th:if="${cliente != null}" >
+										<table th:if="${cliente != null}" class="table custom-table">
+											<thead>
+												<tr>
+													<th colspan="2" th:utext="#{myaccount.descripcion} + ' ' + ${userLogin} ">Cabecera</th>
+												</tr>
+											</thead>
+											<tbody th:if="${cliente != null}">
+												<tr>
+													<td>
+														<div class="item-name"><h4 th:text="#{myaccount.datos.clienteid}"></h4></div>
+													</td>
+													<td th:if="${cliente != null}">
+														<div class="item-name"><h4 th:text="${cliente.id.idCliente}"></h4></div>													
+													</td>
+												</tr>
+												<tr>
+													<td>
+														<div class="item-name"><h4 th:text="#{myaccount.datos.comercioid}"></h4></div>
+													</td>
+													<td th:if="${cliente != null}">
+														<div class="item-name"><h4 th:text="${cliente.id.idComercio}"></h4></div>	
+													</td>
+												</tr>
+												<tr>
+													<td>
+														<div class="item-name"><h4 th:text="#{myaccount.datos.nombre}"></h4></div>
+													</td>
+													<td th:if="${cliente != null}">
+														<div class="item-name"><h4 th:text="${cliente.razonSocial}"></h4></div>	
+													</td>
+												</tr>
+												<tr>
+													<td>
+														<div class="item-name"><h4 th:text="#{myaccount.datos.direccion}"></h4></div>
+													</td>
+													<td th:if="${cliente != null}">
+														<div class="item-name"><h4 th:text="${cliente.domicilio}"></h4></div>	
+													</td>
+												</tr>
+												<tr>
+													<td>
+														<div class="item-name"><h4 th:text="#{myaccount.datos.localidad}"></h4></div>
+													</td>
+													<td th:if="${cliente != null}">
+														<div class="item-name"><h4 th:text="${cliente.localidad.descripcion}"></h4></div>	
+													</td>
+												</tr>
+												<tr>
+													<td>
+														<div class="item-name"><h4 th:text="#{myaccount.datos.telefono}"></h4></div>
+													</td>
+													<td th:if="${cliente != null}">
+														<div class="item-name"><h4 th:text="${cliente.telefono}"></h4></div>	
+													</td>
+												</tr>
+												<tr>
+													<td>
+														<div class="item-name"><h4 th:text="#{myaccount.datos.email}"></h4></div>
+													</td>
+													<td th:if="${cliente != null}">
+														<div class="item-name"><h4 th:text="${cliente.email}"></h4></div>	
+													</td>
+												</tr>
+												<tr>
+													<td>
+														<div class="item-name"><h4 th:text="#{myaccount.datos.contribuyente}"></h4></div>
+													</td>
+													<td th:if="${cliente != null}">
+														<div class="item-name"><h4 th:text="${cliente.categoriaFiscal.descripcion}"></h4></div>	
+													</td>
+												</tr>
+												<tr>
+													<td>
+														<div class="item-name"><h4 th:text="#{myaccount.datos.cuit}"></h4></div>
+													</td>
+													<td th:if="${cliente != null}">
+														<div class="item-name"><h4 th:text="${cliente.cuit}"></h4></div>	
+													</td>
+												</tr>
+											</tbody>
+										</table>
+										<div th:if="${cliente != null}" class="col-xs-12 col-sm-4 col-md-3">
+											<span class="shopping-btn">
+												<a href="change-password" th:text="#{change.password.menu}">cambiar contraseña</a>
 											</span>
-									</h3>
-									<form>
-										<select class="select">
-											<option value="">Argentina (AR)</option>
-											<!-- <option value="1">germany</option>
-											<option value="2">france</option>
-											<option value="3">italy</option> -->
-										</select>
-										<input type="text" th:placeholder="#{shopping.cart.costoenvio.statecountry}"/> <!-- "State / Country" -->
-										<input type="text" th:placeholder="#{shopping.cart.costoenvio.postcode}" />
-										<input type="submit" th:value="#{shopping.cart.costoenvio.btndescription}" />
-									</form>
-								</div>
-							</div>
-							<div class="col-xs-12 col-sm-4" >
-								<div class="cart-form">
-									<h3 th:text="#{shopping.cart.cupon.description}" style="display: none">coupon discount 
-										<span class="after-icon">
-											<span class="icon_minus-06" aria-hidden="true"></span>
-										</span>
-									</h3>
-									<span th:text="#{shopping.cart.cupon.header}" class="enter-coupon" style="display: none">Enter your coupon code if you have one.</span>
-									<form>
-										<input type="text" th:placeholder="#{shopping.cart.cupon.code}" style="display: none"/>
-										<input type="submit" th:value="#{shopping.cart.cupon.btndescription}" style="display: none"/>
-									</form>
-								</div>
-							</div>
-							<div class="col-xs-12 col-sm-4">
-								<div class="cart-checkout">
-									<div id="cart-totales" class="total">
-										<span class="sub-total" th:text="#{shopping.cart.precios.subtotal}">sub total</span>
-										<span id="cart-pr-subtotal" class="sub-total"><strong>$0.00</strong></span>
-										<span id="cart-pr-total-gral" class="grand-total">total <strong>$0.00</strong></span>
+										</div>
+										<div class="col-xs-12 col-sm-4 col-md-3 col-md-offset-3">
+											<span class="shopping-btn continue">
+												<a href="javascript:goToCatalog()" th:text="#{shopping.cart.table.footer.continue}">continue shopping</a>
+											</span>
+										</div>
 									</div>
-									<a href="#" onclick="enviarPedido()" class="cart-proceed" th:text="#{shopping.cart.precios.btncheckout}">proceed to checkout</a>
-									<a href="#" class="checkout-with" th:text="#{shopping.cart.precios.description}"style="display: none">Checkout with Mutilple Adresses</a>
-								</div>
+								</div>								
 							</div>
 						</div>
 					</div>
 				</div>
-				<!-- Cart Section Ends Here -->
 			</div>
 			<!--Content Area End-->
 			<!--Footer Section Start-->
 			<footer class="footer">
 				<div class="primary-footer">
 					<div class="container">
-						<div class="row">
+						<div class="row">							
+							
 						</div>
 					</div>
 				</div>
@@ -272,19 +288,21 @@
 		</div>
 		<!--Page Wrapper End-->
 		<script type="text/javascript" src="assets/js/jquery-1.12.0.min.js"></script>
+		<script type="text/javascript" src="assets/js/angular.js"></script>
+		
 		<script src="assets/js/less.js"></script>
 		<script type="text/javascript" src="assets/js/jquery.selectbox-0.2.js"></script>
-		<script type="text/javascript" src="assets/js/jquery.fancybox.js"></script>
 		<script type="text/javascript" src="assets/js/bootstrap.js"></script>
 		<script type="text/javascript" src="assets/js/jquery-ui.js"></script>
-		<!-- RS5.0 Core JS Files -->
-		<script type="text/javascript" src="js/sweetalert2.all.js"></script>
+		
+		
 		<script type="text/javascript" src="js/vgmjs.js"></script>
-		<script type="text/javascript" src="js/vgmutil.js"></script>
+		<script type="text/javascript" src="js/sweetalert2.all.js"></script>
+		
+		<script type="text/javascript" src="assets/js/vailidation.js"></script>
+		<!-- RS5.0 Core JS Files -->
 
 		<script type="text/javascript" src="assets/js/site.js"></script>
-		
-		
-
+		<script type="text/javascript" src="assets/js/app.js"></script>
 	</body>
 </html>

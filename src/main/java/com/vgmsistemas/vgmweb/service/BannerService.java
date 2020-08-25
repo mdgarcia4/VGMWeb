@@ -12,7 +12,7 @@ public class BannerService {
 	@Autowired
 	BannerRepo bannerRepo;
 
-	public List<Banner> getByDePaginaAndSnActivo(String dePagina, String snActivo){
+	public List<Banner> getByDePaginaAndSnActivo(String dePagina, String snActivo)throws Exception{
 		List<Banner> banners;
 		banners = bannerRepo.findByDePaginaAndSnActivo(dePagina, snActivo);
 		return banners;

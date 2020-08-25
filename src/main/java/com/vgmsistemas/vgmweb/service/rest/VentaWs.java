@@ -36,6 +36,7 @@ public class VentaWs extends GenericWs{
             int result = Integer.valueOf(response);
             return result;
         } catch (Exception e){
+			logger.error("Error inesperado en clase VentaWs-Met: send. " + e.getStackTrace());
 		    return CodeResult.RESULT_ERROR;
         }
 	}

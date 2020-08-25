@@ -4,8 +4,11 @@ package com.vgmsistemas.vgmweb.service;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
@@ -22,41 +25,48 @@ import com.vgmsistemas.vgmweb.repository.AccionesComDetalleRepo;
 public class AccionesComDetalleService {
 	@Autowired
 	AccionesComDetalleRepo accionesComDetRepo;
-
 	@Autowired
 	ListaPrecioService listaPrecioService;
-
 	@Autowired
 	SucursalService sucursalService;
-
 	Float _cantidadPedida = 1F; // se pone 1 como es para calcular el precio del articulo
+	static Logger logger = LoggerFactory.getLogger(AccionesComDetalleService.class);
 
 	public void validarAccionesComDetalle(Page<ListaPrecioDetalle> listadoArticulos, Cliente cliente) throws Exception {
-		ListaPrecio listaPrecio = null;
-		for (Iterator<ListaPrecioDetalle> iterator = listadoArticulos.iterator(); iterator.hasNext();) {
-			ListaPrecioDetalle listaPrecioDetalle = (ListaPrecioDetalle) iterator.next();
-			// busco la lista de precio para ver el ti_lista
-			if (listaPrecio == null) {
-				// Busco por la lista del listado
-				Optional<ListaPrecio> optListaPrecio = listaPrecioService
-						.getByIdListaPrecio(listaPrecioDetalle.getId().getIdLista());
-				// asigno lista de precio del listado si existe sino asgino lista 1
-				listaPrecio = optListaPrecio.isPresent() ? optListaPrecio.get()
-						: listaPrecioService.getByIdListaPrecio(1L).get();
+		try {
+			ListaPrecio listaPrecio = null;
+			for (Iterator<ListaPrecioDetalle> iterator = listadoArticulos.iterator(); iterator.hasNext();) {
+				ListaPrecioDetalle listaPrecioDetalle = (ListaPrecioDetalle) iterator.next();
+				// busco la lista de precio para ver el ti_lista
+				if (listaPrecio == null) {
+					// Busco por la lista del listado
+					Optional<ListaPrecio> optListaPrecio = listaPrecioService
+							.getByIdListaPrecio(listaPrecioDetalle.getId().getIdLista());
+					// asigno lista de precio del listado si existe sino asgino lista 1
+					listaPrecio = optListaPrecio.isPresent() ? optListaPrecio.get()
+							: listaPrecioService.getByIdListaPrecio(1L).get();
+				}
+				// determino si es necesario aplicar acciones comerciales.
+				if (listaPrecio.getTipoLista() == ListaPrecio.TIPO_LISTA_BASE
+						|| listaPrecio.getTipoLista() == ListaPrecio.TIPO_LISTA_BASE_X_ART_LIBRE
+						|| listaPrecio.getTipoLista() == ListaPrecio.TIPO_LISTA_BASE_X_CANTIDAD) {
+					buscarAccionesComDetalle(listaPrecioDetalle, cliente, AccionesCom.TI_ORIGEN_PROVEEDOR);
+					buscarAccionesComDetalle(listaPrecioDetalle, cliente, AccionesCom.TI_ORIGEN_EMPRESA);
+					buscarAccionesComDetalle(listaPrecioDetalle, cliente, AccionesCom.TI_ORIGEN_GLOBALES);
+					// buscarAccionesComDetalle(listaPrecioDetalle, cliente, AccionesCom.TI_ORIGEN_CONJUNTAS);
+				}
 			}
-			// determino si es necesario aplicar acciones comerciales.
-			if (listaPrecio.getTipoLista() == ListaPrecio.TIPO_LISTA_BASE
-					|| listaPrecio.getTipoLista() == ListaPrecio.TIPO_LISTA_BASE_X_ART_LIBRE
-					|| listaPrecio.getTipoLista() == ListaPrecio.TIPO_LISTA_BASE_X_CANTIDAD) {
-				buscarAccionesComDetalle(listaPrecioDetalle, cliente, AccionesCom.TI_ORIGEN_PROVEEDOR);
-				buscarAccionesComDetalle(listaPrecioDetalle, cliente, AccionesCom.TI_ORIGEN_EMPRESA);
-				buscarAccionesComDetalle(listaPrecioDetalle, cliente, AccionesCom.TI_ORIGEN_GLOBALES);
-				// buscarAccionesComDetalle(listaPrecioDetalle, cliente, AccionesCom.TI_ORIGEN_CONJUNTAS);
-			}
+		} catch (NoSuchElementException  e1) {
+			logger.error("No existen mas elemento a recorrer. " + e1.getStackTrace());
+			throw e1;
+		}catch (Exception e) {
+			logger.error("Error inesperado en clase AccionesComDetalleService-Met: validarAccionesComDetalle. " + e.getStackTrace());
+			throw e;
 		}
+		
 	}
 
-	private void buscarAccionesComDetalle(ListaPrecioDetalle lstPrecioDetalle, Cliente cliente, String origen) {
+	private void buscarAccionesComDetalle(ListaPrecioDetalle lstPrecioDetalle, Cliente cliente, String origen) throws Exception{
 		Optional<AccionesComDetalle> optAccionesComDetalle = null;
 		Integer tipoAccion = AccionesCom.TIPO_ACCIONES_ARTICULO;
 		Long idArticulo = lstPrecioDetalle.getArticulo().getId();
@@ -77,12 +87,14 @@ public class AccionesComDetalleService {
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
+			logger.error("Error inesperado en clase AccionesComDetalleService. Método: validarAccionesComDetalle. " + e.getStackTrace());
+			throw e;
 		}
 
 	}
 
 	private void calcularDescuento(ListaPrecioDetalle aListaPrecioDetalle, AccionesComDetalle accionesComDetalle,
-			Cliente cliente, Integer tipoAccion, String tiOrigen) {
+			Cliente cliente, Integer tipoAccion, String tiOrigen) throws Exception{
 
 		Float taDto = 0f;
 
@@ -105,6 +117,8 @@ public class AccionesComDetalleService {
 				// AccionesComDetalleService.logger.error("AccionesComBo. calcularDescuento().
 				// No se pudo recuperar la sucursal id: "+cliente.getId().getIdSucursal());
 				e.printStackTrace();
+				logger.error("No se pudo recuperar la sucursal id: "+ cliente.getId().getIdSucursal()+". Método: calcularDescuento. " + e.getStackTrace());
+				throw e;
 			}
 			if (sucursal != null) {
 				float caMaxima;

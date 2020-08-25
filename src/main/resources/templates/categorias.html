@@ -78,7 +78,7 @@
 								</ul>
 								<ul class="top-header-right clearfix">
 									<li class="profile">
-										<a href="#" th:utext="#{header.myacount}"><i class="icon_profile" ></i>My Account </a>
+										<a href="myaccount" th:utext="#{header.myacount}"><i class="icon_profile" ></i>My Account </a>
 									</li>
 									
 									<li class="checkout">
@@ -236,11 +236,6 @@
 											</li>
 										</ul>
 									</div>
-									<!--  <div class="compare-products">
-										<h3 class="heading">compare product</h3>
-										<span>You have no product to compare</span>
-									</div>
-									-->
 								</div>
 							</div>
 							<div class="col-xs-12 col-sm-9">
@@ -269,10 +264,6 @@
 													<option value="15">15</option>
 												</select>
 											</li>
-											<!-- <li>
-												<span th:text="#{categorias.view}" >VIEW</span>
-												<span class="view-btn"> <a href="#" class="grid-view active"><i class="fa fa-th-large"></i></a> <a href="#" class="list-view"><i class="fa fa-th-list"></i></a> </span>
-											</li> -->
 										</ul>
 									</div>
 									<!-- articulos de carrito -->
@@ -284,7 +275,7 @@
 													<div class="product-view-block">
 														<div class="product-view clearfix">
 															<a class="data-report icon_datareport" href="#"></a>
-															<a class="zoom icon_zoom-in_alt single_image" th:href="'img/'+${precio.articulo.idCodigoBarras}+'.jpg'"  ></a>
+															<a class="zoom icon_zoom-in_alt single_image" th:href="'img/'+${precio.srcImagen}+'.jpg'"  ></a>
 															<a class="heart icon_heart_alt" href="#"></a>
 														</div>
 														<button th:id="'btn-add-'+${precio.articulo.id}" th:onClick="|agregarDwnCarritoVgm(${precio.articulo.id},'N','#{categorias.error}')|" class="btn add-cart btn-block" >AGREGAR
@@ -298,9 +289,6 @@
 														href="#" th:text="${precio.articulo.descripcion}">Articulo 1</a>
 												</h4>
 												<span > 
-													<!-- <i class="icon_star active"></i> <i class="icon_star active"></i>
-													<i class="icon_star active"></i> <i class="icon_star active"></i>
-													<i class="icon_star"></i> -->
 													<span th:id="'item-idempresa-'+${precio.articulo.id}" class="item-name"
 														th:text="'COD:[' + ${precio.articulo.codigoEmpresa} + ']'">Codigo</span>													
 												</span> 
@@ -317,14 +305,12 @@
 										<div class="categories-shop-pagging">
 											<ul >
 												<li>
-													<!-- <a th:href="@{|/categorias?pagNro=${paginaAnterior}|}" ><i class="fa fa-angle-left"></i></a> -->
 													<a th:href="'javascript:getpage('+ ${paginaAnterior} +')'" ><i class="fa fa-angle-left"></i></a>
 												</li>
 												<li th:each=" pagina: ${paginas}" th:class="${pagina ==paginaActual ? 'active' :'' }">
 													<a th:href="'javascript:getpage('+ ${pagina} +')'" th:text ="${pagina}" >1</a>
 												</li>
 												<li>
-													<!-- <a th:href="@{|/categorias?pagNro=${paginaSiguiente}|}" ><i class="fa fa-angle-right" ></i></a> -->
 													<a th:href="'javascript:getpage('+ ${paginaSiguiente} +')'" ><i class="fa fa-angle-right" ></i></a>
 												</li>
 											</ul>
@@ -343,6 +329,9 @@
 				<div class="primary-footer">
 					<div class="container">
 						<div class="row">
+							<div id="usuariologin" style="display: none">
+					 			<a id="usuariologueado" th:text="${userlogincontroller}" ></a>
+							</div>
 						</div>
 					</div>
 				</div>

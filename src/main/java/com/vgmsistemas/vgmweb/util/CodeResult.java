@@ -2,6 +2,8 @@ package com.vgmsistemas.vgmweb.util;
 
 import java.util.HashMap;
 import java.util.Map;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class CodeResult {
 	/*Errores de app*/
@@ -14,6 +16,8 @@ public class CodeResult {
 	public static final int RESULT_PEDIDOS_NO_AUTORIZADO = 102;
 	public static final int RESULT_RECIBO_YA_IMPUTADO = 103;
 	public static final int RESULT_PEDIDO_EXISTENTE = 104; // lo dejo para posterior uso.
+	
+	static Logger logger = LoggerFactory.getLogger(CodeResult.class);
 	
 	/*Errores de Http*/
 	//El request es correcto. Esta es la respuesta estándar para respuestas correctas.
@@ -149,7 +153,12 @@ public class CodeResult {
 			httpError.put(HTTP_VERSION_NOT_SUPPORTED , "El servidor no soporta la versión del protocolo HTTP usada en el request.");
 			httpError.put(HTTP_NETWORK_AUTHENTICATION , "El cliente necesita autentificarse para poder acceder a la red.");			
 		}
-		return httpError.get(code)== null ? "Error inesperado": httpError.get(code);
+		if (httpError.get(code)== null) {
+			logger.error("Error htm inesperado. ");
+			return "Error inesperado";
+		}else {
+			return httpError.get(code);			
+		}
 	}
 	
 	

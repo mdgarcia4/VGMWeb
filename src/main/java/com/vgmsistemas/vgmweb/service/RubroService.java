@@ -12,26 +12,23 @@ public class RubroService {
 	@Autowired
 	RubroRepo rubroRepo;
 
-	public List<Rubro> getAll()  {
-
-		List<Rubro> rubros ;
+	public List<Rubro> getAll() throws Exception {
+		List<Rubro> rubros;
 		rubros = rubroRepo.findAll();
 		return rubros;
 	}
-	
-	public List<Rubro> getBySnWeb(String sn)  {
 
-		List<Rubro> rubros ;
+	public List<Rubro> getBySnWeb(String sn) {
+		List<Rubro> rubros;
 		rubros = rubroRepo.findBySnWeb(sn);
 		return rubros;
 	}
-	
-	public RubroRepo getRubroRepo() {
+
+	public RubroRepo getRubroRepo() throws Exception {
 		return rubroRepo;
 	}
 
-	public void setRubroRepo(RubroRepo rubroRepo) {
+	public void setRubroRepo(RubroRepo rubroRepo) throws Exception {
 		this.rubroRepo = rubroRepo;
 	}
-
 }

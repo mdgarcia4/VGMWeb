@@ -1,0 +1,17 @@
+* En Parametros
+** Habilitar el sn_pagina_web y determinar el tipo de búsqueda de la imagen en la vista campo ti_busqueda_img_articulo(por defecto sino esta configurado toma el Id_articulos)
+
+* En Empresas
+** Determinar si existen los campos  "sn_pagina_web" y "ti_busqueda_img_articulo"
+
+* En Articulos, Proveedores, Segmentos y Linea
+** Habilitar sn_pagina_web para que sea visualizado en la pagina.
+
+* En Articulos
+** Se puede configurar las distintas categorias 
+
+*Mail de veficacion
+https://medium.com/karibu-blog/c%C3%B3mo-enviar-un-mail-con-spring-boot-f86c2f7af678
+
+*Usuario
+** Configurar el usuario vgm por defecto con el cliente consumidor final para traer las categorias en index

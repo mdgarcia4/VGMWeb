@@ -13,7 +13,7 @@ public class ListaPrecioService {
 	@Autowired
 	ListaPrecioRepo listaPrecioRepo;
 	
-	public Optional<ListaPrecio> getByIdListaPrecio(Long id) {
+	public Optional<ListaPrecio> getByIdListaPrecio(Long id)throws Exception  {
 		Optional<ListaPrecio> listaPrecio;
 		listaPrecio = listaPrecioRepo.findById(id);
 		return listaPrecio;

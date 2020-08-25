@@ -12,29 +12,25 @@ public class MarcaService {
 	@Autowired
 	MarcaRepo marcaRepo;
 
-	public List<Marca> getAll()  {
+	public List<Marca> getAll() throws Exception {
 
-		List<Marca> marcas ;
+		List<Marca> marcas;
 		marcas = marcaRepo.findAll();
 		return marcas;
 	}
-	
-	public List<Marca> getBySnWeb(String sn){
+
+	public List<Marca> getBySnWeb(String sn) throws Exception {
 		List<Marca> marcas;
 		marcas = marcaRepo.findBySnWeb(sn);
 		return marcas;
 	}
 
-	public MarcaRepo getMarcaRepo() {
+	public MarcaRepo getMarcaRepo() throws Exception {
 		return marcaRepo;
 	}
 
-	public void setMarcaRepo(MarcaRepo marcaRepo) {
+	public void setMarcaRepo(MarcaRepo marcaRepo) throws Exception {
 		this.marcaRepo = marcaRepo;
 	}
-	
-	
-	
 
-	
 }

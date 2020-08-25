@@ -1,5 +1,7 @@
 package com.vgmsistemas.vgmweb.repository;
 
+import java.util.List;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -59,5 +61,14 @@ public interface ListaPrecioDetalleRepo extends JpaRepository<ListaPrecioDetalle
     		+ "  AND (a.idProveedor = ?6 OR 0 = ?6 )")
     public Page<ListaPrecioDetalle> findListaBySucListaRubroSubrubroMarcaProvedor(Long sucursal, Long lista, 
     			Long rubro, Long subrubro ,Long marca, Long proveedor, Pageable pageable);
+	
+	@Query("SELECT l FROM ListaPrecioDetalle l,Articulo a "
+    		+ " WHERE a.id = l.id.idArticulo "
+    		+ "  AND a.snActivo ='S'"
+    		+ "  and a.snWeb='S'"
+    		+ "  AND l.id.idSucursal = ?1"
+    		+ "  AND l.id.idLista = ?2"
+    		+ "  AND a.tiWebDestacados in ?3")
+    public Page<ListaPrecioDetalle> findByTiWebDestacadosIn(Long sucursal, Long lista, List<String> arrTiWebDestacados, Pageable pageable);
     
 }

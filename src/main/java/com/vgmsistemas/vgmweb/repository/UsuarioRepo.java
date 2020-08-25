@@ -10,4 +10,6 @@ import com.vgmsistemas.vgmweb.entity.Usuario;
 @Repository
 public interface UsuarioRepo extends JpaRepository<Usuario, Long>  {
     public Optional<Usuario> findByUsuario(String username);
+
+    public Optional<Usuario> findByEmail(String email);
 }
