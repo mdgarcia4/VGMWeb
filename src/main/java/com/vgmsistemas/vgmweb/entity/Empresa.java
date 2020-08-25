@@ -105,6 +105,12 @@ public class Empresa {
 	private String snModifCdMovil;
 	@Column(name = "sn_acciones_com")
 	private String snAccionesCom;
+	
+	@Column(name = "sn_pagina_web")
+	private String snPaginaWeb;
+	
+	@Column(name = "ti_busqueda_img_articulo")
+	private String tiBusquedaImgArticulo;
 
 	public int getCategoriasEmpRepartidor() {
 		return categoriasEmpRepartidor;
@@ -466,5 +472,20 @@ public class Empresa {
 
 	public void setSnAccionesCom(String snAccionesCom) {
 		this.snAccionesCom = snAccionesCom;
+	}
+	public String getSnPaginaWeb() {
+		return snPaginaWeb;
+	}
+
+	public void setSnPaginaWeb(String snPaginaWeb) {
+		this.snPaginaWeb = snPaginaWeb;
+	}
+
+	public String getTiBusquedaImgArticulo() {
+		return tiBusquedaImgArticulo;
+	}
+
+	public void setTiBusquedaImgArticulo(String tiBusquedaImgArticulo) {
+		this.tiBusquedaImgArticulo = tiBusquedaImgArticulo;
 	}
 }

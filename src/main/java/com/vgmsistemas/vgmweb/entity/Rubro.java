@@ -28,7 +28,7 @@ public class Rubro implements Serializable{
 	@Column(name = "de_segmento")
 	private String descripcion;
 	
-	@Column(name="sn_web")
+	@Column(name="sn_pagina_web")
 	private String snWeb;
 	
 	@ManyToOne(fetch=FetchType.LAZY)

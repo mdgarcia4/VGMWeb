@@ -119,7 +119,7 @@ public class Articulo{
 	@Column(name="id_codigobarras")
 	private String idCodigoBarras;
 	
-	@Column(name="sn_web")
+	@Column(name="sn_pagina_web")
 	private String snWeb;
 	
 	@Column(name="ti_web_destacados")

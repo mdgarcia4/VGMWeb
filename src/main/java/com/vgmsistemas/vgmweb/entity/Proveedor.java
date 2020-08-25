@@ -23,7 +23,7 @@ public class Proveedor {
 	private Long idSucursal;
 	@Column(name = "nu_cuit")
 	private String nuCuit;
-	@Column(name = "sn_web")
+	@Column(name = "sn_pagina_web")
 	private String snWeb;
 	
 	public Long getIdProveedor() {

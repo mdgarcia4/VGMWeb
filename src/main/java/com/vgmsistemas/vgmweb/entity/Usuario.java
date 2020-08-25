@@ -17,22 +17,16 @@ public class Usuario {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-
 	@Column
 	private String usuario;
-
 	@Column
-	private String clave;
-	
+	private String clave;	
 	@Column(name="id_sucursal")
-	private Integer idSucursal;
-	
+	private Integer idSucursal;	
 	@Column(name="id_cliente")
-	private Integer idCliente;
-	
+	private Integer idCliente;	
 	@Column(name="id_comercio")
-	private Integer idComercio;
-	
+	private Integer idComercio;	
 	@Column
 	private String nombre;
 	

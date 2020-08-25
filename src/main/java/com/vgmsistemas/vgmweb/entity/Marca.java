@@ -31,7 +31,7 @@ public class Marca implements Serializable{
 	@Column(name = "de_linea")
 	private String descripcion;
 	
-	@Column(name = "sn_web")
+	@Column(name = "sn_pagina_web")
 	private String snWeb;
 	
 	public long getId() {
