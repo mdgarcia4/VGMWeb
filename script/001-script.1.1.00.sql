@@ -17,11 +17,13 @@ IF (SELECT COUNT(*) FROM INFORMATION_SCHEMA.COLUMNS AS c1
 									[clave] [varchar](255) NULL,
 									[usuario] [varchar](255) NULL,
 									[nombre] [varchar](50) NULL,
-									[email] [varchar](50) NULL,
+									[email] [varchar](60) NULL,
 									[telefono] [varchar](50) NULL,
 									[id_sucursal] [int] NULL,
 									[id_cliente] [int] NULL,
 									[id_comercio] [int] NULL,
+									[id_cuit] [varchar](11) NULL,
+									[id_nrodoc] [int] NULL,
 								 PRIMARY KEY CLUSTERED 
 								(
 									[id] ASC
