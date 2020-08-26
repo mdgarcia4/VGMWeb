@@ -26,9 +26,13 @@ public class Usuario {
 	@Column(name="id_cliente")
 	private Integer idCliente;	
 	@Column(name="id_comercio")
-	private Integer idComercio;	
+	private Integer idComercio;		
 	@Column
-	private String nombre;
+	private String nombre;	
+	@Column(name="id_cuit")
+	private String idCuit;	
+	@Column(name="id_nrodoc")
+	private Integer idNroDoc;
 	
 	@Column
 	private String email;
@@ -129,6 +133,21 @@ public class Usuario {
 
 	public void setIdComercio(Integer idComercio) {
 		this.idComercio = idComercio;
+	}
+	public String getIdCuit() {
+		return idCuit;
+	}
+
+	public void setIdCuit(String idCuit) {
+		this.idCuit = idCuit;
+	}
+
+	public Integer getIdNroDoc() {
+		return idNroDoc;
+	}
+
+	public void setIdNroDoc(Integer idNroDoc) {
+		this.idNroDoc = idNroDoc;
 	}
 
 	@Override
