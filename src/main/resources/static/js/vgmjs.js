@@ -667,7 +667,7 @@ function reemplazarCadena(cadenaVieja, cadenaNueva, cadenaCompleta) {
 if(document.getElementById("form-register")){
 	$.validator.addMethod("campoemail", function(value, element) {
 		return this.optional(element) || /^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/.test(value);
-		}, "Debe ser de una direcci\u00f3n email valida");
+		}, "Debe ser una direcci\u00f3n email valida");
 
 	$.validator.addMethod("campotelefono", function(value, element) {
 		return this.optional(element) || /^[0-9]{1,50}$/.test(value);
@@ -682,7 +682,8 @@ if(document.getElementById("form-register")){
 			rules :{
 				email : {
 					required : true, //para validar campo vacio
-					campoemail    : ""  //para validar formato email
+					maxlength : 60,  //para validar campo con maximo 60 caracteres
+					campoemail : ""  //para validar formato email					
 					/*email	 : true*/
 				},
 				nombre : {
@@ -707,27 +708,39 @@ if(document.getElementById("form-register")){
 				claverepetir: {
 					required :true,
 					equalTo: "#clave"
+				},
+				idCuit : {
+					minlength : 11, //para validar campo con minimo 11 caracteres
+					maxlength : 11,  //para validar campo con maximo 11 caracteres
+					number : true   //para validar campo solo numeros
+				},
+				idNroDoc : {
+					required : true,
+					minlength : 7, //para validar campo con minimo 7 caracteres
+					maxlength : 8,  //para validar campo con maximo 8 caracteres
+					number : true   //para validar campo solo numeros
 				}
 			},
 			messages : {
 				email : {
 					required : "Debe ingresar un email.",
+					maxlength : "El email debe tener un m\u00e1ximo de 60 caracteres."
 					/*email    : "Debe ingresar un email valido"*/
 				},
 				nombre : {
 					required : "Debe ingresar un nombre.",
-					minlength : "EL nombre debe tener un m\u00ednimo de 6 caracteres.",
-					maxlength : "EL nombre debe tener un m\u00e1ximo de 50 caracteres."
+					minlength : "El nombre debe tener un m\u00ednimo de 6 caracteres.",
+					maxlength : "El nombre debe tener un m\u00e1ximo de 50 caracteres."
 				},
 				usuario : {
 					required : "Debe ingresar un usuario",
-					minlength : "EL usuario debe tener un m\u00ednimo de 6 caracteres.",
-					maxlength : "EL usuario debe tener un m\u00e1ximo de 30 caracteres."
+					minlength : "El usuario debe tener un m\u00ednimo de 6 caracteres.",
+					maxlength : "El usuario debe tener un m\u00e1ximo de 30 caracteres."
 				},
 				telefono : {
 					required : "Debe ingresar un tel\u00e9fono",
-					minlength : "EL tel\u00e9fono debe tener un m\u00ednimo de 6 caracteres.",
-					maxlength : "EL tel\u00e9fono debe tener un m\u00e1ximo de 50 caracteres.",
+					minlength : "El tel\u00e9fono debe tener un m\u00ednimo de 6 caracteres.",
+					maxlength : "El tel\u00e9fono debe tener un m\u00e1ximo de 50 caracteres.",
 					number : "Solo se adminten n\u00fameros en en el tel\u00e9fono."
 				},
 				clave : {
@@ -735,6 +748,17 @@ if(document.getElementById("form-register")){
 				} ,
 				claverepetir : {
 					required : "Debe repetir la clave ingresada."
+				},
+				idCuit : {
+					minlength : "El CUIT debe tener un m\u00ednimo de 11 caracteres.",
+					maxlength : "El CUIT debe tener un m\u00e1ximo de 11 caracteres.",
+					number : "Solo se adminten n\u00fameros en en el CUIT."
+				},
+				telefono : {
+					required : "Debe ingresar un DNI",
+					minlength : "El DNI debe tener un m\u00ednimo de 7 caracteres.",
+					maxlength : "El DNI debe tener un m\u00e1ximo de 8 caracteres.",
+					number : "Solo se adminten n\u00fameros en en el DNI."
 				}
 			}
 		});
@@ -764,8 +788,8 @@ if(document.getElementById("form-change-pass")){
 			messages : {
 				user : {
 					required : "Debe ingresar un usuario",
-					minlength : "EL usuario debe tener un m\u00ednimo de 6 caracteres.",
-					maxlength : "EL usuario debe tener un m\u00e1ximo de 30 caracteres."
+					minlength : "El usuario debe tener un m\u00ednimo de 6 caracteres.",
+					maxlength : "El usuario debe tener un m\u00e1ximo de 30 caracteres."
 				},
 				oldpassword : {
 					required : "Debe ingresar la clave actual."
