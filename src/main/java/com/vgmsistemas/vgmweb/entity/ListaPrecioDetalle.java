@@ -70,6 +70,9 @@ public class ListaPrecioDetalle implements Serializable {
 	private Double precioConIvaYDtos;
 	@Transient
 	private String srcImagen;
+	@Transient
+	private Float caStock;
+
 	
 
 	public ListaPrecioDetalle(){
@@ -91,6 +94,21 @@ public class ListaPrecioDetalle implements Serializable {
 		this.fechaVigenciaDesdeSqlite = fechaVigenciaDesdeSqlite;
 		this.fechaVigenciaHastaSqlite = fechaVigenciaHastaSqlite;
 		this.snPedidoWeb = snPedidoWeb;
+	}
+	
+	public ListaPrecioDetalle(PkListaPrecioDetalle id, Double precioSinIva, Double precioConIva, Float cantidadPorLista,
+			Float cantidadVendida, String snMovil, Date fechaVigenciaDesde, Date fechaVigenciaHasta,Articulo articulo,Float caStock) {
+		super();
+		this.id = id;
+		this.precioSinIva = precioSinIva;
+		this.precioConIva = precioConIva;
+		this.cantidadPorLista = cantidadPorLista;
+		this.cantidadVendida = cantidadVendida;
+		this.snMovil = snMovil;
+		this.fechaVigenciaDesde = fechaVigenciaDesde;
+		this.fechaVigenciaHasta = fechaVigenciaHasta;
+		this.articulo = articulo;
+		this.caStock = caStock;
 	}
 
 	/**
@@ -282,5 +300,11 @@ public class ListaPrecioDetalle implements Serializable {
 	public void setSrcImagen(String srcImagen) {
 		this.srcImagen = srcImagen;
 	}
+	public Float getCaStock() {
+		return caStock;
+	}
 
+	public void setCaStock(Float caStock) {
+		this.caStock = caStock;
+	}
 }

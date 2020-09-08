@@ -57,10 +57,10 @@ public class AccionesComDetalleService {
 				}
 			}
 		} catch (NoSuchElementException  e1) {
-			logger.error("No existen mas elemento a recorrer. " + e1.getStackTrace());
+			logger.error("No existen mas elemento a recorrer. " + e1.getStackTrace() + " MENSAJEEX: " + e1.getMessage() );
 			throw e1;
 		}catch (Exception e) {
-			logger.error("Error inesperado en clase AccionesComDetalleService-Met: validarAccionesComDetalle. " + e.getStackTrace());
+			logger.error("Error inesperado en clase AccionesComDetalleService-Met: validarAccionesComDetalle. " + e.getStackTrace() + " MENSAJEEX: " + e.getMessage() );
 			throw e;
 		}
 		
@@ -87,7 +87,7 @@ public class AccionesComDetalleService {
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-			logger.error("Error inesperado en clase AccionesComDetalleService. Método: validarAccionesComDetalle. " + e.getStackTrace());
+			logger.error("Error inesperado en clase AccionesComDetalleService. Método: buscarAccionesComDetalle. " + e.getStackTrace() + " MENSAJEEX: " + e.getMessage() );
 			throw e;
 		}
 
@@ -117,7 +117,7 @@ public class AccionesComDetalleService {
 				// AccionesComDetalleService.logger.error("AccionesComBo. calcularDescuento().
 				// No se pudo recuperar la sucursal id: "+cliente.getId().getIdSucursal());
 				e.printStackTrace();
-				logger.error("No se pudo recuperar la sucursal id: "+ cliente.getId().getIdSucursal()+". Método: calcularDescuento. " + e.getStackTrace());
+				logger.error("No se pudo recuperar la sucursal id: "+ cliente.getId().getIdSucursal()+". Método: calcularDescuento. " + e.getStackTrace() + " MENSAJEEX: " + e.getMessage() );
 				throw e;
 			}
 			if (sucursal != null) {

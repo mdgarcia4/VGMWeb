@@ -77,7 +77,7 @@
 									
 									<li class="checkout">
 										<a href="javascript:enviar_formulario_logout()" th:utext="#{header.checkout}">Checkout </a>
-										<form th:action="@{/logout}" method="post" name="formulario_logout">
+										<form th:action="@{logout}" method="post" name="formulario_logout">
 					            			<input type="hidden" value="Cerrar Sesion"   />
 					        			</form>
 									</li>
@@ -104,7 +104,7 @@
 									<a href="index" th:text="#{menu.home}">Home</a>
 								</li>
 								<li>
-									<a href="/categorias" th:text="#{menu.products}">Productos</a>
+									<a href="categorias" th:text="#{menu.products}">Productos</a>
 								</li>
 								
 								<li>

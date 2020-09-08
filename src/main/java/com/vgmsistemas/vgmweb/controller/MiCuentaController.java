@@ -26,7 +26,7 @@ public class MiCuentaController {
 	Cliente cliente;
 	static Logger logger = LoggerFactory.getLogger(MiCuentaController.class);
 
-	@GetMapping("/myaccount")
+	@GetMapping({ "/myaccount", "/myaccount.html", "/myaccount.htm" })
 	public String miCuenta(Model model) {
 		try {
 			// Obtengo el usuario
@@ -45,8 +45,8 @@ public class MiCuentaController {
 			model.addAttribute("userLogin", usuarioName);
 			return "myaccount";
 		} catch (Exception e) {
-			logger.error("Error inesperado en clase  MiCuentaController-Página: miCuenta. " + e.getStackTrace() + " - "
-					+ e.getMessage());
+			logger.error("Error inesperado en clase  MiCuentaController-Página: miCuenta. " + e.getStackTrace()
+			+ " VGMMESAGGE: " + e.getMessage() + " VGMTOSTRING: " + e.toString());
 			model.addAttribute("nameapp", prepertyService.getNameApp());
 			return "myaccount";
 		}

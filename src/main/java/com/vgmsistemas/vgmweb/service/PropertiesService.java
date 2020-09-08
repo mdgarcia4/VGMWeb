@@ -31,7 +31,19 @@ public class PropertiesService {
 
 	@Value("${pagina.path.imagenes}")
 	private String pathSrcImagen;
-		
+
+	@Value("${documento.web.iddoc}")
+	private String idDocWeb;
+
+	@Value("${documento.web.idptovta}")
+	private int idPtoVtaWeb;
+	
+	@Value("${categoria.precio.desde}")
+	private int precioDesde;
+	
+	@Value("${categoria.precio.hasta}")
+	private int precioHasta;		
+
 	public String getApiKeyGoogle() {
 		if(apiKeyGoogle == null) {
 			return "";
@@ -113,5 +125,36 @@ public class PropertiesService {
 
 	public void setPathSrcImagen(String pathSrcImagen) {
 		this.pathSrcImagen = pathSrcImagen;
+	}
+	public String getIdDocWeb() {
+		return idDocWeb;
+	}
+
+	public void setIdDocWeb(String idDocWeb) {
+		this.idDocWeb = idDocWeb;
+	}
+
+	public int getIdPtoVtaWeb() {
+		return idPtoVtaWeb;
+	}
+
+	public void setIdPtoVtaWeb(int idPtoVtaWeb) {
+		this.idPtoVtaWeb = idPtoVtaWeb;
+	}
+
+	public int getPrecioDesde() {
+		return precioDesde;
+	}
+
+	public void setPrecioDesde(int precioDesde) {
+		this.precioDesde = precioDesde;
+	}
+
+	public int getPrecioHasta() {
+		return precioHasta;
+	}
+
+	public void setPrecioHasta(int precioHasta) {
+		this.precioHasta = precioHasta;
 	}
 }

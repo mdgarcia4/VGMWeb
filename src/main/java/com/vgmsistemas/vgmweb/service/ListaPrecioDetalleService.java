@@ -31,6 +31,7 @@ public class ListaPrecioDetalleService {
 	PropertiesService propertyService;
 	static Logger logger = LoggerFactory.getLogger(ListaPrecioDetalleService.class);
 	private Empresa empresa;
+	private Long idDeposito;
 
 	public Page<ListaPrecioDetalle> getListaPrecioPorCliente(Cliente cliente, Integer pagNro, Integer pagTamanio,
 			String ordenadoPor, Long rubro, Long subrubro, Long proveedor, Long marca) throws Exception {
@@ -50,7 +51,32 @@ public class ListaPrecioDetalleService {
 			return controlCalculosPorArticulos(listaPrecios);
 		} catch (Exception e) {
 			logger.error("Error inesperado en clase ListaPrecioDetalleService-Met: getListaPrecioPorCliente. "
-					+ e.getStackTrace());
+					+ e.getStackTrace() + " MENSAJEEX: " + e.getMessage() + " MENSAJEStr: " + e.toString());
+			throw e;
+		}
+	}
+
+	public Page<ListaPrecioDetalle> getListaPrecioPorClienteStock(Cliente cliente, Integer pagNro, Integer pagTamanio,
+			String ordenadoPor, Long rubro, Long subrubro, Long proveedor, Long marca) throws Exception {
+		try {
+			Pageable pagina = PageRequest.of(pagNro, pagTamanio, Sort.by(ordenadoPor));
+			Page<ListaPrecioDetalle> listaPrecios;
+			Long sucursal = cliente.getId().getIdSucursal();
+			Long lista = cliente.getListaPrecio().getId();
+			empresa = empresaService.getById(1L);// hardco empresa 1
+
+			idDeposito = empresaService.getDepositoActivo(empresa, cliente);
+
+			listaPrecios = listaPrecioDetalleRepo.findListaBySucListaRubroSubrubroMarcaProvedorStock(sucursal, lista,
+					rubro, subrubro, marca, proveedor, idDeposito, pagina);
+			if (empresa.getSnAccionesCom().equals(Empresa.PERMITE)) {
+				getAccionesComerciales(listaPrecios, cliente);
+			}
+
+			return controlCalculosPorArticulos(listaPrecios);
+		} catch (Exception e) {
+			logger.error("Error inesperado en clase ListaPrecioDetalleService-Met: getListaPrecioPorClienteStock. "
+					+ e.getStackTrace() + " MENSAJEEX: " + e.getMessage() + " MENSAJEStr: " + e.toString());
 			throw e;
 		}
 	}
@@ -65,7 +91,13 @@ public class ListaPrecioDetalleService {
 		Page<ListaPrecioDetalle> listaPrecios;
 		Long sucursal = cliente.getId().getIdSucursal();
 		Long lista = cliente.getListaPrecio().getId();
-		listaPrecios = listaPrecioDetalleRepo.findByTiWebDestacadosIn(sucursal, lista, arrTiWebDestacados, pagina);
+		// buscar stockt
+		empresa = empresaService.getById(1L);
+		Long idDeposito = empresaService.getDepositoActivo(empresa, cliente);
+		listaPrecios = listaPrecioDetalleRepo.findByTiWebDestacadosInStock(sucursal, lista, arrTiWebDestacados,
+				idDeposito, pagina);
+		// listaPrecios = listaPrecioDetalleRepo.findByTiWebDestacadosIn(sucursal,
+		// lista, arrTiWebDestacados, pagina);
 		return controlCalculosPorArticulos(listaPrecios).iterator();
 	}
 
@@ -74,7 +106,7 @@ public class ListaPrecioDetalleService {
 			accionesComDetalleService.validarAccionesComDetalle(asListaprecio, aCliente);
 		} catch (Exception e) {
 			logger.error("Error inesperado en clase ListaPrecioDetalleService-Met: getAccionesComerciales. "
-					+ e.getMessage());
+					+ e.getStackTrace() + " MENSAJEEX: " + e.getMessage() + " MsjTOStr: " + e.toString());
 			throw e;
 		}
 	}
@@ -87,14 +119,14 @@ public class ListaPrecioDetalleService {
 			File dirApp = home.getDir();// obtengo la dir donde esta el proyecto
 			pathSourceImage = propertyService.getPathSrcImagen();
 			if (!pathSourceImage.equals("") && pathSourceImage != null) {
-				// path = pathSourceImage; No se uso por ahora
-				path = dirApp.toString() + "\\src\\main\\resources\\static\\img\\";
+				path = pathSourceImage; // No se uso por ahora
+				// path = dirApp.toString() + "\\src\\main\\resources\\static\\img\\";
 			} else {
 				path = dirApp.toString() + "\\src\\main\\resources\\static\\img\\";
 			}
 			// pathHtml = path.replaceAll("\\\\", "/"); No se uso por ahora
-			
-			String tipoBusqueda = empresaService.getById(1L).getTiBusquedaImgArticulo();//"CB";
+
+			String tipoBusqueda = empresaService.getById(1L).getTiBusquedaImgArticulo();// "CB";
 			for (ListaPrecioDetalle list : listado) {
 				// busco el nombre por el cual se buscará la imagen
 				srcImagenControl = getSrcPorTipoBusqueda(list, tipoBusqueda);
@@ -113,7 +145,7 @@ public class ListaPrecioDetalleService {
 			return listado;
 		} catch (Exception e) {
 			logger.error("Error inesperado en clase ListaPrecioDetalleService-Met: controlCalculosPorArticulos. "
-					+ e.getMessage());
+					+ e.getStackTrace() + " MENSAJEEX: " + e.getMessage() + " MENSAJEStr: " + e.toString());
 			throw e;
 		}
 	}
@@ -126,7 +158,7 @@ public class ListaPrecioDetalleService {
 		} else if (tipoBusquedaEmpresa.equals(ListaPrecioDetalle.BUSQUEDA_POR_IDEMPRESA)) {
 			return lista.getArticulo().getCodigoEmpresa();
 		} else {
-			return lista.getId().toString();/*por defecto busca por id, sino tiene nada en el tipo de búsquda*/
+			return lista.getId().toString();/* por defecto busca por id, sino tiene nada en el tipo de búsquda */
 		}
 	}
 
@@ -144,8 +176,8 @@ public class ListaPrecioDetalleService {
 			listaPrecioDetalle.setPrecioConIva(formatearDecimales(listaPrecioDetalle.getPrecioConIva(), 2));
 			listaPrecioDetalle.setPrecioSinIva(formatearDecimales(listaPrecioDetalle.getPrecioSinIva(), 2));
 		} catch (Exception e) {
-			logger.error(
-					"Error inesperado en clase ListaPrecioDetalleService-Met: calcularTotales. " + e.getStackTrace());
+			logger.error("Error inesperado en clase ListaPrecioDetalleService-Met: calcularTotales. "
+					+ e.getStackTrace() + " MENSAJEEX: " + e.getMessage());
 			throw e;
 		}
 	}

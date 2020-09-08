@@ -82,7 +82,7 @@
 									
 									<li class="checkout">
 										<a href="javascript:enviar_formulario_logout()" th:utext="#{header.checkout}"><i class="icon_check_alt" ></i>Checkout</a>
-										<form th:action="@{/logout}" method="post" name="formulario_logout">
+										<form th:action="@{logout}" method="post" name="formulario_logout">
 					            			<input type="hidden" value="Cerrar Sesion"   />
 					        			</form>
 									</li>
@@ -95,7 +95,7 @@
 					<div class="container">
 						<div class="row clearfix">
 							<div class="col-xs-12 middle-header-content">
-								<div class="middle-header-left">
+								<div class="middle-header-left" style="display: none">
 									<form class="clearfix" th:action="@{/categorias}"action="/categorias" method="post">
 										<input type="text" name="search" placeholder="Search... " th:placeholder="#{header.search}"/>
 										<button type="submit">
@@ -118,8 +118,8 @@
 											<span class="total">Total</span> <span id="totDwnCarritoVgmItem" class="amount">$ 0.00</span>
 										</div>
 										<div class="butn-group clearfix">
-											<a href="/shopping-cart" class="cart" th:text="#{itemcart.viewcart}">VIEW CART</a> 
-											<a href="#" class="checkout" th:text="#{itemcart.checkout}">CHECKOUT</a>
+											<a href="shopping-cart" class="cart" th:text="#{itemcart.viewcart}">VIEW CART</a> 
+											<a href="#" class="checkout" th:text="#{itemcart.checkout}" style="display: none">CHECKOUT</a>
 										</div>
 									</div>
 								</div>
@@ -137,7 +137,7 @@
 									<a href="index" th:text="#{menu.home}">Home</a>
 								</li>
 								<li>
-									<a href="/categorias" th:text="#{menu.products}">Productos</a>
+									<a href="categorias" th:text="#{menu.products}">Productos</a>
 								</li>
 								
 								<li>
@@ -155,12 +155,12 @@
 						<div class="main-banner-text">
 							<span style="display: none">contact</span>
 							 <ul class="banner-nav" style="display: none">
-								<listyle="display: none">
+								<li style="display: none">
 									<a href="index.html">Home</a>
 								</li>
-								<listyle="display: none">
+								<li style="display: none">
 									<a href="shopping-cart.html">Shop</a>
-								</listyle="display: none">
+								</li>
 								<li class="active" style="display: none">
 									<a href="#">Contact</a>
 								</li>
@@ -286,6 +286,7 @@
 		
 		
 		<script type="text/javascript" src="js/vgmjs.js"></script>
+		<script type="text/javascript" src="js/vgmutil.js"></script>
 		<script type="text/javascript" src="js/sweetalert2.all.js"></script>
 		
 		<script type="text/javascript" th:src="'http://maps.google.com/maps/api/js?key='+ ${apiKey}"></script><!-- +'&sensor=true' -->

@@ -15,6 +15,9 @@ public class BannerService {
 	public List<Banner> getByDePaginaAndSnActivo(String dePagina, String snActivo)throws Exception{
 		List<Banner> banners;
 		banners = bannerRepo.findByDePaginaAndSnActivo(dePagina, snActivo);
+		if (banners.isEmpty()) {
+			return null;
+		}
 		return banners;
 	}
 	

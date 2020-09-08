@@ -83,7 +83,7 @@
 									
 									<li class="checkout">
 										<a href="javascript:enviar_formulario_logout()" th:utext="#{header.checkout}"><i class="icon_check_alt" ></i>Checkout</a>
-										<form th:action="@{/logout}" method="post" name="formulario_logout">
+										<form th:action="@{logout}" method="post" name="formulario_logout">
 					            			<input type="hidden" value="Cerrar Sesion"   />
 					        			</form>
 									</li>
@@ -100,7 +100,7 @@
 							<div class="col-xs-12 middle-header-content">
 								<!-- Busqueda -->
 								<div class="middle-header-left">
-									<form class="clearfix" th:action="@{/categorias}"action="/categorias" method="post">
+									<form class="clearfix" th:action="@{categorias}"action="/categorias" method="post">
 										<input type="text" name="search" placeholder="Search... " th:placeholder="#{header.search}"/>
 										<button type="submit" >
 											<i class="icon_search"></i>
@@ -123,11 +123,11 @@
 										</div>
 										<div class="butn-group clearfix">
 											<a href="#"	class="checkout" th:text="#{itemcart.checkout}" style="display: none">CHECKOUT</a>
-											<a href="/shopping-cart" class="cart" th:text="#{itemcart.viewcart}">VIEW CART</a> 
+											<a href="shopping-cart" class="cart" th:text="#{itemcart.viewcart}">VIEW CART</a> 
 										</div>
 									</div>
 								</div>
-								<a href="index.html" class="logo"><img src="assets/images/logo.png" alt="LOOK" /></a>
+								<a href="index.html" class="logo"><img src="img/gral/logo.png" alt="LOOK" /></a>
 							</div>
 						</div>
 					</div>
@@ -143,7 +143,7 @@
 								</li>
 								
 								<li>
-									<a href="/categorias" th:text="#{menu.products}">Productos</a>
+									<a href="categorias" th:text="#{menu.products}">Productos</a>
 								</li>
 								<li>
 									<a href="contacto" th:text="#{menu.contactus}">Contact us</a>
@@ -219,22 +219,52 @@
 											<a id="preciomaximo" th:text="${preciomaximo}" ></a>
 									   </div>
 									</div>
-									<div class="manufacturer">
+									<!-- <div class="manufacturer">
 										<h4 class="heading" th:text="#{categorias.filter.brand}">Marcas</h4>
 										<ul class="main-list" th:each="marca: ${marcas}">
 											<li>
 												<a th:href="'javascript:getmarca('+ ${marca.id} +')'" th:text="${marca.descripcion}">Marca 1 </a>
 											</li>
 										</ul>
+									</div> -->
+									<div class="categories-list">
+										<h3 class="heading" th:text="#{categorias.filter.brands}">Marcas</h3>
+										<ul class="main-list" id="accordionM">
+											<li class="panel-heading" id="headingOneM">
+												<a role="button" data-toggle="collapse" data-parent="#accordionM" href="#collapseOneM" aria-expanded="true" aria-controls="collapseOneM" th:text="#{categorias.filter.brand}">RUBROSMARCA</a>
+												<ul class="sub-list panel-collapse collapse in" id="collapseOneM"  aria-labelledby="headingOneM" >
+													<li th:each="marca: ${marcas}">														
+														<a th:href="'javascript:getmarca('+ ${marca.id} +')'" th:text="${marca.descripcion}">Marca 1 </a>
+													</li>
+												</ul>
+											</li>
+										</ul>
 									</div>
-									<div class="manufacturer">
-										
+									<!-- <div class="manufacturer">										
 										<h4 class="heading" th:text="#{categorias.filter.provider}">Proveedores</h4>
 										<ul class="main-list" th:each="proveedor: ${proveedores}">
 											<li>												
 												<a th:href="'javascript:getproveedor('+ ${proveedor.idProveedor} +')'" th:text="${proveedor.deProveedor}">Proveedor 1 </a>
 											</li>
 										</ul>
+									</div>-->
+									<div class="categories-list">
+										<h3 class="heading" th:text="#{categorias.filter.providers}">Proveedores</h3>
+										<ul class="main-list" id="accordionP">
+											<li class="panel-heading" id="headingOneP">
+												<a role="button" data-toggle="collapse" data-parent="#accordionP" href="#collapseOneP" aria-expanded="true" aria-controls="collapseOneP" th:text="#{categorias.filter.provider}">Provee</a>
+												<ul class="sub-list panel-collapse collapse in" id="collapseOneP"  aria-labelledby="headingOneP" >
+													<li th:each="proveedor: ${proveedores}">														
+														<a th:href="'javascript:getproveedor('+ ${proveedor.idProveedor} +')'" th:text="${proveedor.deProveedor}">Proveedor 1 </a>
+													</li>
+												</ul>
+											</li>
+										</ul>
+									</div>
+									<div class="manufacturer">
+										<span class="shopping-btn">
+											<a href="javascript:limpiarFiltros()" th:text="#{categorias.filter.cleanFilters}">QuitarFiltros</a>
+										</span>
 									</div>
 								</div>
 							</div>
@@ -278,7 +308,9 @@
 															<a class="zoom icon_zoom-in_alt single_image" th:href="'img/'+${precio.srcImagen}+'.jpg'"  ></a>
 															<a class="heart icon_heart_alt" href="#"></a>
 														</div>
-														<button th:id="'btn-add-'+${precio.articulo.id}" th:onClick="|agregarDwnCarritoVgm(${precio.articulo.id},'N','#{categorias.error}')|" class="btn add-cart btn-block" >AGREGAR
+														<button th:if="${precio.caStock > 0}" th:id="'btn-add-'+${precio.articulo.id}" th:text="#{categorias.agregar}" th:onClick="|agregarDwnCarritoVgm(${precio.articulo.id},'N','#{categorias.error}')|" class="btn add-cart btn-block" >AGREGAR
+														AL CARRITO</button>
+														<button th:if="${precio.caStock <= 0}" th:id="'btn-sinstock-'+${precio.articulo.id}" th:text="#{categorias.sinstock}" class="btn add-cart btn-block" >AGREGAR
 														AL CARRITO</button>
 													</div>
 												</div>

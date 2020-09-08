@@ -16,12 +16,13 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.vgmsistemas.vgmweb.entity.Banner;
 import com.vgmsistemas.vgmweb.entity.Cliente;
 import com.vgmsistemas.vgmweb.entity.ListaPrecioDetalle;
 import com.vgmsistemas.vgmweb.service.ArticuloService;
+import com.vgmsistemas.vgmweb.service.BannerService;
 import com.vgmsistemas.vgmweb.service.ClienteService;
 import com.vgmsistemas.vgmweb.service.ListaPrecioDetalleService;
 import com.vgmsistemas.vgmweb.service.MarcaService;
@@ -32,7 +33,6 @@ import com.vgmsistemas.vgmweb.service.RubroService;
 import org.springframework.ui.Model;
 
 @Controller
-@RequestMapping("/categorias")
 public class CategoriasController {
 
 	@Autowired
@@ -48,10 +48,12 @@ public class CategoriasController {
 	@Autowired
 	ListaPrecioDetalleService listaPrecioDetalleService;
 	@Autowired
+	BannerService bannerService;
+	@Autowired
 	PropertiesService propertyService;
 	static Logger logger = LoggerFactory.getLogger(CategoriasController.class);
 
-	@GetMapping
+	@GetMapping({ "/categorias", "/categorias.html", "/categorias.htm" })
 	public String categorias(@RequestParam(defaultValue = "1") Integer page,
 			@RequestParam(defaultValue = "12") Integer size,
 			@RequestParam(defaultValue = "articulo.descripcion") String order,
@@ -77,7 +79,7 @@ public class CategoriasController {
 
 			paginaRecuperar = page - 1;
 
-			Page<ListaPrecioDetalle> paginaArticulos = listaPrecioDetalleService.getListaPrecioPorCliente(cliente,
+			Page<ListaPrecioDetalle> paginaArticulos = listaPrecioDetalleService.getListaPrecioPorClienteStock(cliente,
 					paginaRecuperar, size, order, rubro, subrubro, proveedor, marca);
 
 			paginasTotal = paginaArticulos.getTotalPages();
@@ -111,14 +113,19 @@ public class CategoriasController {
 			model.addAttribute("productoDesde", productoDesde);
 			model.addAttribute("productoHasta", productoHasta);
 			model.addAttribute("productosTotal", productosTotal);
-			model.addAttribute("preciominimo", 10);
-			model.addAttribute("preciomaximo", 50000);
+			model.addAttribute("preciominimo", propertyService.getPrecioDesde());
+			model.addAttribute("preciomaximo", propertyService.getPrecioHasta());
 			model.addAttribute("nameapp", propertyService.getNameApp());
-			model.addAttribute("userlogincontroller",usuario);
+			model.addAttribute("userlogincontroller", usuario);
+			List<Banner> list = bannerService.getByDePaginaAndSnActivo("categorias", "S");
+			if (list != null) {
+				model.addAttribute("banner", list.get(0));
+			}
 
 			return "categorias";
 		} catch (Exception e) {
-			logger.error("Error inesperado en clase CategoriasController-Página: categorias. " + e.getStackTrace());
+			logger.error("Error inesperado en clase CategoriasController-Página: categorias. " + e.getStackTrace()
+					+ " VGMMESAGGE:" + e.getMessage() + " VGMTOSTRING:" + e.toString());
 			return "error";
 		}
 
@@ -140,7 +147,7 @@ public class CategoriasController {
 		return paginas;
 	}
 
-	@PostMapping
+	@PostMapping({ "/categorias", "/categorias.html", "/categorias.htm" })
 	public String categoriasSearch(String search, Model model, @PageableDefault(page = 0, size = 9) Pageable pageable) {
 		try {
 			model.addAttribute("marcas", marcaService.getBySnWeb("S"));
@@ -151,8 +158,8 @@ public class CategoriasController {
 			return "categorias";
 
 		} catch (Exception e) {
-			logger.error(
-					"Error inesperado en clase CategoriasController-Página: categoriasSearch. " + e.getStackTrace());
+			logger.error("Error inesperado en clase CategoriasController-Página: categoriasSearch. " + e.getStackTrace()
+					+ " VGMMESAGGE: " + e.getMessage() + " VGMTOSTRING: " + e.toString());
 			return "error";
 		}
 	}

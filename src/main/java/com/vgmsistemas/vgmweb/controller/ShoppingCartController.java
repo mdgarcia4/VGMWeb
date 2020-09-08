@@ -1,5 +1,7 @@
 package com.vgmsistemas.vgmweb.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
@@ -13,17 +15,17 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.vgmsistemas.vgmweb.dto.DetailViewWsDto;
+import com.vgmsistemas.vgmweb.entity.Banner;
 import com.vgmsistemas.vgmweb.entity.Clientes;
+import com.vgmsistemas.vgmweb.service.BannerService;
 import com.vgmsistemas.vgmweb.service.ClienteService;
 import com.vgmsistemas.vgmweb.service.PropertiesService;
 import com.vgmsistemas.vgmweb.service.VentaService;
 
 @Controller
-@RequestMapping({ "/shopping-cart", "/shopping-cart.html", "/shopping-cart.htm" })
 public class ShoppingCartController {
 	@Autowired
 	VentaService vtaService;
@@ -31,9 +33,11 @@ public class ShoppingCartController {
 	PropertiesService prepertyService;
 	@Autowired
 	ClienteService clienteService;
+	@Autowired
+	BannerService bannerService;
 	static Logger logger = LoggerFactory.getLogger(ShoppingCartController.class);
 
-	@GetMapping
+	@GetMapping({ "/shopping-cart", "/shopping-cart.html", "/shopping-cart.htm" })
 	public String getShoppingCar(Model model) {
 		try {
 			// Obtengo el usuario
@@ -41,20 +45,25 @@ public class ShoppingCartController {
 			UserDetails userDetail = (UserDetails) auth.getPrincipal();
 			String usuario = userDetail.getUsername();
 			Clientes clientesComerciosPorUsuario = clienteService.getAllClientesByUsuario(usuario);
-						
-			model.addAttribute("comercios",clientesComerciosPorUsuario.getClientes());
+
+			model.addAttribute("comercios", clientesComerciosPorUsuario.getClientes());
 			model.addAttribute("token", "");
 			model.addAttribute("nameapp", prepertyService.getNameApp());
+			List<Banner> list = bannerService.getByDePaginaAndSnActivo("shopping-cart", "S");
+			if (list != null) {
+				model.addAttribute("banner", list.get(0));
+			}
 			return "shopping-cart";
 		} catch (Exception e) {
-
+			logger.error("Error inesperado en clase ShoppingCartController-Página: shopping-cart. " + e.getStackTrace()
+					+ " VGMMESAGGE: " + e.getMessage() + " VGMTOSTRING: " + e.toString());
 			model.addAttribute("token", "");
 			model.addAttribute("nameapp", prepertyService.getNameApp());
 			return "shopping-cart";
 		}
 	}
 
-	@PostMapping
+	@PostMapping({ "/shopping-cart", "/shopping-cart.html", "/shopping-cart.htm" })
 	public @ResponseBody String checkin(@RequestBody DetailViewWsDto detallePedido, HttpServletRequest request) {
 		if (detallePedido == null) {
 			return "el servidor no pudo interpretar la solicitud dada una sintaxis inválida.";
@@ -62,7 +71,8 @@ public class ShoppingCartController {
 			try {
 				return vtaService.generarVenta(detallePedido);
 			} catch (Exception e) {
-				logger.error("Error inesperado en clase ContactoController-Página: contacto. " + e.getStackTrace());
+				logger.error("Error inesperado en clase ShoppingCartController-Página: shopping-cart. "
+						+ e.getStackTrace() + " VGMMESAGGE: " + e.getMessage() + " VGMTOSTRING: " + e.toString());
 				return "error";
 			}
 		}

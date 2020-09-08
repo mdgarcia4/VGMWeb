@@ -31,7 +31,7 @@ public class ClaveController {
 	static Logger logger = LoggerFactory.getLogger(ClaveController.class);
 	String usuarioName = "";
 
-	@GetMapping("/change-password")
+	@GetMapping({ "/change-password", "/change-password.html", "/change-password.htm" })
 	public String cambioClave(Model model) {
 		// Obtengo el usuario
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -68,7 +68,7 @@ public class ClaveController {
 				throw new Exception("Usuario no esta Logueado.");
 			}
 			clave.setUser(usuarioName);
-			if (userService.cambiarClave(clave).equals("OK")) {				
+			if (userService.cambiarClave(clave).equals("OK")) {
 				return "login";
 			}
 			model.addAttribute("nameapp", prepertyService.getNameApp());
@@ -76,8 +76,8 @@ public class ClaveController {
 			model.addAttribute("CambiarClaveErrorMensaje", "No se encontró Cliente");
 			return "change-password";
 		} catch (Exception e) {
-			logger.error("Error inesperado en clase  ClaveController-Página: change-password. " + e.getStackTrace() + " - "
-					+ e.getMessage());
+			logger.error("Error inesperado en clase  ClaveController-Página: change-password. " + e.getStackTrace()
+					+ " VGMMESAGGE: " + e.getMessage() + " VGMTOSTRING: " + e.toString());
 			model.addAttribute("nameapp", prepertyService.getNameApp());
 			model.addAttribute("usuarioLogin", usuarioName);
 			model.addAttribute("CambiarClaveErrorMensaje", e.getMessage());
@@ -85,7 +85,7 @@ public class ClaveController {
 		}
 	}
 
-	@GetMapping("/recover-password")
+	@GetMapping({ "/recover-password", "/recover-password.html", "/recover-password.htm" })
 	public String getClave(Model model) {
 		model.addAttribute("nameapp", prepertyService.getNameApp());
 		return "recover-password";
@@ -97,14 +97,14 @@ public class ClaveController {
 			if (clave != null && !clave.getMail().equals("")) {
 				// genero el password
 				if (userService.recuperarClave(clave).equals("OK")) {
-					return "login";					
+					return "login";
 				}
 			}
 			model.addAttribute("nameapp", prepertyService.getNameApp());
 			return "recover-password";
 		} catch (Exception e) {
-			logger.error("Error inesperado en clase  ClaveController-Página: recover-password. " + e.getStackTrace() + " - "
-					+ e.getMessage());
+			logger.error("Error inesperado en clase  ClaveController-Página: recover-password. " + e.getStackTrace()
+					+ " VGMMESAGGE: " + e.getMessage() + " VGMTOSTRING: " + e.toString());
 			model.addAttribute("nameapp", prepertyService.getNameApp());
 			model.addAttribute("RecuperarClaveErrorMensaje", e.getMessage());
 			return "recover-password";

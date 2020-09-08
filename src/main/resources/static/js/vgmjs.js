@@ -167,7 +167,7 @@ function goToCatalog() {
 		let msubrubro = item.msubrubro;
 		let mproveedor = item.mproveedor;
 		let mmarca = item.mmarca;
-		window.location = "/categorias?page=" + mpage + "&size=" + msize + "&order=" + morderby +
+		window.location = "categorias?page=" + mpage + "&size=" + msize + "&order=" + morderby +
 						  "&rubro=" + mrubro + "&subrubro=" + msubrubro + "&proveedor=" + mproveedor +
 						  "&marca=" + mmarca;
 
@@ -239,7 +239,7 @@ function getproveedor(id) {
 };
 
 function goToAccount() {
-	window.location="/myaccount"
+	window.location="myaccount"
 }
 
 /*agrego items al ddn-carrito*/
@@ -923,4 +923,10 @@ function limpiarLocalStorage() {
 	localStorage.removeItem("cbShopCart");
 	localStorage.removeItem("comercioSeleccionado");
 	localStorage.removeItem("optionValue");
+};
+
+function limpiarFiltros() {
+	localStorage.removeItem("memoryBackUp");
+	loadMemoryBackUp();
+	goToCatalog();
 };
