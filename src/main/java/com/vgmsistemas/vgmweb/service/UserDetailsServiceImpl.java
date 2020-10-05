@@ -150,7 +150,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 		String mailEnvio = entidad.getEmail();
 		if (mailEnvio != null && !mailEnvio.equals("")) {
 			String asunto = prepertyService.getNameApp() + " - " + "Se ha registrado correctamente.";
-			String cuerpoMail = "Se ha registrado correctamete. El usuario con el que se encuentra registrado este e-mail es " + entidad.getEmail();
+			String cuerpoMail = "Ud. se ha registrado correctamete. El usuario con el que se encuentra registrado este e-mail es " + entidad.getUsuario();
 			mandarMail(mailEnvio, asunto, cuerpoMail);
 		}
 		return userDet;
@@ -328,9 +328,9 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 	public String generarPasswordNew(Usuario appUser) throws UsernameNotFoundException {
 		// Buscar el usuario en el repositorio y si no existe lanzar una exepcion
 		String alfanumerico = "abcdefghijklmnopqrstuvwxyz";
-		String claveAlfa = randomString(alfanumerico, 16);
+		String claveAlfa = randomString(alfanumerico, 6);
 		String numerico = "1234567890";
-		String claveNro = randomString(numerico, 8);
+		String claveNro = randomString(numerico, 6);
 		String passNew = claveNro + claveAlfa;
 		BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder(4);
 

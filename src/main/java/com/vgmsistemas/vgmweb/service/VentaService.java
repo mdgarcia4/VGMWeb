@@ -63,8 +63,7 @@ public class VentaService {
 			}
 
 		} catch (Exception e) {
-			logger.error("Error inesperado en clase VentaService-Met: generarVenta. " + e.getMessage());
-			logger.error("Error inesperado en clase VentaService-Met: generarVenta. " + e.getStackTrace());
+			logger.error("Error inesperado en clase VentaService-Met: generarVenta.");
 			throw e;
 		}
 

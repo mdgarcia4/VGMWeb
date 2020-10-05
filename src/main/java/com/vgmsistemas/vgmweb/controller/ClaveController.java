@@ -78,6 +78,7 @@ public class ClaveController {
 		} catch (Exception e) {
 			logger.error("Error inesperado en clase  ClaveController-Página: change-password. " + e.getStackTrace()
 					+ " VGMMESAGGE: " + e.getMessage() + " VGMTOSTRING: " + e.toString());
+			logger.error("Error inesperado en clase  ClaveController-Página: change-password. " + e);
 			model.addAttribute("nameapp", prepertyService.getNameApp());
 			model.addAttribute("usuarioLogin", usuarioName);
 			model.addAttribute("CambiarClaveErrorMensaje", e.getMessage());
@@ -105,6 +106,7 @@ public class ClaveController {
 		} catch (Exception e) {
 			logger.error("Error inesperado en clase  ClaveController-Página: recover-password. " + e.getStackTrace()
 					+ " VGMMESAGGE: " + e.getMessage() + " VGMTOSTRING: " + e.toString());
+			logger.error("Error inesperado en clase  ClaveController-Página: recover-password. " + e);
 			model.addAttribute("nameapp", prepertyService.getNameApp());
 			model.addAttribute("RecuperarClaveErrorMensaje", e.getMessage());
 			return "recover-password";

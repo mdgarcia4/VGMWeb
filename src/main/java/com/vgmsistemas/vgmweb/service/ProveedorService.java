@@ -1,6 +1,8 @@
 package com.vgmsistemas.vgmweb.service;
 
 import java.util.List;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.vgmsistemas.vgmweb.entity.Proveedor;
@@ -32,5 +34,8 @@ public class ProveedorService {
 	public void setProveedorRepo(ProveedorRepo proveedorRepo) throws Exception {
 		this.proveedorRepo = proveedorRepo;
 	}
-
+	
+	public Optional<Proveedor> getById(Long id) {
+		return proveedorRepo.findById(id);
+	}
 }

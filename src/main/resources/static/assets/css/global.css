@@ -460,7 +460,17 @@ input:focus, input:active, button:focus, button:active, textarea:focus {
 .total-amount {
 	padding: 10px 0 24px;
 }
-.total-amount .total {
+.total-amount .total{
+	font-family: 'Montserrat', sans-serif;
+	font-size: 14px;
+	color: #696969;
+	float: left;
+	text-transform: uppercase;
+	padding-top: 4px;
+	letter-spacing: 1.5px;
+	border-bottom: 0;
+}
+.total-amount .total-impuesto{
 	font-family: 'Montserrat', sans-serif;
 	font-size: 14px;
 	color: #696969;

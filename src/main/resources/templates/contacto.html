@@ -231,12 +231,13 @@
 									<input type="submit" class="comment-submit qoute-sub" ng-disabled="submitButtonDisabled">
 									<div ng-class="{'submissionMessage' : submission}" ng-bind="submissionMessage" style="float:right; color: red;"></div>
 									</form> -->
-									<form name="contactForm" method="post"  novalidate id="contact" class="contact-form" data-ng-controller='lookcontactCtrl'>
+									<form name="contactForm" class="contact-form" th:action="@{contacto}" th:object="${contacto}" method="post" id="contact">
+									<!-- <form name="contactForm" method="post"  novalidate id="contact" class="contact-form" data-ng-controller='lookcontactCtrl'> -->
 										<!-- 	<form class="contact-form"> -->
 										<!-- <div ng-class="{'successMessage' : successsubmission}" ng-bind="successsubmissionMessage" id="success"></div> -->
 										<input id="name" class="contact-name" type="text" name="name" placeholder="Name*" th:placeholder="#{contacto.message.name}" required ng-model="contactformData.name"   ng-class="{'error' : contactForm.name.$error.pattern || submit && contactForm.name.$invalid}"/>
 										<input id="email" class="contact-mail" type="email" name="email" placeholder="Email*" th:placeholder="#{contacto.message.email}" required ng-model="contactformData.email"   ng-class="{'error' : contactForm.email.$error.pattern || submit && contactForm.email.$invalid}"/>
-										<input id="sub" class="contact-subject" type="text" name="subject" placeholder="Subject*" th:placeholder="#{contacto.message.subject}" required data-ng-model="contactformData.subject" data-ng-class="{'error' : contactForm.subject.$error.required && contactForm.subject.$blured || submit && contactForm.subject.$invalid}"/>
+										<input id="sub" class="contact-subject" type="text" name="sub" placeholder="Subject*" th:placeholder="#{contacto.message.subject}" required data-ng-model="contactformData.subject" data-ng-class="{'error' : contactForm.subject.$error.required && contactForm.subject.$blured || submit && contactForm.subject.$invalid}"/>
 										<textarea placeholder="Comment*" th:placeholder="#{contacto.message.comment}" id="message" name="message" data-ng-model="contactformData.message" required data-ng-class="{'error' : contactForm.message.$error.required && contactForm.message.$blured || submit && contactForm.message.$invalid}"></textarea>										
 												
 

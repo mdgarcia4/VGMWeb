@@ -93,9 +93,12 @@ public interface ListaPrecioDetalleRepo extends JpaRepository<ListaPrecioDetalle
     		+ "  AND (a.subrubro.id.idRubro = ?3 OR 0 = ?3 )"
     		+ "  AND (a.subrubro.id.idSubrubro = ?4 OR 0 = ?4 )"
     		+ "  AND (a.marca.id = ?5 OR 0 = ?5 )"
-    		+ "  AND (a.idProveedor = ?6 OR 0 = ?6 )")
+    		+ "  AND (a.idProveedor = ?6 OR 0 = ?6 )"
+    		+ "  AND ((l.precioConIva between ?8 AND ?9) OR (0 = ?8 AND 0 = ?9))"
+    		+ "  AND ((s.stock > 0 AND 'S' = ?10) OR ('N' = ?10 ))")
     public Page<ListaPrecioDetalle> findListaBySucListaRubroSubrubroMarcaProvedorStock(Long sucursal, Long lista, 
-    			Long rubro, Long subrubro ,Long marca, Long proveedor, Long deposito, Pageable pageable);
+    			Long rubro, Long subrubro ,Long marca, Long proveedor, Long deposito, Double prMin, Double prMax, 
+    			String soloConStock, Pageable pageable);
 	
 	@Query("SELECT NEW com.vgmsistemas.vgmweb.entity.ListaPrecioDetalle("
 			+ "l.id,"
@@ -119,5 +122,27 @@ public interface ListaPrecioDetalleRepo extends JpaRepository<ListaPrecioDetalle
     		+ "  AND a.tiWebDestacados in ?3")
 	public Page<ListaPrecioDetalle> findByTiWebDestacadosInStock(Long sucursal, Long lista, 
 			List<String> arrTiWebDestacados, Long deposito, Pageable pageable);
+	
+	@Query("SELECT NEW com.vgmsistemas.vgmweb.entity.ListaPrecioDetalle("
+			+ "l.id,"
+			+ "l.precioSinIva,"
+			+ "l.precioConIva,"
+			+ "l.cantidadPorLista,"
+			+ "l.cantidadVendida,"
+			+ "l.snMovil,"
+			+ "l.fechaVigenciaDesde,"
+			+ "l.fechaVigenciaHasta,"
+			+ "l.articulo,"
+			+ "s.stock )"
+	+ " FROM ListaPrecioDetalle l,Articulo a, Stock s "
+	+ " WHERE a.id = l.id.idArticulo "
+	+ "  AND a.id = s.idArticulos"
+	+ "  AND s.idDeposito = ?4"
+	+ "  AND a.snActivo ='S'"
+	+ "  and a.snWeb='S'"
+	+ "  AND l.id.idSucursal = ?1"
+	+ "  AND l.id.idLista = ?2"
+	+ "  AND (Upper(a.descripcion) LIKE Upper('%'+ ?3 +'%' ))")
+public Page<ListaPrecioDetalle> findDescripcionArticulo(Long sucursal, Long lista,String descripcion, Long deposito,Pageable pageable);
 	    
 }

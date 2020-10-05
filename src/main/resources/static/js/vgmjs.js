@@ -8,7 +8,7 @@ function load() {
 	};
 	resguardarUrlLocal();
 	let optionValue = localStorage.getItem("optionValue");
-	if (optionValue === null) {
+	if ((optionValue === null) || (optionValue === 'null')) {
 		optionValue = "es";
 	};
 	$("#idiomas option[value='"+ optionValue +"']").attr("selected",true);
@@ -16,24 +16,39 @@ function load() {
 	loadMemoryBackUp();
 	/*cargo datos del comercio selecionado*/
 	let comercioSelect = localStorage.getItem("comercioSeleccionado");
-	if (comercioSelect === null){
+	if ((comercioSelect === null) || (comercioSelect === 'null')){
 		comercioSelectt = 0;
 		localStorage.setItem('comercioSeleccionado', comercioSelect);
 	};
-	/*cargo el usuario logueado si estoy en categ*/
+	/*cargo el usuario logueado si estoy en categ, ademas datos generales*/
 	if ($("#usuariologin").length > 0) {
 		let userlogin = localStorage.getItem("userlogin");
-		if (userlogin === null){
+		if  ((userlogin === null) || (userlogin === 'null')){
 			userlogin = $("#usuariologueado").text();;
 			localStorage.setItem('userlogin', userlogin);
 		};
+		/*datos generales*/
+
+		var impuestosGenerales = JSON.parse(localStorage.getItem("impuestosGenerales"));
+		if ((impuestosGenerales === null)||(impuestosGenerales === 'null')){
+			impuestosGenerales = [];
+			//cargo solo si no hay datos			
+			let dtoCondVta= parseFloat(parseFloat($("#item-dto-condicionventa").text()).toFixed(2));
+			let taImpDgr = parseFloat(parseFloat($("#item-tasa-imp-provincial").text()).toFixed(2));
+			let taImpDirsc = parseFloat(parseFloat($("#item-tasa-imp-municipal").text()).toFixed(2));
+			let letraComprobante = $("#item-letra-comprobante").text();
+			var datosGrales = new ImpuestosGenerales(dtoCondVta, taImpDgr, taImpDirsc, letraComprobante);
+			impuestosGenerales.push(datosGrales);
+			localStorage.setItem("impuestosGenerales", JSON.stringify(impuestosGenerales));
+		};
+		
 	};
 	
 };
 
 function loadItemDwnCarrito(){
 	var cbShopCart = JSON.parse(localStorage.getItem("cbShopCart"));
-	if (cbShopCart === null){
+	if ((cbShopCart === null)||(cbShopCart === 'null')){
 		cbShopCart = [];
 	};
 	cbShopCart.forEach(function(item){
@@ -85,15 +100,16 @@ function cargaritemdwnhtml(id, asimagensrc, asdescripcion, asprecio, ascantidad,
 		refreshCantPrDwnCarritoVgm();
 }
 
-function Pedido(id, descripcion, cantidad, precio,srcimagen) {
+function Pedido(id, descripcion, cantidad, precio,srcimagen, primpuestointerno) {
   this.id = id;
   this.descripcion = descripcion;
   this.cantidad = cantidad;
   this.precio = precio;
   this.srcimagen = srcimagen;
+  this.primpuestointerno = primpuestointerno
 };
 
-function MemoryBack(mpage,msize,morderby,mrubro,msubrubro,mproveedor,mmarca) {
+function MemoryBack(mpage,msize,morderby,mrubro,msubrubro,mproveedor,mmarca,mprmin,mprmax, mconstock) {
 	this.mpage = mpage;
 	this.msize = msize;
 	this.morderby = morderby;
@@ -101,12 +117,21 @@ function MemoryBack(mpage,msize,morderby,mrubro,msubrubro,mproveedor,mmarca) {
 	this.msubrubro = msubrubro;
 	this.mproveedor = mproveedor;
 	this.mmarca = mmarca;
+	this.mprmin = mprmin;
+	this.mprmax = mprmax;
+	this.mconstock = mconstock;
 };
 
+function ImpuestosGenerales(dtoConVta,tadgr, tadirsc, letraComprobante){
+	this.dtoConVta = dtoConVta;
+	this.tadgr = tadgr;
+	this.tadirsc = tadirsc;
+	this.letraComprobante = letraComprobante
+};
 /*carga items de la pag shoppingcart */
 function loadItemsShoppingCart() {
 	var cbShopCart = JSON.parse(localStorage.getItem("cbShopCart"));
-	if (cbShopCart === null){
+	if ((cbShopCart === null)||(cbShopCart === 'null')){
 		cbShopCart = [];
 	};
 	cbShopCart.forEach(function(item){
@@ -142,7 +167,28 @@ function loadItemsShoppingCart() {
 /*Cargar la Memoria */
 function loadMemoryBackUp() {
 	var memoryBackUp = JSON.parse(localStorage.getItem("memoryBackUp"));
-	if (memoryBackUp === null){
+	if ((memoryBackUp === null) || (memoryBackUp === 'null')){
+		let lsPrecioMin = "0";
+		let lsPrecioMax = "0";
+		let lsStock = "N";
+		if(document.getElementById("preciominimo")){
+			lsPrecioMin = $("#preciominimo").text();
+			lsPrecioMin = reemplazarCadena("$", "", lsPrecioMin)
+		}
+		if(document.getElementById("preciomaximo")){
+			lsPrecioMax = $("#preciomaximo").text();
+			lsPrecioMax = reemplazarCadena("$", "", lsPrecioMax)
+		}
+		if(document.getElementById("preciomaximo")){
+			lsPrecioMax = $("#preciomaximo").text();
+			lsPrecioMax = reemplazarCadena("$", "", lsPrecioMax)
+		}
+		if(document.getElementById("view-for-stock")){
+			lsStock = $("#view-for-stock").text();
+			if (lsStock === "") {
+				lsStock = "N";
+			}
+		}
 		memoryBackUp = [];
 		let mpage = 1;
 		let msize = 12;
@@ -151,7 +197,9 @@ function loadMemoryBackUp() {
 		let msubrubro = 0;
 		let mproveedor = 0;
 		let mmarca = 0;
-		var newMemory = new MemoryBack(mpage,msize,morderby,mrubro,msubrubro,mproveedor,mmarca);	
+		let mprmin = parseInt(lsPrecioMin);
+		let mprmax = parseInt(lsPrecioMax);
+		var newMemory = new MemoryBack(mpage,msize,morderby,mrubro,msubrubro,mproveedor,mmarca,mprmin,mprmax,lsStock);	
 		memoryBackUp.push(newMemory);
 		localStorage.setItem("memoryBackUp", JSON.stringify(memoryBackUp));
 	};	
@@ -167,9 +215,12 @@ function goToCatalog() {
 		let msubrubro = item.msubrubro;
 		let mproveedor = item.mproveedor;
 		let mmarca = item.mmarca;
+		let mprmin = item.mprmin;
+		let mprmax = item.mprmax;
+		let mconstock = item.mconstock;
 		window.location = "categorias?page=" + mpage + "&size=" + msize + "&order=" + morderby +
 						  "&rubro=" + mrubro + "&subrubro=" + msubrubro + "&proveedor=" + mproveedor +
-						  "&marca=" + mmarca;
+						  "&marca=" + mmarca + "&min=" + mprmin + "&max=" + mprmax + "&stk=" + mconstock;
 
 	});
 };
@@ -242,12 +293,42 @@ function goToAccount() {
 	window.location="myaccount"
 }
 
+function getRangoPrecioStock(){
+	let conStock = "N";
+	if(document.getElementById("view-for-stock").checked) conStock = "S";
+	let lsPrecioMin = $("#amount2").text();
+	let lsPrecioMax = $("#amount1").text();
+	lsPrecioMin = reemplazarCadena("$", "", lsPrecioMin)
+	lsPrecioMax = reemplazarCadena("$", "", lsPrecioMax)
+	let memoryBackUp = JSON.parse(localStorage.getItem("memoryBackUp"));
+	memoryBackUp.forEach(function(item){
+		item.mprmin = parseInt(lsPrecioMin);
+		item.mprmax = parseInt(lsPrecioMax);
+		item.mconstock = conStock;
+	});
+	localStorage.setItem("memoryBackUp", JSON.stringify(memoryBackUp));
+	goToCatalog();
+}
+
 /*agrego items al ddn-carrito*/
 function agregarDwnCarritoVgm(id, isCombo,msj){
 	var cantidad = 1;
+	var result = {}; 
+	for(var i = 0; i < 50; i++) 
+	{ 
+		result[i + 1] = i + 1; 
+	} 
+	var inputOptionsPromise = new Promise(function (resolve) {
+		// get your data and pass it to resolve()
+		setTimeout(function () {
+			resolve(result)
+		}, 50)
+	  })
 	swal({
         title: "Cantidad",
-        input: "text",
+		//input: "text",
+		input: 'select',
+		inputOptions: inputOptionsPromise,
         showCancelButton: true,
         confirmButtonText: "Guardar",
         cancelButtonText: "Cancelar",
@@ -313,12 +394,13 @@ function addItem(id, isCombo,msj){
 	let precio = parseFloat(parseFloat($("#item-precio-"+id).text()).toFixed(2));
 	let ele_imagen = document.getElementById("item-fig-"+id);
 	let lsimagen =  ele_imagen.getAttribute("src");
+	let primpuestointerno = parseFloat(parseFloat($("#item-impuesto-interno-"+id).text()).toFixed(2));
 	if(isCombo === "N"){
 		var cbShopCart = JSON.parse(localStorage.getItem("cbShopCart"));
 	}else{
 		var cbShopCart = JSON.parse(localStorage.getItem("cbShopCart-combos"));
 	};
-	if (cbShopCart === null){
+	if ((cbShopCart === null)||(cbShopCart === 'null')){
 		cbShopCart = [];
 	};
 	let find = false;
@@ -330,7 +412,7 @@ function addItem(id, isCombo,msj){
 	});
 	if (find === false){
 		if(isCombo === 'N'){
-			var nuevoPedido = new Pedido(id, descripcion, cantidad, precio, lsimagen);
+			var nuevoPedido = new Pedido(id, descripcion, cantidad, precio, lsimagen, primpuestointerno);
 		}else{
 			var artBonif = [];
 			combos = JSON.parse(localStorage.getItem('cb-combos'));
@@ -450,11 +532,13 @@ function deleteStorage(id) {
 function refreshCantPrDwnCarritoVgm() {
 	var cantidad = 0;
 	var precio = 0;
+	let impuestoInterno = 0;
 	var cbShopCart = JSON.parse(localStorage.getItem("cbShopCart"));
 	if (cbShopCart !== null){
 		cbShopCart.forEach(function(item){
 			cantidad += parseInt(item.cantidad,10);
 			precio += parseFloat(item.precio * item.cantidad);
+			impuestoInterno += parseFloat(item.primpuestointerno * item.cantidad);
 		});	
 	};
 	var cbShopCartCombos = JSON.parse(localStorage.getItem("cbShopCart-combos"));
@@ -464,10 +548,38 @@ function refreshCantPrDwnCarritoVgm() {
 			precio += parseFloat(parseFloat(item.precio).toFixed(2));
 		});
 	};
+	/*Calculo impuestos grales*/
+	let impuestos = 0;
+	let totalGeneral = 0;
+	var impuestosGenerales = JSON.parse(localStorage.getItem("impuestosGenerales"));
+	if (impuestosGenerales !== null){
+		let prConDtoCondVta = 0;
+		let prDGR = 0;
+		let prDirsc = 0;
+		let impuetoInternoConDtoCvta = 0;
+		let letra = "";
+		/*como precio ya tiene impuesto interno no lo concidero*/
+		impuestosGenerales.forEach(function(item){
+			prConDtoCondVta = parseFloat(parseFloat((precio) /** ( 1 + item.dtoConVta)*/).toFixed(2));
+			impuetoInternoConDtoCvta = parseFloat(parseFloat((impuestoInterno) * ( 1 + item.dtoConVta)).toFixed(2));
+			prDGR = parseFloat(parseFloat((prConDtoCondVta) * (item.tadgr/100)).toFixed(2));
+			prDirsc = parseFloat(parseFloat((prConDtoCondVta) * (item.tadirsc/100)).toFixed(2));
+			letra = item.letraComprobante;
+		});
+		if (letra === "A") {
+			impuestos = /*impuetoInternoConDtoCvta +*/ prDGR + prDirsc;
+			totalGeneral = prConDtoCondVta /*+ prDGR + prDirsc*/;
+		}else{						
+			impuestos = /*impuetoInternoConDtoCvta +*/ prDGR + prDirsc;
+			totalGeneral = prConDtoCondVta /*+ prDGR + prDirsc*/;
+		}
+	};
 	/*remuevo el span para volver a cargarlo*/
 	$("#cantPrCarritoVgmItem").remove();
 	$("#icono1CantPrCarritoVgm").remove();
 	$("#totDwnCarritoVgmItem").remove();
+	$("#totalImpuestosyDtos").remove();
+	$("#totalGeneral").remove();
 	if (cantidad !== 0) {
 		var htmlDinamico = '<i id="icono1CantPrCarritoVgm" class="icon_bag_alt"></i>';	
 		htmlDinamico += '<span id="cantPrCarritoVgmItem" class="item-count"> ';
@@ -477,6 +589,10 @@ function refreshCantPrDwnCarritoVgm() {
 		$("#cantPrCarritoVgm").append(htmlDinamico);
 		htmlDinamico = '<span id="totDwnCarritoVgmItem" class="amount"> $' + precioString(precio)  +'</span>';
 		$("#totDwnCarritoVgm").append(htmlDinamico);
+		htmlDinamico = '<span id="totalImpuestosyDtos" class="amount"> $' + precioString(impuestos)  +'</span>';
+		$("#totImpDwnCarritoVgm").append(htmlDinamico);
+		htmlDinamico = '<span id="totalGeneral" class="amount"> $' + precioString(totalGeneral)  +'</span>';
+		$("#totGralDwnCarritoVgm").append(htmlDinamico);
 		/* si estoy en la pag de shopping cargo los items */
 		if ($("#shopping-cart-content").length > 0) {
 			calcularTotales();
@@ -490,6 +606,10 @@ function refreshCantPrDwnCarritoVgm() {
 		$("#cantPrCarritoVgm").append(htmlDinamico);
 		htmlDinamico = '<span id="totDwnCarritoVgmItem" class="amount"> $ 0.00</span>';
 		$("#totDwnCarritoVgm").append(htmlDinamico);
+		htmlDinamico = '<span id="totalImpuestosyDtos" class="amount"> $ 0.00</span>';
+		$("#totImpDwnCarritoVgm").append(htmlDinamico);
+		htmlDinamico = '<span id="totalGeneral" class="amount"> $ 0.00</span>';
+		$("#totGralDwnCarritoVgm").append(htmlDinamico);
 		/* si estoy en la pag de shopping cargo los items */
 		if ($("#shopping-cart-content").length > 0) {
 			calcularTotales();
@@ -523,18 +643,50 @@ function actualizarValorPrTotalItem(id) {
 
 function calcularTotales() {
 	let precio = 0;
+	let impuestoInterno = 0;
 	var cbShopCart = JSON.parse(localStorage.getItem("cbShopCart"));
 	if (cbShopCart !== null){
 		cbShopCart.forEach(function(item){
 			precio += parseFloat(item.precio * item.cantidad);
+			impuestoInterno += parseFloat(item.primpuestointerno * item.cantidad);
 		});	
 	};
+	/*Calculo los impuestos*/
+	let impuestos = 0;
+	let totalGeneral = 0;
+	var impuestosGenerales = JSON.parse(localStorage.getItem("impuestosGenerales"));
+	if (impuestosGenerales !== null){
+		let prConDtoCondVta = 0;
+		let prDGR = 0;
+		let prDirsc = 0;
+		let impuetoInternoConDtoCvta = 0;
+		let letra = "";
+		/*como precio ya tiene impuesto interno no lo concidero*/
+		impuestosGenerales.forEach(function(item){
+			prConDtoCondVta = parseFloat(parseFloat((precio) /* * ( 1 + item.dtoConVta)*/).toFixed(2));
+			impuetoInternoConDtoCvta = parseFloat(parseFloat((impuestoInterno) * ( 1 + item.dtoConVta)).toFixed(2));
+			prDGR = parseFloat(parseFloat((prConDtoCondVta) * (item.tadgr/100)).toFixed(2));
+			prDirsc = parseFloat(parseFloat((prConDtoCondVta) * (item.tadirsc/100)).toFixed(2));
+			letra = item.letraComprobante;
+		});
+		if (letra === "A") {
+			impuestos = /*impuetoInternoConDtoCvta +*/ prDGR + prDirsc;
+			totalGeneral = prConDtoCondVta /*+ prDGR + prDirsc*/;
+		}else{						
+			impuestos = /*impuetoInternoConDtoCvta +*/ prDGR + prDirsc;
+			totalGeneral = prConDtoCondVta /*+ prDGR + prDirsc*/;
+		}
+	};
+
 	$("#cart-pr-subtotal").remove();
+	$("#cart-pr-impuestos").remove();
 	$("#cart-pr-total-gral").remove();
-	let htmlsubtotal = "<span id='cart-pr-subtotal' class='sub-total'>Sub total<strong>$" + precioString(precio) + "</strong></span>";
-	let htmltotalgral = "<span id='cart-pr-total-gral' class='grand-total'>Total <strong>$" + precioString(precio) + "</strong></span>";
-	$("#cart-totales").append(htmlsubtotal);
-	$("#cart-totales").append(htmltotalgral);
+	let htmlsubtotal = "<span id='cart-pr-subtotal' class='sub-total'><strong>$" + precioString(precio) + "</strong></span>";
+	let htmlimpuestos = "<span id='cart-pr-impuestos' class='sub-total'><strong>$" + precioString(impuestos) + "</strong></span>";
+	let htmltotalgral = "<span id='cart-pr-total-gral' class='grand-total'><strong>$" + precioString(totalGeneral) + "</strong></span>";
+	$("#sub-totales").append(htmlsubtotal);
+	$("#impuestos-totales").append(htmlimpuestos);
+	$("#gral-totales").append(htmltotalgral);
 };
 
 function imgError(image){ 
@@ -821,11 +973,11 @@ function enviarPedido() {
 			title: 'Error',
 			text: 'No es posible envíar el pedido ya que su carrito esta vacío',
 		});
-		return
+		return;
 	};
 	
 	let comercioSelect = localStorage.getItem("comercioSeleccionado");
-	if ((comercioSelect === null || comercioSelect === 0)){
+	if ((comercioSelect === null) || (comercioSelect === 0) || (comercioSelect === 'null') ){
 		swal({
 			type: 'error',
 			title: 'Error',
@@ -912,6 +1064,7 @@ function enviarPedido() {
 				  text: 'Parte del pedido no ha sido enviado correctamente. Problemas en el ingreso de pedidos.',
 				}).then(function(){
 					location.reload(); 
+					localStorage.removeItem("comercioSeleccionado");
 				});
 			}, 
 		});
@@ -930,3 +1083,4 @@ function limpiarFiltros() {
 	loadMemoryBackUp();
 	goToCatalog();
 };
+

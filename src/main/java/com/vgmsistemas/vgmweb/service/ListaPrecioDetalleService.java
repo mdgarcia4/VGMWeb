@@ -28,36 +28,16 @@ public class ListaPrecioDetalleService {
 	@Autowired
 	EmpresaService empresaService;
 	@Autowired
+	ProveedorService proveedorService;
+	@Autowired
 	PropertiesService propertyService;
 	static Logger logger = LoggerFactory.getLogger(ListaPrecioDetalleService.class);
 	private Empresa empresa;
 	private Long idDeposito;
 
-	public Page<ListaPrecioDetalle> getListaPrecioPorCliente(Cliente cliente, Integer pagNro, Integer pagTamanio,
-			String ordenadoPor, Long rubro, Long subrubro, Long proveedor, Long marca) throws Exception {
-		try {
-			Pageable pagina = PageRequest.of(pagNro, pagTamanio, Sort.by(ordenadoPor));
-			Page<ListaPrecioDetalle> listaPrecios;
-			Long sucursal = cliente.getId().getIdSucursal();
-			Long lista = cliente.getListaPrecio().getId();
-			empresa = empresaService.getById(1L);// hardco empresa 1
-
-			listaPrecios = listaPrecioDetalleRepo.findListaBySucListaRubroSubrubroMarcaProvedor(sucursal, lista, rubro,
-					subrubro, marca, proveedor, pagina);
-			if (empresa.getSnAccionesCom().equals(Empresa.PERMITE)) {
-				getAccionesComerciales(listaPrecios, cliente);
-			}
-
-			return controlCalculosPorArticulos(listaPrecios);
-		} catch (Exception e) {
-			logger.error("Error inesperado en clase ListaPrecioDetalleService-Met: getListaPrecioPorCliente. "
-					+ e.getStackTrace() + " MENSAJEEX: " + e.getMessage() + " MENSAJEStr: " + e.toString());
-			throw e;
-		}
-	}
-
 	public Page<ListaPrecioDetalle> getListaPrecioPorClienteStock(Cliente cliente, Integer pagNro, Integer pagTamanio,
-			String ordenadoPor, Long rubro, Long subrubro, Long proveedor, Long marca) throws Exception {
+			String ordenadoPor, Long rubro, Long subrubro, Long proveedor, Long marca, Long min, Long max, String stk)
+			throws Exception {
 		try {
 			Pageable pagina = PageRequest.of(pagNro, pagTamanio, Sort.by(ordenadoPor));
 			Page<ListaPrecioDetalle> listaPrecios;
@@ -66,18 +46,35 @@ public class ListaPrecioDetalleService {
 			empresa = empresaService.getById(1L);// hardco empresa 1
 
 			idDeposito = empresaService.getDepositoActivo(empresa, cliente);
-
+			Double prMin = Double.valueOf(min);
+			Double prMax = Double.valueOf(max);
 			listaPrecios = listaPrecioDetalleRepo.findListaBySucListaRubroSubrubroMarcaProvedorStock(sucursal, lista,
-					rubro, subrubro, marca, proveedor, idDeposito, pagina);
+					rubro, subrubro, marca, proveedor, idDeposito, prMin, prMax, stk, pagina);
+			// seteo dto proveedor si los tuviere
+			//setearDtoProveedor(listaPrecios);
+			// seteo dto cliente si los tuviere
+			setearDtoCliente(listaPrecios, cliente);
+			//Determinio si tiene acciones comerciales
 			if (empresa.getSnAccionesCom().equals(Empresa.PERMITE)) {
 				getAccionesComerciales(listaPrecios, cliente);
 			}
 
 			return controlCalculosPorArticulos(listaPrecios);
 		} catch (Exception e) {
-			logger.error("Error inesperado en clase ListaPrecioDetalleService-Met: getListaPrecioPorClienteStock. "
-					+ e.getStackTrace() + " MENSAJEEX: " + e.getMessage() + " MENSAJEStr: " + e.toString());
+			logger.error("Error inesperado en clase ListaPrecioDetalleService-Met: getListaPrecioPorClienteStock.");
 			throw e;
+		}
+	}
+
+	private void setearDtoProveedor(Page<ListaPrecioDetalle> listaPrecios) {
+		for (ListaPrecioDetalle itemList : listaPrecios) {
+			// TODO dto proveedor, y solo buscar si es otro proveedor
+		}
+	}
+
+	private void setearDtoCliente(Page<ListaPrecioDetalle> listaPrecios, Cliente cliente) {
+		for (ListaPrecioDetalle itemList : listaPrecios) {
+			itemList.setTaDtoCliente(cliente.getTasaDescuentoCliente());
 		}
 	}
 
@@ -101,12 +98,27 @@ public class ListaPrecioDetalleService {
 		return controlCalculosPorArticulos(listaPrecios).iterator();
 	}
 
+	public Page<ListaPrecioDetalle> findDescripcionArticulos(Cliente cliente, String search, Pageable pageable)
+			throws Exception {
+		Page<ListaPrecioDetalle> listaPrecios;
+		Long sucursal = cliente.getId().getIdSucursal();
+		Long lista = cliente.getListaPrecio().getId();
+		empresa = empresaService.getById(1L);// hardco empresa 1
+
+		idDeposito = empresaService.getDepositoActivo(empresa, cliente);
+		listaPrecios = listaPrecioDetalleRepo.findDescripcionArticulo(sucursal, lista, search, idDeposito, pageable);
+		if (empresa.getSnAccionesCom().equals(Empresa.PERMITE)) {
+			getAccionesComerciales(listaPrecios, cliente);
+		}
+
+		return controlCalculosPorArticulos(listaPrecios);
+	}
+
 	private void getAccionesComerciales(Page<ListaPrecioDetalle> asListaprecio, Cliente aCliente) throws Exception {
 		try {
 			accionesComDetalleService.validarAccionesComDetalle(asListaprecio, aCliente);
 		} catch (Exception e) {
-			logger.error("Error inesperado en clase ListaPrecioDetalleService-Met: getAccionesComerciales. "
-					+ e.getStackTrace() + " MENSAJEEX: " + e.getMessage() + " MsjTOStr: " + e.toString());
+			logger.error("Error inesperado en clase ListaPrecioDetalleService-Met: getAccionesComerciales.");
 			throw e;
 		}
 	}
@@ -144,8 +156,7 @@ public class ListaPrecioDetalleService {
 			}
 			return listado;
 		} catch (Exception e) {
-			logger.error("Error inesperado en clase ListaPrecioDetalleService-Met: controlCalculosPorArticulos. "
-					+ e.getStackTrace() + " MENSAJEEX: " + e.getMessage() + " MENSAJEStr: " + e.toString());
+			logger.error("Error inesperado en clase ListaPrecioDetalleService-Met: controlCalculosPorArticulos.");
 			throw e;
 		}
 	}
@@ -175,9 +186,9 @@ public class ListaPrecioDetalleService {
 			listaPrecioDetalle.setPrecioConIvaYDtos(formatearDecimales(precioTotalConIvaYDtos, 2));
 			listaPrecioDetalle.setPrecioConIva(formatearDecimales(listaPrecioDetalle.getPrecioConIva(), 2));
 			listaPrecioDetalle.setPrecioSinIva(formatearDecimales(listaPrecioDetalle.getPrecioSinIva(), 2));
+
 		} catch (Exception e) {
-			logger.error("Error inesperado en clase ListaPrecioDetalleService-Met: calcularTotales. "
-					+ e.getStackTrace() + " MENSAJEEX: " + e.getMessage());
+			logger.error("Error inesperado en clase ListaPrecioDetalleService-Met: calcularTotales.");
 			throw e;
 		}
 	}

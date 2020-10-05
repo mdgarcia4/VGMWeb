@@ -47,6 +47,7 @@ public class MiCuentaController {
 		} catch (Exception e) {
 			logger.error("Error inesperado en clase  MiCuentaController-Página: miCuenta. " + e.getStackTrace()
 			+ " VGMMESAGGE: " + e.getMessage() + " VGMTOSTRING: " + e.toString());
+			logger.error("Error inesperado en clase  MiCuentaController-Página: miCuenta. " + e);
 			model.addAttribute("nameapp", prepertyService.getNameApp());
 			return "myaccount";
 		}

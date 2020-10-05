@@ -8,6 +8,12 @@ public class PropertiesService {
 	@Value("${contact.apikey}")
 	private String apiKeyGoogle;	
 	
+	@Value("${contact.email.consulta}")
+	private String emailDeConsulta;	
+	
+	@Value("${contact.email.asunto}")
+	private String asuntoContulta;
+
 	@Value("${shopping-cart.urlservicio}")
 	private String urlServicio;
 	
@@ -54,6 +60,22 @@ public class PropertiesService {
 
 	public void setApiKeyGoogle(String apiKeyGoogle) {
 		this.apiKeyGoogle = apiKeyGoogle;
+	}
+	
+	public String getEmailDeConsulta() {
+		return emailDeConsulta;
+	}
+
+	public void setEmailDeConsulta(String emailDeConsulta) {
+		this.emailDeConsulta = emailDeConsulta;
+	}
+	
+	public String getAsuntoContulta() {
+		return asuntoContulta;
+	}
+
+	public void setAsuntoContulta(String asuntoContulta) {
+		this.asuntoContulta = asuntoContulta;
 	}
 
 	public String getUrlServicio() {

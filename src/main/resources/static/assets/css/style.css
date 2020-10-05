@@ -1894,6 +1894,9 @@
 	border-bottom: 1px solid #cecece;
 	padding: 0 0 29px;
 }
+.total-impuesto {
+	border-bottom: 1px solid #cecece;
+}
 .sub-total, .grand-total {
 	display: block;
 	font-family: montserrat;
@@ -2312,7 +2315,47 @@
 	vertical-align: text-top;
 	color: #666;
 }
+/**/
+.categorias-vgm-form {
+	margin: 10px 0 0;
+	width: 100%;
+}
+.categorias-vgm-form input {
+	background: transparent none repeat scroll 0 0;
+	border: 1px solid #e6e6e6;
+	padding: 18px 10px 16px 20px;
+	font-family: montserrat;
+	width: 90%;
+	margin: 0 0 24px;
+	-webkit-appearance: none;
+	border-radius: 0;
+}
+.categorias-vgm-form input[type="checkbox"] {
+	display: none;
+}
+.categorias-vgm-form label span {
+	background: transparent;
+	border: 1px solid #999999;
+	height: 16px;
+	margin: 2px 8px 0 0;
+	width: 16px;
+	display: block;
+	float: left;
+	position: relative;
+}
+.categorias-vgm-form label span i {
+	position: absolute;
+	display: none;
+}
+.categorias-vgm-form label {
+	font-size: 13px;
+	vertical-align: text-top;
+	color: #666;
+}
 #keep-login:checked + .forgot-pswrd label span i {
+	display: block;
+}
+#view-for-stock:checked + .forgot-pswrd label span i {
 	display: block;
 }
 .forgot-pswrd {

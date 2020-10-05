@@ -51,6 +51,6 @@ spring.mail.properties.mail.smtp.quitwait=false
 documento.web.iddoc=PW
 documento.web.idptovta=5
 
-### Búsqueda por precio
+### BÃºsqueda por precio
 categoria.precio.desde=10
 categoria.precio.hasta=5000

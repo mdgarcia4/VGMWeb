@@ -240,10 +240,29 @@
 							</div>
 							<div class="col-xs-12 col-sm-4">
 								<div class="cart-checkout">
-									<div id="cart-totales" class="total">
+									<!--<div id="cart-totales" class="total">
 										<span class="sub-total" th:text="#{shopping.cart.precios.subtotal}">sub total</span>
 										<span id="cart-pr-subtotal" class="sub-total"><strong>$0.00</strong></span>
+										<div class="total" id="imuestos-totales">
+											<span th:text="#{general.dwn.impuestos}">sub total</span>											
+											<span id="cart-pr-impuestos" class="sub-total"><strong>$0.00</strong></span>
+										</div>
 										<span id="cart-pr-total-gral" class="grand-total">total <strong>$0.00</strong></span>
+									</div>-->
+									<div id="cart-totales" class="total">
+										<div class="sub-total" id="sub-totales">
+											<span class="sub-total" th:text="#{shopping.cart.precios.subtotal}">sub total</span>
+											<span id="cart-pr-subtotal" class="sub-total"><strong>$0.00</strong></span>
+										</div>
+										<div class="sub-total" id="impuestos-totales" style="display: none">
+											<span th:text="#{general.dwn.impuestos}">Impuestos Desc</span>											
+											<span id="cart-pr-impuestos" class="sub-total"><strong>$0.00</strong></span>
+										</div>
+										<div class="sub-total" id="gral-totales">
+											<span class="sub-total" th:text="#{general.dwn.total}">TOTAL Desc</span>
+											<span id="cart-pr-total-gral" class="grand-total">total <strong>$0.00</strong></span>
+										</div>
+										
 									</div>
 									<a href="#" onclick="enviarPedido()" class="cart-proceed" th:text="#{shopping.cart.precios.btncheckout}">proceed to checkout</a>
 									<a href="#" class="checkout-with" th:text="#{shopping.cart.precios.description}"style="display: none">Checkout with Mutilple Adresses</a>

@@ -65,7 +65,7 @@ public abstract class GenericWs {
     		}
     		
 		}catch(Exception ex) {
-			logger.error("Error inesperado en clase GenericWs-Met: refreshToken. " + ex.getStackTrace());
+			logger.error("Error inesperado en clase GenericWs-Met: refreshToken.");
 			throw ex;
 		}
     }
@@ -109,7 +109,7 @@ public abstract class GenericWs {
     			return response.getStatus();
     		}
 		} catch (Exception e) {
-			logger.error("Error inesperado en clase GenericWs-Met: callWebService. " + e.getStackTrace());
+			logger.error("Error inesperado en clase GenericWs-Met: callWebService.");
 			throw e;
 		}
 	    

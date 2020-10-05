@@ -57,6 +57,7 @@ public class ShoppingCartController {
 		} catch (Exception e) {
 			logger.error("Error inesperado en clase ShoppingCartController-Página: shopping-cart. " + e.getStackTrace()
 					+ " VGMMESAGGE: " + e.getMessage() + " VGMTOSTRING: " + e.toString());
+			logger.error("Error inesperado en clase ShoppingCartController-Página: shopping-cart. " + e);
 			model.addAttribute("token", "");
 			model.addAttribute("nameapp", prepertyService.getNameApp());
 			return "shopping-cart";
@@ -73,6 +74,8 @@ public class ShoppingCartController {
 			} catch (Exception e) {
 				logger.error("Error inesperado en clase ShoppingCartController-Página: shopping-cart. "
 						+ e.getStackTrace() + " VGMMESAGGE: " + e.getMessage() + " VGMTOSTRING: " + e.toString());
+				logger.error("Error inesperado en clase ShoppingCartController-Página: shopping-cart. "
+						+ e);
 				return "error";
 			}
 		}

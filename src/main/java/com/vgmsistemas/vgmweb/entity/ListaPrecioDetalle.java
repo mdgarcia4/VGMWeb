@@ -74,7 +74,6 @@ public class ListaPrecioDetalle implements Serializable {
 	private Float caStock;
 
 	
-
 	public ListaPrecioDetalle(){
 		
 	}
@@ -307,4 +306,5 @@ public class ListaPrecioDetalle implements Serializable {
 	public void setCaStock(Float caStock) {
 		this.caStock = caStock;
 	}
+
 }

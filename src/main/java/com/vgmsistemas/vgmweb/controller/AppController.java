@@ -83,11 +83,14 @@ public class AppController {
 		} catch (UsernameNotFoundException ex) {
 			logger.error("Error en clase AppController-Página: registrar. Usuario no encontrado" + ex.getStackTrace()
 					+ " VGMMESAGGE: " + ex.getMessage() + " VGMTOSTRING: " + ex.toString());
+
+			logger.error("Error en clase AppController-Página: registrar. Usuario no encontrado" + ex);
 			model.addAttribute("RegistrarErrorMensaje", ex.getMessage());
 			return "registrar";
 		} catch (Exception e) {
 			logger.error("Error inesperado en clase AppController-Página: registrar. " + e.getStackTrace()
 					+ " VGMMESAGGE: " + e.getMessage() + " VGMTOSTRING: " + e.toString());
+			logger.error("Error inesperado en clase AppController-Página: registrar. " + e);
 			model.addAttribute("RegistrarErrorMensaje", e.getMessage());
 			return "registrar";
 		}
@@ -125,10 +128,12 @@ public class AppController {
 		} catch (ClassCastException ex) {
 			logger.error("Error en clase AppController-Página: No existe un usuario logueado." + ex.getStackTrace()
 					+ " VGMMESAGGE: " + ex.getMessage() + " VGMTOSTRING: " + ex.toString());
+			logger.error("Error en clase AppController-Página: No existe un usuario logueado." + ex);
 			return "error";
 		} catch (Exception e) {
 			logger.error("Error inesperado en clase AppController-Página: index. " + e.getStackTrace() + " VGMMESAGGE:"
 					+ e.getMessage() + " VGMTOSTRING:" + e.toString());
+			logger.error("Error inesperado en clase AppController-Página: index. " + e);
 			return "error";
 		}
 	}
