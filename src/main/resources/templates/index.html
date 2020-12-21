@@ -167,7 +167,7 @@
 								<img src="img/banner01.jpg" th:src="'img/gral/'+${banner.deImagen}"  alt=""  width="1920" height="1280">
 								<div class="banner-content">
 									<!-- LAYER NR. 1 -->
-									<div class="tp-caption NotGeneric-Title   tp-resizeme title"  data-x="left" data-hoffset="-100px" data-y="center" data-voffset="-50" data-width="['auto','auto','auto','auto']"
+									<div th:if="${banner.deTitulo} != '' and ${banner.deTitulo} != null"  class="tp-caption NotGeneric-Title   tp-resizeme title"  data-x="left" data-hoffset="-100px" data-y="center" data-voffset="-50" data-width="['auto','auto','auto','auto']"
 									data-height="['auto','auto','auto','auto']"
 									data-transform_idle="o:1;"
 									data-transform_in="y:[100%];z:0;rX:0deg;rY:0;rZ:0;sX:1;sY:1;skX:0;skY:0;opacity:0;s:2000;e:Power3.easeInOut;" 	data-transform_out="s:1000;e:Power3.easeInOut;s:1000;e:Power3.easeInOut;"
@@ -177,7 +177,7 @@
 									data-responsive_offset="on" th:text="${banner.deTitulo}">
 										DESIGN &amp; FASHION
 									</div>
-									<div class="tp-caption NotGeneric-Title tp-resizeme banner-text"  data-x="left" data-hoffset="-100px" data-y="center" data-voffset="-150" data-width="['auto','auto','auto','auto']"
+									<div th:if="${banner.deDescripcion} != '' and ${banner.deDescripcion} != null"  class="tp-caption NotGeneric-Title tp-resizeme banner-text"  data-x="left" data-hoffset="-100px" data-y="center" data-voffset="-150" data-width="['auto','auto','auto','auto']"
 									data-height="['auto','auto','auto','auto']"
 									data-transform_idle="o:1;"
 									data-transform_in="y:[100%];z:0;rX:0deg;rY:0;rZ:0;sX:1;sY:1;skX:0;skY:0;opacity:0;s:2000;e:Power3.easeInOut;" 	data-transform_out="s:1000;e:Power3.easeInOut;s:1000;e:Power3.easeInOut;"
@@ -187,7 +187,7 @@
 									data-responsive_offset="on" th:text="${banner.deDescripcion}">
 										Transformer theme is an elegant, powerful and fully responsive prestashop theme with modern design. Suitable for every type of store.
 									</div>
-									<div class="tp-caption NotGeneric-Title   tp-resizeme banner-btn"  data-x="center" data-hoffset="-100px" data-y="center" data-voffset="150" data-width="['auto','auto','auto','auto']"
+									<div th:if="${banner.deDescripcionEnlace} != '' and ${banner.deDescripcionEnlace} != null" class="tp-caption NotGeneric-Title   tp-resizeme banner-btn"  data-x="center" data-hoffset="-100px" data-y="center" data-voffset="150" data-width="['auto','auto','auto','auto']"
 									data-height="['auto','auto','auto','auto']"
 									data-transform_idle="o:1;"
 									data-transform_in="y:[100%];z:0;rX:0deg;rY:0;rZ:0;sX:1;sY:1;skX:0;skY:0;opacity:0;s:2000;e:Power3.easeInOut;" 	data-transform_out="s:1000;e:Power3.easeInOut;s:1000;e:Power3.easeInOut;"
@@ -211,8 +211,8 @@
 						<figure class="hero-image center-block col-md-6 col-sm-6 col-xs-12">
 							<img src="img/gral/index_ini.jpg" alt="image" />
 						</figure>
-						<div class="col-md-12 col-sm-12 hidden-xs banner-block-one"></div>
-						<div class="col-md-8 col-sm-8 hidden-xs banner-block-two"></div>
+						<div class="col-md-12 col-sm-12 hidden-xs banner-block-one" style="display: none"></div>
+						<div class="col-md-8 col-sm-8 hidden-xs banner-block-two" style="display: none"></div>
 						<span class="lookbook" th:text="#{index.centro.descripcion1}">Lookbook 2015</span>
 						<span class="collection" th:text="#{index.centro.descripcion2}">Collection 2015</span>
 					</div>

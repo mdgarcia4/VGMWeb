@@ -671,6 +671,18 @@ body {
     width: 100%;
     padding: 0 24px;
 }
+@media screen and (max-width:768px) {
+	body {
+		background-image: none
+	}
+	.comprobante-card {
+		border-radius: 0!important;
+		width: 100%;
+		margin-top: 0;
+		box-shadow: -5px 0 5px -5px #333, 5px 0 5px -5px #333
+	}
+}
+
 /***************mat-form-field***************************/
 
 .div-span {

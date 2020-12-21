@@ -65,7 +65,7 @@ public abstract class GenericWs {
     		}
     		
 		}catch(Exception ex) {
-			logger.error("Error inesperado en clase GenericWs-Met: refreshToken.");
+			logger.error("Error inesperado en clase GenericWs-Met: refreshToken. url-servicio: " + url);
 			throw ex;
 		}
     }

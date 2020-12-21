@@ -314,7 +314,7 @@ function getRangoPrecioStock(){
 function agregarDwnCarritoVgm(id, isCombo,msj){
 	var cantidad = 1;
 	var result = {}; 
-	for(var i = 0; i < 50; i++) 
+	for(var i = 0; i < 1000; i++) 
 	{ 
 		result[i + 1] = i + 1; 
 	} 
@@ -987,7 +987,7 @@ function enviarPedido() {
 	};
 
 	if (cbShopCart !== null){
-		var url_enviar = "http://" + window.location.host
+		var url_enviar = window.location.href
 		/*DIA Y HORA*/
 		var today = new Date();
 		var dd = today.getDate();
@@ -1017,7 +1017,7 @@ function enviarPedido() {
 			method: "POST", 
 			contentType: "application/json; charset=utf-8", 
 			dataType: "json",  
-			url: url_enviar + "/shopping-cart",
+			url: url_enviar,
 			data: oparam,
 			timeout: 30000,	
 			statusCode: {
