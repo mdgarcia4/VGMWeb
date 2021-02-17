@@ -24,7 +24,7 @@ public class ContactoController {
 	@Autowired
 	SucursalService sucursalService;
 	@Autowired
-	PropertiesService prepertyService;
+	PropertiesService propertyService;
 	@Autowired
 	BannerService bannerService;
 	@Autowired
@@ -56,8 +56,10 @@ public class ContactoController {
 			model.addAttribute("longitud", longitud);
 			model.addAttribute("infoWindowDescripcion", infoWindowDesc);
 			model.addAttribute("sucursales", sucursales);
-			model.addAttribute("apiKey", prepertyService.getApiKeyGoogle());
-			model.addAttribute("nameapp", prepertyService.getNameApp());
+			model.addAttribute("apiKey", propertyService.getApiKeyGoogle());
+			model.addAttribute("nameapp", propertyService.getNameApp());
+			model.addAttribute("nombre_otra_pagina", propertyService.getNombreOtraPagina());
+			model.addAttribute("link_otra_pagina", propertyService.getLinkOtraPagina());
 			return "contacto";
 		} catch (Exception e) {
 			logger.error("Error inesperado en clase ContactoController-Página: contacto. " + e.getStackTrace()
@@ -107,8 +109,10 @@ public class ContactoController {
 		model.addAttribute("longitud", longitud);
 		model.addAttribute("infoWindowDescripcion", infoWindowDesc);
 		model.addAttribute("sucursales", sucursales);
-		model.addAttribute("apiKey", prepertyService.getApiKeyGoogle());
-		model.addAttribute("nameapp", prepertyService.getNameApp());
+		model.addAttribute("apiKey", propertyService.getApiKeyGoogle());
+		model.addAttribute("nameapp", propertyService.getNameApp());
+		model.addAttribute("nombre_otra_pagina", propertyService.getNombreOtraPagina());
+		model.addAttribute("link_otra_pagina", propertyService.getLinkOtraPagina());
 		return "contacto";
 
 	}

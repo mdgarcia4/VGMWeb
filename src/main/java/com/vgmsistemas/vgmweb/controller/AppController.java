@@ -63,6 +63,8 @@ public class AppController {
 
 	@GetMapping({ "/registrar", "/registrar.html", "/registrar.htm" })
 	public String getRegistrar(Model model) {
+		model.addAttribute("nombre_otra_pagina", propertyService.getNombreOtraPagina());
+		model.addAttribute("link_otra_pagina", propertyService.getLinkOtraPagina());
 		return "registrar";
 	}
 
@@ -122,6 +124,8 @@ public class AppController {
 			model.addAttribute("banners", bannerService.getByDePaginaAndSnActivo("index", "S"));
 			model.addAttribute("articulos", paginaArticulos);
 			model.addAttribute("nameapp", propertyService.getNameApp());
+			model.addAttribute("nombre_otra_pagina", propertyService.getNombreOtraPagina());
+			model.addAttribute("link_otra_pagina", propertyService.getLinkOtraPagina());
 			model.addAttribute("pathsrcimagen", path);
 
 			return "index";

@@ -72,7 +72,6 @@ public class CategoriasController {
 	private Long marcaElegido;
 	private Long minElegido;
 	private Long maxElegido;
-	private String soloConStock;
 	private String usuarioElegido;
 	private Cliente cliente;
 	private long productosTotal;
@@ -113,7 +112,6 @@ public class CategoriasController {
 			minElegido = min;
 			maxElegido = max;
 			usuarioElegido = usuario;
-			soloConStock = stk;
 			taImpProvicial = cliente.getCondicionRenta().getTasaDgr().equals(null)? 0 : cliente.getCondicionRenta().getTasaDgr();
 			taImpMunicipal = (cliente.getCondicionDirsc() == null) ? 0 : cliente.getCondicionDirsc().getTasaImpuesto();
 			letraSegunTipoContribuyente= cliente.getCategoriaFiscal().getId().equals("IN") ? "A" : "B";
@@ -280,6 +278,8 @@ public class CategoriasController {
 		model.addAttribute("taImpMunicipal", taImpMunicipal);
 		model.addAttribute("dtoCondicionVenta", dtoCondicionVenta);
 		model.addAttribute("letraComprobante",letraSegunTipoContribuyente);
+		model.addAttribute("nombre_otra_pagina", propertyService.getNombreOtraPagina());
+		model.addAttribute("link_otra_pagina", propertyService.getLinkOtraPagina());
 		List<Banner> list = bannerService.getByDePaginaAndSnActivo("categorias", "S");
 		if (list != null) {
 			model.addAttribute("banner", list.get(0));

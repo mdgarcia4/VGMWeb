@@ -21,7 +21,7 @@ import com.vgmsistemas.vgmweb.service.UserDetailsServiceImpl;
 @Controller
 public class ClaveController {
 	@Autowired
-	PropertiesService prepertyService;
+	PropertiesService propertyService;
 	@Autowired
 	UserDetailsServiceImpl userService;
 	@Autowired
@@ -42,8 +42,10 @@ public class ClaveController {
 			UserDetails userDetail = (UserDetails) auth.getPrincipal();
 			usuarioName = userDetail.getUsername();
 		}
-		model.addAttribute("nameapp", prepertyService.getNameApp());
+		model.addAttribute("nameapp", propertyService.getNameApp());
 		model.addAttribute("usuarioLogin", usuarioName);
+		model.addAttribute("nombre_otra_pagina", propertyService.getNombreOtraPagina());
+		model.addAttribute("link_otra_pagina", propertyService.getLinkOtraPagina());
 		return "change-password";
 	}
 
@@ -71,7 +73,7 @@ public class ClaveController {
 			if (userService.cambiarClave(clave).equals("OK")) {
 				return "login";
 			}
-			model.addAttribute("nameapp", prepertyService.getNameApp());
+			model.addAttribute("nameapp", propertyService.getNameApp());
 			model.addAttribute("usuarioLogin", usuarioName);
 			model.addAttribute("CambiarClaveErrorMensaje", "No se encontró Cliente");
 			return "change-password";
@@ -79,7 +81,7 @@ public class ClaveController {
 			logger.error("Error inesperado en clase  ClaveController-Página: change-password. " + e.getStackTrace()
 					+ " VGMMESAGGE: " + e.getMessage() + " VGMTOSTRING: " + e.toString());
 			logger.error("Error inesperado en clase  ClaveController-Página: change-password. " + e);
-			model.addAttribute("nameapp", prepertyService.getNameApp());
+			model.addAttribute("nameapp", propertyService.getNameApp());
 			model.addAttribute("usuarioLogin", usuarioName);
 			model.addAttribute("CambiarClaveErrorMensaje", e.getMessage());
 			return "change-password";
@@ -88,7 +90,7 @@ public class ClaveController {
 
 	@GetMapping({ "/recover-password", "/recover-password.html", "/recover-password.htm" })
 	public String getClave(Model model) {
-		model.addAttribute("nameapp", prepertyService.getNameApp());
+		model.addAttribute("nameapp", propertyService.getNameApp());
 		return "recover-password";
 	}
 
@@ -101,13 +103,13 @@ public class ClaveController {
 					return "login";
 				}
 			}
-			model.addAttribute("nameapp", prepertyService.getNameApp());
+			model.addAttribute("nameapp", propertyService.getNameApp());
 			return "recover-password";
 		} catch (Exception e) {
 			logger.error("Error inesperado en clase  ClaveController-Página: recover-password. " + e.getStackTrace()
 					+ " VGMMESAGGE: " + e.getMessage() + " VGMTOSTRING: " + e.toString());
 			logger.error("Error inesperado en clase  ClaveController-Página: recover-password. " + e);
-			model.addAttribute("nameapp", prepertyService.getNameApp());
+			model.addAttribute("nameapp", propertyService.getNameApp());
 			model.addAttribute("RecuperarClaveErrorMensaje", e.getMessage());
 			return "recover-password";
 		}

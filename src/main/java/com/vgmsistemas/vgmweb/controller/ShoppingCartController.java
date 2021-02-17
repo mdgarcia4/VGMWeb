@@ -30,7 +30,7 @@ public class ShoppingCartController {
 	@Autowired
 	VentaService vtaService;
 	@Autowired
-	PropertiesService prepertyService;
+	PropertiesService propertyService;
 	@Autowired
 	ClienteService clienteService;
 	@Autowired
@@ -48,7 +48,9 @@ public class ShoppingCartController {
 
 			model.addAttribute("comercios", clientesComerciosPorUsuario.getClientes());
 			model.addAttribute("token", "");
-			model.addAttribute("nameapp", prepertyService.getNameApp());
+			model.addAttribute("nameapp", propertyService.getNameApp());
+			model.addAttribute("nombre_otra_pagina", propertyService.getNombreOtraPagina());
+			model.addAttribute("link_otra_pagina", propertyService.getLinkOtraPagina());
 			List<Banner> list = bannerService.getByDePaginaAndSnActivo("shopping-cart", "S");
 			if (list != null) {
 				model.addAttribute("banner", list.get(0));
@@ -59,7 +61,7 @@ public class ShoppingCartController {
 					+ " VGMMESAGGE: " + e.getMessage() + " VGMTOSTRING: " + e.toString());
 			logger.error("Error inesperado en clase ShoppingCartController-Página: shopping-cart. " + e);
 			model.addAttribute("token", "");
-			model.addAttribute("nameapp", prepertyService.getNameApp());
+			model.addAttribute("nameapp", propertyService.getNameApp());
 			return "shopping-cart";
 		}
 	}

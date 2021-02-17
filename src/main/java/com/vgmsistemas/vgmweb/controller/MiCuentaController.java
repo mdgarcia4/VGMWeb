@@ -18,7 +18,7 @@ import com.vgmsistemas.vgmweb.service.PropertiesService;
 @Controller
 public class MiCuentaController {
 	@Autowired
-	PropertiesService prepertyService;
+	PropertiesService propertyService;
 	@Autowired
 	ClienteService clienteService;
 	@Autowired
@@ -40,7 +40,9 @@ public class MiCuentaController {
 				usuarioName = userDetail.getUsername();
 				cliente = clienteService.getClienteByUsuario(usuarioName);
 			}
-			model.addAttribute("nameapp", prepertyService.getNameApp());
+			model.addAttribute("nameapp", propertyService.getNameApp());
+			model.addAttribute("nombre_otra_pagina", propertyService.getNombreOtraPagina());
+			model.addAttribute("link_otra_pagina", propertyService.getLinkOtraPagina());
 			model.addAttribute("cliente", cliente);
 			model.addAttribute("userLogin", usuarioName);
 			return "myaccount";
@@ -48,7 +50,7 @@ public class MiCuentaController {
 			logger.error("Error inesperado en clase  MiCuentaController-Página: miCuenta. " + e.getStackTrace()
 			+ " VGMMESAGGE: " + e.getMessage() + " VGMTOSTRING: " + e.toString());
 			logger.error("Error inesperado en clase  MiCuentaController-Página: miCuenta. " + e);
-			model.addAttribute("nameapp", prepertyService.getNameApp());
+			model.addAttribute("nameapp", propertyService.getNameApp());
 			return "myaccount";
 		}
 	}

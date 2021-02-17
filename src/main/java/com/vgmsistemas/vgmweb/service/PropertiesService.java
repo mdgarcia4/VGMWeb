@@ -48,7 +48,13 @@ public class PropertiesService {
 	private int precioDesde;
 	
 	@Value("${categoria.precio.hasta}")
-	private int precioHasta;		
+	private int precioHasta;
+
+	@Value("${menu.otra.pagina.name}")
+	private String nombreOtraPagina;	
+
+	@Value("${menu.otra.pagina.link}")
+	private String linkOtraPagina;	
 
 	public String getApiKeyGoogle() {
 		if(apiKeyGoogle == null) {
@@ -178,5 +184,21 @@ public class PropertiesService {
 
 	public void setPrecioHasta(int precioHasta) {
 		this.precioHasta = precioHasta;
+	}	
+
+	public String getNombreOtraPagina() {
+		return nombreOtraPagina;
+	}
+
+	public void setNombreOtraPagina(String nombreOtraPagina) {
+		this.nombreOtraPagina = nombreOtraPagina;
+	}
+
+	public String getLinkOtraPagina() {
+		return linkOtraPagina;
+	}
+
+	public void setLinkOtraPagina(String linkOtraPagina) {
+		this.linkOtraPagina = linkOtraPagina;
 	}
 }

@@ -344,7 +344,7 @@ function agregarDwnCarritoVgm(id, isCombo,msj){
                 else {
 		            for(i=0;i<nombre.length;i++){
 		                var code=nombre.charCodeAt(i);
-		                    if(code<=48 || code>=57){          
+		                    if(code<48 || code>57){          
 		                    	return "Por favor ingrese sólo números.";
 		                    }    
 		              }

@@ -55,3 +55,7 @@ documento.web.idptovta=${PTOVTAWEB:5}
 ### Búsqueda por precio
 categoria.precio.desde=${PRECIO_DESDE:10}
 categoria.precio.hasta=${PRECIO_HASTA:50000}
+
+###Menu a otra pagina
+menu.otra.pagina.name=${OTRA_PAGINA_NAME:Ir a Unidespo}
+menu.otra.pagina.link=${OTRA_PAGINA_LINK:https://unidespo.grupodespo.com.ar:8444/login}

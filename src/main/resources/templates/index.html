@@ -82,14 +82,15 @@
 											<option> $ </option>
 										</select><i class="arrow_carrot-down"></i>
 									</li>
+									<li class="select-wrapper">										
+										<a th:href="${link_otra_pagina}" th:text="${nombre_otra_pagina}"><i class="icon_profile"></i>My Account </a>
+									</li>	
 								</ul>
-								<ul class="top-header-right clearfix">
-									<li class="profile">
-										
+								<ul class="top-header-right clearfix">							
+									<li class="profile">										
 										<a href="myaccount" th:utext="#{header.myacount}"><i class="icon_profile"></i>My Account </a>
 									</li>
-									<li class="checkout">
-										
+									<li class="checkout">										
 										<a href="javascript:enviar_formulario_logout()" th:utext="#{header.checkout}"><i class="icon_check_alt" ></i> Checkout </a>
 										<form th:action="@{logout}" method="post" name="formulario_logout">
 					            			<input type="hidden" value="Cerrar Sesion"   />
